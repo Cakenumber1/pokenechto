@@ -2,8 +2,12 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { useAuth } from '../firebase/AuthContext';
 
 const Home: NextPage = () => {
+  // @ts-ignore
+  const {login} = useAuth()
+  console.log(login('asd@mail.ru', 'asddsds12'))
   return (
     <div className={styles.container}>
       <Head>
