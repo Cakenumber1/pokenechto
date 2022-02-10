@@ -11,7 +11,13 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
-const myApp = firebase.initializeApp(firebaseConfig);
+let myApp
+if (!firebase.apps.length) {
+  myApp = firebase.initializeApp(firebaseConfig);
+}else {
+  myApp = firebase.app();
+}
+
 export const db = firebase.firestore();
 export const str = firebase.storage();
 export const fieldValue = firebase.firestore.FieldValue;
