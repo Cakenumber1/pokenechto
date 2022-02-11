@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Supermercado+One&display=swap');
+
+
+:root {
+  --swiper-navigation-color: black;
+  --swiper-pagination-color: red;
+  --swiper-navigation-size: 2vmax
+}
+
+html,
+body {
+  position: relative;
+  height: 100%;
+}
+
+h2 {
+  font-family: 'Supermercado One', cursive;
+  color: white;
+  font-size: 1vmax;
+  margin: 0;
+}
+
+body {
+  background: #eee;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+#__next{
+  height: 100%;
+  width: 100%;
+}
+
+.swiper-pagination-bullet {
+  width: 1vmax;
+  height: 1vmax;
+}
+
+.swiper-button-next {
+  //size idk
+}
+.swiper-button-prev {
+
+}
+
+.MuiModal-root .closeMuiModal{
+  @keyframes closeModal {
+    0% { top: 0; left: 0; width: 100%; height: 100%; opacity: 1;  }
+    100%  { width: 0; height: 0; opacity: 0 }
+  }
+  background: red;
+  animation: closeModal 1s forwards;
+}

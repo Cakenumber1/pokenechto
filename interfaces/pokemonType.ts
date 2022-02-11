@@ -10,4 +10,6 @@ export type Pokemon = {
   stats: Stat[],
   types: string[],
   exp: number,
+  limit: number,
+  amount: number,
 } | undefined;
