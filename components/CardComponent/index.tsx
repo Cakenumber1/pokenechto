@@ -1,6 +1,6 @@
 import React, {useState, useCallback} from 'react';
 import {Card, CardMedia, CardContent, Modal, Typography, Box} from "@mui/material";
-import { PokemonsListResults } from "../../api";
+import { PokemonsListResults } from "../../interfaces/pokemonListType";
 
 type CardData = {
     pokemon: Required<PokemonsListResults>
@@ -17,22 +17,23 @@ export const CardComponent = (props: CardData) => {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width:'400',
+        right:'auto',
+        bottom:'auto',
         bgcolor: 'background.paper',
         border: '2px solid #000',
         boxShadow: 24,
         overflow: 'scroll',
-        p: 4,
+        p: 1,
     };
 
     const {name, fullInfo} = props.pokemon
 
 
     return (
-        <>
-            <Card onClick={handleOpen}>
+		<>
+            <Card sx={{ height: '100%' }} onClick={handleOpen}>
                 <CardMedia
-                    sx={{ maxWidth: 155, margin: "auto", paddingTop: 2 }}
+                    sx={{ width: '80%', margin: "auto", paddingTop: 2 }}
                     component="img"
                     image={fullInfo.img}
                     alt={name}
@@ -42,7 +43,6 @@ export const CardComponent = (props: CardData) => {
                 </CardContent>
             </Card>
             <Modal
-
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"

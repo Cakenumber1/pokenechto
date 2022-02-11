@@ -1,26 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { getListFromPokeApi} from "../../api";
+import React from 'react';
+import { getListFromPokeApi, createPath } from "../../api/pokeApi/getListFromPokeApi";
 import { BestiaryComponent } from "../../components/BestiaryComponent";
+import { Limits } from "../../interfaces/pokemonListType";
+import useSWR from 'swr'
 
 
-type limits = {
-    offset : number,
-    limit : number
-}
+export const BestiaryContainer = (props: Limits) => {
 
-export const BestiaryContainer = (props: limits) => {
+    const { data, error } = useSWR(createPath(props.offset, props.limit), getListFromPokeApi)
 
-    const [data, setData] = useState <any>()
-    //const user = useSelector(state => state.user)
-
-    useEffect(() => {
-        const fetchList = async (offset: number, limit: number) => {
-            const res = await getListFromPokeApi(offset, limit)
-            setData(res)
-            }
-
-        fetchList(props.offset, props.limit)
-    })
+    if (error) return <h2>Ошибка загрузка...</h2>
+    if (!data) return <h2>Идёт загрузка...</h2>
 
     return <BestiaryComponent pokemons={data}/>
 }
