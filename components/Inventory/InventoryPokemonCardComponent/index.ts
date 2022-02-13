@@ -1,0 +1,1 @@
+export {InventoryPokemonCardComponent} from './InventoryPokemonCardComponent';
