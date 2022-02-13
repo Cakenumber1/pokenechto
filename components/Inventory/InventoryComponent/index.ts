@@ -1,0 +1,1 @@
+export {InventoryComponent} from './InventoryComponent';
