@@ -8,8 +8,8 @@ export type Limits = {
 export type PokemonsListResults = {
     name: string,
     url: string,
-    img?: string,
-    fullInfo?: Pokemon
+    img: string,
+    fullInfo: NonNullable<Pokemon>
 }
 
 export type PokemonsList = {

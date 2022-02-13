@@ -1,7 +1,13 @@
-import {BestiaryContainer} from "../containers/BestiaryContainer";
+import { BestiaryContainer } from "../containers/BestiaryContainer";
+import { AppBarComponent } from "../components/AppBarComponent";
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from "../theme";
 
 export default function bestiary() {
     return (
-        <BestiaryContainer offset={120} limit={34}/>
+        <ThemeProvider theme={theme}>
+            <AppBarComponent/>
+            <BestiaryContainer offset={80} limit={34}/>
+        </ThemeProvider>
     );
 }

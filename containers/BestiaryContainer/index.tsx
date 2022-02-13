@@ -9,8 +9,10 @@ export const BestiaryContainer = (props: Limits) => {
 
     const { data, error } = useSWR(createPath(props.offset, props.limit), getListFromPokeApi)
 
-    if (error) return <h2>Ошибка загрузка...</h2>
+    if (error) return <h2>Ошибка загрузки</h2>
     if (!data) return <h2>Идёт загрузка...</h2>
 
-    return <BestiaryComponent pokemons={data}/>
+    return (
+        <BestiaryComponent pokemons={data}/>
+    )
 }

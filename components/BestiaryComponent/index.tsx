@@ -2,9 +2,7 @@ import React from "react";
 import { CardComponent} from "../CardComponent";
 import { Grid, Container, TextField, IconButton } from "@mui/material"
 import SearchIcon from '@mui/icons-material/Search';
-import { PokemonsList } from "../../interfaces/pokemonListType";
-import { ThemeProvider } from '@mui/material/styles';
-import { theme } from "../../theme";
+import {PokemonsList, PokemonsListResults} from "../../interfaces/pokemonListType";
 
 
 type BestiaryData = {
@@ -13,14 +11,13 @@ type BestiaryData = {
 
 export function BestiaryComponent( props: BestiaryData) {
 
-    const data = props.pokemons.results.map((pokemon: any, i: number) =>
+    const data = props.pokemons.results.map((pokemon: PokemonsListResults, i: number) =>
         <Grid key={i} item xs={3}>
             <CardComponent pokemon={pokemon}/>
         </Grid>)
 
     return (
-        <ThemeProvider theme={theme}>
-            <Container sx={{ bgcolor: "text.disabled", paddingTop: 5, paddingBottom: 5 }}>
+            <Container sx={{ paddingTop: '6%', paddingBottom: '6%' }}>
                 <div>
                     <TextField id="outlined-basic" label="Search" variant="outlined" />
                     <IconButton><SearchIcon fontSize="large" /></IconButton>
@@ -30,6 +27,5 @@ export function BestiaryComponent( props: BestiaryData) {
                     {data}
                 </Grid>
             </Container>
-        </ThemeProvider>
     )
 }
