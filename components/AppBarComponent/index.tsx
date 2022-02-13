@@ -4,14 +4,14 @@ import { appStyles } from "../../styles";
 
 export const AppBarComponent = () => {
     return (
-        <AppBar position="fixed">
+        <AppBar position="sticky">
             <Toolbar>
                 <ButtonGroup variant="contained" color="secondary">
                     <Button>Set</Button>
                     <Button>Bestiary</Button>
                     <Button>Inventory</Button>
                 </ButtonGroup>
-                <Link href="https://pokeapi.co/" target="_blank" rel="noopener" sx={{marginLeft: 'auto'}}>
+                <Link href="https://pokeapi.co/" target="_blank" rel="noopener" sx={{ml: 'auto'}}>
                     <Avatar
                     sx={appStyles.logo}
                     alt="logo"

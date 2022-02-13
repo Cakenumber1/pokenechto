@@ -7,7 +7,7 @@ async function getFromPokeApi(path = '' ) {
     const data = res.data;
     const temp:any = {};
     temp.id = data.id;
-    temp.name = data.name;
+    temp.name = data.name[0].toUpperCase() + data.name.substring(1);
     temp.img = data.sprites.other.dream_world.front_default
     temp.abilities = [];
     data.abilities.forEach((a: any) => temp.abilities.push(a.ability.name));
@@ -24,8 +24,8 @@ async function getFromPokeApi(path = '' ) {
     return temp
 }
 
-export const createPath = (offset: number, limit: number) =>
-    `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`
+export const createKey = (offset: number) =>
+    `https://pokeapi.co/api/v2/pokemon?offset=${offset * 12}&limit=12`
 
 export async function getListFromPokeApi(path: string) {
     const res = await axios.get(path)

@@ -32,7 +32,6 @@ export const modalStyle = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    margin: '15%'
 };
 
 export const appStyles = {

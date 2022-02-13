@@ -1,18 +1,30 @@
 import React from 'react';
-import { getListFromPokeApi, createPath } from "../../api/pokeApi/getListFromPokeApi";
+import { getListFromPokeApi, createKey } from "../../api/pokeApi/getListFromPokeApi";
 import { BestiaryComponent } from "../../components/BestiaryComponent";
-import { Limits } from "../../interfaces/pokemonListType";
-import useSWR from 'swr'
+import { PokemonsList } from "../../interfaces/pokemonListType";
+
+import useSWRInfinite, {SWRInfiniteResponse} from "swr/infinite";
+import InfiniteScroll from 'react-swr-infinite-scroll'
 
 
-export const BestiaryContainer = (props: Limits) => {
+export const BestiaryContainer = () => {
+    const swr = useSWRInfinite(createKey, getListFromPokeApi);
 
-    const { data, error } = useSWR(createPath(props.offset, props.limit), getListFromPokeApi)
-
-    if (error) return <h2>Ошибка загрузки</h2>
-    if (!data) return <h2>Идёт загрузка...</h2>
-
+    let i = 0
     return (
-        <BestiaryComponent pokemons={data}/>
+
+            <InfiniteScroll
+                swr={swr}
+                loadingIndicator="Loading..."
+                endingIndicator="No more "
+                isReachingEnd={(swr: SWRInfiniteResponse<PokemonsList>) =>
+                    !swr.data || swr.data[swr.data.length - 1].next === null
+                }
+            >
+                {(response: PokemonsList) =>
+                        <BestiaryComponent key={i++} pokemons={response}/>
+                }
+            </InfiniteScroll>
+
     )
 }
