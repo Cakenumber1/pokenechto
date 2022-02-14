@@ -1,0 +1,1 @@
+export {InventoryPageContainer} from './InventoryPageContainer';
