@@ -1,7 +1,6 @@
 import React from "react";
 import { CardComponent} from "../CardComponent";
-import { Grid, Container, TextField, IconButton } from "@mui/material"
-import SearchIcon from '@mui/icons-material/Search';
+import { Grid } from "@mui/material"
 import {PokemonsList, PokemonsListResults} from "../../interfaces/pokemonListType";
 
 
@@ -17,15 +16,11 @@ export function BestiaryComponent( props: BestiaryData) {
         </Grid>)
 
     return (
-            <Container sx={{ paddingTop: '6%', paddingBottom: '6%' }}>
-                <div>
-                    <TextField id="outlined-basic" label="Search" variant="outlined" />
-                    <IconButton><SearchIcon fontSize="large" /></IconButton>
-                </div>
-                <Grid sx={{ paddingTop: 2 }} container spacing={4}
+
+                <Grid sx={{ pt: 2 }} container spacing={4}
                       columns={{ sm: 6, md: 9, lg: 12 }}>
                     {data}
                 </Grid>
-            </Container>
+
     )
 }

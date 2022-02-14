@@ -13,17 +13,17 @@ export const CardComponent = (props: CardData) => {
     const handleOpen =  useCallback(() => setOpen(true), []);
     const handleClose = useCallback(() => setOpen(false), []);
 
-    const {name, fullInfo} = props.pokemon
+    const {fullInfo} = props.pokemon
 
     return (
         <>
             <Card sx={ Styles.card } onClick={handleOpen}>
-                <CardHeader sx={ Styles.pokeName } title={name[0].toUpperCase() + name.substring(1)} />
+                <CardHeader sx={ Styles.pokeName } title={fullInfo.name} />
                 <CardMedia
-                    sx={ Styles.pokeImg }
+                    sx={Styles.pokeImg}
                     component="img"
                     image={fullInfo.img}
-                    alt={name}
+                    alt={fullInfo.name}
                 />
             </Card>
             <PokeModal fullInfo={fullInfo} isOpen={open} onClose={handleClose} />
