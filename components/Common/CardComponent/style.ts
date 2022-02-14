@@ -1,4 +1,4 @@
-export const Styles = {
+export const style = {
     page: {
         height: "100vh",
         display: "flex",
@@ -23,21 +23,10 @@ export const Styles = {
         paddingBottom: '3%',
         objectFit: "contain"
     },
-    pokeName: {
+    pokeName: (isSize: boolean) => (
+        {
+        fontSize: isSize ? 'x-large' : 'large',
         margin: 'auto'
-    }
+        }
+    )
 };
-
-export const modalStyle = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-};
-
-export const appStyles = {
-    logo: {
-        width: "50px",
-        height: "50px",
-    },
-
-}

@@ -1,8 +1,9 @@
 import React, { useState, useCallback } from 'react';
-import { Card, CardMedia, CardHeader } from "@mui/material";
-import { PokemonsListResults } from "../../interfaces/pokemonListType";
+import { Card, CardMedia, CardContent } from "@mui/material";
+import { PokemonsListResults } from "../../../interfaces/pokemonListType";
 import { PokeModal } from "../PokeModalComponent";
-import { Styles } from "../../styles";
+import { style } from "./style";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 type CardData = {
     pokemon: PokemonsListResults
@@ -12,15 +13,15 @@ export const CardComponent = (props: CardData) => {
     const [open, setOpen] = useState(false);
     const handleOpen =  useCallback(() => setOpen(true), []);
     const handleClose = useCallback(() => setOpen(false), []);
+    const matchesSize = useMediaQuery('(min-width:470px)');
 
-    const {fullInfo} = props.pokemon
-
+    const { fullInfo } = props.pokemon
     return (
         <>
-            <Card sx={ Styles.card } onClick={handleOpen}>
-                <CardHeader sx={ Styles.pokeName } title={fullInfo.name} />
+            <Card sx={ style.card } onClick={handleOpen}>
+                <CardContent sx={ style.pokeName(matchesSize) }>{fullInfo.name}</CardContent>
                 <CardMedia
-                    sx={Styles.pokeImg}
+                    sx={ style.pokeImg}
                     component="img"
                     image={fullInfo.img}
                     alt={fullInfo.name}

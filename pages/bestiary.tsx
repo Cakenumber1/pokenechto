@@ -1,5 +1,5 @@
 import { BestiaryContainer } from "../containers/BestiaryContainer";
-import { AppBarComponent } from "../components/AppBarComponent";
+import { AppBarComponent } from "../components/Common/AppBarComponent";
 import { ThemeProvider } from '@mui/material/styles';
 import { Container } from "@mui/material"
 import { theme } from "../theme";

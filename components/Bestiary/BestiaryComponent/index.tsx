@@ -1,7 +1,7 @@
 import React from "react";
-import { CardComponent} from "../CardComponent";
+import { CardComponent} from "../../Common/CardComponent";
 import { Grid } from "@mui/material"
-import {PokemonsList, PokemonsListResults} from "../../interfaces/pokemonListType";
+import {PokemonsList, PokemonsListResults} from "../../../interfaces/pokemonListType";
 
 
 type BestiaryData = {
@@ -15,12 +15,6 @@ export function BestiaryComponent( props: BestiaryData) {
             <CardComponent pokemon={pokemon}/>
         </Grid>)
 
-    return (
+    return <>{data}</>
 
-                <Grid sx={{ pt: 2 }} container spacing={4}
-                      columns={{ sm: 6, md: 9, lg: 12 }}>
-                    {data}
-                </Grid>
-
-    )
 }

@@ -1,7 +1,7 @@
 import { Grid, Modal, Paper, Typography } from "@mui/material";
-import { modalStyle } from "../../styles";
+import { style } from "./style";
 import React from "react";
-import { Pokemon } from "../../interfaces";
+import { Pokemon } from "../../../interfaces";
 
 
 type ModalData = {
@@ -15,7 +15,7 @@ export const PokeModal = (props: ModalData) => {
     const { fullInfo, isOpen, onClose: handleClose } = props
 
     return (
-        <Modal open={isOpen} onClose={handleClose} sx={modalStyle}>
+        <Modal open={isOpen} onClose={handleClose} sx={style}>
             <Grid container justifyContent="center" alignItems="center">
                 <Grid item lg={8} md={6} sm={4} >
                     <Paper sx={ { p: '5%' } }>
