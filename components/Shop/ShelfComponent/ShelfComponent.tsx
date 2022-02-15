@@ -1,19 +1,31 @@
-import React, { useEffect } from 'react';
-import { Pokemon } from '../../../interfaces';
+import React from 'react';
 import CellComponent from '../CellComponent';
-import css from './ShelfComponent.module.scss'
+import { Stack } from '@mui/material'
+import { useStyles } from './style';
+
 import { PokemonsListResults } from '../../../interfaces/pokemonListType';
+import { useCountCellSize } from '../../../helpers/adaptors/useCountCellSize';
 
 type Props = {
   pokemons: PokemonsListResults[],
 }
+
 const ShelfComponent: React.FC<Props> = ({pokemons}) => {
+  const classes = useStyles();
+
+  let temp = useCountCellSize()
+
+
   return (
-    <div className={`${css.ShelfComponent} ${css.boxShadow}`}>
-      {pokemons.map((poke, index :number) =>
-        (<CellComponent pokemon={poke.fullInfo} key ={index}/>)
+    <Stack className={classes.stack} direction="row">
+      {pokemons.map((pokemon: PokemonsListResults, i: number) =>
+        (
+          <div key={i} style={{width: `${temp}px`, height: `${temp}px`, position: 'relative'}}>
+            <CellComponent pokemon={pokemon.fullInfo}/>
+          </div>
+        )
       )}
-    </div>
+    </Stack>
   )
 }
 
