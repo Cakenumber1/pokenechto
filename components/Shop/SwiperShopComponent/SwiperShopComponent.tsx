@@ -2,9 +2,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import React from 'react';
 import { Autoplay, Navigation, Pagination } from 'swiper';
 import { isMobile } from 'react-device-detect';
-import CellComponent from '../CellComponent';
-import { PokemonsListResults } from '../../../interfaces/pokemonListType';
-import { useCountCellSize } from '../../../helpers/adaptors/useCountCellSize';
+import CellComponent from 'components/Shop/CellComponent';
+import { PokemonsListResults } from 'interfaces/pokemonListType';
+import { useCountCellSize } from 'helpers/adaptors/useCountCellSize';
 
 type Props = {
   pokemons: PokemonsListResults[]

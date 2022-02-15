@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
-import { useAuth } from '../firebase/AuthContext';
-import { ActiveLink } from '../helpers';
-import WalletComponent from '../components/Shop/WalletComponent';
+import { useAuth } from 'firebase/AuthContext';
+import { ActiveLink } from 'helpers';
+import WalletComponent from 'components/Shop/WalletComponent';
 
 const Home: NextPage = () => {
   const {login, currentUser}: any = useAuth()

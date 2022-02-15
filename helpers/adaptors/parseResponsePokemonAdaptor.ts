@@ -1,4 +1,4 @@
-import { Pokemon, Stat } from '../../interfaces';
+import { Pokemon, Stat } from 'interfaces';
 
 export function parseResponsePokemon(data: any) {
   const temp: any = {};

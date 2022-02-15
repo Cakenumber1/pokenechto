@@ -4,7 +4,7 @@ import Fade from '@mui/material/Fade';
 import Button  from '@mui/material/Button';
 import React, { useRef, useState } from 'react';
 import { keyframes } from '@emotion/react';
-import { Pokemon } from '../../interfaces';
+import { Pokemon } from 'interfaces';
 
 const RESERVED_GLOBAL_CLASS = 'closeMuiModal'
 

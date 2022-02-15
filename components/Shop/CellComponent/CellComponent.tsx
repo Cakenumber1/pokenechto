@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Pokemon } from '../../../interfaces';
-import soledOut from '../../../public/soled_out.png'
+import { Pokemon } from 'interfaces';
+import soledOut from 'public/soled_out.png'
 import { Card, CardMedia, Typography, CardContent } from '@mui/material';
 import { useStyles } from './style';
 

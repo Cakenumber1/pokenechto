@@ -3,8 +3,8 @@ import CellComponent from '../CellComponent';
 import { Stack } from '@mui/material'
 import { useStyles } from './style';
 
-import { PokemonsListResults } from '../../../interfaces/pokemonListType';
-import { useCountCellSize } from '../../../helpers/adaptors/useCountCellSize';
+import { PokemonsListResults } from 'interfaces/pokemonListType';
+import { useCountCellSize } from 'helpers/adaptors/useCountCellSize';
 
 type Props = {
   pokemons: PokemonsListResults[],

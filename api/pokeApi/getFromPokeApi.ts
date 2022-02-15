@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { PokemonsList } from '../../interfaces/pokemonListType';
-import { parseResponsePokemon } from '../../helpers';
+import { PokemonsList } from 'interfaces/index';
+import { parseResponsePokemon } from 'helpers';
 
 export async function getFromPokeApi(path: string) {
   return await axios.get(path)

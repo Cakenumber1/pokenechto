@@ -1,5 +1,5 @@
 import React from 'react';
-import { createPath, getListFromPokeApi } from '../../../../api';
+import { createPath, getListFromPokeApi } from 'api/pokeApi/getFromPokeApi';
 import ShopComponent from '../ShopComponent';
 import useSWR from 'swr'
 
