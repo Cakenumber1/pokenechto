@@ -1,7 +1,8 @@
-import React from "react";
-import styles from "./InventoryComponent.module.css";
-import { InventoryPokemonCardComponent } from "../InventoryPokemonCardComponent";
-import { PokemonCollectionType } from "../../../helpers/inventoryHelpers";
+import React from 'react';
+import { InventoryPokemonCardComponent } from '../InventoryPokemonCardComponent';
+import { PokemonCollectionType } from '../../../helpers/inventoryHelpers';
+import { Box } from '@mui/material';
+import { useStyles } from './styles';
 
 export type InventoryComponentProps = {
   pokemonCollection: PokemonCollectionType[];
@@ -10,17 +11,17 @@ export type InventoryComponentProps = {
 export const InventoryComponent = ({
   pokemonCollection,
 }: InventoryComponentProps) => {
+  const classes = useStyles();
   return (
-    <div className={styles.inventory}>
+    <Box className={classes.inventory}>
       {pokemonCollection.map(({ collectionId, pokemonId, pokemonImage }) => (
-        <div key={collectionId} className={styles.inventoryItem}>
-          <InventoryPokemonCardComponent
-            collectionId={collectionId}
-            pokemonId={pokemonId}
-            pokemonImage={pokemonImage}
-          />
-        </div>
+        <InventoryPokemonCardComponent
+          key={collectionId}
+          collectionId={collectionId}
+          pokemonId={pokemonId}
+          pokemonImage={pokemonImage}
+        />
       ))}
-    </div>
+    </Box>
   );
 };
