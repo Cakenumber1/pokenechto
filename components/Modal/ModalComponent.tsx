@@ -1,14 +1,14 @@
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
-import Button  from '@mui/material/Button';
-import React, { useRef, useState } from 'react';
 import { keyframes } from '@emotion/react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Fade from '@mui/material/Fade';
+import Modal from '@mui/material/Modal';
 import { Pokemon } from 'interfaces';
+import React, { useRef, useState } from 'react';
 
-const RESERVED_GLOBAL_CLASS = 'closeMuiModal'
+const RESERVED_GLOBAL_CLASS = 'closeMuiModal';
 
-//перекинуть в функцию, передать данные и поменять top left тут
+// перекинуть в функцию, передать данные и поменять top left тут
 
 const getAnimation = keyframes`
   0% {
@@ -37,23 +37,22 @@ const styleOpen = {
 
 type ModalProps = {
   pokemon: Pokemon
-}
+};
 
-export default function ModalComponent({pokemon}: ModalProps) {
-
+const ModalComponent = ({ pokemon }: ModalProps) => {
   const modal = useRef<HTMLElement>(null);
   const [open, setOpen] = useState(false);
 
   const handleOpen = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     setOpen(true);
-  }
+  };
 
   const handleClose = () => {
-    modal!.current!.classList.add(RESERVED_GLOBAL_CLASS)
+    modal!.current!.classList.add(RESERVED_GLOBAL_CLASS);
     setTimeout(() => {
-      setOpen(false)
-    }, 500)
+      setOpen(false);
+    }, 500);
   };
 
   return (
@@ -64,18 +63,19 @@ export default function ModalComponent({pokemon}: ModalProps) {
         aria-describedby="transition-modal-description"
         open={open}
         onClose={handleClose}
-        hideBackdrop={true}
+        hideBackdrop
       >
         <Fade in={open}>
           <Box ref={modal} sx={styleOpen}>
             {pokemon
               ? <div>{pokemon.id}</div>
-              : <div>ошибка загрузки</div>
-            }
+              : <div>ошибка загрузки</div>}
             <Button onClick={handleClose}>Close</Button>
           </Box>
         </Fade>
       </Modal>
     </div>
   );
-}
+};
+
+export default ModalComponent;

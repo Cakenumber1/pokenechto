@@ -1,1 +1,1 @@
-export * from './pokeApi/getFromPokeApi'
+export * from './pokeApi/getFromPokeApi';

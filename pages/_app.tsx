@@ -1,16 +1,17 @@
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import 'styles/globals.scss'
-import type { AppProps } from 'next/app'
-import { AuthProvider } from 'firebase/AuthContext';
+import 'styles/globals.scss';
 
-function MyApp({Component, pageProps}: AppProps) {
+import { AuthProvider } from 'firebase/AuthContext';
+import type { AppProps } from 'next/app';
+
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
       <Component {...pageProps} />
     </AuthProvider>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;

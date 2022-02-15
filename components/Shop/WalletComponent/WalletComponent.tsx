@@ -1,20 +1,22 @@
-import React, { useCallback, useRef, useState } from 'react';
-import { useStyles, useModalStyles } from './style';
 import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded';
 import {
+  Box,
   Button,
   Collapse,
   Modal,
-  Box, Stack,
+  Stack,
 } from '@mui/material';
-import TableComponent from './TableComponent/';
+import React, { useCallback, useRef, useState } from 'react';
+
+import { useModalStyles, useStyles } from './style';
+import TableComponent from './TableComponent';
 
 type Props = {
   money: number,
   mushrooms: number,
 };
 
-const WalletComponent: React.FC<Props> = ({money, mushrooms}) => {
+const WalletComponent: React.FC<Props> = ({ money, mushrooms }) => {
   const classesM = useModalStyles();
   const classes = useStyles();
   const modal = useRef<HTMLElement>(null);
@@ -27,34 +29,34 @@ const WalletComponent: React.FC<Props> = ({money, mushrooms}) => {
       modal!.current!.classList.add(`${classesM.boxExpand}`);
     }, 1);
     setTimeout(() => {
-      setExpand(true)
-    }, 1000)
+      setExpand(true);
+    }, 1000);
   }, [classesM.boxExpand]);
 
   const handleClose = useCallback(() => {
-    setExpand(false)
+    setExpand(false);
     setTimeout(() => {
-      setOpen(false)
+      setOpen(false);
     }, 1100);
     setTimeout(() => {
       modal!.current!.classList.remove(`${classesM.boxExpand}`);
-    }, 300)
+    }, 300);
   }, [classesM.boxExpand]);
-
 
   return (
     <div className={classes.container}>
-      <TableComponent money={money} mushrooms={mushrooms}/>
-      <Modal open={open}
-             onClose={handleClose}
-             hideBackdrop={true}
+      <TableComponent money={money} mushrooms={mushrooms} />
+      <Modal
+        open={open}
+        onClose={handleClose}
+        hideBackdrop
       >
         <Box ref={modal} className={classesM.box}>
           <Collapse in={expand}>
             <Stack className={classesM.boxInner} spacing={2}>
               <div>
-                <h2 style={{textAlign: 'center'}}>Баланс</h2>
-                <TableComponent money={money} mushrooms={mushrooms}/>
+                <h2 style={{ textAlign: 'center' }}>Баланс</h2>
+                <TableComponent money={money} mushrooms={mushrooms} />
               </div>
               <div>
                 <div>Купить $$$</div>
@@ -73,9 +75,9 @@ const WalletComponent: React.FC<Props> = ({money, mushrooms}) => {
           </Collapse>
         </Box>
       </Modal>
-      <Button startIcon={<ShoppingBasketRoundedIcon sx={{color: 'black'}}/>} onClick={handleOpen}/>
+      <Button startIcon={<ShoppingBasketRoundedIcon sx={{ color: 'black' }} />} onClick={handleOpen} />
     </div>
-  )
-}
+  );
+};
 
-export default WalletComponent
+export default WalletComponent;

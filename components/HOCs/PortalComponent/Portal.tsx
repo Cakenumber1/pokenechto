@@ -1,7 +1,7 @@
-import { createPortal } from 'react-dom'
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
-const Portal = ({children}: any) => {
+const Portal = ({ children }: any) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -11,9 +11,11 @@ const Portal = ({children}: any) => {
   }, []);
 
   return mounted
-    ? createPortal(children,
-      document.querySelector('#__next')!)
-    : null
+    ? createPortal(
+      children,
+      document.querySelector('#__next')!,
+    )
+    : null;
 }
 
 export default Portal;

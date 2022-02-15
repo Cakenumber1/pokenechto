@@ -1,21 +1,20 @@
 import { useWindowDimensions } from 'helpers/MediaHooks/MediaHooks';
 
 export function useCountCellSize() {
+  const { width, height } = useWindowDimensions();
+  let temp : number;
 
-  const {width, height} = useWindowDimensions()
-  let temp : number
-
-  //IDK
-  switch(true) {
-    case (width<500):
-      temp = .9 * .55 * .23 * height;
+  // IDK
+  switch (true) {
+    case (width < 500):
+      temp = 0.9 * 0.55 * 0.23 * height;
       break;
-    case (width<1000):
-      temp = .9 * .75 * .20 * height;
-      break
+    case (width < 1000):
+      temp = 0.9 * 0.75 * 0.20 * height;
+      break;
     default:
-      temp = .9 * .75 * .30 * height
-      break
+      temp = 0.9 * 0.75 * 0.30 * height;
+      break;
   }
-  return temp
+  return temp;
 }

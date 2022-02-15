@@ -36,5 +36,5 @@ export const useStyles = makeStyles({
     height: '20%',
     width: '100%',
     background: 'lightblue',
-  }
-})
+  },
+});

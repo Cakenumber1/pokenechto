@@ -28,4 +28,3 @@ export async function getListFromPokeApi(path: string) {
   }
   return temp
 }
-

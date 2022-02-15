@@ -12,7 +12,7 @@ export const useStyles = makeStyles({
     margin: 0,
     padding: 0,
   },
-})
+});
 
 export const useModalStyles = makeStyles({
   box: {
@@ -43,8 +43,8 @@ export const useModalStyles = makeStyles({
     alignItems: 'center',
     justifyContent: 'space-around',
 
-  }
-})
+  },
+});
 
 export const useTableStyles = makeStyles({
   container: {
@@ -62,18 +62,18 @@ export const useTableStyles = makeStyles({
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   tableRow: {
     '& td': {
       padding: 0,
     },
     '& th': {
-      padding: 0
-    }
+      padding: 0,
+    },
   },
   tableCell: {
     padding: 0,
-    textAlign: 'center'
+    textAlign: 'center',
   },
-})
+});

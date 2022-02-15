@@ -3,8 +3,8 @@ import { makeStyles } from '@mui/styles';
 export const useStyles = makeStyles({
   root: {
     '& .MuiCardMedia-root': {
-      objectFit: 'fill'
-    }
+      objectFit: 'fill',
+    },
   },
   card: {
     width: '100%',
@@ -15,8 +15,8 @@ export const useStyles = makeStyles({
     height: '100%',
     objectFit: 'fill',
     '& .MuiCardMedia-root': {
-      objectFit: 'fill'
-    }
+      objectFit: 'fill',
+    },
   },
   cardAmount: {
     position: 'absolute',
@@ -24,7 +24,7 @@ export const useStyles = makeStyles({
     zIndex: 1,
     bottom: 0,
     right: 0,
-    margin: 0
+    margin: 0,
   },
   unavailable: {
     filter: 'grayscale(100%)',
@@ -38,7 +38,7 @@ export const useStyles = makeStyles({
     height: '100%',
     objectFit: 'fill',
     '& .MuiCardMedia-root': {
-      objectFit: 'fill'
-    }
-  }
-})
+      objectFit: 'fill',
+    },
+  },
+});
