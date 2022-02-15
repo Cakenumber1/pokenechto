@@ -1,4 +1,4 @@
-import { useWindowDimensions } from '../MathMedia/MathMediaHooks';
+import { useWindowDimensions } from '../MediaHooks/MediaHooks';
 
 export function useCountCellSize() {
 

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Pokemon } from '../../../interfaces';
-import css from './CellComponent.module.scss';
 import soledOut from '../../../public/soled_out.png'
+import { Card, CardMedia, Typography, CardContent } from '@mui/material';
+import { useStyles } from './style';
 
 type Props = {
   pokemon: Pokemon,
@@ -9,10 +10,12 @@ type Props = {
   limit?: number
 }
 const CellComponent: React.FC<Props> = ({pokemon}) => {
+  const classes = useStyles();
   const [loading, setLoading] = useState(true)
   const amount = pokemon!.amount;
   const limit = pokemon!.limit;
 
+  //IDK
   useEffect(() => {
     setTimeout(() => {
       setLoading(false)
@@ -20,22 +23,31 @@ const CellComponent: React.FC<Props> = ({pokemon}) => {
   }, [])
 
   if (!loading) {
-    if (amount! > 0) {
       return (
-        <div className={css.CellComponent}>
-          <img className={`${css.standard}`} src={pokemon?.img} alt={pokemon?.img}/>
-          {amount && limit && <div className={css.left}>{amount}/{limit}</div>}
-        </div>
-      )
-    } else {
-      return (
-        <div className={css.CellComponent}>
-          <img className={`${css.unavailable}`} src={pokemon?.img} alt={pokemon?.img}/>
-          <img src={soledOut.src} className={css.soled}/>
-        </div>
+        <Card className={classes.card}>
+          <CardMedia
+            className={amount > 0
+              ? `${classes.pokeImg}`
+              : `${classes.pokeImg} ${classes.unavailable}`
+            }
+            component="img"
+            image={pokemon!.img}
+            alt={pokemon!.name}
+          />
+          {amount! === 0 && <CardMedia
+            className={classes.soled}
+            component="img"
+            image={soledOut.src}
+            alt={'soled'}
+          />}
+          {amount && limit && <CardContent>
+            <Typography className={classes.cardAmount} variant="h5" component="div">
+              {amount}/{limit}
+            </Typography>
+          </CardContent>}
+        </Card>
       )
     }
-  }
   return <></>
 }
 
