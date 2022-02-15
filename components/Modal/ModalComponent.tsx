@@ -1,47 +1,59 @@
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Fade from "@mui/material/Fade";
-import Button from "@mui/material/Button";
-import { useRef, useState } from 'react';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import Button  from '@mui/material/Button';
+import React, { useRef, useState } from 'react';
 import { keyframes } from '@emotion/react';
 import { Pokemon } from '../../interfaces';
 
 const RESERVED_GLOBAL_CLASS = 'closeMuiModal'
 
 //перекинуть в функцию, передать данные и поменять top left тут
+
 const getAnimation = keyframes`
-    0%  { width: 0; height: 0; opacity: 0 }
-    100% { top: 0; left: 0; width: 100%; height: 100%; opacity: 1;  }
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0
+  }
+  100% {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+  }
 `;
 
 const styleOpen = {
-  position: "absolute",
-//тут и в globals.css
-  top: "50%",
-  left: "50%",
-  transformStyle : '',
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transformStyle: '',
   animation: `${getAnimation} 2s forwards`,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
 };
 
 type ModalProps = {
-  pokemon : Pokemon
+  pokemon: Pokemon
 }
 
-export default function ModalComponent({ pokemon } : ModalProps) {
-  const modal = useRef<HTMLElement>(null)
+export default function ModalComponent({pokemon}: ModalProps) {
+
+  const modal = useRef<HTMLElement>(null);
   const [open, setOpen] = useState(false);
 
-  const handleOpen = () => {
-      setOpen(true);
+  const handleOpen = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault()
+    setOpen(true);
   }
 
   const handleClose = () => {
     modal!.current!.classList.add(RESERVED_GLOBAL_CLASS)
     setTimeout(() => {
       setOpen(false)
-    },500)
+    }, 500)
   };
 
   return (
@@ -56,7 +68,7 @@ export default function ModalComponent({ pokemon } : ModalProps) {
       >
         <Fade in={open}>
           <Box ref={modal} sx={styleOpen}>
-            { pokemon
+            {pokemon
               ? <div>{pokemon.id}</div>
               : <div>ошибка загрузки</div>
             }

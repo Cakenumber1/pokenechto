@@ -1,16 +1,16 @@
 import type { NextPage } from 'next'
 import { useAuth } from '../firebase/AuthContext';
 import { ActiveLink } from '../helpers';
-import ModalComponent from '../components/Modal/';
+import WalletComponent from '../components/Shop/WalletComponent';
 
 const Home: NextPage = () => {
   const {login, currentUser}: any = useAuth()
   console.log(login('asd@mail.ru', 'asddsds12'))
   console.log(currentUser)
   return (
-    <div>
+    <div style={{height: '100%'}}>
       <ActiveLink href={'/somepage'}>Go Shopping</ActiveLink>
-      <ModalComponent pokemon={undefined}/>
+      <WalletComponent money={1000} mushrooms={100}/>
     </div>
   )
 }
