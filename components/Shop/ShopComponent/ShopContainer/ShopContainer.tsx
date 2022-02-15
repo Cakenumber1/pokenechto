@@ -1,6 +1,6 @@
 import React from 'react';
-import { createPath, getListFromPokeApi } from '../../../api';
-import ShopComponent from './ShopComponent';
+import { createPath, getListFromPokeApi } from '../../../../api';
+import ShopComponent from '../ShopComponent';
 import useSWR from 'swr'
 
 const ShopContainer: React.FC = () => {
