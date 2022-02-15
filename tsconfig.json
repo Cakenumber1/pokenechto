@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -16,13 +20,48 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "components/*": ["./components/*", "./components"],
-      "api/*": ["./api/*", "./api"],
-      "helpers/*": ["./helpers/*", "./helpers"],
-      "interfaces/*": ["./interfaces/*", "./interfaces"],
-      "public/*": ["./public/*", "./public"],
+      "components/*": [
+        "./components/*",
+        "./components"
+      ],
+      "api/*": [
+        "./api/*",
+        "./api"
+      ],
+      "helpers/*": [
+        "./helpers/*",
+        "./helpers"
+      ],
+      "interfaces/*": [
+        "./interfaces/*",
+        "./interfaces"
+      ],
+      "public/*": [
+        "./public/*",
+        "./public"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "settings": {
+    "node": {
+      "tryExtensions": [
+        ".js",
+        ".json",
+        ".node",
+        ".ts",
+        ".d.ts"
+      ]
+    }
+  },
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
