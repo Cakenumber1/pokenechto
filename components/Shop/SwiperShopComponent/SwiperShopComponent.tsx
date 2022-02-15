@@ -1,17 +1,17 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import React from 'react';
 import { Autoplay, Navigation, Pagination } from 'swiper';
-import css from './SwiperShopComponent.module.scss'
 import { isMobile } from 'react-device-detect';
 import CellComponent from '../CellComponent';
 import { PokemonsListResults } from '../../../interfaces/pokemonListType';
+import { useCountCellSize } from '../../../helpers/adaptors/useCountCellSize';
 
 type Props = {
   pokemons: PokemonsListResults[]
 }
 
 const SwiperShopComponent: React.FC<Props> = ({pokemons}) => {
-  //const isMobile = true;
+  let temp = useCountCellSize() * 1.2
   return (
     <Swiper
       allowTouchMove={isMobile}
@@ -24,9 +24,9 @@ const SwiperShopComponent: React.FC<Props> = ({pokemons}) => {
       pagination={{
         dynamicBullets: true,
       }}
-      className={css.swiperMain}>
+      style={{width: temp, height: temp}}>
       {pokemons.map((pokemon, index: number) => (
-        <SwiperSlide key={index} className={css.swiperSlide}>
+        <SwiperSlide key={index}>
           <CellComponent pokemon={pokemon.fullInfo}/>
         </SwiperSlide>
       ))}
