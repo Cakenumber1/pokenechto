@@ -1,7 +1,7 @@
-import {Navigation, Pagination} from 'swiper';
-import {PropsWithChildren} from 'react';
-import {Swiper} from 'swiper/react';
-import {Swiper as ISwiper} from 'swiper/types';
+import { Navigation, Pagination } from 'swiper';
+import { PropsWithChildren } from 'react';
+import { Swiper } from 'swiper/react';
+import { Swiper as ISwiper } from 'swiper/types';
 
 export type InventorySwiperComponentProps = {
   activeSlide: number;
@@ -25,8 +25,8 @@ export const InventorySwiperComponent = ({
       longSwipesRatio={0.3}
       longSwipesMs={50}
       preloadImages={false}
-      onSlideChange={handleSlideChange}
-      onSwiper={swiper => {
+      onSlideChangeTransitionEnd={handleSlideChange}
+      onSwiper={(swiper) => {
         swiper.slideTo(activeSlide, 0, false);
       }}
     >
