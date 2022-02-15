@@ -1,19 +1,21 @@
-import React from 'react';
-import styles from './InventoryComponent.module.css';
-import {InventoryPokemonCardComponent} from '../InventoryPokemonCardComponent';
-import {PokemonCollectionItemType} from '../types';
+import React from "react";
+import styles from "./InventoryComponent.module.css";
+import { InventoryPokemonCardComponent } from "../InventoryPokemonCardComponent";
+import { PokemonCollectionType } from "../../../helpers/inventoryHelpers";
 
 export type InventoryComponentProps = {
-  pokemonCollection: PokemonCollectionItemType[];
+  pokemonCollection: PokemonCollectionType[];
 };
 
-export const InventoryComponent = ({pokemonCollection}: InventoryComponentProps) => {
+export const InventoryComponent = ({
+  pokemonCollection,
+}: InventoryComponentProps) => {
   return (
     <div className={styles.inventory}>
-      {pokemonCollection.map(({id, pokemonId, pokemonImage}) => (
-        <div key={id} className={styles.inventoryItem}>
+      {pokemonCollection.map(({ collectionId, pokemonId, pokemonImage }) => (
+        <div key={collectionId} className={styles.inventoryItem}>
           <InventoryPokemonCardComponent
-            id={id}
+            collectionId={collectionId}
             pokemonId={pokemonId}
             pokemonImage={pokemonImage}
           />

@@ -1,13 +1,11 @@
-import React from 'react';
-import styles from './InventoryPokemonCard.module.scss';
-import {PokemonCollectionItemType} from '../types';
-
-export type InventoryPokemonCardComponentProps = PokemonCollectionItemType;
+import React from "react";
+import styles from "./InventoryPokemonCard.module.scss";
+import { PokemonCollectionType } from "../../../helpers/inventoryHelpers";
 
 export const InventoryPokemonCardComponent = ({
   pokemonImage,
   pokemonId,
-}: InventoryPokemonCardComponentProps) => {
+}: PokemonCollectionType) => {
   return (
     <img
       className={styles.inventoryPokemonCard}
