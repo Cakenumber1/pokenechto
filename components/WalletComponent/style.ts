@@ -18,21 +18,14 @@ export const useModalStyles = makeStyles({
   box: {
     transition: '1.5s all',
     position: 'absolute',
-    width: 0,
-    height: 0,
-    top: '50%',
-    left: '50%',
+    width: '100%',
+    height: '100%',
+    top: 0,
+    left: 0,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     background: 'white',
-
-  },
-  boxExpand: {
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
   },
   boxInner: {
     width: '100%',
@@ -40,7 +33,6 @@ export const useModalStyles = makeStyles({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-around',
-
   },
 });
 

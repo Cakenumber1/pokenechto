@@ -1,7 +1,7 @@
-import { useAuth } from 'firebase/AuthContext';
-import type { NextPage } from 'next';
 import OnloadOverlayComponent from 'components/HOCs/OnloadOverlayComponent';
 import HomeComponent from 'components/Home/HomeComponent';
+import { useAuth } from 'firebase/AuthContext';
+import type { NextPage } from 'next';
 
 const Home: NextPage = () => {
   const { login, currentUser }: any = useAuth();

@@ -1,4 +1,4 @@
-import WalletComponent from 'components/Shop/WalletComponent';
+import WalletComponent from 'components/WalletComponent';
 import { ActiveLink } from 'helpers';
 import React from 'react';
 

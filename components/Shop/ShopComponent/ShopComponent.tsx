@@ -1,7 +1,7 @@
 import { Container, Rating } from '@mui/material';
 import ShelfComponent from 'components/Shop/ShelfComponent';
 import SwiperShopComponent from 'components/Shop/SwiperShopComponent';
-import WalletComponent from 'components/Shop/WalletComponent/';
+import WalletComponent from 'components/WalletComponent/';
 import { ActiveLink } from 'helpers/';
 import { PokemonsList } from 'interfaces/pokemonListType';
 import React, { useEffect } from 'react';
