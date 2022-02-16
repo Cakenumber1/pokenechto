@@ -9,11 +9,8 @@ export function useCountCellSize() {
     case (width < 500):
       temp = 0.9 * 0.55 * 0.23 * height;
       break;
-    case (width < 1000):
-      temp = 0.9 * 0.75 * 0.20 * height;
-      break;
     default:
-      temp = 0.9 * 0.75 * 0.30 * height;
+      temp = 0.9 * 0.75 * 0.20 * height;
       break;
   }
   return temp;
