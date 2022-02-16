@@ -1,12 +1,13 @@
 import {
   Card,
   CardContent,
-  CardMedia,
+  CardMedia, Grow,
   Typography,
 } from '@mui/material';
+import clsx from 'clsx';
 import { Pokemon } from 'interfaces';
 import soledOut from 'public/soled_out.png';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { useStyles } from './style';
 
@@ -16,49 +17,42 @@ type Props = {
 
 const CellComponent: React.FC<Props> = ({ pokemon }) => {
   const classes = useStyles();
-  const [loading, setLoading] = useState(true);
-  const { amount } = pokemon!;
   const { limit } = pokemon!;
+  const { amount } = pokemon!;
+  const imgStyle = clsx({
+    [classes.pokeImg]: true,
+    [classes.unavailable]: amount <= 0,
+  });
 
-  // IDK
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1);
-  }, []);
-
-  if (!loading) {
-    return (
+  return (
+    <Grow in timeout={3000}>
       <Card className={classes.card}>
         <CardMedia
-          className={amount > 0
-            ? `${classes.pokeImg}`
-            : `${classes.pokeImg} ${classes.unavailable}`}
+          className={imgStyle}
           component="img"
           image={pokemon!.img}
           alt={pokemon!.name}
         />
         {amount! === 0 && (
-          <CardMedia
-            className={classes.soled}
-            component="img"
-            image={soledOut.src}
-            alt="soled"
-          />
+        <CardMedia
+          className={classes.soled}
+          component="img"
+          image={soledOut.src}
+          alt="soled"
+        />
         )}
         {amount && limit && (
-          <CardContent>
-            <Typography className={classes.cardAmount} variant="h5" component="div">
-              {amount}
-              /
-              {limit}
-            </Typography>
-          </CardContent>
+        <CardContent>
+          <Typography className={classes.cardAmount} variant="h5" component="div">
+            {amount}
+            /
+            {limit}
+          </Typography>
+        </CardContent>
         )}
       </Card>
-    );
-  }
-  return <div/>
+    </Grow>
+  );
 };
 
 export default CellComponent;
