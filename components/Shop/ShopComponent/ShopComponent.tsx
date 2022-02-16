@@ -10,9 +10,10 @@ import { useStyles } from './style';
 
 type Props = {
   pokemons: PokemonsList,
+  onclick: () => void
 };
 
-const ShopComponent: React.FC<Props> = ({ pokemons }) => {
+const ShopComponent: React.FC<Props> = ({ pokemons, onclick }) => {
   const classes = useStyles();
   // Рандомайзер количества
   useEffect(() => {
@@ -32,26 +33,26 @@ const ShopComponent: React.FC<Props> = ({ pokemons }) => {
 
   return (
     <Container>
-      <ActiveLink href="/">
-        <div>Back</div>
-      </ActiveLink>
+      <ActiveLink onclick={onclick} href="/">Back</ActiveLink>
       <WalletComponent money={100} mushrooms={2000} />
       <div className={classes.shopBody}>
-        <div className={classes.shopTop}>
-          <div className={classes.shopTopText}>
-            <h3 style={{ textAlign: 'center', margin: 0 }}>Лучшее предложение</h3>
-            <Rating name="read-only" value={5} size="large" readOnly />
+        <Container className={classes.shopBodyInner} sx={{ border: 2, borderRadius: 1 }}>
+          <div className={classes.shopTop}>
+            <div className={classes.shopTopText}>
+              <div className={classes.shopText}>Лучшее предложение</div>
+              <Rating name="read-only" value={5} style={{ fontSize: '2vmax' }} readOnly />
+            </div>
+            <SwiperShopComponent pokemons={pokemons.results.slice(0, 3)} />
           </div>
-          <SwiperShopComponent pokemons={pokemons.results.slice(0, 3)} />
-        </div>
-        <div className={classes.shopShelves}>
-          <div className={classes.shopShelvesText}>Juhasd</div>
-          <ShelfComponent pokemons={pokemons.results.slice(6, 9)} />
-        </div>
-        <div className={classes.shopShelves}>
-          <div className={classes.shopShelvesText}>dsasaP</div>
-          <ShelfComponent pokemons={pokemons.results.slice(6, 9)} />
-        </div>
+          <div className={classes.shopShelves}>
+            <div className={classes.shopShelvesText}>Juhasd</div>
+            <ShelfComponent pokemons={pokemons.results.slice(3, 6)} />
+          </div>
+          <div className={classes.shopShelves}>
+            <div className={classes.shopShelvesText}>dsasaP</div>
+            <ShelfComponent pokemons={pokemons.results.slice(6, 9)} />
+          </div>
+        </Container>
       </div>
     </Container>
   );

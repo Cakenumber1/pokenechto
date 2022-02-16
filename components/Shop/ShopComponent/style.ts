@@ -3,16 +3,19 @@ import { makeStyles } from '@mui/styles';
 export const useStyles = makeStyles({
   shopBody: {
     position: 'absolute',
-    bottom: 0,
+    bottom: '2.5%',
     left: '5%',
     height: '90%',
     padding: '2.5% 2.5% 0 2.5%',
     width: '85%',
-    background: 'saddlebrown',
+    overflowY: 'auto',
+  },
+  shopBodyInner: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',
-    overflowY: 'auto',
+    height: '100%',
+    background: '#003a70',
   },
   shopTop: {
     height: '30%',
@@ -32,9 +35,16 @@ export const useStyles = makeStyles({
   shopShelves: {
     height: '30%',
   },
+  shopText: {
+    fontSize: '2vmax',
+    color: '#ffcb05',
+    textAlign: 'center',
+  },
   shopShelvesText: {
+    fontSize: '2vmax',
+    color: '#ffcb05',
     height: '20%',
     width: '100%',
-    background: 'lightblue',
+    background: '#3d7dca',
   },
 });
