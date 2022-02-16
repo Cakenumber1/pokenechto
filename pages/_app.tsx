@@ -6,12 +6,10 @@ import 'styles/globals.scss';
 import { AuthProvider } from 'firebase/AuthContext';
 import type { AppProps } from 'next/app';
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return (
-    <AuthProvider>
-      <Component {...pageProps} />
-    </AuthProvider>
-  );
-}
+const MyApp = ({ Component, pageProps }: AppProps) => (
+  <AuthProvider>
+    <Component {...pageProps} />
+  </AuthProvider>
+);
 
 export default MyApp;
