@@ -16,13 +16,12 @@ export const useStyles = makeStyles({
 
 export const useModalStyles = makeStyles({
   box: {
-    transition: '1s all',
+    transition: '1.5s all',
     position: 'absolute',
     width: 0,
     height: 0,
     top: '50%',
     left: '50%',
-    opacity: '50%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -34,7 +33,6 @@ export const useModalStyles = makeStyles({
     left: 0,
     width: '100%',
     height: '100%',
-    opacity: 1,
   },
   boxInner: {
     width: '100%',

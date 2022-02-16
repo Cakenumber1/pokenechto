@@ -6,7 +6,10 @@ import {
   Modal,
   Stack,
 } from '@mui/material';
-import React, { useCallback, useRef, useState } from 'react';
+import clsx from 'clsx';
+import React, {
+  useCallback, useEffect, useRef, useState,
+} from 'react';
 
 import { useModalStyles, useStyles } from './style';
 import TableComponent from './TableComponent';
@@ -19,40 +22,72 @@ type Props = {
 const WalletComponent: React.FC<Props> = ({ money, mushrooms }) => {
   const classesM = useModalStyles();
   const classes = useStyles();
-  const modal = useRef<HTMLElement>(null);
-  const [open, setOpen] = useState(false);
-  const [expand, setExpand] = useState(false);
+  const modal = useRef<HTMLElement>();
+  const [isTransitioned, setIsTransitioned] = useState(false);
+  const [isDropped, setIsDropped] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isExpand, setIsExpand] = useState(false);
+
+  const boxStyle = clsx({
+    [classesM.box]: true,
+    [classesM.boxExpand]: isExpand,
+  });
 
   const handleOpen = useCallback(() => {
-    setOpen(true);
+    setIsOpen(true);
     setTimeout(() => {
-      modal!.current!.classList.add(`${classesM.boxExpand}`);
+      setIsExpand(true);
     }, 1);
-    setTimeout(() => {
-      setExpand(true);
-    }, 1000);
-  }, [classesM.boxExpand]);
+  }, []);
 
   const handleClose = useCallback(() => {
-    setExpand(false);
+    setIsDropped(false);
+    setIsExpand(false);
     setTimeout(() => {
-      setOpen(false);
-    }, 1100);
-    setTimeout(() => {
-      modal!.current!.classList.remove(`${classesM.boxExpand}`);
-    }, 300);
-  }, [classesM.boxExpand]);
+      setIsOpen(false);
+    }, 1000);
+  }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      setTimeout(() => {
+        modal.current?.addEventListener('transitionend', () => {
+          setIsTransitioned(true);
+          setIsTransitioned(false);
+        });
+      }, 1);
+    }
+  }, [isOpen]);
+
+  // Open mechanism
+  useEffect(() => {
+    if (isExpand && isTransitioned) {
+      setIsDropped(true);
+    }
+  }, [isTransitioned, isExpand]);
+
+  // Close mechanism
+  // isTransitioned happens in the middle of animation
+
+  // useEffect(() => {
+  //   if (!isExpand && isTransitioned) {
+  //     // isTransitioned happens in the middle of animation
+  //     setTimeout(() => {
+  //       setIsOpen(false);
+  //     }, 500);
+  //   }
+  // }, [isTransitioned, isExpand]);
 
   return (
     <div className={classes.container}>
       <TableComponent money={money} mushrooms={mushrooms} />
       <Modal
-        open={open}
+        open={isOpen}
         onClose={handleClose}
         hideBackdrop
       >
-        <Box ref={modal} className={classesM.box}>
-          <Collapse in={expand}>
+        <Box ref={modal} className={boxStyle}>
+          <Collapse in={isDropped}>
             <Stack className={classesM.boxInner} spacing={2}>
               <div>
                 <h2 style={{ textAlign: 'center' }}>Баланс</h2>

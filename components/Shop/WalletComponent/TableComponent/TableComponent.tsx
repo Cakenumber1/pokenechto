@@ -1,7 +1,8 @@
-import { FC } from 'react';
 import {
   Paper, Table, TableBody, TableCell, TableContainer, TableRow,
 } from '@mui/material';
+import { FC } from 'react';
+
 import { useTableStyles } from '../style';
 
 type Props = {
@@ -10,6 +11,7 @@ type Props = {
 };
 
 const TableComponent: FC<Props> = ({ money, mushrooms }) => {
+  const classesT = useTableStyles();
   function createData(name: string, amount: number, symbol: string) {
     return { name, amount, symbol };
   }
@@ -18,7 +20,7 @@ const TableComponent: FC<Props> = ({ money, mushrooms }) => {
     createData('Money', money, '$'),
     createData('Mushrooms', mushrooms, '🍄'),
   ];
-  const classesT = useTableStyles();
+
   return (
     <TableContainer
       component={Paper}
