@@ -1,25 +1,29 @@
 import React from 'react';
 import { InventoryPokemonCardComponent } from '../InventoryPokemonCardComponent';
-import { PokemonCollectionType } from '../../../helpers/inventoryHelpers';
+import { PokemonCollectionItemProp } from '../../../helpers/inventoryHelpers';
 import { Box } from '@mui/material';
 import { useStyles } from './styles';
 
 export type InventoryComponentProps = {
-  pokemonCollection: PokemonCollectionType[];
+  pokemonCollection: PokemonCollectionItemProp[];
+  onClickCard: (
+    event: React.MouseEvent<HTMLElement>,
+    pokemonId: number,
+  ) => void;
 };
 
 export const InventoryComponent = ({
   pokemonCollection,
+  onClickCard: handleClickCard,
 }: InventoryComponentProps) => {
   const classes = useStyles();
   return (
     <Box className={classes.inventory}>
-      {pokemonCollection.map(({ collectionId, pokemonId, pokemonImage }) => (
+      {pokemonCollection.map((collectionItem) => (
         <InventoryPokemonCardComponent
-          key={collectionId}
-          collectionId={collectionId}
-          pokemonId={pokemonId}
-          pokemonImage={pokemonImage}
+          key={collectionItem.collectionId}
+          collectionItem={collectionItem}
+          onClick={handleClickCard}
         />
       ))}
     </Box>

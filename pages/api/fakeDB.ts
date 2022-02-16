@@ -1,12 +1,13 @@
-import { PokemonCollectionType } from "../../helpers/inventoryHelpers";
+import { PokemonCollectionItemProp } from '../../helpers/inventoryHelpers';
 
-function generateInventory(length: number): PokemonCollectionType[] {
+function generateInventory(length: number): PokemonCollectionItemProp[] {
   return Array.from({ length }).map((_, index) => ({
     collectionId: index,
-    pokemonId: index,
-    pokemonImage: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${
+    id: index,
+    sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${
       index + 1
     }.svg`,
+    name: `Name of Pokemon #${index + 1}`,
   }));
 }
 
@@ -24,7 +25,7 @@ const fakeDB = {
       return this.data;
     },
     getById(id: number) {
-      return this.data.find((element) => element.pokemonId === id);
+      return this.data.find((element) => element.id === id);
     },
     getByPage(page: number) {
       if (page < 1 || page > this.getPages()) return undefined;

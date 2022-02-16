@@ -11,7 +11,7 @@ export const useStyles = makeStyles({
     width: '100%',
     height: '100%',
     objectFit: 'contain',
-    padding: '10%',
+    padding: '5px',
     transition: '0.5s',
     '&:hover': {
       transform: 'scale(1.5)',

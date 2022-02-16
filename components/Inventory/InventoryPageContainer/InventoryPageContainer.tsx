@@ -6,6 +6,7 @@ import {
   fetchInventoryByPage,
   getInventoryByPageKey,
 } from "../../../helpers/inventoryHelpers";
+import {InventoryWithControlsContainer} from "../InventoryWithControlsContainer";
 
 type InventoryPageContainerProps = {
   page: number;
@@ -22,5 +23,5 @@ export const InventoryPageContainer = ({
   if (error) return <div>Error InventoryPageContainer</div>;
   if (!pokemonCollection) return <LinearProgress />;
 
-  return <InventoryComponent pokemonCollection={pokemonCollection} />;
+  return <InventoryWithControlsContainer pokemonCollection={pokemonCollection} />;
 };
