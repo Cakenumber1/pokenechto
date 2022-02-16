@@ -1,5 +1,6 @@
 import WalletComponent from 'components/WalletComponent';
 import { ActiveLink } from 'helpers';
+import Link from 'next/link';
 import React from 'react';
 
 type Props = {
@@ -17,10 +18,12 @@ const HomeComponent: React.FC<Props> = ({ onclick }) => (
     }}
     >
       <ActiveLink onclick={onclick} href="/pokedex">Pokedex</ActiveLink>
+      <Link href="/bestiary">Bestiary std link</Link>
+      <Link href="/inventory">inventory std link</Link>
       <ActiveLink onclick={onclick} href="/shop">Shop</ActiveLink>
       <ActiveLink onclick={onclick} href="/arena">Arena</ActiveLink>
     </div>
-    <WalletComponent money={1000} mushrooms={100}/>
+    <WalletComponent money={1000} mushrooms={100} />
   </div>
 );
 

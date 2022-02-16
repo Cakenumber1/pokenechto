@@ -39,6 +39,14 @@
       "public/*": [
         "./public/*",
         "./public"
+      ],
+      "store/*": [
+        "./store/*",
+        "./store"
+      ],
+      "theme/*": [
+        "./theme/*",
+        "./theme"
       ]
     }
   },

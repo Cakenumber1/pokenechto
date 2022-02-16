@@ -1,8 +1,8 @@
 import { Stack } from '@mui/material';
 import { ThemeProvider } from '@mui/styles';
-import { myTheme } from 'helpers/ThemeProvider';
 import { PokemonsListResults } from 'interfaces/';
 import React from 'react';
+import { theme } from 'theme/index';
 
 import CellComponent from '../CellComponent';
 import { useStylesItem, useStylesStack } from './style';
@@ -26,7 +26,7 @@ const ItemComp = ({ _key, pokemon } : ItemType) => {
 const ShelfComponent: React.FC<Props> = ({ pokemons }) => {
   const classes = useStylesStack();
   return (
-    <ThemeProvider theme={myTheme}>
+    <ThemeProvider theme={theme}>
       <Stack className={classes.stack} direction="row">
         {pokemons.map((pokemon: PokemonsListResults, i: number) => (
           <ItemComp _key={i} pokemon={pokemon} />

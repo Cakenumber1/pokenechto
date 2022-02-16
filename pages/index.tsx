@@ -1,5 +1,5 @@
 import OnloadOverlayComponent from 'components/HOCs/OnloadOverlayComponent';
-import HomeComponent from 'components/Home/HomeComponent';
+import HomeComponent from 'components/Home/';
 import { useAuth } from 'firebase/AuthContext';
 import type { NextPage } from 'next';
 
