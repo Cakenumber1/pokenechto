@@ -1,7 +1,25 @@
 import { Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
-export const useStyles = makeStyles((theme : Theme) => ({
+export const useStylesItem = makeStyles((theme : Theme) => ({
+  item: {
+    position: 'relative',
+    [theme.breakpoints.down('md')]: {
+      width: '11.385vh',
+      height: '11.385vh',
+    },
+    [theme.breakpoints.down('lg')]: {
+      width: '13.5vh',
+      height: '13.5vh',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '15vh',
+      height: '15vh',
+    },
+  },
+}));
+
+export const useStylesStack = makeStyles({
   stack: {
     height: '85%',
     width: '100%',
@@ -10,20 +28,4 @@ export const useStyles = makeStyles((theme : Theme) => ({
     alignItems: 'center',
     boxShadow: 'rgba(50, 50, 93, 0.25) 0 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset',
   },
-  // TypeError: Cannot read properties of undefined (reading 'down')
-  // item: {
-  //   position: 'relative',
-  //   [theme.breakpoints.down('md')]: {
-  //     width: '10px',
-  //     height: '10px',
-  //   },
-  //   [theme.breakpoints.down('lg')]: {
-  //     width: '100px',
-  //     height: '100px',
-  //   },
-  //   [theme.breakpoints.up('lg')]: {
-  //     width: '200px',
-  //     height: '200px',
-  //   },
-  // },
-}));
+});

@@ -1,5 +1,6 @@
+import { ThemeProvider } from '@mui/styles';
 import CellComponent from 'components/Shop/CellComponent';
-import { useCountCellSize } from 'helpers/adaptors/useCountCellSize';
+import { myTheme } from 'helpers/ThemeProvider';
 import { PokemonsListResults } from 'interfaces/pokemonListType';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
@@ -7,12 +8,14 @@ import { Autoplay, Navigation, Pagination } from 'swiper';
 // eslint-disable-next-line import/no-unresolved
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { useStyles } from './style';
+
 type Props = {
   pokemons: PokemonsListResults[]
 };
 
-const SwiperShopComponent: React.FC<Props> = ({ pokemons }) => {
-  const temp = useCountCellSize() * 1.2;
+const MySwiper = ({ pokemons } : Props) => {
+  const classes = useStyles();
   return (
     <Swiper
       allowTouchMove={isMobile}
@@ -25,7 +28,7 @@ const SwiperShopComponent: React.FC<Props> = ({ pokemons }) => {
       pagination={{
         dynamicBullets: true,
       }}
-      style={{ width: temp, height: temp }}
+      className={classes.item}
     >
       {pokemons.map((pokemon, index: number) => (
         <SwiperSlide key={index}>
@@ -35,5 +38,12 @@ const SwiperShopComponent: React.FC<Props> = ({ pokemons }) => {
     </Swiper>
   );
 };
+
+const SwiperShopComponent: React.FC<Props> = ({ pokemons }) => (
+  <ThemeProvider theme={myTheme}>
+    <MySwiper pokemons={pokemons} />
+  </ThemeProvider>
+
+);
 
 export default SwiperShopComponent;
