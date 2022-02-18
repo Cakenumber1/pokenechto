@@ -1,0 +1,1 @@
+export { InventorySwiperComponent } from './InventorySwiperComponent';

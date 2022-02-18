@@ -1,4 +1,5 @@
 import '../styles/globals.css';
+
 import type { AppProps } from 'next/app';
 import { AuthProvider } from '../firebase/AuthContext';
 import { store } from '../store';

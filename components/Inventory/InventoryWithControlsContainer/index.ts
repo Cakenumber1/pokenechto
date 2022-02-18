@@ -1,0 +1,1 @@
+export { InventoryWithControlsContainer } from './InventoryWithControlsContainer';

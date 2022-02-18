@@ -1,0 +1,1 @@
+export { InventoryPopover } from './InventoryPopover';
