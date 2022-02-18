@@ -1,17 +1,18 @@
 import '../styles/globals.css';
+
 import type { AppProps } from 'next/app';
-import { AuthProvider } from '../firebase/AuthContext';
-import { store } from '../store';
 import { Provider } from 'react-redux';
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return (
-    <AuthProvider>
-      <Provider store={store}>
-        <Component {...pageProps} />
-      </Provider>
-    </AuthProvider>
-  );
-}
+import { AuthProvider } from '../firebase/AuthContext';
+import { store } from '../store';
+
+const MyApp = ({ Component, pageProps }: AppProps) => (
+  <AuthProvider>
+    <Provider store={store}>
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+      <Component {...pageProps} />
+    </Provider>
+  </AuthProvider>
+);
 
 export default MyApp;
