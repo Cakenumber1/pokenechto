@@ -1,4 +1,4 @@
-import { PokemonCollectionItemProp } from '../../helpers/inventoryHelpers';
+import { PokemonCollectionItemProp } from 'helpers/inventoryHelpers';
 
 function generateInventory(length: number): PokemonCollectionItemProp[] {
   return Array.from({ length }).map((_, index) => ({

@@ -1,6 +1,6 @@
 import React from 'react';
-import { InventoryPokemonCardComponent } from '../InventoryPokemonCardComponent';
-import { PokemonCollectionItemProp } from '../../../helpers/inventoryHelpers';
+import { InventoryPokemonCardComponent } from 'components/Inventory/InventoryPokemonCardComponent';
+import { PokemonCollectionItemProp } from 'helpers/inventoryHelpers';
 import { Box } from '@mui/material';
 import { useStyles } from './styles';
 

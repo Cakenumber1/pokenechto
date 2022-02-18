@@ -2,9 +2,9 @@ import useSWR from 'swr';
 import {
   fetchInventoryByPage,
   getInventoryByPageKey,
-} from '../../../helpers/inventoryHelpers';
-import { InventoryWithControlsContainer } from '../InventoryWithControlsContainer';
-import { InventoryLoader } from '../InventoryLoader';
+} from 'helpers/inventoryHelpers';
+import { InventoryWithControlsContainer } from 'components/Inventory/InventoryWithControlsContainer';
+import { InventoryLoader } from 'components/Inventory/InventoryLoader';
 
 type InventoryPageContainerProps = {
   page: number;

@@ -1,15 +1,15 @@
 import { Swiper as ISwiper } from 'swiper/types';
-import { InventorySwiperComponent } from '../InventorySwiperComponent';
 import { SwiperSlide } from 'swiper/react';
 import { useRouter } from 'next/router';
-import { InventoryPageContainer } from '../InventoryPageContainer';
 import useSWR from 'swr';
+import { InventorySwiperComponent } from 'components/Inventory/InventorySwiperComponent';
+import { InventoryPageContainer } from 'components/Inventory/InventoryPageContainer';
 import {
   adjacentSlide,
   fetchInventoryPagesLength,
   getInventoryPagesLengthKey,
-} from '../../../helpers/inventoryHelpers';
-import { InventoryLoader } from '../InventoryLoader';
+} from 'helpers/inventoryHelpers';
+import { InventoryLoader } from 'components/Inventory/InventoryLoader';
 
 type InventoryContainerProps = {
   pageQuery: number;

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useCallback, useState } from 'react';
-import { InventoryComponent } from '../InventoryComponent';
-import { PokemonCollectionItemProp } from '../../../helpers/inventoryHelpers';
-import { InventoryPopover } from '../InventoryPopover';
-import { InventoryModal } from '../InventoryModal';
+import { InventoryComponent } from 'components/Inventory/InventoryComponent';
+import { PokemonCollectionItemProp } from 'helpers/inventoryHelpers';
+import { InventoryPopover } from 'components/Inventory/InventoryPopover';
+import { InventoryModal } from 'components/Inventory/InventoryModal';
 
 export type InventoryWithControlsContainerProps = {
   pokemonCollection: PokemonCollectionItemProp[];
