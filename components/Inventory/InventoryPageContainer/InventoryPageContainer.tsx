@@ -1,12 +1,10 @@
-import useSWR from "swr";
-
-import { LinearProgress } from "@mui/material";
-import { InventoryComponent } from "../InventoryComponent";
+import useSWR from 'swr';
 import {
   fetchInventoryByPage,
   getInventoryByPageKey,
-} from "../../../helpers/inventoryHelpers";
-import {InventoryWithControlsContainer} from "../InventoryWithControlsContainer";
+} from '../../../helpers/inventoryHelpers';
+import { InventoryWithControlsContainer } from '../InventoryWithControlsContainer';
+import { InventoryLoader } from '../InventoryLoader';
 
 type InventoryPageContainerProps = {
   page: number;
@@ -17,11 +15,13 @@ export const InventoryPageContainer = ({
 }: InventoryPageContainerProps) => {
   const { data: pokemonCollection, error } = useSWR(
     getInventoryByPageKey(page),
-    fetchInventoryByPage
+    fetchInventoryByPage,
   );
 
   if (error) return <div>Error InventoryPageContainer</div>;
-  if (!pokemonCollection) return <LinearProgress />;
+  if (!pokemonCollection) return <InventoryLoader open={!pokemonCollection} />;
 
-  return <InventoryWithControlsContainer pokemonCollection={pokemonCollection} />;
+  return (
+    <InventoryWithControlsContainer pokemonCollection={pokemonCollection} />
+  );
 };

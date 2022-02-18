@@ -1,10 +1,9 @@
+import * as React from 'react';
+import { useCallback, useState } from 'react';
 import { InventoryComponent } from '../InventoryComponent';
-import { useState } from 'react';
-import { Button, ButtonGroup, Popover } from '@mui/material';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import FlakyIcon from '@mui/icons-material/Flaky';
-import CardGiftcardOutlinedIcon from '@mui/icons-material/CardGiftcardOutlined';
 import { PokemonCollectionItemProp } from '../../../helpers/inventoryHelpers';
+import { InventoryPopover } from '../InventoryPopover';
+import { InventoryModal } from '../InventoryModal';
 
 export type InventoryWithControlsContainerProps = {
   pokemonCollection: PokemonCollectionItemProp[];
@@ -12,57 +11,62 @@ export type InventoryWithControlsContainerProps = {
 export const InventoryWithControlsContainer = ({
   pokemonCollection,
 }: InventoryWithControlsContainerProps) => {
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const [popoverAnchorElement, setPopoverAnchorElement] =
+    useState<HTMLElement | null>(null);
+  const [isTopHalfOfScreen, setIsTopHalfOfScreen] = useState(true);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
   const [pokemonId, setPokemonId] = useState<number | null>(null);
+  const [pokemonSprite, setPokemonSprite] = useState<string>('');
 
-  const handleClick = (
-    event: React.MouseEvent<HTMLElement>,
-    pokemonId: number,
-  ) => {
-    setAnchorEl(event.currentTarget);
-    setPokemonId(pokemonId);
-  };
+  const handleClickCard = useCallback(
+    (
+      event: React.MouseEvent<HTMLElement>,
+      pokemon: { id: number; sprite: string },
+    ) => {
+      setPopoverAnchorElement(event.currentTarget);
+      setIsTopHalfOfScreen(event.clientY > window.innerHeight / 2);
+    },
+    [],
+  );
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const handleClosePopover = useCallback(() => {
+    setPopoverAnchorElement(null);
+  }, []);
 
-  const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
+  const handleClickPokemonControls = useCallback((event, buttonClicked) => {
+    switch (buttonClicked) {
+      case 'info':
+        setModalOpen(true);
+        handleClosePopover();
+        break;
+      case 'gift':
+        // smth doing with click on gift
+        break;
+    }
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setModalOpen(false);
+  }, []);
 
   return (
     <>
       <InventoryComponent
         pokemonCollection={pokemonCollection}
-        onClickCard={handleClick}
+        onClickCard={handleClickCard}
       />
-      <Popover
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-      >
-        <ButtonGroup
-          orientation="vertical"
-          aria-label="vertical contained button group"
-          variant="contained"
-          size="large"
-        >
-          <Button color="info" startIcon={<InfoOutlinedIcon />}>
-            Info
-          </Button>
-          <Button color="success" startIcon={<FlakyIcon />}>
-            Feed
-          </Button>
-          <Button color="secondary" startIcon={<CardGiftcardOutlinedIcon />}>
-            Gift
-          </Button>
-        </ButtonGroup>
-      </Popover>
+      <InventoryPopover
+        anchorEl={popoverAnchorElement}
+        onClose={handleClosePopover}
+        isTopHalfOfScreenClicked={isTopHalfOfScreen}
+        onClickControls={handleClickPokemonControls}
+      />
+      <InventoryModal
+        open={modalOpen}
+        pokemon={{ id: pokemonId, sprite: pokemonSprite }}
+        onClose={handleCloseModal}
+      />
     </>
   );
 };

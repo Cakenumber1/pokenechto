@@ -6,10 +6,11 @@ import { useStyles } from './styles';
 
 export type InventoryComponentProps = {
   pokemonCollection: PokemonCollectionItemProp[];
-  onClickCard: (
-    event: React.MouseEvent<HTMLElement>,
-    pokemonId: number,
-  ) => void;
+  onClickCard: any;
+  //(
+  //   event: React.MouseEvent<HTMLElement>,
+  //   pokemonId: number,
+  // ) => void;
 };
 
 export const InventoryComponent = ({

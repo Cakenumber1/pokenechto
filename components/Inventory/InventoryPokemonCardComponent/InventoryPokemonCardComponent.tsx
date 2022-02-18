@@ -7,7 +7,7 @@ import { useStyles } from './styles';
 
 type InventoryPokemonCardComponentProps = {
   collectionItem: PokemonCollectionItemProp;
-  onClick: (event: React.MouseEvent<HTMLElement>, pokemonId: number) => void;
+  onClick: any; //(event: React.MouseEvent<HTMLElement>, pokemonId: number) => void;
 };
 
 export const InventoryPokemonCardComponent = ({
@@ -20,7 +20,7 @@ export const InventoryPokemonCardComponent = ({
   return (
     <Card
       className={classes.inventoryPokemonCard}
-      onClick={(event) => handleClick(event, id)}
+      onClick={(event) => handleClick(event, id, sprite)}
     >
       <CardActionArea sx={{ width: '100%', height: '100%' }}>
         <CardMedia
