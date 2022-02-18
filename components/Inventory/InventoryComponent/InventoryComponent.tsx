@@ -1,13 +1,14 @@
-import React from 'react';
+import { Box } from '@mui/material';
 import { InventoryPokemonCardComponent } from 'components/Inventory/InventoryPokemonCardComponent';
 import { PokemonCollectionItemProp } from 'helpers/inventoryHelpers';
-import { Box } from '@mui/material';
+import React from 'react';
+
 import { useStyles } from './styles';
 
 export type InventoryComponentProps = {
   pokemonCollection: PokemonCollectionItemProp[];
   onClickCard: any;
-  //(
+  // (
   //   event: React.MouseEvent<HTMLElement>,
   //   pokemonId: number,
   // ) => void;

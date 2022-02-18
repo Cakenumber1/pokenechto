@@ -1,9 +1,9 @@
+import { InventoryComponent } from 'components/Inventory/InventoryComponent';
+import { InventoryModal } from 'components/Inventory/InventoryModal';
+import { InventoryPopover } from 'components/Inventory/InventoryPopover';
+import { PokemonCollectionItemProp } from 'helpers/inventoryHelpers';
 import * as React from 'react';
 import { useCallback, useState } from 'react';
-import { InventoryComponent } from 'components/Inventory/InventoryComponent';
-import { PokemonCollectionItemProp } from 'helpers/inventoryHelpers';
-import { InventoryPopover } from 'components/Inventory/InventoryPopover';
-import { InventoryModal } from 'components/Inventory/InventoryModal';
 
 export type InventoryWithControlsContainerProps = {
   pokemonCollection: PokemonCollectionItemProp[];
@@ -11,21 +11,19 @@ export type InventoryWithControlsContainerProps = {
 export const InventoryWithControlsContainer = ({
   pokemonCollection,
 }: InventoryWithControlsContainerProps) => {
-  const [popoverAnchorElement, setPopoverAnchorElement] =
-    useState<HTMLElement | null>(null);
+  const [popoverAnchorElement, setPopoverAnchorElement] = useState<HTMLElement | null>(null);
   const [isTopHalfOfScreen, setIsTopHalfOfScreen] = useState(true);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-
-  const [pokemonId, setPokemonId] = useState<number | null>(null);
-  const [pokemonSprite, setPokemonSprite] = useState<string>('');
+  const [pokemon, setPokemon] = useState<{ id: number; sprite: string } | null>(null);
 
   const handleClickCard = useCallback(
     (
       event: React.MouseEvent<HTMLElement>,
-      pokemon: { id: number; sprite: string },
+      pokemonProp: { id: number; sprite: string },
     ) => {
       setPopoverAnchorElement(event.currentTarget);
       setIsTopHalfOfScreen(event.clientY > window.innerHeight / 2);
+      setPokemon(pokemonProp);
     },
     [],
   );
@@ -43,6 +41,7 @@ export const InventoryWithControlsContainer = ({
       case 'gift':
         // smth doing with click on gift
         break;
+      default: break;
     }
   }, []);
 
@@ -56,17 +55,21 @@ export const InventoryWithControlsContainer = ({
         pokemonCollection={pokemonCollection}
         onClickCard={handleClickCard}
       />
+      {popoverAnchorElement && (
       <InventoryPopover
         anchorEl={popoverAnchorElement}
         onClose={handleClosePopover}
         isTopHalfOfScreenClicked={isTopHalfOfScreen}
         onClickControls={handleClickPokemonControls}
       />
+      )}
+      {modalOpen && (
       <InventoryModal
         open={modalOpen}
-        pokemon={{ id: pokemonId, sprite: pokemonSprite }}
+        pokemon={pokemon}
         onClose={handleCloseModal}
       />
+      )}
     </>
   );
 };

@@ -1,1 +1,1 @@
-export {InventorySwiperComponent} from './InventorySwiperComponent';
+export { InventorySwiperComponent } from './InventorySwiperComponent';

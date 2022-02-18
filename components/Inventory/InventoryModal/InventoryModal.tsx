@@ -1,31 +1,29 @@
+import { linearProgressClasses } from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
-import Modal from '@mui/material/Modal';
-import * as React from 'react';
-import { useState } from 'react';
 import Box from '@mui/material/Box';
-import Slide from '@mui/material/Slide';
+import Button from '@mui/material/Button';
 import Grow from '@mui/material/Grow';
 import LinearProgress from '@mui/material/LinearProgress';
-import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import Slide from '@mui/material/Slide';
 import Zoom from '@mui/material/Zoom';
-import { linearProgressClasses } from '@mui/material';
+import * as React from 'react';
+import { useState } from 'react';
 
-//TODO: временное для показать
-const borderLinearProgress = (color: string) => {
-  return {
-    width: '100%',
-    height: 15,
-    marginBottom: 5,
+// TODO: временное для показать
+const borderLinearProgress = (color: string) => ({
+  width: '100%',
+  height: 15,
+  marginBottom: 5,
+  borderRadius: 5,
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor: 'white',
+  },
+  [`& .${linearProgressClasses.bar}`]: {
     borderRadius: 5,
-    [`&.${linearProgressClasses.colorPrimary}`]: {
-      backgroundColor: 'white',
-    },
-    [`& .${linearProgressClasses.bar}`]: {
-      borderRadius: 5,
-      backgroundColor: color,
-    },
-  };
-};
+    backgroundColor: color,
+  },
+});
 
 export const InventoryModal = ({
   open,
@@ -50,7 +48,10 @@ export const InventoryModal = ({
             <img src={pokemon.sprite} alt="" />
           </Slide>
           <div>
-            <h3>Info of Pokemon #{pokemon.id}</h3>
+            <h3>
+              Info of Pokemon #
+              {pokemon.id}
+            </h3>
           </div>
           <Grow timeout={1000} in={zoomEntered}>
             <LinearProgress

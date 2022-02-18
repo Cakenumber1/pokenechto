@@ -1,13 +1,14 @@
-import React from 'react';
-import { PokemonCollectionItemProp } from 'helpers/inventoryHelpers';
-import CardMedia from '@mui/material/CardMedia';
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
+import CardMedia from '@mui/material/CardMedia';
+import { PokemonCollectionItemProp } from 'helpers/inventoryHelpers';
+import React from 'react';
+
 import { useStyles } from './styles';
 
 type InventoryPokemonCardComponentProps = {
   collectionItem: PokemonCollectionItemProp;
-  onClick: any; //(event: React.MouseEvent<HTMLElement>, pokemonId: number) => void;
+  onClick: any; // (event: React.MouseEvent<HTMLElement>, pokemonId: number) => void;
 };
 
 export const InventoryPokemonCardComponent = ({
@@ -15,12 +16,12 @@ export const InventoryPokemonCardComponent = ({
   onClick: handleClick,
 }: InventoryPokemonCardComponentProps) => {
   const classes = useStyles();
-  const { id, sprite, name } = collectionItem;
+  const { sprite, name } = collectionItem;
 
   return (
     <Card
       className={classes.inventoryPokemonCard}
-      onClick={(event) => handleClick(event, id, sprite)}
+      onClick={(event) => handleClick(event, collectionItem)}
     >
       <CardActionArea sx={{ width: '100%', height: '100%' }}>
         <CardMedia

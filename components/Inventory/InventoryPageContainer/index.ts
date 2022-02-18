@@ -1,1 +1,1 @@
-export {InventoryPageContainer} from './InventoryPageContainer';
+export { InventoryPageContainer } from './InventoryPageContainer';

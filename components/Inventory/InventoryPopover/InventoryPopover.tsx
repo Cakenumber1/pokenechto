@@ -1,9 +1,9 @@
-import * as React from 'react';
-import Popover from '@mui/material/Popover';
-import Button from '@mui/material/Button';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import CardGiftcardOutlinedIcon from '@mui/icons-material/CardGiftcardOutlined';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
+import Popover from '@mui/material/Popover';
+import * as React from 'react';
 
 export const InventoryPopover = ({
   anchorEl,

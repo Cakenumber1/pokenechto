@@ -1,1 +1,1 @@
-export {InventoryComponent} from './InventoryComponent';
+export { InventoryComponent } from './InventoryComponent';

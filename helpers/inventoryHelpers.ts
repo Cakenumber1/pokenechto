@@ -8,26 +8,24 @@ export const adjacentSlide = (
 ) => {
   const slideIndexLikePage = slideIndex + 1;
   return (
-    (pageQuery === 1 && slideIndexLikePage <= 2) ||
-    (pageQuery > 1 &&
-      (pageQuery === slideIndexLikePage - 1 ||
-        pageQuery === slideIndexLikePage ||
-        pageQuery === slideIndexLikePage + 1)) ||
-    (pageQuery === pagesCount && slideIndexLikePage >= pagesCount - 1)
+    (pageQuery === 1 && slideIndexLikePage <= 2)
+    || (pageQuery > 1
+      && (pageQuery === slideIndexLikePage - 1
+        || pageQuery === slideIndexLikePage
+        || pageQuery === slideIndexLikePage + 1))
+    || (pageQuery === pagesCount && slideIndexLikePage >= pagesCount - 1)
   );
 };
-//swr
-export const getInventoryPagesLengthKey = `/api/inventory`;
-export const fetchInventoryPagesLength = (url: string) =>
-  axios
-    .head<number>(url)
-    .then((response) => Number(response.headers['x-inventory-pages-length']));
+// swr
+export const getInventoryPagesLengthKey = '/api/inventory';
+export const fetchInventoryPagesLength = (url: string) => axios
+  .head<number>(url)
+  .then((response) => Number(response.headers['x-inventory-pages-length']));
 
 export const getInventoryByPageKey = (page: number) => `/api/inventory/${page}`;
-export const fetchInventoryByPage = (url: string) =>
-  axios.get<PokemonCollectionItemType[]>(url).then((response) => response.data);
+export const fetchInventoryByPage = (url: string) => axios.get<PokemonCollectionItemType[]>(url).then((response) => response.data);
 
-//types
+// types
 export type PokemonType = {
   id: number;
   name: string;
@@ -36,15 +34,15 @@ export type PokemonType = {
   type: string[];
   abilities: string[];
   sprite: string;
-  //stats: stat[]
+  // stats: stat[]
   weight: number;
   height: number;
-  //expType: enum;
+  // expType: enum;
 };
 
 export type PokemonCollectionItemType = PokemonType & { collectionId: number };
 
 export type PokemonCollectionItemProp = Pick<
-  PokemonCollectionItemType,
-  'collectionId' | 'name' | 'id' | 'sprite'
+PokemonCollectionItemType,
+'collectionId' | 'name' | 'id' | 'sprite'
 >;

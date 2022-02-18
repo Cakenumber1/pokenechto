@@ -1,10 +1,8 @@
-import Backdrop from '@mui/material/Backdrop';
 import { CircularProgress } from '@mui/material';
+import Backdrop from '@mui/material/Backdrop';
 
-export const InventoryLoader = ({ open }: any) => {
-  return (
-    <Backdrop open={open}>
-      <CircularProgress />
-    </Backdrop>
-  );
-};
+export const InventoryLoader = ({ open }: any) => (
+  <Backdrop open={open}>
+    <CircularProgress />
+  </Backdrop>
+);
