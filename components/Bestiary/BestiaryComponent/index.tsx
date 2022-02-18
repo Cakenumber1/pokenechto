@@ -10,8 +10,8 @@ type BestiaryData = {
 
 export function BestiaryComponent( props: BestiaryData) {
 
-    const data = props.pokemons.results.map((pokemon: PokemonsListResults, i: number) =>
-        <Grid key={i} item xs={3}>
+    const data = props.pokemons.results.map((pokemon: PokemonsListResults) =>
+        <Grid key={pokemon.name} item xs={3}>
             <CardComponent pokemon={pokemon}/>
         </Grid>)
 
