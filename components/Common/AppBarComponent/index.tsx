@@ -8,9 +8,9 @@ import React, { useCallback, useState } from 'react';
 import { style } from './style';
 
 export const AppBarComponent = () => {
-  const matchesInscription = useMediaQuery('(min-width:470px)');
-  const matchesLogo = useMediaQuery('(min-width:354px)');
-  const currentStyle = style(matchesLogo, matchesInscription);
+  const matchesInscription = useMediaQuery('(min-width:500px)');
+  const matchesDashboard = useMediaQuery('(min-width:375px)');
+  const currentStyle = style(matchesInscription);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -57,7 +57,7 @@ export const AppBarComponent = () => {
   return (
     <AppBar position="static">
       <Toolbar>
-        {matchesLogo ? buttons : mobileButtons}
+        {matchesDashboard ? buttons : mobileButtons}
         <Link href="https://pokeapi.co/" target="_blank" rel="noopener" sx={{ ml: 'auto' }}>
           <Avatar
             sx={currentStyle.logo}
