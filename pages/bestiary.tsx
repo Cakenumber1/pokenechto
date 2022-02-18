@@ -4,9 +4,8 @@ import React from 'react';
 import { BestiaryContainer } from '../containers/BestiaryContainer';
 
 export default function bestiary() {
-  const a = 1;
   return (
-    <FrameComponent key={a}>
+    <FrameComponent>
       <BestiaryContainer />
     </FrameComponent>
   );
