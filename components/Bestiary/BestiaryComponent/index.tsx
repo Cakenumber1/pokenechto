@@ -1,9 +1,8 @@
 import { Grid } from '@mui/material';
-import { PokemonsList, PokemonsListResults } from 'interfaces/pokemonListType';
+import { PokemonsListResults } from 'interfaces/pokemonListType';
 import React from 'react';
 
 import { CardComponent } from '../../Common/CardComponent';
-
 
 export const BestiaryComponent = (props: any) => {
   const { pokemons } = props;

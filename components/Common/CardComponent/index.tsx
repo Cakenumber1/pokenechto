@@ -1,39 +1,38 @@
-import { Card, CardHeader, CardMedia } from '@mui/material';
+import {
+  Card, CardContent, CardHeader, CardMedia,
+} from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import React, {useCallback, useEffect, useState} from 'react';
-import {useGetPokemonByNameQuery, useGetPokemonListQuery} from 'store/api'
-
-
 import { PokemonsListResults } from 'interfaces/pokemonListType';
+import React, { useCallback, useState } from 'react';
+import { useGetPokemonByNameQuery } from 'store/api';
+
 import { PokeModal } from '../PokeModalComponent';
 import { style } from './style';
 
-type CardData = {
-  pokemon: PokemonsListResults
-};
-
-export const CardComponent = (props: CardData) => {
-
-  const { data, error, isLoading, isUninitialized } = useGetPokemonByNameQuery(props.pokemon.name)
-
+export const CardComponent = ({ pokemon }: { pokemon: PokemonsListResults }) => {
+  const {
+    data, error, isLoading, isUninitialized,
+  } = useGetPokemonByNameQuery(pokemon.name);
 
   const [open, setOpen] = useState(false);
   const handleOpen = useCallback(() => setOpen(true), []);
   const handleClose = useCallback(() => setOpen(false), []);
 
   const matchesSize = useMediaQuery('(min-width:400px)');
-  if (error || isLoading || isUninitialized) return <h1>ABOBA</h1>
+
+  if (error || isLoading || isUninitialized) {
+    return (
+      <Card sx={style.card}>
+        <CardHeader
+          titleTypographyProps={style.pokeName(matchesSize)}
+          title={error ? 'error' : isUninitialized ? 'uninitialized' : 'Loading...'}
+        />
+        <CardContent />
+      </Card>
+    );
+  }
   return (
     <>
-      {error ? (
-          <>Oh no, there was an error</>
-      ) : isUninitialized ? (
-          <div>
-            - Currently skipped -
-          </div>
-      ) : isLoading ? (
-          <>loading...</>
-      ) : data ? ( <>
       <Card sx={style.card} onClick={handleOpen}>
         <CardHeader
           titleTypographyProps={style.pokeName(matchesSize)}
@@ -47,7 +46,6 @@ export const CardComponent = (props: CardData) => {
         />
       </Card>
       <PokeModal fullInfo={data} isOpen={open} onClose={handleClose} />
-      </>) : null}
     </>
   );
 };
