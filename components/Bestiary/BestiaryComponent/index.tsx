@@ -4,11 +4,8 @@ import React from 'react';
 
 import { CardComponent } from '../../Common/CardComponent';
 
-type BestiaryData = {
-  pokemons: PokemonsList
-};
 
-export const BestiaryComponent = (props: BestiaryData) => {
+export const BestiaryComponent = (props: any) => {
   const { pokemons } = props;
   const data = pokemons.results.map((pokemon: PokemonsListResults) => (
     <Grid key={pokemon.name} item xs={3}>
