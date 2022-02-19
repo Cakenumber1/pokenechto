@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import {
   decrement,
@@ -25,6 +26,7 @@ const IndexPage: React.FC = () => {
           onChange={(e) => setIncrementAmount(Number(e.target.value))}
           type="number"
         />
+        {/* eslint-disable-next-line react/button-has-type */}
         <button
           onClick={() => dispatch(incrementByAmount(Number(incrementAmount)))}
         >
@@ -32,7 +34,9 @@ const IndexPage: React.FC = () => {
         </button>
       </div>
       <div>
+        {/* eslint-disable-next-line react/button-has-type */}
         <button onClick={() => dispatch(decrement())}>Decrement by 1</button>
+        {/* eslint-disable-next-line react/button-has-type */}
         <button onClick={() => dispatch(increment())}>Increment by 1</button>
       </div>
     </>
