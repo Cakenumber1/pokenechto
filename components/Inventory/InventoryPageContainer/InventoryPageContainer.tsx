@@ -1,27 +1,28 @@
+import { InventoryComponent } from 'components/Inventory/InventoryComponent';
 import { InventoryLoader } from 'components/Inventory/InventoryLoader';
-import { InventoryWithControlsContainer } from 'components/Inventory/InventoryWithControlsContainer';
-import {
-  fetchInventoryByPage,
-  getInventoryByPageKey,
-} from 'helpers/inventoryHelpers';
-import useSWR from 'swr';
+import { HandleClickCard } from 'helpers/inventoryHelpers';
+import * as React from 'react';
+import { useGetInventoryByPageQuery } from 'store/service';
 
 type InventoryPageContainerProps = {
   page: number;
+  onClickCard: HandleClickCard
 };
 
 export const InventoryPageContainer = ({
   page,
+  onClickCard,
 }: InventoryPageContainerProps) => {
-  const { data: pokemonCollection, error } = useSWR(
-    getInventoryByPageKey(page),
-    fetchInventoryByPage,
-  );
+  const { data, isError, isLoading } = useGetInventoryByPageQuery(page);
 
-  if (error) return <div>Error InventoryPageContainer</div>;
-  if (!pokemonCollection) return <InventoryLoader open={!pokemonCollection} />;
+  if (isError) return <div>Error InventoryPageContainer</div>;
+  if (isLoading) return <InventoryLoader open />;
+  if (!data) return <h1>NO DATA InventoryPageContainer</h1>;
 
   return (
-    <InventoryWithControlsContainer pokemonCollection={pokemonCollection} />
+    <InventoryComponent
+      pokemonCollection={data.results}
+      onClickCard={onClickCard}
+    />
   );
 };

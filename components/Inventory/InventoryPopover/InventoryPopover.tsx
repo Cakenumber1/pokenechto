@@ -3,14 +3,22 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Popover from '@mui/material/Popover';
+import { HandleClickPopoverControls } from 'helpers/inventoryHelpers';
 import * as React from 'react';
+
+type InventoryPopoverProps = {
+  anchorEl: HTMLElement | null
+  onClose: ()=>void,
+  isTopHalfOfScreenClicked: boolean,
+  onClickControls: HandleClickPopoverControls
+};
 
 export const InventoryPopover = ({
   anchorEl,
   onClose: handleClosePopover,
   isTopHalfOfScreenClicked,
-  onClickControls: handleClickPokemonControls,
-}: any) => {
+  onClickControls: handleClickControls,
+}: InventoryPopoverProps) => {
   const popoverOpen = Boolean(anchorEl);
   const popoverId = popoverOpen ? 'simple-popover' : undefined;
 
@@ -36,14 +44,14 @@ export const InventoryPopover = ({
         size="large"
       >
         <Button
-          onClick={(event) => handleClickPokemonControls(event, 'info')}
+          onClick={(event) => handleClickControls(event, 'info')}
           color="info"
           startIcon={<InfoOutlinedIcon />}
         >
           Info
         </Button>
         <Button
-          onClick={(event) => handleClickPokemonControls(event, 'gift')}
+          onClick={(event) => handleClickControls(event, 'gift')}
           color="secondary"
           startIcon={<CardGiftcardOutlinedIcon />}
         >
