@@ -8,31 +8,31 @@ const PokemonsChunk = memo(({ offset }: { offset: number }) => {
   const { data, isLoading } = useGetPokemonListQuery(offset);
 
   return isLoading
-      ? <Box height="70vh" visibility="hidden">loading...</Box>
-      : <BestiaryComponent pokemons={data} />
+    ? <Box height="70vh" visibility="hidden">loading...</Box>
+    : <BestiaryComponent pokemons={data} />;
 });
 
 export const BestiaryContainer = () => {
   const [chunksCount, setChunksCount] = useState(0);
 
   return (
-      <InfiniteScroll
-          pageStart={0}
-          loadMore={setChunksCount}
-          hasMore={true}
-          loader={<Box key={0} height="60vh" visibility="hidden">Loading ...</Box>}
-          useWindow={false}
+    <InfiniteScroll
+      pageStart={0}
+      loadMore={setChunksCount}
+      hasMore
+      loader={<Box key={0} height="60vh" visibility="hidden">Loading ...</Box>}
+      useWindow={false}
+    >
+      <Grid
+        sx={{ py: 2, px: 2 }}
+        container
+        spacing={4}
+        columns={{ sm: 6, md: 9, lg: 12 }}
       >
-        <Grid
-            sx={{ py: 2, px: 2 }}
-            container
-            spacing={4}
-            columns={{ sm: 6, md: 9, lg: 12 }}
-        >
-          {Array.from({ length: chunksCount }, (_item, index) => (
-              <PokemonsChunk key={index} offset={index} />
-          ))}
-        </Grid>
-      </InfiniteScroll>
+        {Array.from({ length: chunksCount }, (_item, index) => (
+          <PokemonsChunk key={index} offset={index} />
+        ))}
+      </Grid>
+    </InfiniteScroll>
   );
 };
