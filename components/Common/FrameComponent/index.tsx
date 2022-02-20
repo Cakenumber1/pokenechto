@@ -15,7 +15,6 @@ export const FrameComponent = (props: { children: JSX.Element }) => {
       <Box sx={style.page}>
         <AppBarComponent />
         <Container sx={style.content}>
-          <SearchComponent />
           {children}
         </Container>
       </Box>
