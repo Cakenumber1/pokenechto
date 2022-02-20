@@ -1,5 +1,5 @@
 import {
-  Modal,
+  Modal, Button
 } from '@mui/material';
 import clsx from 'clsx';
 import { colorMap, namesMap } from 'helpers/types';
@@ -63,7 +63,7 @@ const PokeModal = ({
         className={modalStyle}
         ref={modal}
       >
-        <button type="button" className={buttonStyle} onClick={handleClose}>Back</button>
+        <button type="button"  className={buttonStyle} onClick={handleClose}>Back</button>
         <div style={{
           background: 'grey',
           width: '100%',
@@ -84,7 +84,7 @@ const PokeModal = ({
             src={pokemon!.img}
             alt={pokemon!.name}
           />
-          <div style={{ width: '100%', padding: '10%' }}>
+          <div style={{ width: '100%', padding: '2vh' }}>
             <div style={{ textAlign: 'center', fontSize: 'large' }}>{pokemon!.name.toUpperCase()}</div>
             <div style={{ textAlign: 'center' }}>
               Types
@@ -145,6 +145,7 @@ const PokeModal = ({
               <div>EXP {pokemon!.exp}/?</div>
             </div>
           </div>
+          <Button variant="contained">Buy</Button>
         </div>
       </div>
     </Modal>

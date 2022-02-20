@@ -41,6 +41,7 @@ export const useStyles = makeStyles((theme : Theme) => ({
     border: 'none',
     fontSize: '0px',
     transition: '1s all',
+    cursor: 'pointer',
     // не работает
     transitionDelay: '10s all',
     margin: '.5vh',
