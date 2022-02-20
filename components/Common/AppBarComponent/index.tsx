@@ -39,7 +39,7 @@ export const AppBarComponent = () => {
     <>
       <Button
         variant="contained"
-        color="secondary"
+        color="success"
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
