@@ -1,6 +1,6 @@
-import { PokemonCollectionItemProp } from 'helpers/inventoryHelpers';
+import { CollectionItemType } from 'helpers/inventoryHelpers';
 
-function generateInventory(length: number): PokemonCollectionItemProp[] {
+function generateInventory(length: number): Partial<CollectionItemType>[] {
   return Array.from({ length }).map((_, index) => ({
     collectionId: index,
     id: index,
@@ -13,7 +13,7 @@ function generateInventory(length: number): PokemonCollectionItemProp[] {
 
 const fakeDB = {
   inventory: {
-    data: generateInventory(99),
+    data: generateInventory(14),
     itemsPerPage: 12,
     getLength() {
       return this.data.length;
@@ -24,14 +24,19 @@ const fakeDB = {
     getData() {
       return this.data;
     },
-    getById(id: number) {
-      return this.data.find((element) => element.id === id);
+    getCollectionItemById(collectionId: number) {
+      return this.data.find((element) => element.collectionId === collectionId);
     },
     getByPage(page: number) {
-      if (page < 1 || page > this.getPages()) return undefined;
       const start = (page - 1) * this.itemsPerPage;
       const end = start + this.itemsPerPage;
       return this.data.slice(start, end);
+    },
+    deleteCollectionItem(collectionId: number) {
+      const itemIndex = this.data.findIndex(
+        (element) => element.collectionId === collectionId,
+      );
+      this.data.splice(itemIndex, 1);
     },
   },
 };
