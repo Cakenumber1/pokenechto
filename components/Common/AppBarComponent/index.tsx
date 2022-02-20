@@ -1,8 +1,10 @@
 import {
-  AppBar, Avatar, Button, ButtonGroup, Link, Menu, MenuItem,
+  AppBar, Avatar, Button, ButtonGroup, Link as MuiLink, Menu, MenuItem,
   Toolbar, Typography,
 } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useCallback, useState } from 'react';
 
 import { style } from './style';
@@ -12,16 +14,24 @@ export const AppBarComponent = () => {
   const matchesDashboard = useMediaQuery('(min-width:375px)');
   const currentStyle = style(matchesInscription);
 
+  const { pathname: path } = useRouter();
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = useCallback((event) => setAnchorEl(event.currentTarget), []);
   const handleClose = useCallback(() => setAnchorEl(null), []);
 
   const buttons = (
-    <ButtonGroup variant="contained" color="secondary">
-      <Button>Set</Button>
-      <Button>Bestiary</Button>
-      <Button>Inventory</Button>
+    <ButtonGroup variant="contained" color="secondary" sx={{ mr: 'auto' }}>
+      <Link href="/shop" passHref>
+        <Button color={path === '/shop' ? 'success' : 'secondary'}>Set</Button>
+      </Link>
+      <Link href="/bestiary" passHref>
+        <Button color={path === '/bestiary' ? 'success' : 'secondary'}>Bestiary</Button>
+      </Link>
+      <Link href="/inventory" passHref>
+        <Button color={path === '/inventory' ? 'success' : 'secondary'}>Inventory</Button>
+      </Link>
     </ButtonGroup>
   );
 
@@ -35,8 +45,9 @@ export const AppBarComponent = () => {
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
+        sx={{ mr: 'auto' }}
       >
-        Dashboard
+        {path.substring(1)}
       </Button>
       <Menu
         id="basic-menu"
@@ -47,9 +58,15 @@ export const AppBarComponent = () => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>Set</MenuItem>
-        <MenuItem onClick={handleClose}>Bestiary</MenuItem>
-        <MenuItem onClick={handleClose}>Inventory</MenuItem>
+        <Link href="/shop" passHref>
+          <MenuItem onClick={handleClose}>Set</MenuItem>
+        </Link>
+        <Link href="/bestiary" passHref>
+          <MenuItem onClick={handleClose}>Bestiary</MenuItem>
+        </Link>
+        <Link href="/inventory" passHref>
+          <MenuItem onClick={handleClose}>Inventory</MenuItem>
+        </Link>
       </Menu>
     </>
   );
@@ -58,13 +75,13 @@ export const AppBarComponent = () => {
     <AppBar position="static">
       <Toolbar>
         {matchesDashboard ? buttons : mobileButtons}
-        <Link href="https://pokeapi.co/" target="_blank" rel="noopener" sx={{ ml: 'auto' }}>
+        <MuiLink href="https://pokeapi.co/" target="_blank" rel="noopener">
           <Avatar
             sx={currentStyle.logo}
             alt="logo"
             src="https://www.pngall.com/wp-content/uploads/4/Pokemon-Pokeball-PNG-Image-File.png"
           />
-        </Link>
+        </MuiLink>
         <Typography variant="h6" sx={currentStyle.inscription} component="div">
           PokeNechto
         </Typography>
