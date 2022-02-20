@@ -22,7 +22,6 @@ export const inventoryApi = createApi({
     }),
     deleteInventoryItem: builder.mutation<CollectionItemType, Partial<CollectionItemType>>({
       query: (body) => {
-        console.log('deleteInventoryItem query', body);
         return {
           url: '/inventory',
           method: 'DELETE',
