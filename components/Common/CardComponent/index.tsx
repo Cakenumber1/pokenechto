@@ -11,7 +11,7 @@ import { style } from './style';
 
 export const CardComponent = ({ pokemon }: { pokemon: PokemonsListResults }) => {
   const {
-    data, error, isLoading, isUninitialized,
+    data, error, isUninitialized,
   } = useGetPokemonByNameQuery(pokemon.name);
 
   const [open, setOpen] = useState(false);
@@ -20,7 +20,7 @@ export const CardComponent = ({ pokemon }: { pokemon: PokemonsListResults }) => 
 
   const matchesSize = useMediaQuery('(min-width:400px)');
 
-  if (error || isLoading || isUninitialized) {
+  if (!data) {
     return (
       <Card sx={style.card}>
         <CardHeader

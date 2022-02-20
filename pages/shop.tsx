@@ -4,7 +4,7 @@ import React from 'react';
 export default function shop() {
   return (
     <FrameComponent>
-      <h1>ABOBA-SHOP</h1>
+      <h1>SHOP</h1>
     </FrameComponent>
   );
 }
