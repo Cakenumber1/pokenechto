@@ -1,1 +1,0 @@
-export { InventoryWithControlsContainer } from './InventoryWithControlsContainer';
