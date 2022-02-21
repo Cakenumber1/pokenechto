@@ -7,10 +7,6 @@ export async function getFromPokeApi(path: string) {
     .catch(console.error);
 }
 
-export const createPath = (offset: number = 1, limit: number = 9) => `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
-
-export const createKey = (offset: number) => `https://pokeapi.co/api/v2/pokemon?offset=${offset * 12}&limit=12`;
-
 export async function getListFromPokeApi() {
   const res = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${1}&limit=${9}`);
   const { data } = res;

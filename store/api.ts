@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Pokemon, RawPokemon } from 'interfaces/index';
 import { PokemonsList } from 'interfaces/pokemonListType';
-import {Ability, RawStat, Types} from 'interfaces/rawPokemonTypes';
+import { Ability, RawStat, Types } from 'interfaces/rawPokemonTypes';
 
 export const pokemonApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://pokeapi.co/api/v2/' }),
