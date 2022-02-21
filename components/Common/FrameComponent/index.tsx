@@ -4,7 +4,6 @@ import React from 'react';
 
 import { theme } from '../../../theme';
 import { AppBarComponent } from '../AppBarComponent';
-import { SearchComponent } from '../SearchComponent';
 import { style } from './style';
 
 export const FrameComponent = (props: { children: JSX.Element }) => {

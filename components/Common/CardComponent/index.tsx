@@ -1,5 +1,5 @@
 import {
-  Card, CardContent, CardHeader, CardMedia,
+    Card, CardActionArea, CardContent, CardHeader, CardMedia,
 } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { PokemonsListResults } from 'interfaces/pokemonListType';
@@ -34,16 +34,18 @@ export const CardComponent = ({ pokemon }: { pokemon: PokemonsListResults }) => 
   return (
     <>
       <Card sx={style.card} onClick={handleOpen}>
+          <CardActionArea sx={{ width: '100%', height: '100%' }}>
         <CardHeader
           titleTypographyProps={style.pokeName(matchesSize)}
           title={data.name}
         />
+
         <CardMedia
           sx={style.pokeImg}
           component="img"
           image={data.img}
           alt={data.name}
-        />
+        /></CardActionArea>
       </Card>
       <PokeModal fullInfo={data} isOpen={open} onClose={handleClose} />
     </>

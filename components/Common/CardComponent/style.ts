@@ -10,7 +10,7 @@ export const style = {
     width: '85%',
     margin: 'auto',
     height: '100%',
-    paddingBottom: '3%',
+    paddingBottom: '50%',
     objectFit: 'contain',
   },
   pokeName: (isSize: boolean): any => (isSize ? {
