@@ -3,7 +3,7 @@ import { InventoryPokemonCardComponent } from 'components/Inventory/InventoryPok
 import { CollectionItemType } from 'helpers/inventoryHelpers';
 import React from 'react';
 
-import { useStyles } from './styles';
+import { style } from './style';
 
 export type InventoryComponentProps = {
   pokemonCollection: Partial<CollectionItemType>[];
@@ -16,17 +16,14 @@ export type InventoryComponentProps = {
 export const InventoryComponent = ({
   pokemonCollection,
   onClickCard: handleClickCard,
-}: InventoryComponentProps) => {
-  const classes = useStyles();
-  return (
-    <Box className={classes.inventory}>
-      {pokemonCollection.map((collectionItem) => (
-        <InventoryPokemonCardComponent
-          key={collectionItem.collectionId}
-          collectionItem={collectionItem}
-          onClick={handleClickCard}
-        />
-      ))}
-    </Box>
-  );
-};
+}: InventoryComponentProps) => (
+  <Box sx={style.inventory}>
+    {pokemonCollection.map((collectionItem) => (
+      <InventoryPokemonCardComponent
+        key={collectionItem.collectionId}
+        collectionItem={collectionItem}
+        onClick={handleClickCard}
+      />
+    ))}
+  </Box>
+);

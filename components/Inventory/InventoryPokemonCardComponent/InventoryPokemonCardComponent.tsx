@@ -4,7 +4,7 @@ import CardMedia from '@mui/material/CardMedia';
 import { CollectionItemType, HandleClickCard } from 'helpers/inventoryHelpers';
 import React from 'react';
 
-import { useStyles } from './styles';
+import { style } from './style';
 
 export type InventoryPokemonCardComponentProps = {
   collectionItem: Partial<CollectionItemType>;
@@ -15,18 +15,17 @@ export const InventoryPokemonCardComponent = ({
   collectionItem,
   onClick: handleClick,
 }: InventoryPokemonCardComponentProps) => {
-  const classes = useStyles();
   const { sprite, name } = collectionItem;
 
   return (
     <Card
-      className={classes.inventoryPokemonCard}
+      sx={style.inventoryPokemonCard}
       onClick={(event) => handleClick(event, collectionItem)}
     >
       <CardActionArea sx={{ width: '100%', height: '100%' }}>
         <CardMedia
-          className={classes.inventoryPokemonCard__Image}
           component="img"
+          sx={style.inventoryPokemonCardImage}
           src={sprite}
           alt={name}
           title={name}
