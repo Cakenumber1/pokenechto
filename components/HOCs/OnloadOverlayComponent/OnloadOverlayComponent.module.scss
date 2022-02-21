@@ -1,0 +1,109 @@
+.Overlay{
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+@mixin div($bcolor,
+$url,
+$x1,
+$y1,
+$bor,
+$col) {
+  background: $bcolor;
+  -webkit-mask: url($url);
+  mask: url($url);
+  -webkit-mask-size: $x1 $y1;
+  mask-size: $x1 $y1;
+  border: $bor;
+  color: $col;
+}
+.clicked {
+  display: block;
+  opacity: 1;
+  z-index: 100;
+  div {
+    width:100%;
+    height:100%;
+
+    @include div(#fff,
+            "https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/nature-sprite.png",
+            2300%,
+            100%,
+            none,
+            #fff);
+    cursor: wait;
+    background: black;
+    -webkit-animation: ani2 2s steps(22) forwards;
+    animation: ani2 2s steps(22) forwards;
+  }
+}
+.onload{
+  display: block;
+  opacity: 1;
+  z-index: 100;
+  div {
+    width:100%;
+    height:100%;
+    @include div(#fff,
+            "https://raw.githubusercontent.com/robin-dela/css-mask-animation/master/img/nature-sprite.png",
+            2300%,
+            100%,
+            none,
+            #fff);
+    cursor: wait;
+    background: black;
+    -webkit-animation: ani 2s steps(22) forwards;
+    animation: ani 2s steps(22) forwards;
+  }
+}
+
+@-webkit-keyframes ani {
+  from {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+
+  to {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+}
+
+@keyframes ani {
+  from {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+
+  to {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+}
+
+@-webkit-keyframes ani2 {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}
+
+@keyframes ani2 {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}

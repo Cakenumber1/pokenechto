@@ -1,4 +1,10 @@
-import '../styles/globals.css';
+// eslint-disable-next-line import/no-unresolved
+import 'swiper/css';
+// eslint-disable-next-line import/no-unresolved
+import 'swiper/css/navigation';
+// eslint-disable-next-line import/no-unresolved
+import 'swiper/css/pagination';
+import 'styles/globals.scss';
 
 import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
@@ -6,13 +12,14 @@ import { Provider } from 'react-redux';
 import { AuthProvider } from '../firebase/AuthContext';
 import { store } from '../store';
 
-const MyApp = ({ Component, pageProps }: AppProps) => (
-  <AuthProvider>
-    <Provider store={store}>
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <Component {...pageProps} />
-    </Provider>
-  </AuthProvider>
-);
+const MyApp = ({ Component, pageProps }: AppProps) => {
+  return (
+    <AuthProvider>
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
+    </AuthProvider>
+  );
+};
 
 export default MyApp;

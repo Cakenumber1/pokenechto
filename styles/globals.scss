@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Supermercado+One&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+
+:root {
+  --swiper-navigation-color: red;
+  --swiper-pagination-color: red;
+  --swiper-navigation-size: 2vmax;
+  .MuiCardMedia-media {
+    object-fit: fill;
+  }
+}
+
+html,
+body {
+  position: relative;
+  height: 100%;
+}
+
+body {
+  background: #eee;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+#__next{
+  height: 100%;
+  width: 100%;
+}
+
+.swiper-pagination-bullet {
+  width: 1vmax;
+  height: 1vmax;
+}

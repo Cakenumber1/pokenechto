@@ -1,39 +1,53 @@
-import { Card, CardHeader, CardMedia } from '@mui/material';
+import {
+    Card, CardActionArea, CardContent, CardHeader, CardMedia,
+} from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { PokemonsListResults } from 'interfaces/pokemonListType';
 import React, { useCallback, useState } from 'react';
+import { useGetPokemonByNameQuery } from 'store/api';
 
-import { PokemonsListResults } from '../../../interfaces/pokemonListType';
 import { PokeModal } from '../PokeModalComponent';
 import { style } from './style';
 
-type CardData = {
-  pokemon: PokemonsListResults
-};
+export const CardComponent = ({ pokemon }: { pokemon: PokemonsListResults }) => {
+  const {
+    data, error, isUninitialized,
+  } = useGetPokemonByNameQuery(pokemon.name);
 
-export const CardComponent = (props: CardData) => {
   const [open, setOpen] = useState(false);
   const handleOpen = useCallback(() => setOpen(true), []);
   const handleClose = useCallback(() => setOpen(false), []);
 
   const matchesSize = useMediaQuery('(min-width:400px)');
 
-  const { pokemon } = props;
-  const { fullInfo } = pokemon;
+  if (!data) {
+    return (
+      <Card sx={style.card}>
+        <CardHeader
+          titleTypographyProps={style.pokeName(matchesSize)}
+          title={error ? 'error' : isUninitialized ? 'uninitialized' : 'Loading...'}
+        />
+        <CardContent />
+      </Card>
+    );
+  }
   return (
     <>
       <Card sx={style.card} onClick={handleOpen}>
+          <CardActionArea sx={{ width: '100%', height: '100%' }}>
         <CardHeader
           titleTypographyProps={style.pokeName(matchesSize)}
-          title={fullInfo.name}
+          title={data.name}
         />
+
         <CardMedia
           sx={style.pokeImg}
           component="img"
-          image={fullInfo.img}
-          alt={fullInfo.name}
-        />
+          image={data.img}
+          alt={data.name}
+        /></CardActionArea>
       </Card>
-      <PokeModal fullInfo={fullInfo} isOpen={open} onClose={handleClose} />
+      <PokeModal fullInfo={data} isOpen={open} onClose={handleClose} />
     </>
   );
 };

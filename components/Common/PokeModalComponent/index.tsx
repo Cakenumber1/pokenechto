@@ -7,7 +7,7 @@ import { Pokemon } from '../../../interfaces';
 import { style } from './style';
 
 type ModalData = {
-  fullInfo: Pokemon,
+  fullInfo: Partial<Pokemon>,
   isOpen: boolean,
   onClose: () => void,
 };
