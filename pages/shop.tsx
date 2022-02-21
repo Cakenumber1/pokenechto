@@ -11,7 +11,7 @@ const Shop: NextPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchPokemonsThunk());
-  }, [dispatch]);
+  }, []);
   return (<OnloadOverlayComponent />);
 };
 
