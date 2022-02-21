@@ -1,18 +1,18 @@
 import { Grid } from '@mui/material';
-import { CardComponent } from 'components/Common/CardComponent';
-import { PokemonsList, PokemonsListResults } from 'interfaces/pokemonListType';
+import { PokemonsListResults } from 'interfaces/pokemonListType';
 import React from 'react';
 
-type BestiaryData = {
-  pokemons: PokemonsList
-};
+import { CardComponent } from '../../Common/CardComponent';
 
-export const BestiaryComponent = ({ pokemons }: BestiaryData) => {
-  const data = pokemons.results.map((pokemon: PokemonsListResults, i: number) => (
-    <Grid key={i} item xs={3}>
+export const BestiaryComponent = (props: any) => {
+
+  const { pokemons } = props;
+  const data = pokemons.results.map((pokemon: PokemonsListResults) => (
+    <Grid key={pokemon.name} item xs={3}>
       <CardComponent pokemon={pokemon} />
     </Grid>
   ));
 
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   return <>{data}</>;
 };

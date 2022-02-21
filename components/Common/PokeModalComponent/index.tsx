@@ -1,13 +1,13 @@
 import {
   Grid, Modal, Paper, Typography,
 } from '@mui/material';
-import { Pokemon } from 'interfaces';
 import React from 'react';
 
+import { Pokemon } from '../../../interfaces';
 import { style } from './style';
 
 type ModalData = {
-  fullInfo: Pokemon,
+  fullInfo: Partial<Pokemon>,
   isOpen: boolean,
   onClose: () => void,
 };

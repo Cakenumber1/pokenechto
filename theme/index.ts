@@ -8,6 +8,9 @@ export const theme = createTheme({
     secondary: {
       main: '#ffa733',
     },
+    success: {
+      main: '#f44336',
+    },
   },
   breakpoints: {
     values: {

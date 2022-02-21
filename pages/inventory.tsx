@@ -1,12 +1,10 @@
 import { FrameComponent } from 'components/Common/FrameComponent';
 import React from 'react';
 
-import { BestiaryContainer } from '../containers/BestiaryContainer';
-
-export default function bestiary() {
+export default function inventory() {
   return (
     <FrameComponent>
-      <BestiaryContainer />
+      <h1>inventory</h1>
     </FrameComponent>
   );
 }

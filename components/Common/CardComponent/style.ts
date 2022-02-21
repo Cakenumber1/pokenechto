@@ -1,14 +1,4 @@
 export const style = {
-  page: {
-    height: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
-    overflow: 'hidden',
-  },
-  content: {
-    flexGrow: 1,
-    overflow: 'scroll',
-  },
   card: {
     width: '100%',
     height: '100%',
@@ -20,13 +10,15 @@ export const style = {
     width: '85%',
     margin: 'auto',
     height: '100%',
-    paddingBottom: '3%',
+    paddingBottom: '50%',
     objectFit: 'contain',
   },
-  pokeName: (isSize: boolean) => (
-    {
-      fontSize: isSize ? 'x-large' : 'large',
-      margin: 'auto',
-    }
-  ),
+  pokeName: (isSize: boolean): any => (isSize ? {
+    textAlign: 'center',
+    variant: 'h6',
+  } : {
+    textAlign: 'left',
+    variant: 'body2',
+  })
+  ,
 };

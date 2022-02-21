@@ -1,7 +1,6 @@
-export const style = (isLogo: boolean, isInscription: boolean) => (
+export const style = (isInscription: boolean) => (
   {
     logo: {
-      display: isLogo ? 'visible' : 'none',
       width: '50px',
       height: '50px',
     },
