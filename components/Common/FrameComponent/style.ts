@@ -8,6 +8,6 @@ export const style = {
   content: {
     py: 2,
     flexGrow: 1,
-    overflowY: 'scroll',
+    overflowY: 'auto',
   },
 };

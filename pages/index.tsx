@@ -1,15 +1,16 @@
+import withOverlay from 'components/HOCs/OnloadOverlayComponent';
+import HomeComponent from 'components/Home';
+import { useAuth } from 'firebase/AuthContext';
 import type { NextPage } from 'next';
 
-import { useAuth } from '../firebase/AuthContext';
+const OnloadOverlayComponent = withOverlay(HomeComponent);
 
 const Home: NextPage = () => {
   const { login, currentUser }: any = useAuth();
-  // eslint-disable-next-line no-console
   console.log(login('asd@mail.ru', 'asddsds12'));
-  // eslint-disable-next-line no-console
   console.log(currentUser);
   return (
-    <div>1</div>
+    <OnloadOverlayComponent />
   );
 };
 
