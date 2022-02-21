@@ -12,6 +12,7 @@ import { InventoryPopover } from 'components/Inventory/InventoryPopover';
 import { CollectionItemType, HandleClickCard, HandleClickPopoverControls } from 'helpers/inventoryHelpers';
 import * as React from 'react';
 import { useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import { useDeleteInventoryItemMutation, useGetInventoryByPageQuery } from 'store/service';
 import { Navigation, Pagination, Virtual } from 'swiper';
 // eslint-disable-next-line import/no-unresolved
@@ -77,8 +78,9 @@ export const InventoryContainer = ({ pageQuery }: InventoryContainerProps) => {
   return (
     <>
       <Swiper
-        modules={[Pagination, Navigation, Virtual]}
-        navigation
+        modules={isMobile ? [Pagination, Virtual] : [Pagination, Navigation, Virtual]}
+        navigation={!isMobile}
+        allowTouchMove={isMobile}
         virtual
         slidesPerView={1}
         spaceBetween={30}
