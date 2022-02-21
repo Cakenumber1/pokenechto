@@ -3,7 +3,7 @@ import { getListFromPokeApi } from 'api/';
 
 export const fetchPokemonsThunk = createAsyncThunk(
   'shop/fetchPokemonsThunk',
-  async (_, { dispatch }) => {
+  async () => {
     const data = await getListFromPokeApi();
     return data;
   },

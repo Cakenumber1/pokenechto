@@ -8,7 +8,7 @@ export async function getFromPokeApi(path: string) {
 }
 
 export async function getListFromPokeApi() {
-  const res = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${1}&limit=${9}`);
+  const res = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${Math.round(Math.random() * 300)}&limit=${9}`);
   const { data } = res;
   const pokemons = await Promise.all(
     data.results.map((pokemon : any) => getFromPokeApi(pokemon.url)),

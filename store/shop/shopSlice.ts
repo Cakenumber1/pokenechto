@@ -16,7 +16,7 @@ export const shopSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchPokemonsThunk.fulfilled, (state: any, action: any) => {
+    builder.addCase(fetchPokemonsThunk.fulfilled, (state, action) => {
       articlesEntityAdapter.setAll(state, action.payload);
     });
   },
@@ -27,6 +27,6 @@ export const selectPokemons = (state: RootState) => state.shop;
 export const {
   selectIds: pokemonsIDsSelector,
   selectById: pokemonByIDSelector,
-} = articlesEntityAdapter.getSelectors((state : any) => state.shop);
+} = articlesEntityAdapter.getSelectors((state : RootState) => state.shop);
 
 export const { reducer: shopReducer } = shopSlice;
