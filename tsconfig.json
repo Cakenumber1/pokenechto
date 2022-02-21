@@ -20,35 +20,22 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "components/*": [
-        "./components/*",
-        "./components"
-      ],
-      "api/*": [
-        "./api/*",
-        "./api"
-      ],
-      "helpers/*": [
-        "./helpers/*",
-        "./helpers"
-      ],
-      "interfaces/*": [
-        "./interfaces/*",
-        "./interfaces"
-      ],
-      "public/*": [
-        "./public/*",
-        "./public"
-      ],
-      "store/*": [
-        "./store/*",
-        "./store"
-      ],
-      "theme/*": [
-        "./theme/*",
-        "./theme"
-      ]
+      "components/*": ["./components/*", "./components"],
+      "api/*": ["./api/*", "./api"],
+      "helpers/*": ["./helpers/*", "./helpers"],
+      "interfaces/*": ["./interfaces/*", "./interfaces"],
+      "public/*": ["./public/*", "./public"],
+      "store/*": ["./store/*", "./store"],
+      "theme/*": ["./theme/*", "./theme"]
     }
+  },
+  "settings": {
+    "node": {
+      "tryExtensions": [".js", ".json", ".node", ".ts", ".d.ts"]
+    }
+  },
+  "parserOptions": {
+    "project": "./tsconfig.json"
   },
   "settings": {
     "node": {
