@@ -1,9 +1,10 @@
 import {
-  Modal, Button
+  Button,
+  Modal,
 } from '@mui/material';
 import clsx from 'clsx';
 import { colorMap, namesMap } from 'helpers/types';
-import { DataType, Pokemon } from 'interfaces/';
+import { DataType, Pokemon } from 'interfaces';
 import React, {
   useEffect, useRef,
   useState,
@@ -14,7 +15,7 @@ import { useStyles } from './style';
 type Props = {
   open: boolean
   onClose: () => void
-  pokemon: Pokemon,
+  pokemon: Partial<Pokemon>,
   data: DataType
 };
 
@@ -31,10 +32,6 @@ const PokeModal = ({
     [classes.modal]: true,
     [classes.modalFull]: full,
   });
-  const buttonStyle = clsx({
-    [classes.button]: true,
-    [classes.buttonFull]: full,
-  });
 
   const handleClose = () => {
     setFull(false);
@@ -49,21 +46,13 @@ const PokeModal = ({
     }, 1);
   }, [open]);
 
-  // не видит
-  // useEffect(() => {
-  //   modal.current?.addEventListener('transitionstart', () => {
-  //     setIsAnimated(true);
-  //     console.log(isAnimated);
-  //   });
-  // }, [isAnimated]);
-
   return (
     <Modal open={open} hideBackdrop>
       <div
         className={modalStyle}
         ref={modal}
       >
-        <button type="button"  className={buttonStyle} onClick={handleClose}>Back</button>
+        <Button variant="contained" onClick={handleClose}>Back</Button>
         <div style={{
           background: 'grey',
           width: '100%',
@@ -145,7 +134,6 @@ const PokeModal = ({
               <div>EXP {pokemon!.exp}/?</div>
             </div>
           </div>
-          <Button variant="contained">Buy</Button>
         </div>
       </div>
     </Modal>

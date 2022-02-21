@@ -1,6 +1,6 @@
 export type DataType = {
-  left: number,
-  top: number,
+  left: number | string,
+  top: number | string,
   height: number,
   width: number,
   background: string

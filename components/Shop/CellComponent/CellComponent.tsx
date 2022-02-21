@@ -3,7 +3,7 @@ import {
   Grow,
 } from '@mui/material';
 import clsx from 'clsx';
-import PokeModal from 'components/Common/ModalComponent';
+import PokeModal from 'components/Bestiary/ModalComponent';
 import { getBackgdoundColor } from 'helpers/types/colorMap';
 import { DataType } from 'interfaces';
 import soledOut from 'public/soled_out.png';
