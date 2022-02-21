@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { parseResponsePokemon } from 'helpers';
-import { PokemonsList } from 'interfaces/index';
 
 export async function getFromPokeApi(path: string) {
   return axios.get(path)
@@ -12,18 +11,15 @@ export const createPath = (offset: number = 1, limit: number = 9) => `https://po
 
 export const createKey = (offset: number) => `https://pokeapi.co/api/v2/pokemon?offset=${offset * 12}&limit=12`;
 
-export async function getListFromPokeApi(path: string) {
-  const res = await axios.get(path);
+export async function getListFromPokeApi() {
+  const res = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${1}&limit=${9}`);
   const { data } = res;
-  const temp: PokemonsList = {
-    count: data.count,
-    next: data.next,
-    previous: data.previous,
-    results: data.results,
-  };
-  for (const pokemon of temp.results) {
-    const t = await getFromPokeApi(pokemon.url);
-    pokemon.fullInfo = parseResponsePokemon(t);
+  const pokemons = await Promise.all(
+    data.results.map((pokemon : any) => getFromPokeApi(pokemon.url)),
+  );
+  let temp = [];
+  for (let i = 0; i < 9; i++) {
+    temp.push(parseResponsePokemon(pokemons[i]));
   }
   return temp;
 }
