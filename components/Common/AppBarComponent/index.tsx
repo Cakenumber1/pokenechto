@@ -23,14 +23,14 @@ export const AppBarComponent = () => {
 
   const buttons = (
     <ButtonGroup variant="contained" color="secondary" sx={{ mr: 'auto' }}>
-      <Link href="/shop" passHref>
-        <Button color={path === '/shop' ? 'success' : 'secondary'}>Set</Button>
+      <Link href="/pokedex" passHref>
+        <Button color={path === '/pokedex' ? 'success' : 'secondary'}>Home</Button>
       </Link>
-      <Link href="/bestiary" passHref>
-        <Button color={path === '/bestiary' ? 'success' : 'secondary'}>Bestiary</Button>
+      <Link href="/pokedex/bestiary" passHref>
+        <Button color={path === '/pokedex/bestiary' ? 'success' : 'secondary'}>Bestiary</Button>
       </Link>
-      <Link href="/inventory" passHref>
-        <Button color={path === '/inventory' ? 'success' : 'secondary'}>Inventory</Button>
+      <Link href="/pokedex/inventory" passHref>
+        <Button color={path === '/pokedex/inventory' ? 'success' : 'secondary'}>Inventory</Button>
       </Link>
     </ButtonGroup>
   );
