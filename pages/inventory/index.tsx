@@ -1,15 +1,21 @@
-import { InventoryLoader } from 'components/Inventory/InventoryLoader';
+import { FrameComponent } from 'components/Common/FrameComponent';
+import { InventoryContainer } from 'components/Inventory/InventoryContainer';
+import { naturalNumberPattern } from 'helpers/inventoryHelpers';
+import Error from 'next/error';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
-const Inventory = () => {
+const InventoryByPage = () => {
   const router = useRouter();
+  const isBadRequest = router.query.page && !naturalNumberPattern.test(router.query.page as string);
 
-  useEffect(() => {
-    router.push('/inventory/1');
-  }, [router]);
+  if (isBadRequest) return <Error statusCode={400} />;
 
-  return <InventoryLoader open />;
+  const pageQuery = router.query.page ? Number(router.query.page) : 1;
+  return (
+    <FrameComponent>
+      <InventoryContainer pageQuery={pageQuery} />
+    </FrameComponent>
+  );
 };
 
-export default Inventory;
+export default InventoryByPage;

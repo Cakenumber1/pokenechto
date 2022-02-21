@@ -1,20 +1,14 @@
-import { makeStyles } from '@mui/styles';
-
-export const useStyles = makeStyles({
+export const style = {
   inventoryPokemonCard: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  inventoryPokemonCard__Image: {
+  inventoryPokemonCardImage: {
     width: '100%',
     height: '100%',
     objectFit: 'contain',
     padding: '5px',
-    transition: '0.5s',
-    '&:hover': {
-      transform: 'scale(1.5)',
-    },
   },
-});
+};
