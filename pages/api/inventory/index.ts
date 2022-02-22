@@ -14,10 +14,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       }
       break;
     }
-    case 'DELETE': {
-      fakeDB.inventory.deleteCollectionItem(req.body.collectionId);
-      return res.status(200).end();
-    }
     default:
   }
 
