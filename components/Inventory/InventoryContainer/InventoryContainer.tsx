@@ -78,6 +78,7 @@ export const InventoryContainer = ({ pageQuery }: InventoryContainerProps) => {
   return (
     <>
       <Swiper
+        style={{ height: '100%' }}
         modules={isMobile ? [Pagination, Virtual] : [Pagination, Navigation, Virtual]}
         navigation={!isMobile}
         allowTouchMove={isMobile}
