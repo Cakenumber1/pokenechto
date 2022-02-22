@@ -3,34 +3,60 @@ import { CollectionItemType } from 'helpers/inventoryHelpers';
 
 type GetInventoryByPageResult = {
   count: number,
-  results: Partial<CollectionItemType>[]
+  results: CollectionItemType[]
 };
 
 export const inventoryApi = createApi({
   reducerPath: 'inventoryApi',
-  tagTypes: ['Inventory'],
+  tagTypes: ['Inventory', 'Mushrooms'],
   baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
   endpoints: (builder) => ({
     getInventoryByPage: builder.query<GetInventoryByPageResult, number>({
       query: (page) => `/inventory?page=${page}`,
       providesTags: (result) => (result
         ? [
-          ...result.results.map(({ collectionId }) => ({ type: 'Inventory' as const, collectionId })),
+          ...result.results.map(({ collectionId: id }) => ({ type: 'Inventory', id } as const)),
           { type: 'Inventory', id: 'LIST' },
         ]
         : [{ type: 'Inventory', id: 'LIST' }]),
     }),
-    deleteInventoryItem: builder.mutation<CollectionItemType, Partial<CollectionItemType>>({
-      query: (body) => {
-        return {
-          url: '/inventory',
-          method: 'DELETE',
-          body,
-        };
-      },
-      invalidatesTags: [{ type: 'Inventory', id: 'LIST' }],
+    getInventoryItem: builder.query<CollectionItemType, string>({
+      query: (collectionId) => `/inventory/${collectionId}`,
+      providesTags: (result, error, id) => [{ type: 'Inventory', id }],
+    }),
+    deleteInventoryItem: builder.mutation<CollectionItemType, string>({
+      query: (collectionId) => ({
+        url: `/inventory/${collectionId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: (result, error, id) => [{ type: 'Inventory', id }],
+    }),
+    patchInventoryItem: builder.mutation<CollectionItemType, string>({
+      query: (collectionId) => ({
+        url: `/inventory/${collectionId}`,
+        method: 'PATCH',
+      }),
+      invalidatesTags: (result, error, id) => [{ type: 'Inventory', id }, 'Mushrooms'],
+    }),
+    getMushrooms: builder.query<any, any>({
+      query: () => '/wallet/mushrooms',
+      providesTags: ['Mushrooms'],
+    }),
+    decreaseMushrooms: builder.mutation<any, any>({
+      query: ({ count }) => ({
+        url: '/wallet/mushrooms',
+        method: 'DELETE',
+        body: { count },
+      }),
+      invalidatesTags: ['Mushrooms'],
     }),
   }),
 });
 
-export const { useGetInventoryByPageQuery, useDeleteInventoryItemMutation } = inventoryApi;
+export const {
+  useGetInventoryByPageQuery,
+  useDeleteInventoryItemMutation,
+  usePatchInventoryItemMutation,
+  useGetInventoryItemQuery,
+  useGetMushroomsQuery,
+} = inventoryApi;
