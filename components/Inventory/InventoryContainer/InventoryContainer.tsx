@@ -13,7 +13,11 @@ import { CollectionItemType, HandleClickCard, HandleClickPopoverControls } from 
 import * as React from 'react';
 import { useState } from 'react';
 import { isMobile } from 'react-device-detect';
-import { useDeleteInventoryItemMutation, useGetInventoryByPageQuery } from 'store/service';
+import {
+  useDeleteInventoryItemMutation,
+  useGetInventoryByPageQuery,
+  usePatchInventoryItemMutation,
+} from 'store/service';
 import { Navigation, Pagination, Virtual } from 'swiper';
 // eslint-disable-next-line import/no-unresolved
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -27,9 +31,10 @@ export const InventoryContainer = ({ pageQuery }: InventoryContainerProps) => {
   const [popoverAnchorElement, setPopoverAnchorElement] = useState<HTMLElement | null>(null);
   const [isTopHalfOfScreen, setIsTopHalfOfScreen] = useState(true);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [pokemon, setPokemon] = useState<Partial<CollectionItemType> | null>(null);
+  const [pokemon, setPokemon] = useState<CollectionItemType | null>(null);
   const { data, isError, isLoading } = useGetInventoryByPageQuery(pageQuery);
-  const [deleteCollection] = useDeleteInventoryItemMutation();
+  const [deletePokemonCollection] = useDeleteInventoryItemMutation();
+  const [patchPokemonCollection] = usePatchInventoryItemMutation();
 
   const handleSlideChange = (swiper: ISwiper) => {
     window.history.pushState(null, '', `/pokedex/inventory?page=${swiper.realIndex + 1}`);
@@ -55,8 +60,10 @@ export const InventoryContainer = ({ pageQuery }: InventoryContainerProps) => {
         handleClosePopover();
         break;
       case 'gift':
-        deleteCollection({ collectionId: pokemon?.collectionId }).unwrap();
-        handleClosePopover();
+        if (pokemon !== null) {
+          deletePokemonCollection(pokemon.collectionId).unwrap();
+          handleClosePopover();
+        }
         break;
       default:
         break;
@@ -108,11 +115,14 @@ export const InventoryContainer = ({ pageQuery }: InventoryContainerProps) => {
       />
       )}
       {modalOpen && (
-      <InventoryModal
-        open={modalOpen}
-        pokemon={pokemon}
-        onClose={handleCloseModal}
-      />
+        <InventoryModal
+          open={modalOpen}
+          pokemon={pokemon as CollectionItemType}
+          onClose={handleCloseModal}
+          onMushroom={() => {
+            patchPokemonCollection(pokemon?.collectionId);
+          }}
+        />
       )}
     </>
   );
