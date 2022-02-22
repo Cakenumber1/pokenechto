@@ -1,1 +1,1 @@
-export * from './inventoryApi';
+export * from './appApi';

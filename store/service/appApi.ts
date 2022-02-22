@@ -6,8 +6,8 @@ type GetInventoryByPageResult = {
   results: CollectionItemType[]
 };
 
-export const inventoryApi = createApi({
-  reducerPath: 'inventoryApi',
+export const appApi = createApi({
+  reducerPath: 'appApi',
   tagTypes: ['Inventory', 'Mushrooms'],
   baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
   endpoints: (builder) => ({
@@ -59,4 +59,4 @@ export const {
   usePatchInventoryItemMutation,
   useGetInventoryItemQuery,
   useGetMushroomsQuery,
-} = inventoryApi;
+} = appApi;
