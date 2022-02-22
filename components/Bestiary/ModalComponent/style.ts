@@ -7,16 +7,15 @@ export const useStyles = makeStyles((theme : Theme) => ({
     objectFit: 'fill',
     position: 'relative',
     width: '100%',
-    background: data.background,
-    [theme.breakpoints.down('md')]: {
-      maxHeight: '26.662vh',
-    },
-    [theme.breakpoints.down('lg')]: {
-      maxHeight: '32.2vh',
-    },
-    [theme.breakpoints.up('lg')]: {
-      maxHeight: '36vh',
-    },
+    background: 'white',
+    maxHeight: '100%',
+    transition: '1s all',
+    paddingTop: '1.5vh',
+  }),
+  imgFull: (data : DataType) => ({
+    background: 'white',
+    maxHeight: '30%',
+    paddingTop: '1.5vh',
   }),
   modal: (data: DataType) => ({
     position: 'absolute',
@@ -25,7 +24,7 @@ export const useStyles = makeStyles((theme : Theme) => ({
     top: data.top,
     left: data.left,
     transition: '1s all',
-    background: 'grey',
+    background: 'black',
   }),
   // data не убирать
   modalFull: (data: DataType) => ({
@@ -36,20 +35,24 @@ export const useStyles = makeStyles((theme : Theme) => ({
   }),
   button: (data: DataType) => ({
     display: 'block',
-    maxHeight: '1px',
-    background: 'none',
+    position: 'absolute',
+    left: '0',
+    top: '0',
+    height: '5vh',
+    width: '9vh',
+    fontSize: '2.7vh',
+    background: '#4fc3f7',
     border: 'none',
-    fontSize: '0px',
-    transition: '1s all',
     cursor: 'pointer',
-    // не работает
-    transitionDelay: '10s all',
-    margin: '.5vh',
-    color: 'white',
+    transition: '.3s all',
+    transitionDelay: '.2s all',
+    margin: '1.5vh',
+    color: 'black',
+    opacity: '0',
+    zIndex: '100',
+    borderRadius: '4px',
   }),
   buttonFull: (data: DataType) => ({
-    maxHeight: '3vh',
-    height: '4vh',
-    fontSize: '3vh',
+    opacity: '1',
   }),
 }));

@@ -47,7 +47,7 @@ export const AppBarComponent = () => {
         onClick={handleClick}
         sx={{ mr: 'auto' }}
       >
-        {path.substring(1)}
+        {path === '/pokedex' ? 'Home' : path.substring(9)}
       </Button>
       <Menu
         id="basic-menu"
@@ -58,13 +58,13 @@ export const AppBarComponent = () => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <Link href="/shop" passHref>
-          <MenuItem onClick={handleClose}>Set</MenuItem>
+        <Link href="/pokedex" passHref>
+          <MenuItem onClick={handleClose}>Home</MenuItem>
         </Link>
-        <Link href="/bestiary" passHref>
+        <Link href="/pokedex/bestiary" passHref>
           <MenuItem onClick={handleClose}>Bestiary</MenuItem>
         </Link>
-        <Link href="/inventory" passHref>
+        <Link href="/pokedex/inventory" passHref>
           <MenuItem onClick={handleClose}>Inventory</MenuItem>
         </Link>
       </Menu>

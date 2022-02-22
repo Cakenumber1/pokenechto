@@ -1,5 +1,5 @@
 import {
-  Card, CardActionArea, CardContent, CardHeader, CardMedia,
+  Card, CardContent, CardHeader, CardMedia,
 } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { DataType } from 'interfaces';
@@ -7,7 +7,7 @@ import { PokemonsListResults } from 'interfaces/pokemonListType';
 import React, { SyntheticEvent, useCallback, useState } from 'react';
 import { useGetPokemonByNameQuery } from 'store/api';
 
-import PokeModal from '../../Bestiary/ModalComponent';
+import PokeModal from '../ModalComponent';
 import { style } from './style';
 
 export const CardComponent = ({ pokemon }: { pokemon: PokemonsListResults }) => {
@@ -49,20 +49,18 @@ export const CardComponent = ({ pokemon }: { pokemon: PokemonsListResults }) => 
   }
   return (
     <>
-      <Card sx={style.card} onClick={handleOpen}>
-        <CardActionArea sx={{ width: '100%', height: '100%' }}>
-          <CardHeader
-            titleTypographyProps={style.pokeName(matchesSize)}
-            title={data.name}
-          />
-
-          <CardMedia
-            sx={style.pokeImg}
-            component="img"
-            image={data.img}
-            alt={data.name}
-          />
-        </CardActionArea>
+      <Card sx={style.card}>
+        <CardHeader
+          titleTypographyProps={style.pokeName(matchesSize)}
+          title={data.name}
+        />
+        <CardMedia
+          onClick={handleOpen}
+          sx={style.pokeImg}
+          component="img"
+          image={data.img}
+          alt={data.name}
+        />
       </Card>
       <PokeModal open={open} onClose={handleClose} pokemon={data} data={pos} />
     </>
