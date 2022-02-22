@@ -32,7 +32,7 @@ export const InventoryContainer = ({ pageQuery }: InventoryContainerProps) => {
   const [deleteCollection] = useDeleteInventoryItemMutation();
 
   const handleSlideChange = (swiper: ISwiper) => {
-    window.history.pushState(null, '', `/inventory?page=${swiper.realIndex + 1}`);
+    window.history.pushState(null, '', `/pokedex/inventory?page=${swiper.realIndex + 1}`);
   };
 
   const handleClickCard: HandleClickCard = (
