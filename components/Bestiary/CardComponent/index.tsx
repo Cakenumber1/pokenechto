@@ -1,5 +1,5 @@
 import {
-  Card, CardContent, CardHeader, CardMedia,
+  Box, Card, CardContent, CardHeader, CardMedia,
 } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { DataType } from 'interfaces';
@@ -9,6 +9,8 @@ import { useGetPokemonByNameQuery } from 'store/api';
 
 import PokeModal from '../ModalComponent';
 import { style } from './style';
+
+const names = new Set(['Ivysaur', 'Charmander', 'Charizard']);
 
 export const CardComponent = ({ pokemon }: { pokemon: PokemonsListResults }) => {
   const {
@@ -47,22 +49,23 @@ export const CardComponent = ({ pokemon }: { pokemon: PokemonsListResults }) => 
       </Card>
     );
   }
+  // @ts-ignore
+  const matchesName = names.has(data!.name);
   return (
-    <>
-      <Card sx={style.card}>
-        <CardHeader
-          titleTypographyProps={style.pokeName(matchesSize)}
-          title={data.name}
-        />
-        <CardMedia
-          onClick={handleOpen}
-          sx={style.pokeImg}
-          component="img"
-          image={data.img}
-          alt={data.name}
-        />
-      </Card>
-      <PokeModal open={open} onClose={handleClose} pokemon={data} data={pos} />
-    </>
+    <Card sx={style.card}>
+      <CardHeader
+        titleTypographyProps={style.pokeName(matchesSize)}
+        title={data.name}
+      />
+      <CardMedia
+        onClick={handleOpen}
+        sx={style.pokeImg(matchesName)}
+        component="img"
+        image={data.img}
+        alt={data.name}
+      />
+      {matchesName ? <PokeModal open={open} onClose={handleClose} pokemon={data} data={pos} />
+        : <Box sx={{ display: 'none' }} />}
+    </Card>
   );
 };

@@ -15,7 +15,6 @@ type ItemType = {
 };
 const ItemComp = ({ _key }: ItemType) => {
   const classes = useStylesItem();
-  console.log(_key);
   return (
     <div key={_key} className={classes.item}>
       <CellComponent pokeid={_key} />
