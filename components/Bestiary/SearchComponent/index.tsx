@@ -19,7 +19,7 @@ const Result = ({ search, submit, onClose }: Props) => {
     width: 20,
     background: 'none',
   };
-  if (!search) return <Box sx={{ visibility: 'hidden' }} />;
+  if (!submit || !search) return <Box sx={{ visibility: 'hidden' }} />;
   const { data, error } = useGetPokemonByNameQuery(search);
   if (error) return <Box sx={{ visibility: submit ? 'visible' : 'hidden' }}>Ошибка</Box>;
   if (!data) return <Box sx={{ visibility: submit ? 'visible' : 'hidden' }}>Загрузка</Box>;
@@ -29,16 +29,17 @@ const Result = ({ search, submit, onClose }: Props) => {
 export const SearchComponent = () => {
   const matchWidth = useMediaQuery('(min-width:350px)');
   const [input, setInput] = useState('');
-  const [searchString, setSearchString] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleClose = useCallback(() => setIsSubmitted(false), []);
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
     setIsSubmitted(true);
-    setSearchString(input);
-  }, [input]);
-  const handleInput = useCallback((e) => setInput(e.target.value), []);
+  }, []);
+  const handleInput = useCallback((e) => {
+    setInput(e.target.value);
+    if (isSubmitted) setIsSubmitted(false);
+  }, [isSubmitted]);
 
   return (
     <Box sx={{ pt: 1, px: 2 }}>
@@ -54,7 +55,7 @@ export const SearchComponent = () => {
       <IconButton onClick={handleSubmit}>
         <SearchIcon fontSize="large" />
       </IconButton>
-      <Result search={searchString} submit={isSubmitted} onClose={handleClose} />
+      <Result search={input} submit={isSubmitted} onClose={handleClose} />
     </Box>
   );
 };
