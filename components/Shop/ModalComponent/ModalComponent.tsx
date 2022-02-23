@@ -58,6 +58,11 @@ const PokeModal = ({
       setFull(open);
     }, 1);
   }, [open]);
+  useEffect(() => {
+    if (pokemon!.amount === 0) {
+      handleClose();
+    }
+  });
 
   return (
     <Modal open={open} hideBackdrop>
@@ -83,39 +88,56 @@ const PokeModal = ({
             src={pokemon!.img}
             alt={pokemon!.name}
           />
-          <div style={{ width: '100%', padding: '2vh' }}>
-            <div style={{ textAlign: 'center', fontSize: 'large' }}>{pokemon!.name.toUpperCase()}</div>
+          <div style={{
+            width: '100%', padding: '2vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
+          }}
+          >
+            <div style={{
+              textAlign: 'center',
+              fontSize: 'large',
+            }}
+            >{pokemon!.name.toUpperCase()}
+            </div>
             <div style={{ textAlign: 'center' }}>
               Types
               {pokemon!.types.map((type: any) => (
                 <div key={type}>{type}</div>
               ))}
             </div>
-            <div style={{ width: '100%', display: 'flex', justifyContent: 'space-around' }}>
+            <div style={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'space-around',
+            }}
+            >
               <div style={{
-                background: 'lightgrey', borderRadius: '50vh', height: '8vh', width: '16vh', textAlign: 'center',
+                textAlign: 'center',
               }}
               >
                 <div>
                   Weight
                 </div>
-                <div style={{ paddingTop: '2vh' }}>
+                <div>
                   {pokemon!.weight / 10}KG
                 </div>
               </div>
               <div style={{
-                background: 'lightgrey', borderRadius: '50vh', height: '8vh', width: '16vh', textAlign: 'center',
+                textAlign: 'center',
               }}
               >
                 <div>Height</div>
-                <div style={{ paddingTop: '2vh' }}>
+                <div>
                   {pokemon!.height / 10} M
                 </div>
               </div>
             </div>
             <div style={{ padding: '2vh' }}>
               <div style={{ textAlign: 'center' }}>Abilities</div>
-              <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-around',
+              }}
+              >
                 {pokemon!.abilities.map((ab: any) => (
                   <div key={ab}>{ab}</div>
                 ))}
@@ -124,26 +146,48 @@ const PokeModal = ({
             <div className="stats" style={{ width: '100%' }}>
               <div style={{ textAlign: 'center' }}>Stats</div>
               {pokemon!.stats.map((stat: any) => (
-                <div key={stat.statName} style={{ display: 'flex', padding: '.5vh 10%' }}>
-                  <div style={{ width: '20%' }}>{namesMap.get(stat.statName)}</div>
+                <div
+                  key={stat.statName}
+                  style={{
+                    display: 'flex',
+                    padding: '.5vh 10%',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <div style={{ width: '20%' }}>{namesMap.get(stat.statName)}: {stat.statVal}/300</div>
                   <div style={{
-                    width: '100%', height: '3vh', background: 'dimgrey', borderRadius: '50vmax',
+                    width: '100%',
+                    height: '3vh',
+                    background: 'dimgrey',
+                    borderRadius: '50vmax',
                   }}
                   >
                     <div style={{
-                      height: '100%', background: colorMap.get(stat.statName), width: `${stat.statVal / 3}%`, borderRadius: '50vmax', textAlign: 'center',
+                      height: '100%',
+                      background: colorMap.get(stat.statName),
+                      width: `${stat.statVal / 3}%`,
+                      borderRadius: '50vmax',
+                      textAlign: 'center',
                     }}
-                    >
-                      {stat.statVal}/300
-                    </div>
+                    />
                   </div>
                 </div>
               ))}
             </div>
-            <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
-              <div>EXP {pokemon!.exp}/?</div>
-            </div>
-            <Button disabled={money?.count < 500} onClick={handleBuy} variant="contained">Buy 500$</Button>
+            <div style={{
+              display: 'flex',
+              width: '100%',
+              justifyContent: 'center',
+            }}
+            />
+            <Button
+              style={{ maxWidth: '30%' }}
+              disabled={money?.count < 500 || pokemon!.amount === 0}
+              onClick={handleBuy}
+              variant="contained"
+            >Buy 500$
+            </Button>
           </div>
         </div>
       </div>
