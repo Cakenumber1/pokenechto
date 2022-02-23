@@ -1,5 +1,5 @@
 import {
-  Card, CardContent, CardHeader, CardMedia,
+  Box, Card, CardContent, CardHeader, CardMedia,
 } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { DataType } from 'interfaces';
@@ -9,6 +9,8 @@ import { useGetPokemonByNameQuery } from 'store/api';
 
 import PokeModal from '../ModalComponent';
 import { style } from './style';
+
+const names = new Set(['Ivysaur', 'Charmander', 'Charizard']);
 
 export const CardComponent = ({ pokemon }: { pokemon: PokemonsListResults }) => {
   const {
@@ -47,6 +49,7 @@ export const CardComponent = ({ pokemon }: { pokemon: PokemonsListResults }) => 
       </Card>
     );
   }
+  const matchesName = names.has(data.name);
   return (
     <Card sx={style.card}>
       <CardHeader
@@ -55,12 +58,13 @@ export const CardComponent = ({ pokemon }: { pokemon: PokemonsListResults }) => 
       />
       <CardMedia
         onClick={handleOpen}
-        sx={style.pokeImg}
+        sx={style.pokeImg(matchesName)}
         component="img"
         image={data.img}
         alt={data.name}
       />
-      <PokeModal open={open} onClose={handleClose} pokemon={data} data={pos} />
+      {matchesName ? <PokeModal open={open} onClose={handleClose} pokemon={data} data={pos} />
+        : <Box sx={{ display: 'none' }} />}
     </Card>
   );
 };
