@@ -10,7 +10,6 @@ function withAuth<T>(Component: NextComponentType<T>) {
     if (!currentUser) {
       router.replace('/auth');
       return null;
-      // <AuthComponent />;
     }
 
     return <Component {...props} />;

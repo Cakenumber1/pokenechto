@@ -9,8 +9,8 @@ export const useStylesItem = makeStyles((theme : Theme) => ({
       height: '10.385vh',
     },
     [theme.breakpoints.down('lg')]: {
-      width: '10vh',
-      height: '10vh',
+      width: '10.385vh',
+      height: '10.385vh',
     },
     [theme.breakpoints.up('lg')]: {
       width: '15vh',

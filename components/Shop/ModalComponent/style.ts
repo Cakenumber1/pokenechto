@@ -10,6 +10,7 @@ export const useStyles = makeStyles(() => ({
     maxHeight: '100%',
     transition: '1s all',
     aspectRatio: '1/1',
+    transitionDelay: '.1s all',
   }),
   imgFull: (data : DataType) => ({
     background: data.background,

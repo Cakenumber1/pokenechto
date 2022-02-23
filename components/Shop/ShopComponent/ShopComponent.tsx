@@ -27,11 +27,11 @@ const ShopComponent: React.FC<Props> = ({ onclick }) => {
             <SwiperShopComponent />
           </div>
           <div className={classes.shopShelves}>
-            <div className={classes.shopShelvesText}>Juhasd</div>
+            <div className={classes.shopShelvesText}>Заявление1</div>
             <ShelfComponent shelfn={1} />
           </div>
           <div className={classes.shopShelves}>
-            <div className={classes.shopShelvesText}>dsasaP</div>
+            <div className={classes.shopShelvesText}>Заявление2</div>
             <ShelfComponent shelfn={2} />
           </div>
         </Container>
