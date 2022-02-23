@@ -34,15 +34,16 @@ const shake = [
   { transform: 'translate(1px, -2px) rotate(-1deg)' },
 ];
 
-const CellComponent: React.FC<Props> = ({ pokeid, limit, amount }) => {
+const CellComponent: React.FC<Props> = ({ pokeid }) => {
   const { data: pokemon } = useGetPokemonByIDQuery(pokeid);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [data, setData] = React.useState<DataType>({
     left: 0, top: 0, height: 0, width: 0, background: 'none',
   });
-
-  if (amount === undefined && pokemon) {
+  let limit = 0;
+  let amount = 0;
+  if (pokemon) {
     // eslint-disable-next-line no-param-reassign
     limit = pokemon!.limit;
     // eslint-disable-next-line no-param-reassign

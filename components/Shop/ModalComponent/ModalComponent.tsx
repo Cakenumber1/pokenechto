@@ -1,8 +1,14 @@
-import { Button, Modal } from '@mui/material';
+import {
+  Button,
+  Modal,
+} from '@mui/material';
 import clsx from 'clsx';
 import { colorMap, namesMap } from 'helpers/types';
 import { DataType, Pokemon } from 'interfaces/';
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  useEffect, useRef,
+  useState,
+} from 'react';
 import { useGetMoneyQuery, usePatchSellPokemonMutation } from 'store/service';
 
 import { useStyles } from './style';
@@ -35,6 +41,10 @@ const PokeModal = ({
     [classes.img]: true,
     [classes.imgFull]: full,
   });
+  const textStyle = clsx({
+    [classes.text]: true,
+    [classes.textFull]: full,
+  });
 
   const handleBuy = () => {
     patchSellPokemonMutation({ id: pokemon!.id, price: 500 });
@@ -44,7 +54,7 @@ const PokeModal = ({
     setFull(false);
     setTimeout(() => {
       onClose();
-    }, 1000);
+    }, 1100);
   };
 
   useEffect(() => {
@@ -77,7 +87,7 @@ const PokeModal = ({
             src={pokemon!.img}
             alt={pokemon!.name}
           />
-          <div style={{ width: '100%', padding: '2vh' }}>
+          <div className={textStyle} style={{ width: '100%', padding: '2vh' }}>
             <div style={{ textAlign: 'center', fontSize: 'large' }}>{pokemon!.name.toUpperCase()}</div>
             <div style={{ textAlign: 'center' }}>
               Types
@@ -137,8 +147,8 @@ const PokeModal = ({
             <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
               <div>EXP {pokemon!.exp}/?</div>
             </div>
+            <Button disabled={money?.count < 500} onClick={handleBuy} variant="contained">Buy 500$</Button>
           </div>
-          <Button disabled={money?.count < 500} onClick={handleBuy} variant="contained">Buy 500$</Button>
         </div>
       </div>
     </Modal>

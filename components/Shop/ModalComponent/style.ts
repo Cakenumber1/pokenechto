@@ -9,6 +9,7 @@ export const useStyles = makeStyles(() => ({
     background: data.background,
     maxHeight: '100%',
     transition: '1s all',
+    aspectRatio: '1/1',
   }),
   imgFull: (data : DataType) => ({
     background: data.background,
@@ -23,7 +24,6 @@ export const useStyles = makeStyles(() => ({
     transition: '1s all',
     background: 'grey',
   }),
-  // data не убирать
   modalFull: () => ({
     width: '100%',
     height: '100%',

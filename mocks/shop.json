@@ -86,8 +86,8 @@
             "flying"
         ],
         "exp": 184,
-        "limit": 5,
-        "amount": 3
+        "limit": 1,
+        "amount": 1
     },
     {
         "id": 143,
@@ -130,7 +130,7 @@
             "normal"
         ],
         "exp": 196,
-        "limit": 7,
+        "limit": 1,
         "amount": 0
     },
     {
@@ -174,8 +174,8 @@
             "flying"
         ],
         "exp": 291,
-        "limit": 3,
-        "amount": 0
+        "limit": 1,
+        "amount": 1
     },
     {
         "id": 145,
@@ -218,7 +218,7 @@
             "flying"
         ],
         "exp": 294,
-        "limit": 7,
+        "limit": 1,
         "amount": 0
     },
     {
@@ -262,8 +262,8 @@
             "flying"
         ],
         "exp": 302,
-        "limit": 8,
-        "amount": 2
+        "limit": 1,
+        "amount": 1
     },
     {
         "id": 147,
