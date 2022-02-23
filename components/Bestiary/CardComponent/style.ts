@@ -3,11 +3,12 @@ export const style = {
     width: '100%',
     height: '100%',
     display: 'flex',
+    px: 1,
     flexDirection: 'column',
     aspectRatio: '2 / 3',
   },
   pokeImg: {
-    width: '85%',
+    width: '100%',
     margin: 'auto',
     height: '100%',
     paddingBottom: '3%',

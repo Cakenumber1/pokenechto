@@ -48,21 +48,19 @@ export const CardComponent = ({ pokemon }: { pokemon: PokemonsListResults }) => 
     );
   }
   return (
-    <>
-      <Card sx={style.card}>
-        <CardHeader
-          titleTypographyProps={style.pokeName(matchesSize)}
-          title={data.name}
-        />
-        <CardMedia
-          onClick={handleOpen}
-          sx={style.pokeImg}
-          component="img"
-          image={data.img}
-          alt={data.name}
-        />
-      </Card>
+    <Card sx={style.card}>
+      <CardHeader
+        titleTypographyProps={style.pokeName(matchesSize)}
+        title={data.name}
+      />
+      <CardMedia
+        onClick={handleOpen}
+        sx={style.pokeImg}
+        component="img"
+        image={data.img}
+        alt={data.name}
+      />
       <PokeModal open={open} onClose={handleClose} pokemon={data} data={pos} />
-    </>
+    </Card>
   );
 };
