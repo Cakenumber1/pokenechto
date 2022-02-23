@@ -1,4 +1,5 @@
 import { FrameComponent } from 'components/Common/FrameComponent';
+import withAuth from 'components/HOCs/withAuthHOC';
 import { InventoryContainer } from 'components/Inventory/InventoryContainer';
 import { naturalNumberPattern } from 'helpers/inventoryHelpers';
 import Error from 'next/error';
@@ -18,4 +19,4 @@ const InventoryByPage = () => {
   );
 };
 
-export default InventoryByPage;
+export default withAuth(InventoryByPage);
