@@ -1,4 +1,4 @@
-import CardGiftcardOutlinedIcon from '@mui/icons-material/CardGiftcardOutlined';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
@@ -44,18 +44,20 @@ export const InventoryPopover = ({
         size="large"
       >
         <Button
-          onClick={(event) => handleClickControls(event, 'info')}
+          onClick={handleClickControls}
           color="info"
           startIcon={<InfoOutlinedIcon />}
+          data-button-name="info"
         >
           Info
         </Button>
         <Button
-          onClick={(event) => handleClickControls(event, 'gift')}
-          color="secondary"
-          startIcon={<CardGiftcardOutlinedIcon />}
+          onClick={handleClickControls}
+          color="error"
+          startIcon={<DeleteForeverIcon />}
+          data-button-name="delete"
         >
-          Gift
+          Delete
         </Button>
       </ButtonGroup>
     </Popover>

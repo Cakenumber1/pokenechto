@@ -29,5 +29,4 @@ export type HandleClickCard = (
 
 export type HandleClickPopoverControls = (
   event: React.MouseEvent<HTMLButtonElement>,
-  buttonClicked: 'info' | 'gift'
 ) => void;
