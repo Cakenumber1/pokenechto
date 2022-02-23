@@ -5,12 +5,12 @@ export const useStylesItem = makeStyles((theme : Theme) => ({
   item: {
     position: 'relative',
     [theme.breakpoints.down('md')]: {
-      width: '11.385vh',
-      height: '11.385vh',
+      width: '10.385vh',
+      height: '10.385vh',
     },
     [theme.breakpoints.down('lg')]: {
-      width: '11vh',
-      height: '11vh',
+      width: '10vh',
+      height: '10vh',
     },
     [theme.breakpoints.up('lg')]: {
       width: '15vh',
