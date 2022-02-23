@@ -2,15 +2,12 @@ import WalletComponent from 'components/WalletComponent';
 import { ActiveLink } from 'helpers';
 import Link from 'next/link';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectWallet } from 'store/wallet/walletSlice';
 
 type Props = {
   onclick: () => void
 };
 
 const HomeComponent: React.FC<Props> = ({ onclick }) => {
-  const { money, mushrooms } = useSelector(selectWallet);
   return (
     <div style={{ height: '100%' }}>
       <div style={{
@@ -27,7 +24,7 @@ const HomeComponent: React.FC<Props> = ({ onclick }) => {
         <ActiveLink onclick={onclick} href="/shop">Shop</ActiveLink>
         <ActiveLink onclick={onclick} href="/arena">Arena</ActiveLink>
       </div>
-      <WalletComponent money={money} mushrooms={mushrooms} />
+      <WalletComponent />
     </div>
   );
 };

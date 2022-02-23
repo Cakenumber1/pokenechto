@@ -2,7 +2,6 @@ import { Stack } from '@mui/material';
 import { ThemeProvider } from '@mui/styles';
 import React from 'react';
 import { useGetShopPokemonIDsQuery } from 'store/service';
-import { pokemonsIDsSelector } from 'store/shop/shopSlice';
 import { theme } from 'theme/index';
 
 import CellComponent from '../CellComponent';
@@ -24,9 +23,10 @@ const ItemComp = ({ _key }: ItemType) => {
 };
 
 const ShelfComponent: React.FC<Props> = ({ shelfn }) => {
-  const { data: pokeIDs } = useGetShopPokemonIDsQuery();
+  const { data: pokeIDs } = useGetShopPokemonIDsQuery(null);
   let pkeys;
-  pokeIDs ? pkeys = pokeIDs!.slice(3 * shelfn, 2 * 3 * shelfn) : pkeys = null;
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  (pokeIDs) ? pkeys = pokeIDs!.slice(3 * shelfn, 2 * 3 * shelfn) : pkeys = null;
   const classes = useStylesStack();
   if (pkeys) {
     return (

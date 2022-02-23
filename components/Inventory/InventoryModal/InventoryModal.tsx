@@ -43,7 +43,7 @@ export const InventoryModal = ({
 }: InventoryModalProps) => {
   const [zoomEntered, setZoomEntered] = useState(false);
   const { data } = useGetInventoryItemQuery(pokemon.collectionId);
-  const { data: mushrooms } = useGetMushroomsQuery();
+  const { data: mushrooms } = useGetMushroomsQuery(null);
 
   return (
     <Modal

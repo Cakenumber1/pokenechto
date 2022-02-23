@@ -23,7 +23,7 @@ type Props = {
 const PokeModal = ({
   open, onClose, pokemon, data,
 }: Props) => {
-  const { data: money } = useGetMoneyQuery();
+  const { data: money } = useGetMoneyQuery(null);
   const [patchSellPokemonMutation] = usePatchSellPokemonMutation();
   const classes = useStyles(data);
   const modal = useRef<HTMLDivElement>(null);

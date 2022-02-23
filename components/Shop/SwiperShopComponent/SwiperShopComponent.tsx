@@ -11,7 +11,7 @@ import { theme } from 'theme/index';
 import { useStyles } from './style';
 
 const MySwiper = () => {
-  const { data: pokeIDs } = useGetShopPokemonIDsQuery();
+  const { data: pokeIDs } = useGetShopPokemonIDsQuery(null);
   let pkeys;
   pokeIDs ? pkeys = pokeIDs!.slice(0, 3) : pkeys = null;
   const classes = useStyles();
