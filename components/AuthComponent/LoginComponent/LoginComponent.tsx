@@ -24,7 +24,7 @@ const LoginComponent: React.FC<Props> = ({ handlePage }) => {
       .catch((e : any) => {
         console.log(e);
         setError(e);
-        setTimeout(() => { setError(null); }, 5000);
+        setTimeout(() => { setError(null); }, 12000);
       });
   };
   return (
@@ -65,7 +65,18 @@ const LoginComponent: React.FC<Props> = ({ handlePage }) => {
           value={pass}
           onChange={(event) => setPass(String(event.target.value))}
         />
-        <div style={{ display: error, color: 'red' }}>{error?.message}</div>
+        <div style={{
+          display: error,
+          color: 'red',
+          position: 'absolute',
+          top: '10%',
+          left: 0,
+          width: '100%',
+          padding: '2vh',
+          textAlign: 'center',
+        }}
+        >{error?.message}
+        </div>
         <Button
           type="submit"
           fullWidth

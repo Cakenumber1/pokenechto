@@ -33,7 +33,7 @@ const SignUp: React.FC<Props> = ({ handlePage }) => {
         setError(e);
         setTimeout(() => {
           setError(null);
-        }, 5000);
+        }, 12000);
       });
   };
   return (
@@ -106,7 +106,18 @@ const SignUp: React.FC<Props> = ({ handlePage }) => {
               />
             </Grid>
           </Grid>
-          <div style={{ display: error, color: 'red' }}>{error?.message}</div>
+          <div style={{
+            display: error,
+            color: 'red',
+            position: 'absolute',
+            top: '10%',
+            left: 0,
+            width: '100%',
+            padding: '2vh',
+            textAlign: 'center',
+          }}
+          >{error?.message}
+          </div>
           <Button
             type="submit"
             fullWidth
