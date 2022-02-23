@@ -23,7 +23,7 @@ const HomeComponent: React.FC<Props> = ({ onclick }) => {
       >
         <ActiveLink onclick={onclick} href="/pokedex">Pokedex</ActiveLink>
         <Link href="/bestiary">Bestiary std link</Link>
-        <Link href="/inventory">inventory std link</Link>
+        <Link href="/pokedex/inventory">inventory std link</Link>
         <ActiveLink onclick={onclick} href="/shop">Shop</ActiveLink>
         <ActiveLink onclick={onclick} href="/arena">Arena</ActiveLink>
       </div>
