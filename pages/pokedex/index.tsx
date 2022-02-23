@@ -27,9 +27,12 @@ const Home: NextPage = () => {
           </Button>
         </Grid>
         <Grid item xs={3}>
-          <Link
-            href="/"
-          >Выход на начальный экран
+          <Link href="/" passHref>
+            <Button
+              variant="contained"
+              color="primary"
+            >Выход на начальный экран
+            </Button>
           </Link>
         </Grid>
       </Grid>

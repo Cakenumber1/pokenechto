@@ -1,4 +1,4 @@
-import { Container, Rating } from '@mui/material';
+import { Button, Container, Rating } from '@mui/material';
 import ShelfComponent from 'components/Shop/ShelfComponent';
 import SwiperShopComponent from 'components/Shop/SwiperShopComponent';
 import WalletComponent from 'components/WalletComponent/';
@@ -15,7 +15,15 @@ const ShopComponent: React.FC<Props> = ({ onclick }) => {
   const classes = useStyles();
   return (
     <Container>
-      <ActiveLink onclick={onclick} href="/">Back</ActiveLink>
+      <ActiveLink onclick={onclick} href="/">
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ mt: 2 }}
+        >
+          Back
+        </Button>
+      </ActiveLink>
       <WalletComponent />
       <div className={classes.shopBody}>
         <Container className={classes.shopBodyInner} sx={{ border: 2, borderRadius: 1 }}>
