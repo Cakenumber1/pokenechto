@@ -2,8 +2,7 @@ import { ThemeProvider } from '@mui/styles';
 import CellComponent from 'components/Shop/CellComponent';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
-import { useSelector } from 'react-redux';
-import { pokemonsIDsSelector } from 'store/shop/shopSlice';
+import { useGetShopPokemonIDsQuery } from 'store/service';
 import { Autoplay, Navigation, Pagination } from 'swiper';
 // eslint-disable-next-line import/no-unresolved
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -12,7 +11,9 @@ import { theme } from 'theme/index';
 import { useStyles } from './style';
 
 const MySwiper = () => {
-  const pkeys = useSelector(pokemonsIDsSelector).slice(0, 3);
+  const { data: pokeIDs } = useGetShopPokemonIDsQuery();
+  let pkeys;
+  pokeIDs ? pkeys = pokeIDs!.slice(0, 3) : pkeys = null;
   const classes = useStyles();
   if (pkeys) {
     return (

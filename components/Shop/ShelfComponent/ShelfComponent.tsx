@@ -1,7 +1,7 @@
 import { Stack } from '@mui/material';
 import { ThemeProvider } from '@mui/styles';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useGetShopPokemonIDsQuery } from 'store/service';
 import { pokemonsIDsSelector } from 'store/shop/shopSlice';
 import { theme } from 'theme/index';
 
@@ -24,17 +24,22 @@ const ItemComp = ({ _key }: ItemType) => {
 };
 
 const ShelfComponent: React.FC<Props> = ({ shelfn }) => {
-  const pkeys = useSelector(pokemonsIDsSelector).slice(3 * shelfn, 2 * 3 * shelfn);
+  const { data: pokeIDs } = useGetShopPokemonIDsQuery();
+  let pkeys;
+  pokeIDs ? pkeys = pokeIDs!.slice(3 * shelfn, 2 * 3 * shelfn) : pkeys = null;
   const classes = useStylesStack();
-  return (
-    <ThemeProvider theme={theme}>
-      <Stack className={classes.stack} direction="row">
-        {pkeys.map((_key: any) => (
-          <ItemComp _key={_key} />
-        ))}
-      </Stack>
-    </ThemeProvider>
-  );
+  if (pkeys) {
+    return (
+      <ThemeProvider theme={theme}>
+        <Stack className={classes.stack} direction="row">
+          {pkeys.map((_key: any) => (
+            <ItemComp _key={_key} />
+          ))}
+        </Stack>
+      </ThemeProvider>
+    );
+  }
+  return <div />;
 };
 
 export default ShelfComponent;
