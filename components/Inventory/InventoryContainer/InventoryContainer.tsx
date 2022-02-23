@@ -53,13 +53,13 @@ export const InventoryContainer = ({ pageQuery }: InventoryContainerProps) => {
     setPopoverAnchorElement(null);
   };
 
-  const handleClickControls: HandleClickPopoverControls = (event, buttonClicked) => {
-    switch (buttonClicked) {
+  const handleClickControls: HandleClickPopoverControls = (event) => {
+    switch (event.currentTarget.dataset.buttonName) {
       case 'info':
         setModalOpen(true);
         handleClosePopover();
         break;
-      case 'gift':
+      case 'delete':
         if (pokemon !== null) {
           deletePokemonCollection(pokemon.collectionId).unwrap();
           handleClosePopover();

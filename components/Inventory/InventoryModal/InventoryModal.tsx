@@ -1,4 +1,4 @@
-import { Chip, linearProgressClasses, Stack } from '@mui/material';
+import { Chip, Stack } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Grow from '@mui/material/Grow';
@@ -13,20 +13,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useGetInventoryItemQuery, useGetMushroomsQuery } from 'store/service';
 
-// TODO: временное для показать
-const borderLinearProgress = (color: string) => ({
-  width: '100%',
-  height: 15,
-  marginBottom: 5,
-  borderRadius: 5,
-  [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor: 'black',
-  },
-  [`& .${linearProgressClasses.bar}`]: {
-    borderRadius: 5,
-    backgroundColor: color,
-  },
-});
+import { style } from './style';
 
 export type InventoryModalProps = {
   open: boolean
@@ -53,17 +40,19 @@ export const InventoryModal = ({
       closeAfterTransition
     >
       <Zoom timeout={500} in={open} onEntered={() => setZoomEntered(true)}>
-        <Box sx={{ height: '100%', overflowY: 'auto' }}>
+        <Box sx={style.modalBox}>
           {data && (
           <>
             <Slide direction="down" in={zoomEntered} timeout={1500}>
-              <img style={{ height: 200 }} src={data.img} alt="" />
+              <Box sx={style.modalImg({ background: getBackgdoundColor(data.types) })}>
+                <img style={{ maxHeight: '100%', width: '100%', objectFit: 'contain' }} src={data.img} alt="" />
+              </Box>
             </Slide>
-            <div>
-              <h3>
-                {data.name}{' #'}{data.id}
-              </h3>
-              <Stack direction="row" spacing={1}>
+            <h2>
+              {data.name}{' #'}{data.id}
+            </h2>
+            <Box>
+              <Stack direction="row" spacing={1} justifyContent="center">
                 {data.types.map(
                   (type) => (
                     <Chip
@@ -74,26 +63,34 @@ export const InventoryModal = ({
                   ),
                 )}
               </Stack>
-            </div>
-            <Stack direction="column" spacing={1}>
-              {data.stats.map((stat, index) => (
-                <Grow key={stat.statName} timeout={(index + 1) * 500} in={zoomEntered}>
-                  <div> {namesMap.get(stat.statName) as string}:{` ${stat.statVal}`}
-                    <LinearProgress
-                      variant="determinate"
-                      sx={borderLinearProgress(colorMap.get(stat.statName) as string)}
-                      value={Math.ceil((stat.statVal / 300) * 100)}
-                    />
-                  </div>
-                </Grow>
-              ))}
-            </Stack>
-            <Button variant="contained" size="large" onClick={handleClose}>
-              Close
-            </Button>
-            <Button disabled={!mushrooms} variant="contained" size="large" onClick={handleClickMushroom}>
-              🍄 Mushroom {mushrooms?.count || ''}
-            </Button>
+            </Box>
+            <Box>
+              <Stack direction="column" spacing={1}>
+                {data.stats.map((stat, index) => (
+                  <Grow key={stat.statName} timeout={(index + 1) * 500} in={zoomEntered}>
+                    <div> {namesMap.get(stat.statName) as string}:{` ${stat.statVal}`}
+                      <LinearProgress
+                        variant="determinate"
+                        sx={style.modalStatProgress({
+                          backgroundColor: colorMap.get(stat.statName) as string,
+                        })}
+                        value={Math.ceil((stat.statVal / 300) * 100)}
+                      />
+                    </div>
+                  </Grow>
+                ))}
+              </Stack>
+            </Box>
+            <Box>
+              <Stack direction="row" spacing={1} justifyContent="center">
+                <Button variant="contained" size="large" onClick={handleClose}>
+                  Close
+                </Button>
+                <Button disabled={!mushrooms} variant="contained" size="large" onClick={handleClickMushroom}>
+                  🍄 Mushroom {mushrooms?.count || ''}
+                </Button>
+              </Stack>
+            </Box>
           </>
           )}
         </Box>
