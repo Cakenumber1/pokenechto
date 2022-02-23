@@ -41,10 +41,6 @@ const PokeModal = ({
     [classes.img]: true,
     [classes.imgFull]: full,
   });
-  const textStyle = clsx({
-    [classes.text]: true,
-    [classes.textFull]: full,
-  });
 
   const handleBuy = () => {
     patchSellPokemonMutation({ id: pokemon!.id, price: 500 });
@@ -87,7 +83,7 @@ const PokeModal = ({
             src={pokemon!.img}
             alt={pokemon!.name}
           />
-          <div className={textStyle} style={{ width: '100%', padding: '2vh' }}>
+          <div style={{ width: '100%', padding: '2vh' }}>
             <div style={{ textAlign: 'center', fontSize: 'large' }}>{pokemon!.name.toUpperCase()}</div>
             <div style={{ textAlign: 'center' }}>
               Types
