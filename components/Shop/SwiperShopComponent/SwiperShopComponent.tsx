@@ -31,7 +31,7 @@ const MySwiper = () => {
       >
         {pkeys.map((_key: any) => (
           <SwiperSlide key={_key}>
-            <CellComponent pokeid={_key} amount={Math.round(Math.random())} />
+            <CellComponent pokeid={_key} />
           </SwiperSlide>
         ))}
       </Swiper>
