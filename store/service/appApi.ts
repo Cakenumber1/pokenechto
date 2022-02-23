@@ -6,9 +6,14 @@ type GetInventoryByPageResult = {
   results: CollectionItemType[]
 };
 
+type IDandPrice = {
+  id: number,
+  price: number,
+};
+
 export const appApi = createApi({
   reducerPath: 'appApi',
-  tagTypes: ['Inventory', 'Mushrooms'],
+  tagTypes: ['Inventory', 'Mushrooms', 'Money', 'Shop'],
   baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
   endpoints: (builder) => ({
     getInventoryByPage: builder.query<GetInventoryByPageResult, number>({
@@ -42,13 +47,41 @@ export const appApi = createApi({
       query: () => '/wallet/mushrooms',
       providesTags: ['Mushrooms'],
     }),
-    decreaseMushrooms: builder.mutation<any, any>({
-      query: ({ count }) => ({
-        url: '/wallet/mushrooms',
-        method: 'DELETE',
+    patchMushrooms: builder.mutation<any, any>({
+      query: (count) => ({
+        url: '/wallet/mushrooms/',
+        method: 'PATCH',
         body: { count },
       }),
       invalidatesTags: ['Mushrooms'],
+    }),
+    getMoney: builder.query<any, any>({
+      query: () => '/wallet/money',
+      providesTags: ['Money'],
+    }),
+    patchMoney: builder.mutation<any, any>({
+      query: (count) => ({
+        url: '/wallet/money/',
+        method: 'PATCH',
+        body: { count },
+      }),
+      invalidatesTags: ['Money'],
+    }),
+    getShopPokemonIDs: builder.query<any, any>({
+      query: () => '/shop/',
+      providesTags: ['Shop'],
+    }),
+    getPokemonByID: builder.query<any, any>({
+      query: (_id) => `/shop/${_id}`,
+      providesTags: (result, error, id) => [{ type: 'Shop', id }],
+    }),
+    patchSellPokemon: builder.mutation<any, any>({
+      query: (data : IDandPrice) => ({
+        url: `/shop/${data.id}`,
+        method: 'PATCH',
+        body: { data },
+      }),
+      invalidatesTags: ['Money', 'Shop', 'Inventory'],
     }),
   }),
 });
@@ -59,4 +92,10 @@ export const {
   usePatchInventoryItemMutation,
   useGetInventoryItemQuery,
   useGetMushroomsQuery,
+  usePatchMushroomsMutation,
+  useGetMoneyQuery,
+  usePatchMoneyMutation,
+  useGetShopPokemonIDsQuery,
+  useGetPokemonByIDQuery,
+  usePatchSellPokemonMutation,
 } = appApi;
