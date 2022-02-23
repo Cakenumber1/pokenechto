@@ -14,9 +14,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         fakeDB.buyPoke(String(req.query.id), 500);
         // todo: no response
         return res.status(200).end();
-      } else {
-        return res.status(402).end();
       }
+      return res.status(402).end();
     }
     default:
   }

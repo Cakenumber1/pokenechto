@@ -1,21 +1,13 @@
 import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded';
 import {
-  Box,
-  Button,
-  Collapse,
-  Modal,
-  Stack,
-  Zoom,
+  Box, Button, Collapse, Modal, Stack, Zoom,
 } from '@mui/material';
-import React, {
-  SyntheticEvent,
-  useCallback, useState,
-} from 'react';
+import React, { SyntheticEvent, useCallback, useState } from 'react';
 import {
   useGetMoneyQuery,
   useGetMushroomsQuery,
   usePatchMoneyMutation,
-  usePatchMushroomsMutation
+  usePatchMushroomsMutation,
 } from 'store/service';
 
 import { useModalStyles, useStyles } from './style';

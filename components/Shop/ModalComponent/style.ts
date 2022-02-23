@@ -1,8 +1,7 @@
-import { Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { DataType } from 'interfaces/dataModal';
 
-export const useStyles = makeStyles((theme : Theme) => ({
+export const useStyles = makeStyles(() => ({
   img: (data : DataType) => ({
     objectFit: 'fill',
     position: 'relative',
@@ -25,13 +24,13 @@ export const useStyles = makeStyles((theme : Theme) => ({
     background: 'grey',
   }),
   // data не убирать
-  modalFull: (data: DataType) => ({
+  modalFull: () => ({
     width: '100%',
     height: '100%',
     left: 0,
     top: 0,
   }),
-  button: (data: DataType) => ({
+  button: () => ({
     display: 'block',
     position: 'absolute',
     left: '0',
@@ -48,7 +47,7 @@ export const useStyles = makeStyles((theme : Theme) => ({
     opacity: '0',
     zIndex: '100',
   }),
-  buttonFull: (data: DataType) => ({
+  buttonFull: () => ({
     opacity: '1',
   }),
 }));

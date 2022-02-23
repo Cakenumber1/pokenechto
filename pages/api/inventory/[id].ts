@@ -17,6 +17,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       const pokemon = fakeDB.inventory.getCollectionItemById(req.query.id as string);
       if (pokemon) {
         if (fakeDB.mushrooms) {
+          // eslint-disable-next-line no-param-reassign
           fakeDB.mushrooms -= 1;
           pokemon.stats.forEach((stat) => {
             const randNumber = Math.ceil(Math.random() * 10);
@@ -24,6 +25,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
               // eslint-disable-next-line no-param-reassign
               stat.statVal = 300;
             } else {
+              // eslint-disable-next-line no-param-reassign
               stat.statVal += randNumber;
             }
           });

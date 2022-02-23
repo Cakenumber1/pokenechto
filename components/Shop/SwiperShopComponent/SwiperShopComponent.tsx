@@ -12,8 +12,7 @@ import { useStyles } from './style';
 
 const MySwiper = () => {
   const { data: pokeIDs } = useGetShopPokemonIDsQuery(null);
-  let pkeys;
-  pokeIDs ? pkeys = pokeIDs!.slice(0, 3) : pkeys = null;
+  const pkeys = pokeIDs ? pokeIDs!.slice(0, 3) : null;
   const classes = useStyles();
   if (pkeys) {
     return (

@@ -5,7 +5,6 @@ import React from 'react';
 import { CardComponent } from '../../Common/CardComponent';
 
 export const BestiaryComponent = (props: any) => {
-
   const { pokemons } = props;
   const data = pokemons.results.map((pokemon: PokemonsListResults) => (
     <Grid key={pokemon.name} item xs={3}>
