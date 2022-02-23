@@ -120,7 +120,7 @@ export const InventoryContainer = ({ pageQuery }: InventoryContainerProps) => {
           pokemon={pokemon as CollectionItemType}
           onClose={handleCloseModal}
           onMushroom={() => {
-            patchPokemonCollection(pokemon?.collectionId);
+            patchPokemonCollection(pokemon!.collectionId);
           }}
         />
       )}
