@@ -5,11 +5,11 @@ import fakeDB from 'pages/api/fakeDB';
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'GET': {
-      const { mushrooms: count } = fakeDB;
+      const { money: count } = fakeDB;
       return res.status(200).json({ count });
     }
     case 'PATCH': {
-      fakeDB.mushrooms = Number(fakeDB.mushrooms) + Number(req.body.count);
+      fakeDB.money = Number(fakeDB.money) + Number(req.body.count);
       return res.status(200).end();
     }
     default:

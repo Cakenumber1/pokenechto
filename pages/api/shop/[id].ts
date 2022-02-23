@@ -5,15 +5,20 @@ import fakeDB from 'pages/api/fakeDB';
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'GET': {
-      const { mushrooms: count } = fakeDB;
-      return res.status(200).json({ count });
+      const pokemon = fakeDB.shop.getPokeByID(String(req.query.id));
+      if (pokemon) return res.status(200).json(pokemon);
+      break;
     }
     case 'PATCH': {
-      fakeDB.mushrooms = Number(fakeDB.mushrooms) + Number(req.body.count);
-      return res.status(200).end();
+      if (fakeDB.money >= 500) {
+        fakeDB.buyPoke(String(req.query.id), 500);
+        // todo: no response
+        return res.status(200).end();
+      } else {
+        return res.status(402).end();
+      }
     }
     default:
   }
-
   return res.status(400).end();
 }

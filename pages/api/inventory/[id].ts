@@ -16,13 +16,19 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     case 'PATCH': {
       const pokemon = fakeDB.inventory.getCollectionItemById(req.query.id as string);
       if (pokemon) {
-        pokemon.stats.forEach((stat) => {
-          const randNumber = Math.ceil(Math.random() * 10);
-          // eslint-disable-next-line no-param-reassign
-          stat.statVal += randNumber;
-        });
-        fakeDB.mushrooms -= 1;
-        return res.status(200).end();
+        if (fakeDB.mushrooms) {
+          fakeDB.mushrooms -= 1;
+          pokemon.stats.forEach((stat) => {
+            const randNumber = Math.ceil(Math.random() * 10);
+            if (stat.statVal + randNumber > 300) {
+              // eslint-disable-next-line no-param-reassign
+              stat.statVal = 300;
+            } else {
+              stat.statVal += randNumber;
+            }
+          });
+          return res.status(200).end();
+        }
       }
       break;
     }
