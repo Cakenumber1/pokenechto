@@ -10,8 +10,9 @@ export const style = {
     width: '85%',
     margin: 'auto',
     height: '100%',
-    paddingBottom: '50%',
+    paddingBottom: '3%',
     objectFit: 'contain',
+    cursor: 'pointer',
   },
   pokeName: (isSize: boolean): any => (isSize ? {
     textAlign: 'center',
