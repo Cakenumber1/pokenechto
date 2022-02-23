@@ -14,10 +14,6 @@ import { useStyles } from './style';
 
 type Props = {
   pokeid: any,
-  // eslint-disable-next-line react/require-default-props
-  limit?: number,
-  // eslint-disable-next-line react/require-default-props
-  amount?: number
 };
 
 const shake = [
