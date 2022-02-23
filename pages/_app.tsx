@@ -12,14 +12,12 @@ import { Provider } from 'react-redux';
 import { AuthProvider } from '../firebase/AuthContext';
 import { store } from '../store';
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
-  return (
-    <AuthProvider>
-      <Provider store={store}>
-        <Component {...pageProps} />
-      </Provider>
-    </AuthProvider>
-  );
-};
+const MyApp = ({ Component, pageProps }: AppProps) => (
+  <AuthProvider>
+    <Provider store={store}>
+      <Component {...pageProps} />
+    </Provider>
+  </AuthProvider>
+);
 
 export default MyApp;

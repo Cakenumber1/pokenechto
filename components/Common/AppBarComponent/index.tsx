@@ -23,14 +23,14 @@ export const AppBarComponent = () => {
 
   const buttons = (
     <ButtonGroup variant="contained" color="secondary" sx={{ mr: 'auto' }}>
-      <Link href="/shop" passHref>
-        <Button color={path === '/shop' ? 'success' : 'secondary'}>Set</Button>
+      <Link href="/pokedex" passHref>
+        <Button color={path === '/pokedex' ? 'success' : 'secondary'}>Home</Button>
       </Link>
-      <Link href="/bestiary" passHref>
-        <Button color={path === '/bestiary' ? 'success' : 'secondary'}>Bestiary</Button>
+      <Link href="/pokedex/bestiary" passHref>
+        <Button color={path === '/pokedex/bestiary' ? 'success' : 'secondary'}>Bestiary</Button>
       </Link>
-      <Link href="/inventory" passHref>
-        <Button color={path === '/inventory' ? 'success' : 'secondary'}>Inventory</Button>
+      <Link href="/pokedex/inventory" passHref>
+        <Button color={path === '/pokedex/inventory' ? 'success' : 'secondary'}>Inventory</Button>
       </Link>
     </ButtonGroup>
   );
@@ -47,7 +47,7 @@ export const AppBarComponent = () => {
         onClick={handleClick}
         sx={{ mr: 'auto' }}
       >
-        {path.substring(1)}
+        {path === '/pokedex' ? 'Home' : path.substring(9)}
       </Button>
       <Menu
         id="basic-menu"
@@ -58,13 +58,13 @@ export const AppBarComponent = () => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <Link href="/shop" passHref>
-          <MenuItem onClick={handleClose}>Set</MenuItem>
+        <Link href="/pokedex" passHref>
+          <MenuItem onClick={handleClose}>Home</MenuItem>
         </Link>
-        <Link href="/bestiary" passHref>
+        <Link href="/pokedex/bestiary" passHref>
           <MenuItem onClick={handleClose}>Bestiary</MenuItem>
         </Link>
-        <Link href="/inventory" passHref>
+        <Link href="/pokedex/inventory" passHref>
           <MenuItem onClick={handleClose}>Inventory</MenuItem>
         </Link>
       </Menu>

@@ -1,28 +1,22 @@
 import { Container, Rating } from '@mui/material';
+import ShelfComponent from 'components/Shop/ShelfComponent';
 import SwiperShopComponent from 'components/Shop/SwiperShopComponent';
 import WalletComponent from 'components/WalletComponent/';
-import ShelfComponent from 'components/Shop/ShelfComponent';
 import { ActiveLink } from 'helpers/';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectPokemons } from 'store/shop/shopSlice';
 
 import { useStyles } from './style';
-import { selectWallet } from 'store/wallet/walletSlice';
 
 type Props = {
   onclick: () => void
 };
 
 const ShopComponent: React.FC<Props> = ({ onclick }) => {
-  const data = useSelector(selectPokemons);
-  const {money, mushrooms} = useSelector(selectWallet);
-  console.log(data);
   const classes = useStyles();
   return (
     <Container>
       <ActiveLink onclick={onclick} href="/">Back</ActiveLink>
-      <WalletComponent money={money} mushrooms={mushrooms} />
+      <WalletComponent />
       <div className={classes.shopBody}>
         <Container className={classes.shopBodyInner} sx={{ border: 2, borderRadius: 1 }}>
           <div className={classes.shopTop}>
@@ -33,11 +27,11 @@ const ShopComponent: React.FC<Props> = ({ onclick }) => {
             <SwiperShopComponent />
           </div>
           <div className={classes.shopShelves}>
-            <div className={classes.shopShelvesText}>Juhasd</div>
+            <div className={classes.shopShelvesText}>Заявление1</div>
             <ShelfComponent shelfn={1} />
           </div>
           <div className={classes.shopShelves}>
-            <div className={classes.shopShelvesText}>dsasaP</div>
+            <div className={classes.shopShelvesText}>Заявление2</div>
             <ShelfComponent shelfn={2} />
           </div>
         </Container>

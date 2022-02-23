@@ -1,0 +1,2150 @@
+[
+  {
+    "collectionId": "4c1e46c1-c287-4f51-b7f0-f88830e25aee",
+    "id": 32,
+    "name": "nidoran-m",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/32.svg",
+    "abilities": [
+      "poison-point",
+      "rivalry",
+      "hustle"
+    ],
+    "height": 5,
+    "weight": 90,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 46
+      },
+      {
+        "statName": "attack",
+        "statVal": 57
+      },
+      {
+        "statName": "defense",
+        "statVal": 40
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 40
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 40
+      },
+      {
+        "statName": "speed",
+        "statVal": 50
+      }
+    ],
+    "types": [
+      "poison"
+    ],
+    "exp": 55
+  },
+  {
+    "collectionId": "ae0af0af-cd37-49b3-94c4-a02bd6233c05",
+    "id": 49,
+    "name": "venomoth",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/49.svg",
+    "abilities": [
+      "shield-dust",
+      "tinted-lens",
+      "wonder-skin"
+    ],
+    "height": 15,
+    "weight": 125,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 70
+      },
+      {
+        "statName": "attack",
+        "statVal": 65
+      },
+      {
+        "statName": "defense",
+        "statVal": 60
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 90
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 75
+      },
+      {
+        "statName": "speed",
+        "statVal": 90
+      }
+    ],
+    "types": [
+      "bug",
+      "poison"
+    ],
+    "exp": 158
+  },
+  {
+    "collectionId": "24fb1888-991e-4517-8ba8-f0da506c812d",
+    "id": 50,
+    "name": "diglett",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/50.svg",
+    "abilities": [
+      "sand-veil",
+      "arena-trap",
+      "sand-force"
+    ],
+    "height": 2,
+    "weight": 8,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 10
+      },
+      {
+        "statName": "attack",
+        "statVal": 55
+      },
+      {
+        "statName": "defense",
+        "statVal": 25
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 35
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 45
+      },
+      {
+        "statName": "speed",
+        "statVal": 95
+      }
+    ],
+    "types": [
+      "ground"
+    ],
+    "exp": 53
+  },
+  {
+    "collectionId": "1477dc04-43cd-4ddb-b6f4-f660196ef506",
+    "id": 51,
+    "name": "dugtrio",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/51.svg",
+    "abilities": [
+      "sand-veil",
+      "arena-trap",
+      "sand-force"
+    ],
+    "height": 7,
+    "weight": 333,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 35
+      },
+      {
+        "statName": "attack",
+        "statVal": 100
+      },
+      {
+        "statName": "defense",
+        "statVal": 50
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 50
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 70
+      },
+      {
+        "statName": "speed",
+        "statVal": 120
+      }
+    ],
+    "types": [
+      "ground"
+    ],
+    "exp": 149
+  },
+  {
+    "collectionId": "6fc2188a-1573-480f-9e0b-07246c90c403",
+    "id": 81,
+    "name": "magnemite",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/81.svg",
+    "abilities": [
+      "magnet-pull",
+      "sturdy",
+      "analytic"
+    ],
+    "height": 3,
+    "weight": 60,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 25
+      },
+      {
+        "statName": "attack",
+        "statVal": 35
+      },
+      {
+        "statName": "defense",
+        "statVal": 70
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 95
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 55
+      },
+      {
+        "statName": "speed",
+        "statVal": 45
+      }
+    ],
+    "types": [
+      "electric",
+      "steel"
+    ],
+    "exp": 65
+  },
+  {
+    "collectionId": "e4f6e857-34de-442b-b635-cf4805c465e5",
+    "id": 104,
+    "name": "cubone",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/104.svg",
+    "abilities": [
+      "rock-head",
+      "lightning-rod",
+      "battle-armor"
+    ],
+    "height": 4,
+    "weight": 65,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 50
+      },
+      {
+        "statName": "attack",
+        "statVal": 50
+      },
+      {
+        "statName": "defense",
+        "statVal": 95
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 40
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 50
+      },
+      {
+        "statName": "speed",
+        "statVal": 35
+      }
+    ],
+    "types": [
+      "ground"
+    ],
+    "exp": 64
+  },
+  {
+    "collectionId": "fe430d87-58e8-4b85-b130-2e06b0ce60e8",
+    "id": 119,
+    "name": "seaking",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/119.svg",
+    "abilities": [
+      "swift-swim",
+      "water-veil",
+      "lightning-rod"
+    ],
+    "height": 13,
+    "weight": 390,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 80
+      },
+      {
+        "statName": "attack",
+        "statVal": 92
+      },
+      {
+        "statName": "defense",
+        "statVal": 65
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 65
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 80
+      },
+      {
+        "statName": "speed",
+        "statVal": 68
+      }
+    ],
+    "types": [
+      "water"
+    ],
+    "exp": 158
+  },
+  {
+    "collectionId": "cc742222-331c-41bc-b3a0-2fbe6c9c7273",
+    "id": 120,
+    "name": "staryu",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/120.svg",
+    "abilities": [
+      "illuminate",
+      "natural-cure",
+      "analytic"
+    ],
+    "height": 8,
+    "weight": 345,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 30
+      },
+      {
+        "statName": "attack",
+        "statVal": 45
+      },
+      {
+        "statName": "defense",
+        "statVal": 55
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 70
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 55
+      },
+      {
+        "statName": "speed",
+        "statVal": 85
+      }
+    ],
+    "types": [
+      "water"
+    ],
+    "exp": 68
+  },
+  {
+    "collectionId": "b9ea74d8-10aa-41c6-9300-3eeaea4da59c",
+    "id": 126,
+    "name": "magmar",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/126.svg",
+    "abilities": [
+      "flame-body",
+      "vital-spirit"
+    ],
+    "height": 13,
+    "weight": 445,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 65
+      },
+      {
+        "statName": "attack",
+        "statVal": 95
+      },
+      {
+        "statName": "defense",
+        "statVal": 57
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 100
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 85
+      },
+      {
+        "statName": "speed",
+        "statVal": 93
+      }
+    ],
+    "types": [
+      "fire"
+    ],
+    "exp": 173
+  },
+  {
+    "collectionId": "7e00adb6-6b43-4a74-97eb-67fb436b92df",
+    "id": 139,
+    "name": "omastar",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/139.svg",
+    "abilities": [
+      "swift-swim",
+      "shell-armor",
+      "weak-armor"
+    ],
+    "height": 10,
+    "weight": 350,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 70
+      },
+      {
+        "statName": "attack",
+        "statVal": 60
+      },
+      {
+        "statName": "defense",
+        "statVal": 125
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 115
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 70
+      },
+      {
+        "statName": "speed",
+        "statVal": 55
+      }
+    ],
+    "types": [
+      "rock",
+      "water"
+    ],
+    "exp": 173
+  },
+  {
+    "collectionId": "4c2ad246-b7f0-4f65-a0d8-4bdcd9eac804",
+    "id": 156,
+    "name": "quilava",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/156.svg",
+    "abilities": [
+      "blaze",
+      "flash-fire"
+    ],
+    "height": 9,
+    "weight": 190,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 58
+      },
+      {
+        "statName": "attack",
+        "statVal": 64
+      },
+      {
+        "statName": "defense",
+        "statVal": 58
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 80
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 65
+      },
+      {
+        "statName": "speed",
+        "statVal": 80
+      }
+    ],
+    "types": [
+      "fire"
+    ],
+    "exp": 142
+  },
+  {
+    "collectionId": "39d8484b-d5d8-4ed8-977c-31fdf1d41dbb",
+    "id": 161,
+    "name": "sentret",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/161.svg",
+    "abilities": [
+      "run-away",
+      "keen-eye",
+      "frisk"
+    ],
+    "height": 8,
+    "weight": 60,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 35
+      },
+      {
+        "statName": "attack",
+        "statVal": 46
+      },
+      {
+        "statName": "defense",
+        "statVal": 34
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 35
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 45
+      },
+      {
+        "statName": "speed",
+        "statVal": 20
+      }
+    ],
+    "types": [
+      "normal"
+    ],
+    "exp": 43
+  },
+  {
+    "collectionId": "8c7c81c8-04bf-4558-8def-be28c1420d59",
+    "id": 168,
+    "name": "ariados",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/168.svg",
+    "abilities": [
+      "swarm",
+      "insomnia",
+      "sniper"
+    ],
+    "height": 11,
+    "weight": 335,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 70
+      },
+      {
+        "statName": "attack",
+        "statVal": 90
+      },
+      {
+        "statName": "defense",
+        "statVal": 70
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 60
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 70
+      },
+      {
+        "statName": "speed",
+        "statVal": 40
+      }
+    ],
+    "types": [
+      "bug",
+      "poison"
+    ],
+    "exp": 140
+  },
+  {
+    "collectionId": "76e8bdf6-2187-4472-9f5e-fb6578848756",
+    "id": 174,
+    "name": "igglybuff",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/174.svg",
+    "abilities": [
+      "cute-charm",
+      "competitive",
+      "friend-guard"
+    ],
+    "height": 3,
+    "weight": 10,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 90
+      },
+      {
+        "statName": "attack",
+        "statVal": 30
+      },
+      {
+        "statName": "defense",
+        "statVal": 15
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 40
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 20
+      },
+      {
+        "statName": "speed",
+        "statVal": 15
+      }
+    ],
+    "types": [
+      "normal",
+      "fairy"
+    ],
+    "exp": 42
+  },
+  {
+    "collectionId": "ba4968be-20f5-4adc-961f-e6ceda204655",
+    "id": 175,
+    "name": "togepi",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/175.svg",
+    "abilities": [
+      "hustle",
+      "serene-grace",
+      "super-luck"
+    ],
+    "height": 3,
+    "weight": 15,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 35
+      },
+      {
+        "statName": "attack",
+        "statVal": 20
+      },
+      {
+        "statName": "defense",
+        "statVal": 65
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 40
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 65
+      },
+      {
+        "statName": "speed",
+        "statVal": 20
+      }
+    ],
+    "types": [
+      "fairy"
+    ],
+    "exp": 49
+  },
+  {
+    "collectionId": "33e588dc-0ebb-4b7c-82f6-b08e1f7e03a4",
+    "id": 176,
+    "name": "togetic",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/176.svg",
+    "abilities": [
+      "hustle",
+      "serene-grace",
+      "super-luck"
+    ],
+    "height": 6,
+    "weight": 32,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 55
+      },
+      {
+        "statName": "attack",
+        "statVal": 40
+      },
+      {
+        "statName": "defense",
+        "statVal": 85
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 80
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 105
+      },
+      {
+        "statName": "speed",
+        "statVal": 40
+      }
+    ],
+    "types": [
+      "fairy",
+      "flying"
+    ],
+    "exp": 142
+  },
+  {
+    "collectionId": "dc86b155-6334-436b-bdbe-e49418ed5cf4",
+    "id": 216,
+    "name": "teddiursa",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/216.svg",
+    "abilities": [
+      "pickup",
+      "quick-feet",
+      "honey-gather"
+    ],
+    "height": 6,
+    "weight": 88,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 60
+      },
+      {
+        "statName": "attack",
+        "statVal": 80
+      },
+      {
+        "statName": "defense",
+        "statVal": 50
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 50
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 50
+      },
+      {
+        "statName": "speed",
+        "statVal": 40
+      }
+    ],
+    "types": [
+      "normal"
+    ],
+    "exp": 66
+  },
+  {
+    "collectionId": "00eb3c60-9316-409f-af83-6d347dae93ab",
+    "id": 217,
+    "name": "ursaring",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/217.svg",
+    "abilities": [
+      "guts",
+      "quick-feet",
+      "unnerve"
+    ],
+    "height": 18,
+    "weight": 1258,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 90
+      },
+      {
+        "statName": "attack",
+        "statVal": 130
+      },
+      {
+        "statName": "defense",
+        "statVal": 75
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 75
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 75
+      },
+      {
+        "statName": "speed",
+        "statVal": 55
+      }
+    ],
+    "types": [
+      "normal"
+    ],
+    "exp": 175
+  },
+  {
+    "collectionId": "ffd34408-7474-429a-bae7-e278cf8ff82c",
+    "id": 222,
+    "name": "corsola",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/222.svg",
+    "abilities": [
+      "hustle",
+      "natural-cure",
+      "regenerator"
+    ],
+    "height": 6,
+    "weight": 50,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 65
+      },
+      {
+        "statName": "attack",
+        "statVal": 55
+      },
+      {
+        "statName": "defense",
+        "statVal": 95
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 65
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 95
+      },
+      {
+        "statName": "speed",
+        "statVal": 35
+      }
+    ],
+    "types": [
+      "water",
+      "rock"
+    ],
+    "exp": 144
+  },
+  {
+    "collectionId": "19f85907-0ecd-4a22-a89b-7c0e13e7c220",
+    "id": 234,
+    "name": "stantler",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/234.svg",
+    "abilities": [
+      "intimidate",
+      "frisk",
+      "sap-sipper"
+    ],
+    "height": 14,
+    "weight": 712,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 73
+      },
+      {
+        "statName": "attack",
+        "statVal": 95
+      },
+      {
+        "statName": "defense",
+        "statVal": 62
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 85
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 65
+      },
+      {
+        "statName": "speed",
+        "statVal": 85
+      }
+    ],
+    "types": [
+      "normal"
+    ],
+    "exp": 163
+  },
+  {
+    "collectionId": "6bd3ae1d-8b44-4620-9f78-347081cc745b",
+    "id": 243,
+    "name": "raikou",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/243.svg",
+    "abilities": [
+      "pressure",
+      "inner-focus"
+    ],
+    "height": 19,
+    "weight": 1780,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 90
+      },
+      {
+        "statName": "attack",
+        "statVal": 85
+      },
+      {
+        "statName": "defense",
+        "statVal": 75
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 115
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 100
+      },
+      {
+        "statName": "speed",
+        "statVal": 115
+      }
+    ],
+    "types": [
+      "electric"
+    ],
+    "exp": 290
+  },
+  {
+    "collectionId": "7f53490e-3d2d-4d47-a18e-999876778285",
+    "id": 247,
+    "name": "pupitar",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/247.svg",
+    "abilities": [
+      "shed-skin"
+    ],
+    "height": 12,
+    "weight": 1520,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 70
+      },
+      {
+        "statName": "attack",
+        "statVal": 84
+      },
+      {
+        "statName": "defense",
+        "statVal": 70
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 65
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 70
+      },
+      {
+        "statName": "speed",
+        "statVal": 51
+      }
+    ],
+    "types": [
+      "rock",
+      "ground"
+    ],
+    "exp": 144
+  },
+  {
+    "collectionId": "b1a0f9c0-e8a0-43e8-b75a-28a2b054b847",
+    "id": 267,
+    "name": "beautifly",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/267.svg",
+    "abilities": [
+      "swarm",
+      "rivalry"
+    ],
+    "height": 10,
+    "weight": 284,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 60
+      },
+      {
+        "statName": "attack",
+        "statVal": 70
+      },
+      {
+        "statName": "defense",
+        "statVal": 50
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 100
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 50
+      },
+      {
+        "statName": "speed",
+        "statVal": 65
+      }
+    ],
+    "types": [
+      "bug",
+      "flying"
+    ],
+    "exp": 178
+  },
+  {
+    "collectionId": "587fb56c-d01e-4e17-a4d4-834a73a1e89d",
+    "id": 282,
+    "name": "gardevoir",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/282.svg",
+    "abilities": [
+      "synchronize",
+      "trace",
+      "telepathy"
+    ],
+    "height": 16,
+    "weight": 484,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 68
+      },
+      {
+        "statName": "attack",
+        "statVal": 65
+      },
+      {
+        "statName": "defense",
+        "statVal": 65
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 125
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 115
+      },
+      {
+        "statName": "speed",
+        "statVal": 80
+      }
+    ],
+    "types": [
+      "psychic",
+      "fairy"
+    ],
+    "exp": 259
+  },
+  {
+    "collectionId": "0c9ca4a6-ba3c-496b-955b-69c82e382cf5",
+    "id": 283,
+    "name": "surskit",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/283.svg",
+    "abilities": [
+      "swift-swim",
+      "rain-dish"
+    ],
+    "height": 5,
+    "weight": 17,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 40
+      },
+      {
+        "statName": "attack",
+        "statVal": 30
+      },
+      {
+        "statName": "defense",
+        "statVal": 32
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 50
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 52
+      },
+      {
+        "statName": "speed",
+        "statVal": 65
+      }
+    ],
+    "types": [
+      "bug",
+      "water"
+    ],
+    "exp": 54
+  },
+  {
+    "collectionId": "013934e3-849c-4738-acf3-4e474fea0da2",
+    "id": 286,
+    "name": "breloom",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/286.svg",
+    "abilities": [
+      "effect-spore",
+      "poison-heal",
+      "technician"
+    ],
+    "height": 12,
+    "weight": 392,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 60
+      },
+      {
+        "statName": "attack",
+        "statVal": 130
+      },
+      {
+        "statName": "defense",
+        "statVal": 80
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 60
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 60
+      },
+      {
+        "statName": "speed",
+        "statVal": 70
+      }
+    ],
+    "types": [
+      "grass",
+      "fighting"
+    ],
+    "exp": 161
+  },
+  {
+    "collectionId": "0ec0b171-884f-4993-9de0-b9a189350ceb",
+    "id": 287,
+    "name": "slakoth",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/287.svg",
+    "abilities": [
+      "truant"
+    ],
+    "height": 8,
+    "weight": 240,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 60
+      },
+      {
+        "statName": "attack",
+        "statVal": 60
+      },
+      {
+        "statName": "defense",
+        "statVal": 60
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 35
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 35
+      },
+      {
+        "statName": "speed",
+        "statVal": 30
+      }
+    ],
+    "types": [
+      "normal"
+    ],
+    "exp": 56
+  },
+  {
+    "collectionId": "9d765c4d-ef28-4c7a-8226-fddb1b2530ae",
+    "id": 307,
+    "name": "meditite",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/307.svg",
+    "abilities": [
+      "pure-power",
+      "telepathy"
+    ],
+    "height": 6,
+    "weight": 112,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 30
+      },
+      {
+        "statName": "attack",
+        "statVal": 40
+      },
+      {
+        "statName": "defense",
+        "statVal": 55
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 40
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 55
+      },
+      {
+        "statName": "speed",
+        "statVal": 60
+      }
+    ],
+    "types": [
+      "fighting",
+      "psychic"
+    ],
+    "exp": 56
+  },
+  {
+    "collectionId": "629a630a-b3da-4355-bf08-ea75186c7ce1",
+    "id": 313,
+    "name": "volbeat",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/313.svg",
+    "abilities": [
+      "illuminate",
+      "swarm",
+      "prankster"
+    ],
+    "height": 7,
+    "weight": 177,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 65
+      },
+      {
+        "statName": "attack",
+        "statVal": 73
+      },
+      {
+        "statName": "defense",
+        "statVal": 75
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 47
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 85
+      },
+      {
+        "statName": "speed",
+        "statVal": 85
+      }
+    ],
+    "types": [
+      "bug"
+    ],
+    "exp": 151
+  },
+  {
+    "collectionId": "7dc80983-b65e-47b9-a2c5-9bff801f91a1",
+    "id": 317,
+    "name": "swalot",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/317.svg",
+    "abilities": [
+      "liquid-ooze",
+      "sticky-hold",
+      "gluttony"
+    ],
+    "height": 17,
+    "weight": 800,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 100
+      },
+      {
+        "statName": "attack",
+        "statVal": 73
+      },
+      {
+        "statName": "defense",
+        "statVal": 83
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 73
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 83
+      },
+      {
+        "statName": "speed",
+        "statVal": 55
+      }
+    ],
+    "types": [
+      "poison"
+    ],
+    "exp": 163
+  },
+  {
+    "collectionId": "a8f2136b-d131-4541-abd1-b01420400e73",
+    "id": 339,
+    "name": "barboach",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/339.svg",
+    "abilities": [
+      "oblivious",
+      "anticipation",
+      "hydration"
+    ],
+    "height": 4,
+    "weight": 19,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 50
+      },
+      {
+        "statName": "attack",
+        "statVal": 48
+      },
+      {
+        "statName": "defense",
+        "statVal": 43
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 46
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 41
+      },
+      {
+        "statName": "speed",
+        "statVal": 60
+      }
+    ],
+    "types": [
+      "water",
+      "ground"
+    ],
+    "exp": 58
+  },
+  {
+    "collectionId": "08dae3b1-4fc2-4c3b-b5cb-a2a4fb27b7ad",
+    "id": 370,
+    "name": "luvdisc",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/370.svg",
+    "abilities": [
+      "swift-swim",
+      "hydration"
+    ],
+    "height": 6,
+    "weight": 87,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 43
+      },
+      {
+        "statName": "attack",
+        "statVal": 30
+      },
+      {
+        "statName": "defense",
+        "statVal": 55
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 40
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 65
+      },
+      {
+        "statName": "speed",
+        "statVal": 97
+      }
+    ],
+    "types": [
+      "water"
+    ],
+    "exp": 116
+  },
+  {
+    "collectionId": "1a97ee9f-a43c-4839-b175-35b3edca653b",
+    "id": 373,
+    "name": "salamence",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/373.svg",
+    "abilities": [
+      "intimidate",
+      "moxie"
+    ],
+    "height": 15,
+    "weight": 1026,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 95
+      },
+      {
+        "statName": "attack",
+        "statVal": 135
+      },
+      {
+        "statName": "defense",
+        "statVal": 80
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 110
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 80
+      },
+      {
+        "statName": "speed",
+        "statVal": 100
+      }
+    ],
+    "types": [
+      "dragon",
+      "flying"
+    ],
+    "exp": 300
+  },
+  {
+    "collectionId": "f5c40942-8343-498c-aae9-2c98fa24d18a",
+    "id": 374,
+    "name": "beldum",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/374.svg",
+    "abilities": [
+      "clear-body",
+      "light-metal"
+    ],
+    "height": 6,
+    "weight": 952,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 40
+      },
+      {
+        "statName": "attack",
+        "statVal": 55
+      },
+      {
+        "statName": "defense",
+        "statVal": 80
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 35
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 60
+      },
+      {
+        "statName": "speed",
+        "statVal": 30
+      }
+    ],
+    "types": [
+      "steel",
+      "psychic"
+    ],
+    "exp": 60
+  },
+  {
+    "collectionId": "f95b8a71-db1f-4f87-9d28-a29c83b481f2",
+    "id": 380,
+    "name": "latias",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/380.svg",
+    "abilities": [
+      "levitate"
+    ],
+    "height": 14,
+    "weight": 400,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 80
+      },
+      {
+        "statName": "attack",
+        "statVal": 80
+      },
+      {
+        "statName": "defense",
+        "statVal": 90
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 110
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 130
+      },
+      {
+        "statName": "speed",
+        "statVal": 110
+      }
+    ],
+    "types": [
+      "dragon",
+      "psychic"
+    ],
+    "exp": 300
+  },
+  {
+    "collectionId": "5b1dd4d9-5a79-4781-853a-96f797123b6e",
+    "id": 381,
+    "name": "latios",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/381.svg",
+    "abilities": [
+      "levitate"
+    ],
+    "height": 20,
+    "weight": 600,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 80
+      },
+      {
+        "statName": "attack",
+        "statVal": 90
+      },
+      {
+        "statName": "defense",
+        "statVal": 80
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 130
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 110
+      },
+      {
+        "statName": "speed",
+        "statVal": 110
+      }
+    ],
+    "types": [
+      "dragon",
+      "psychic"
+    ],
+    "exp": 300
+  },
+  {
+    "collectionId": "41bdaced-a855-4cc1-ae48-69dd7bdd817c",
+    "id": 383,
+    "name": "groudon",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/383.svg",
+    "abilities": [
+      "drought"
+    ],
+    "height": 35,
+    "weight": 9500,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 100
+      },
+      {
+        "statName": "attack",
+        "statVal": 150
+      },
+      {
+        "statName": "defense",
+        "statVal": 140
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 100
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 90
+      },
+      {
+        "statName": "speed",
+        "statVal": 90
+      }
+    ],
+    "types": [
+      "ground"
+    ],
+    "exp": 335
+  },
+  {
+    "collectionId": "71d09fb3-8b17-43fc-95d5-6af92be0903a",
+    "id": 399,
+    "name": "bidoof",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/399.svg",
+    "abilities": [
+      "simple",
+      "unaware",
+      "moody"
+    ],
+    "height": 5,
+    "weight": 200,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 59
+      },
+      {
+        "statName": "attack",
+        "statVal": 45
+      },
+      {
+        "statName": "defense",
+        "statVal": 40
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 35
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 40
+      },
+      {
+        "statName": "speed",
+        "statVal": 31
+      }
+    ],
+    "types": [
+      "normal"
+    ],
+    "exp": 50
+  },
+  {
+    "collectionId": "5d940df6-d6c7-466a-9bda-249e5031d6af",
+    "id": 425,
+    "name": "drifloon",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/425.svg",
+    "abilities": [
+      "aftermath",
+      "unburden",
+      "flare-boost"
+    ],
+    "height": 4,
+    "weight": 12,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 90
+      },
+      {
+        "statName": "attack",
+        "statVal": 50
+      },
+      {
+        "statName": "defense",
+        "statVal": 34
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 60
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 44
+      },
+      {
+        "statName": "speed",
+        "statVal": 70
+      }
+    ],
+    "types": [
+      "ghost",
+      "flying"
+    ],
+    "exp": 70
+  },
+  {
+    "collectionId": "120a4165-e557-4ba5-bf87-198a2cf44efb",
+    "id": 438,
+    "name": "bonsly",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/438.svg",
+    "abilities": [
+      "sturdy",
+      "rock-head",
+      "rattled"
+    ],
+    "height": 5,
+    "weight": 150,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 50
+      },
+      {
+        "statName": "attack",
+        "statVal": 80
+      },
+      {
+        "statName": "defense",
+        "statVal": 95
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 10
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 45
+      },
+      {
+        "statName": "speed",
+        "statVal": 10
+      }
+    ],
+    "types": [
+      "rock"
+    ],
+    "exp": 58
+  },
+  {
+    "collectionId": "5c1d5bfd-2c07-4140-9403-b496fdac166c",
+    "id": 447,
+    "name": "riolu",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/447.svg",
+    "abilities": [
+      "steadfast",
+      "inner-focus",
+      "prankster"
+    ],
+    "height": 7,
+    "weight": 202,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 40
+      },
+      {
+        "statName": "attack",
+        "statVal": 70
+      },
+      {
+        "statName": "defense",
+        "statVal": 40
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 35
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 40
+      },
+      {
+        "statName": "speed",
+        "statVal": 60
+      }
+    ],
+    "types": [
+      "fighting"
+    ],
+    "exp": 57
+  },
+  {
+    "collectionId": "2d7f54be-d50d-469c-8acb-e197b128026b",
+    "id": 450,
+    "name": "hippowdon",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/450.svg",
+    "abilities": [
+      "sand-stream",
+      "sand-force"
+    ],
+    "height": 20,
+    "weight": 3000,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 108
+      },
+      {
+        "statName": "attack",
+        "statVal": 112
+      },
+      {
+        "statName": "defense",
+        "statVal": 118
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 68
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 72
+      },
+      {
+        "statName": "speed",
+        "statVal": 47
+      }
+    ],
+    "types": [
+      "ground"
+    ],
+    "exp": 184
+  },
+  {
+    "collectionId": "93bdc434-3f82-43b5-8038-dc524812d786",
+    "id": 473,
+    "name": "mamoswine",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/473.svg",
+    "abilities": [
+      "oblivious",
+      "snow-cloak",
+      "thick-fat"
+    ],
+    "height": 25,
+    "weight": 2910,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 110
+      },
+      {
+        "statName": "attack",
+        "statVal": 130
+      },
+      {
+        "statName": "defense",
+        "statVal": 80
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 70
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 60
+      },
+      {
+        "statName": "speed",
+        "statVal": 80
+      }
+    ],
+    "types": [
+      "ice",
+      "ground"
+    ],
+    "exp": 265
+  },
+  {
+    "collectionId": "9063a64b-22e3-4a4d-9bf0-e1b743619bbf",
+    "id": 476,
+    "name": "probopass",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/476.svg",
+    "abilities": [
+      "sturdy",
+      "magnet-pull",
+      "sand-force"
+    ],
+    "height": 14,
+    "weight": 3400,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 60
+      },
+      {
+        "statName": "attack",
+        "statVal": 55
+      },
+      {
+        "statName": "defense",
+        "statVal": 145
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 75
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 150
+      },
+      {
+        "statName": "speed",
+        "statVal": 40
+      }
+    ],
+    "types": [
+      "rock",
+      "steel"
+    ],
+    "exp": 184
+  },
+  {
+    "collectionId": "afeaf10d-88ea-49a9-b502-1300b1c0870b",
+    "id": 483,
+    "name": "dialga",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/483.svg",
+    "abilities": [
+      "pressure",
+      "telepathy"
+    ],
+    "height": 54,
+    "weight": 6830,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 100
+      },
+      {
+        "statName": "attack",
+        "statVal": 120
+      },
+      {
+        "statName": "defense",
+        "statVal": 120
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 150
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 100
+      },
+      {
+        "statName": "speed",
+        "statVal": 90
+      }
+    ],
+    "types": [
+      "steel",
+      "dragon"
+    ],
+    "exp": 340
+  },
+  {
+    "collectionId": "7aa84bf9-ef08-41ce-911d-1e3331a9f605",
+    "id": 490,
+    "name": "manaphy",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/490.svg",
+    "abilities": [
+      "hydration"
+    ],
+    "height": 3,
+    "weight": 14,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 100
+      },
+      {
+        "statName": "attack",
+        "statVal": 100
+      },
+      {
+        "statName": "defense",
+        "statVal": 100
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 100
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 100
+      },
+      {
+        "statName": "speed",
+        "statVal": 100
+      }
+    ],
+    "types": [
+      "water"
+    ],
+    "exp": 270
+  },
+  {
+    "collectionId": "53d771e4-d304-4e4f-b803-9e300104fe35",
+    "id": 492,
+    "name": "shaymin-land",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/492.svg",
+    "abilities": [
+      "natural-cure"
+    ],
+    "height": 2,
+    "weight": 21,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 100
+      },
+      {
+        "statName": "attack",
+        "statVal": 100
+      },
+      {
+        "statName": "defense",
+        "statVal": 100
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 100
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 100
+      },
+      {
+        "statName": "speed",
+        "statVal": 100
+      }
+    ],
+    "types": [
+      "grass"
+    ],
+    "exp": 270
+  },
+  {
+    "collectionId": "fb30bd83-669b-4639-8d05-c58d0c0edecd",
+    "id": 511,
+    "name": "pansage",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/511.svg",
+    "abilities": [
+      "gluttony",
+      "overgrow"
+    ],
+    "height": 6,
+    "weight": 105,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 50
+      },
+      {
+        "statName": "attack",
+        "statVal": 53
+      },
+      {
+        "statName": "defense",
+        "statVal": 48
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 53
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 48
+      },
+      {
+        "statName": "speed",
+        "statVal": 64
+      }
+    ],
+    "types": [
+      "grass"
+    ],
+    "exp": 63
+  },
+  {
+    "collectionId": "3d5f9cb8-f92f-4b8f-a5f9-16fe4351b2f0",
+    "id": 527,
+    "name": "woobat",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/527.svg",
+    "abilities": [
+      "unaware",
+      "klutz",
+      "simple"
+    ],
+    "height": 4,
+    "weight": 21,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 65
+      },
+      {
+        "statName": "attack",
+        "statVal": 45
+      },
+      {
+        "statName": "defense",
+        "statVal": 43
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 55
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 43
+      },
+      {
+        "statName": "speed",
+        "statVal": 72
+      }
+    ],
+    "types": [
+      "psychic",
+      "flying"
+    ],
+    "exp": 65
+  },
+  {
+    "collectionId": "8f979e64-ae25-4c1f-ae97-9c3562c102f3",
+    "id": 540,
+    "name": "sewaddle",
+    "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/540.svg",
+    "abilities": [
+      "swarm",
+      "chlorophyll",
+      "overcoat"
+    ],
+    "height": 3,
+    "weight": 25,
+    "stats": [
+      {
+        "statName": "hp",
+        "statVal": 45
+      },
+      {
+        "statName": "attack",
+        "statVal": 53
+      },
+      {
+        "statName": "defense",
+        "statVal": 70
+      },
+      {
+        "statName": "special-attack",
+        "statVal": 40
+      },
+      {
+        "statName": "special-defense",
+        "statVal": 60
+      },
+      {
+        "statName": "speed",
+        "statVal": 42
+      }
+    ],
+    "types": [
+      "bug",
+      "grass"
+    ],
+    "exp": 62
+  }
+]

@@ -3,20 +3,17 @@ import {
   Grow,
 } from '@mui/material';
 import clsx from 'clsx';
-import PokeModal from 'components/Common/ModalComponent';
+import PokeModal from 'components/Shop/ModalComponent';
 import { getBackgdoundColor } from 'helpers/types/colorMap';
 import { DataType } from 'interfaces';
 import soledOut from 'public/soled_out.png';
 import React, { SyntheticEvent, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { pokemonByIDSelector } from 'store/shop/shopSlice';
+import { useGetPokemonByIDQuery } from 'store/service';
 
 import { useStyles } from './style';
 
 type Props = {
   pokeid: any,
-  limit?: number,
-  amount?: number
 };
 
 const shake = [
@@ -33,17 +30,20 @@ const shake = [
   { transform: 'translate(1px, -2px) rotate(-1deg)' },
 ];
 
-const CellComponent: React.FC<Props> = ({ pokeid, limit, amount }) => {
+const CellComponent: React.FC<Props> = ({ pokeid }) => {
+  const { data: pokemon } = useGetPokemonByIDQuery(pokeid);
   const classes = useStyles();
-  const pokemon = useSelector((state) => pokemonByIDSelector(state, pokeid));
   const [open, setOpen] = React.useState(false);
   const [data, setData] = React.useState<DataType>({
     left: 0, top: 0, height: 0, width: 0, background: 'none',
   });
-
-  if (amount === undefined) {
-    limit = pokemon.limit;
-    amount = pokemon.amount;
+  let limit = 0;
+  let amount = 0;
+  if (pokemon) {
+    // eslint-disable-next-line no-param-reassign
+    limit = pokemon!.limit;
+    // eslint-disable-next-line no-param-reassign
+    amount = pokemon!.amount;
   }
 
   const handleOpen = useCallback((e : SyntheticEvent) => {
@@ -70,39 +70,41 @@ const CellComponent: React.FC<Props> = ({ pokeid, limit, amount }) => {
     [classes.pokeImg]: true,
     [classes.unavailable]: amount! <= 0,
   });
-
-  const color = getBackgdoundColor(pokemon!.types);
-
-  return (
-    <>
-      <Grow in timeout={3000}>
-        <Box className={classes.card} onClick={handleOpen}>
-          <img
-            className={imgStyle}
-            src={pokemon!.img}
-            alt={pokemon!.name}
-            style={amount > 0 ? { background: color } : { background: 'white' }}
-          />
-          {amount! === 0 ? (
+  let color = 'white';
+  if (pokemon) color = getBackgdoundColor(pokemon.types);
+  if (pokemon) {
+    return (
+      <>
+        <Grow in timeout={3000}>
+          <Box className={classes.card} onClick={handleOpen}>
             <img
-              className={classes.soled}
-              src={soledOut.src}
-              alt="soled"
+              className={imgStyle}
+              src={pokemon!.img}
+              alt={pokemon!.name}
+              style={amount! > 0 ? { background: color } : { background: 'white' }}
             />
-          ) : amount && limit && (
-            <div>
-              <div className={classes.cardAmount}>
-                {amount}
-                /
-                {limit}
+            {amount! === 0 ? (
+              <img
+                className={classes.soled}
+                src={soledOut.src}
+                alt="soled"
+              />
+            ) : amount && limit && (
+              <div>
+                <div className={classes.cardAmount}>
+                  {amount}
+                  /
+                  {limit}
+                </div>
               </div>
-            </div>
-          )}
-        </Box>
-      </Grow>
-      <PokeModal open={open} onClose={handleClose} pokemon={pokemon} data={data} />
-    </>
-  );
+            )}
+          </Box>
+        </Grow>
+        <PokeModal open={open} onClose={handleClose} pokemon={pokemon} data={data} />
+      </>
+    );
+  }
+  return <div />;
 };
 
 export default CellComponent;

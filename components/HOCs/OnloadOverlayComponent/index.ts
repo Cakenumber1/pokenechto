@@ -1,1 +1,1 @@
-export { default } from './OnloadOverlayComponent';
+export { default } from './OnloadOverlayHOC';

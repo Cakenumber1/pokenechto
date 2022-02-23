@@ -6,10 +6,10 @@ import React from 'react';
 import { style } from './style';
 
 export type InventoryComponentProps = {
-  pokemonCollection: Partial<CollectionItemType>[];
+  pokemonCollection: CollectionItemType[];
   onClickCard: (
     event: React.MouseEvent<HTMLDivElement>,
-    collectionItem: Partial<CollectionItemType>
+    collectionItem: CollectionItemType
   ) => void;
 };
 

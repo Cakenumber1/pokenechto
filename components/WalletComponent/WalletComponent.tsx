@@ -1,34 +1,27 @@
 import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded';
 import {
-  Box,
-  Button,
-  Collapse,
-  Modal,
-  Stack,
-  Zoom,
+  Box, Button, Collapse, Modal, Stack, Zoom,
 } from '@mui/material';
-import React, {
-  SyntheticEvent,
-  useCallback, useState,
-} from 'react';
+import React, { SyntheticEvent, useCallback, useState } from 'react';
+import {
+  useGetMoneyQuery,
+  useGetMushroomsQuery,
+  usePatchMoneyMutation,
+  usePatchMushroomsMutation,
+} from 'store/service';
 
 import { useModalStyles, useStyles } from './style';
 import TableComponent from './TableComponent';
-import { useDispatch } from 'react-redux';
-import { addMoney, addMushrooms } from 'store/wallet/walletSlice';
 
-type Props = {
-  money: number,
-  mushrooms: number,
-};
-
-const WalletComponent: React.FC<Props> = ({ money, mushrooms }) => {
-  const dispatch = useDispatch();
+const WalletComponent = () => {
+  const { data: mushrooms } = useGetMushroomsQuery(null);
+  const { data: money } = useGetMoneyQuery(null);
+  const [patchMoneyMutation] = usePatchMoneyMutation();
+  const [patchMushroomsMutation] = usePatchMushroomsMutation();
   const classesM = useModalStyles();
   const classes = useStyles();
   const [isDropped, setIsDropped] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-
   const handleOpen = useCallback(() => {
     setIsOpen(true);
   }, []);
@@ -48,17 +41,17 @@ const WalletComponent: React.FC<Props> = ({ money, mushrooms }) => {
   const handleAddMoney = (e: SyntheticEvent) => {
     e.preventDefault();
     const temp = e.target as HTMLElement;
-    dispatch(addMoney(temp.innerText));
+    patchMoneyMutation(temp.innerText).unwrap();
   };
   const handleAddMushrooms = (e: SyntheticEvent) => {
     e.preventDefault();
     const temp = e.target as HTMLElement;
-    dispatch(addMushrooms(temp.innerText));
+    patchMushroomsMutation(temp.innerText).unwrap();
   };
 
   return (
     <div className={classes.container}>
-      <TableComponent money={money} mushrooms={mushrooms} />
+      <TableComponent money={money?.count || 0} mushrooms={mushrooms?.count || 0} />
       <Modal
         open={isOpen}
         hideBackdrop
@@ -69,7 +62,7 @@ const WalletComponent: React.FC<Props> = ({ money, mushrooms }) => {
               <Stack className={classesM.boxInner} spacing={2}>
                 <div>
                   <h2 style={{ textAlign: 'center' }}>Баланс</h2>
-                  <TableComponent money={money} mushrooms={mushrooms} />
+                  <TableComponent money={money?.count || 0} mushrooms={mushrooms?.count || 0} />
                 </div>
                 <div>
                   <div>Купить $$$</div>

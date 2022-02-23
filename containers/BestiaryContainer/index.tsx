@@ -1,6 +1,6 @@
 import { Box, Grid } from '@mui/material';
 import { BestiaryComponent } from 'components/Bestiary/BestiaryComponent';
-import { SearchComponent } from 'components/Common/SearchComponent';
+import { SearchComponent } from 'components/Bestiary/SearchComponent';
 import React, { memo, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useGetPokemonListQuery } from 'store/api';

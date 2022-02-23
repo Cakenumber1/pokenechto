@@ -1,20 +1,17 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { inventoryApi } from 'store/service';
 import { pokemonApi } from 'store/api';
-import { walletReducer } from 'store/wallet/walletSlice';
-
-import { shopReducer } from './shop/shopSlice';
+import { appApi } from 'store/service';
 
 export const store = configureStore({
   reducer: {
-    [inventoryApi.reducerPath]: inventoryApi.reducer,
+    [appApi.reducerPath]: appApi.reducer,
     [pokemonApi.reducerPath]: pokemonApi.reducer,
-    shop: shopReducer,
-    wallet: walletReducer,
   },
-  middleware: (getDefaultMiddleware) => 
-      getDefaultMiddleware().concat(inventoryApi.middleware, pokemonApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
+    appApi.middleware,
+    pokemonApi.middleware,
+  ),
 });
 
 setupListeners(store.dispatch);
