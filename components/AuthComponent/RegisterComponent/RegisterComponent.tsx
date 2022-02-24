@@ -86,7 +86,6 @@ const SignUp: React.FC<Props> = ({ handlePage }) => {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                autoFocus
                 value={mail}
                 onChange={(event) => setMail(String(event.target.value))}
               />
