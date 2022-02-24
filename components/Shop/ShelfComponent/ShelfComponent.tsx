@@ -23,7 +23,7 @@ const ItemComp = ({ _key }: ItemType) => {
 };
 
 const ShelfComponent: React.FC<Props> = ({ shelfn }) => {
-  const { data: pokeIDs } = useGetShopPokemonIDsQuery(null);
+  const { data: pokeIDs } = useGetShopPokemonIDsQuery();
   let pkeys;
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   (pokeIDs) ? pkeys = pokeIDs!.slice(3 * shelfn, 2 * 3 * shelfn) : pkeys = null;

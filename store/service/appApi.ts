@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { CollectionItemType } from 'helpers/inventoryHelpers';
+import { Pokemon } from 'interfaces/pokemonType';
 
 type GetInventoryByPageResult = {
   count: number,
@@ -9,6 +10,10 @@ type GetInventoryByPageResult = {
 type IDandPrice = {
   id: number,
   price: number,
+};
+
+type CurrencyResponseType = {
+  count: number
 };
 
 export const appApi = createApi({
@@ -43,11 +48,11 @@ export const appApi = createApi({
       }),
       invalidatesTags: (result, error, id) => [{ type: 'Inventory', id }, 'Mushrooms'],
     }),
-    getMushrooms: builder.query<any, any>({
+    getMushrooms: builder.query<CurrencyResponseType, void>({
       query: () => '/wallet/mushrooms',
       providesTags: ['Mushrooms'],
     }),
-    patchMushrooms: builder.mutation<any, any>({
+    patchMushrooms: builder.mutation<void, number>({
       query: (count) => ({
         url: '/wallet/mushrooms/',
         method: 'PATCH',
@@ -55,11 +60,11 @@ export const appApi = createApi({
       }),
       invalidatesTags: ['Mushrooms'],
     }),
-    getMoney: builder.query<any, any>({
+    getMoney: builder.query<CurrencyResponseType, void>({
       query: () => '/wallet/money',
       providesTags: ['Money'],
     }),
-    patchMoney: builder.mutation<any, any>({
+    patchMoney: builder.mutation<void, number>({
       query: (count) => ({
         url: '/wallet/money/',
         method: 'PATCH',
@@ -67,16 +72,16 @@ export const appApi = createApi({
       }),
       invalidatesTags: ['Money'],
     }),
-    getShopPokemonIDs: builder.query<any, any>({
+    getShopPokemonIDs: builder.query<number[], void>({
       query: () => '/shop/',
       providesTags: ['Shop'],
     }),
-    getPokemonByID: builder.query<any, any>({
+    getPokemonByID: builder.query<Exclude<Pokemon, undefined>, number>({
       query: (_id) => `/shop/${_id}`,
       providesTags: (result, error, id) => [{ type: 'Shop', id }],
     }),
-    patchSellPokemon: builder.mutation<any, any>({
-      query: (data : IDandPrice) => ({
+    patchSellPokemon: builder.mutation<void, IDandPrice>({
+      query: (data) => ({
         url: `/shop/${data.id}`,
         method: 'PATCH',
         body: { data },
