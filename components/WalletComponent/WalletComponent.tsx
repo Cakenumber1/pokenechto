@@ -14,8 +14,8 @@ import { useModalStyles, useStyles } from './style';
 import TableComponent from './TableComponent';
 
 const WalletComponent = () => {
-  const { data: mushrooms } = useGetMushroomsQuery(null);
-  const { data: money } = useGetMoneyQuery(null);
+  const { data: mushrooms } = useGetMushroomsQuery();
+  const { data: money } = useGetMoneyQuery();
   const [patchMoneyMutation] = usePatchMoneyMutation();
   const [patchMushroomsMutation] = usePatchMushroomsMutation();
   const classesM = useModalStyles();
@@ -41,12 +41,12 @@ const WalletComponent = () => {
   const handleAddMoney = (e: SyntheticEvent) => {
     e.preventDefault();
     const temp = e.target as HTMLElement;
-    patchMoneyMutation(temp.innerText).unwrap();
+    patchMoneyMutation(Number(temp.innerText)).unwrap();
   };
   const handleAddMushrooms = (e: SyntheticEvent) => {
     e.preventDefault();
     const temp = e.target as HTMLElement;
-    patchMushroomsMutation(temp.innerText).unwrap();
+    patchMushroomsMutation(Number(temp.innerText)).unwrap();
   };
 
   return (

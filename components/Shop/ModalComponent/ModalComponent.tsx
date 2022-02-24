@@ -1,14 +1,8 @@
-import {
-  Button,
-  Modal,
-} from '@mui/material';
+import { Button, Modal } from '@mui/material';
 import clsx from 'clsx';
 import { colorMap, namesMap } from 'helpers/types';
 import { DataType, Pokemon } from 'interfaces/';
-import React, {
-  useEffect, useRef,
-  useState,
-} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useGetMoneyQuery, usePatchSellPokemonMutation } from 'store/service';
 
 import { useStyles } from './style';
@@ -23,7 +17,7 @@ type Props = {
 const PokeModal = ({
   open, onClose, pokemon, data,
 }: Props) => {
-  const { data: money } = useGetMoneyQuery(null);
+  const { data: money } = useGetMoneyQuery();
   const [patchSellPokemonMutation] = usePatchSellPokemonMutation();
   const classes = useStyles(data);
   const modal = useRef<HTMLDivElement>(null);
@@ -63,6 +57,8 @@ const PokeModal = ({
       handleClose();
     }
   });
+
+  const isDisabledMoneyButton = money!.count < 500 || pokemon!.amount === 0;
 
   return (
     <Modal open={open} hideBackdrop>
@@ -183,7 +179,7 @@ const PokeModal = ({
             />
             <Button
               style={{ maxWidth: '30%' }}
-              disabled={money?.count < 500 || pokemon!.amount === 0}
+              disabled={isDisabledMoneyButton}
               onClick={handleBuy}
               variant="contained"
             >Buy 500$
