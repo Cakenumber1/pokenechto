@@ -21,6 +21,7 @@ export const useStyles = makeStyles({
     bottom: 0,
     right: 0,
     padding: '.2vh',
+    pointerEvents: 'none',
   },
   unavailable: {
     cursor: 'auto',
