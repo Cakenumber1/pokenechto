@@ -2,7 +2,7 @@ import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardMedia from '@mui/material/CardMedia';
 import { CollectionItemType, HandleClickCard } from 'helpers/inventoryHelpers';
-import { getBackgdoundColor } from 'helpers/types';
+import { getBackgdoundColor } from 'helpers/maps';
 import React from 'react';
 
 import { style } from './style';

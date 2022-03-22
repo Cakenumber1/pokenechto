@@ -54,4 +54,7 @@ export const useStyles = makeStyles(() => ({
   buttonFull: () => ({
     opacity: '1',
   }),
+  buttonFull2: () => ({
+    opacity: '1',
+  }),
 }));

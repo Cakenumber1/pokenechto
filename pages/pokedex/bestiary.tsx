@@ -1,7 +1,6 @@
-import { FrameComponent } from 'components/Common/FrameComponent';
+import BestiaryContainer from 'components/Bestiary/BestiaryContainer';
+import FrameComponent from 'components/FrameComponent';
 import React from 'react';
-
-import { BestiaryContainer } from '../../containers/BestiaryContainer';
 
 export default function bestiary() {
   return (

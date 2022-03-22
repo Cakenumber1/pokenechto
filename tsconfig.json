@@ -26,30 +26,9 @@
       "interfaces/*": ["./interfaces/*", "./interfaces"],
       "public/*": ["./public/*", "./public"],
       "store/*": ["./store/*", "./store"],
-      "theme/*": ["./theme/*", "./theme"]
+      "theme/*": ["./theme/*", "./theme"],
+      "myFirebase/*": ["./myFirebase/*", "./myFirebase"]
     }
-  },
-  "settings": {
-    "node": {
-      "tryExtensions": [".js", ".json", ".node", ".ts", ".d.ts"]
-    }
-  },
-  "parserOptions": {
-    "project": "./tsconfig.json"
-  },
-  "settings": {
-    "node": {
-      "tryExtensions": [
-        ".js",
-        ".json",
-        ".node",
-        ".ts",
-        ".d.ts"
-      ]
-    }
-  },
-  "parserOptions": {
-    "project": "./tsconfig.json"
   },
   "include": [
     "next-env.d.ts",

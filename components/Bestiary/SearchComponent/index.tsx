@@ -10,7 +10,7 @@ type Props = {
   onClose: () => void,
   search: string
 };
-
+// todo: переделать
 const Result = ({ search, submit, onClose }: Props) => {
   const pos = {
     left: '50%',

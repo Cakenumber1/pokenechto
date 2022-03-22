@@ -1,9 +1,10 @@
 import {
+  Box,
   Button,
   Modal,
 } from '@mui/material';
 import clsx from 'clsx';
-import { colorMap, namesMap } from 'helpers/types';
+import { colorMap, namesMap } from 'helpers/maps';
 import { DataType, Pokemon } from 'interfaces/';
 import React, {
   useEffect, useRef,
@@ -19,6 +20,7 @@ type Props = {
   data: DataType
 };
 
+// todo: переделать
 const PokeModal = ({
   open, onClose, pokemon, data,
 }: Props) => {
@@ -53,22 +55,14 @@ const PokeModal = ({
     }, 1);
   }, [open]);
 
-  // не видит
-  // useEffect(() => {
-  //   modal.current?.addEventListener('transitionstart', () => {
-  //     setIsAnimated(true);
-  //     console.log(isAnimated);
-  //   });
-  // }, [isAnimated]);
-
   return (
     <Modal open={open} hideBackdrop>
-      <div
+      <Box
         className={modalStyle}
         ref={modal}
       >
-        <button type="button" className={buttonStyle} onClick={handleClose}>Back</button>
-        <div style={{
+        <Button type="button" className={buttonStyle} onClick={handleClose}>Back</Button>
+        <Box style={{
           background: 'white',
           width: '100%',
           height: '100%',
@@ -78,33 +72,33 @@ const PokeModal = ({
           flexDirection: 'column',
           alignItems: 'center',
           overflow: 'hidden',
-        }}
+        }} className="zalupa1"
         >
           <img
             className={imgStyle}
             src={pokemon!.img}
             alt={pokemon!.name}
           />
-          <div style={{ width: '100%', padding: '2vh' }}>
-            <div style={{
+          <Box style={{ width: '100%', padding: '2vh' }}>
+            <Box style={{
               textAlign: 'center',
               fontSize: 'large',
             }}
             >{pokemon!.name!.toUpperCase()}
-            </div>
-            <div style={{ textAlign: 'center' }}>
+            </Box>
+            <Box style={{ textAlign: 'center' }}>
               Types
               {pokemon!.types!.map((type) => (
-                <div key={type}>{type}</div>
+                <Box key={type}>{type}</Box>
               ))}
-            </div>
-            <div style={{
+            </Box>
+            <Box style={{
               width: '100%',
               display: 'flex',
               justifyContent: 'space-around',
             }}
             >
-              <div style={{
+              <Box style={{
                 background: '#98b2f5',
                 borderRadius: '50vh',
                 height: '7vh',
@@ -116,8 +110,8 @@ const PokeModal = ({
                 Weight
                 <br />
                 {pokemon!.weight! / 10}KG
-              </div>
-              <div style={{
+              </Box>
+              <Box style={{
                 background: '#f5989e',
                 borderRadius: '50vh',
                 height: '7vh',
@@ -130,21 +124,21 @@ const PokeModal = ({
                 Height
                 <br />
                 {pokemon!.height! / 10} M
-              </div>
-            </div>
-            <div style={{ padding: '2vh' }}>
-              <div style={{ textAlign: 'center' }}>Abilities</div>
-              <div style={{
+              </Box>
+            </Box>
+            <Box style={{ padding: '2vh' }}>
+              <Box style={{ textAlign: 'center' }}>Abilities</Box>
+              <Box style={{
                 display: 'flex',
                 justifyContent: 'space-around',
               }}
               >
                 {pokemon!.abilities!.map((ab) => (
-                  <div key={ab}>{ab}</div>
+                  <Box key={ab}>{ab}</Box>
                 ))}
-              </div>
-            </div>
-            <div
+              </Box>
+            </Box>
+            <Box
               className="stats"
               style={{
                 width: '100%',
@@ -153,11 +147,11 @@ const PokeModal = ({
                 padding: '1vh',
               }}
             >
-              <div style={{ textAlign: 'center' }}>Stats</div>
+              <Box style={{ textAlign: 'center' }}>Stats</Box>
               {pokemon!.stats!.map((stat) => (
-                <div key={stat.statName} style={{ display: 'flex', padding: '.5vh 10%' }}>
-                  <div style={{ width: '20%' }}>{namesMap.get(stat.statName)}</div>
-                  <div style={{
+                <Box key={stat.statName} style={{ display: 'flex', padding: '.5vh 10%' }}>
+                  <Box style={{ width: '20%' }}>{namesMap.get(stat.statName)}</Box>
+                  <Box style={{
                     width: '100%',
                     marginLeft: '1%',
                     height: '3vh',
@@ -165,7 +159,7 @@ const PokeModal = ({
                     borderRadius: '50vmax',
                   }}
                   >
-                    <div style={{
+                    <Box style={{
                       height: '100%',
                       background: colorMap.get(stat.statName),
                       width: `${stat.statVal / 3}%`,
@@ -174,24 +168,24 @@ const PokeModal = ({
                     }}
                     >
                       {stat.statVal}/300
-                    </div>
-                  </div>
-                </div>
+                    </Box>
+                  </Box>
+                </Box>
               ))}
-              <div style={{
+              <Box style={{
                 display: 'flex',
                 width: '100%',
                 justifyContent: 'center',
                 paddingTop: '2vh',
               }}
               >
-                <div>EXP {pokemon!.exp}/?</div>
-              </div>
-            </div>
-          </div>
+                <Box>EXP {pokemon!.exp}/?</Box>
+              </Box>
+            </Box>
+          </Box>
           <Button style={{ display: 'none' }} variant="contained">Buy</Button>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </Modal>
   );
 };

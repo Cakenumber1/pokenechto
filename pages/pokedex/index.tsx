@@ -1,7 +1,7 @@
 import { Button, Grid } from '@mui/material';
-import { FrameComponent } from 'components/Common/FrameComponent';
+import FrameComponent from 'components/FrameComponent';
 import withAuth from 'components/HOCs/withAuthHOC';
-import { useAuth } from 'firebase/AuthContext';
+import { useAuth } from 'myFirebase/AuthContext';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import React from 'react';

@@ -1,4 +1,4 @@
-import { FrameComponent } from 'components/Common/FrameComponent';
+import FrameComponent from 'components/FrameComponent';
 import withAuth from 'components/HOCs/withAuthHOC';
 import { InventoryContainer } from 'components/Inventory/InventoryContainer';
 import { naturalNumberPattern } from 'helpers/inventoryHelpers';

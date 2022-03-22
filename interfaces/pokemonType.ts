@@ -1,5 +1,6 @@
 import {
-  Ability, GameIndex, HeldItem, NameAndUrl, Types, RawStat, Move, Sprite,
+  Ability, GameIndex, HeldItem, Move, NameAndUrl, RawStat, Sprite,
+  Types,
 } from './rawPokemonTypes';
 
 export type RawPokemon = {

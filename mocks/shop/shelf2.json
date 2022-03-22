@@ -1,0 +1,132 @@
+[
+    {
+        "id": 147,
+        "name": "dratini",
+        "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/147.svg",
+        "abilities": [
+            "shed-skin",
+            "marvel-scale"
+        ],
+        "height": 18,
+        "weight": 36,
+        "stats": [
+            {
+                "statName": "hp",
+                "statVal": 41
+            },
+            {
+                "statName": "attack",
+                "statVal": 70
+            },
+            {
+                "statName": "defense",
+                "statVal": 48
+            },
+            {
+                "statName": "special-attack",
+                "statVal": 51
+            },
+            {
+                "statName": "special-defense",
+                "statVal": 53
+            },
+            {
+                "statName": "speed",
+                "statVal": 52
+            }
+        ],
+        "types": [
+            "dragon"
+        ],
+        "exp": 60,
+        "limit": 8,
+        "amount": 3
+    },
+    {
+        "id": 148,
+        "name": "dragonair",
+        "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/148.svg",
+        "abilities": [
+            "shed-skin",
+            "marvel-scale"
+        ],
+        "height": 44,
+        "weight": 181,
+        "stats": [
+            {
+                "statName": "hp",
+                "statVal": 65
+            },
+            {
+                "statName": "attack",
+                "statVal": 89
+            },
+            {
+                "statName": "defense",
+                "statVal": 65
+            },
+            {
+                "statName": "special-attack",
+                "statVal": 74
+            },
+            {
+                "statName": "special-defense",
+                "statVal": 75
+            },
+            {
+                "statName": "speed",
+                "statVal": 72
+            }
+        ],
+        "types": [
+            "dragon"
+        ],
+        "exp": 152,
+        "limit": 6,
+        "amount": 5
+    },
+    {
+        "id": 149,
+        "name": "dragonite",
+        "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/149.svg",
+        "abilities": [
+            "inner-focus",
+            "multiscale"
+        ],
+        "height": 23,
+        "weight": 2213,
+        "stats": [
+            {
+                "statName": "hp",
+                "statVal": 97
+            },
+            {
+                "statName": "attack",
+                "statVal": 146
+            },
+            {
+                "statName": "defense",
+                "statVal": 102
+            },
+            {
+                "statName": "special-attack",
+                "statVal": 106
+            },
+            {
+                "statName": "special-defense",
+                "statVal": 101
+            },
+            {
+                "statName": "speed",
+                "statVal": 86
+            }
+        ],
+        "types": [
+            "dragon",
+            "flying"
+        ],
+        "exp": 307,
+        "limit": 9,
+        "amount": 9
+    }
+]

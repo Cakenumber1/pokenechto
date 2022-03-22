@@ -1,4 +1,4 @@
-import { useAuth } from 'firebase/AuthContext';
+import { useAuth } from 'myFirebase/AuthContext';
 import { NextComponentType } from 'next';
 import { useRouter } from 'next/router';
 

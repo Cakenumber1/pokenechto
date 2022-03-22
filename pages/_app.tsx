@@ -9,7 +9,7 @@ import 'styles/globals.scss';
 import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 
-import { AuthProvider } from '../firebase/AuthContext';
+import { AuthProvider } from 'myFirebase/AuthContext';
 import { store } from '../store';
 
 const MyApp = ({ Component, pageProps }: AppProps) => (

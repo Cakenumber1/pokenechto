@@ -1,0 +1,134 @@
+[
+    {
+        "id": 144,
+        "name": "articuno",
+        "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/144.svg",
+        "abilities": [
+            "pressure",
+            "snow-cloak"
+        ],
+        "height": 18,
+        "weight": 579,
+        "stats": [
+            {
+                "statName": "hp",
+                "statVal": 90
+            },
+            {
+                "statName": "attack",
+                "statVal": 93
+            },
+            {
+                "statName": "defense",
+                "statVal": 107
+            },
+            {
+                "statName": "special-attack",
+                "statVal": 95
+            },
+            {
+                "statName": "special-defense",
+                "statVal": 132
+            },
+            {
+                "statName": "speed",
+                "statVal": 91
+            }
+        ],
+        "types": [
+            "ice",
+            "flying"
+        ],
+        "exp": 291,
+        "limit": 1,
+        "amount": 1
+    },
+    {
+        "id": 145,
+        "name": "zapdos",
+        "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/145.svg",
+        "abilities": [
+            "pressure",
+            "static"
+        ],
+        "height": 16,
+        "weight": 569,
+        "stats": [
+            {
+                "statName": "hp",
+                "statVal": 92
+            },
+            {
+                "statName": "attack",
+                "statVal": 92
+            },
+            {
+                "statName": "defense",
+                "statVal": 92
+            },
+            {
+                "statName": "special-attack",
+                "statVal": 136
+            },
+            {
+                "statName": "special-defense",
+                "statVal": 97
+            },
+            {
+                "statName": "speed",
+                "statVal": 101
+            }
+        ],
+        "types": [
+            "electric",
+            "flying"
+        ],
+        "exp": 294,
+        "limit": 1,
+        "amount": 0
+    },
+    {
+        "id": 146,
+        "name": "moltres",
+        "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/146.svg",
+        "abilities": [
+            "pressure",
+            "flame-body"
+        ],
+        "height": 20,
+        "weight": 660,
+        "stats": [
+            {
+                "statName": "hp",
+                "statVal": 91
+            },
+            {
+                "statName": "attack",
+                "statVal": 107
+            },
+            {
+                "statName": "defense",
+                "statVal": 94
+            },
+            {
+                "statName": "special-attack",
+                "statVal": 137
+            },
+            {
+                "statName": "special-defense",
+                "statVal": 89
+            },
+            {
+                "statName": "speed",
+                "statVal": 98
+            }
+        ],
+        "types": [
+            "fire",
+            "flying"
+        ],
+        "exp": 302,
+        "limit": 1,
+        "amount": 1
+    }
+]
