@@ -65,6 +65,7 @@ const ModalContainer = ({
       handleClose={handleClose}
       isDisabledMoneyButton={isDisabledMoneyButton}
       modalStyle={modalStyle}
+      modalInnerStyle={classes.modalInner}
       buttonStyle={buttonStyle}
       imgStyle={imgStyle}
     />

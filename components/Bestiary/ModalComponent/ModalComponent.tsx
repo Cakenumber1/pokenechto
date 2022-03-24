@@ -72,7 +72,7 @@ const PokeModal = ({
           flexDirection: 'column',
           alignItems: 'center',
           overflow: 'hidden',
-        }} className="zalupa1"
+        }}
         >
           <img
             className={imgStyle}

@@ -9,30 +9,28 @@ type Props = {
   handleClose: () => void,
   isDisabledMoneyButton: boolean,
   modalStyle: string,
+  modalInnerStyle: string,
   buttonStyle: string,
   imgStyle: string
 };
 
 const PokeModal = ({
-  open, pokemon, handleBuy, handleClose, isDisabledMoneyButton, modalStyle, buttonStyle, imgStyle,
+  open,
+  pokemon,
+  handleBuy,
+  handleClose,
+  isDisabledMoneyButton,
+  modalStyle,
+  modalInnerStyle,
+  buttonStyle,
+  imgStyle,
 }: Props) => (
   <Modal open={open} hideBackdrop>
     <Box
       className={modalStyle}
     >
       <button type="button" className={buttonStyle} onClick={handleClose}>Back</button>
-      <Box style={{
-        background: 'grey',
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        top: 0,
-        left: 0,
-        flexDirection: 'column',
-        alignItems: 'center',
-        overflow: 'hidden',
-      }}
-      >
+      <Box className={modalInnerStyle}>
         <img
           className={imgStyle}
           src={pokemon!.img}

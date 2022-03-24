@@ -11,6 +11,9 @@ type Props = {
   search: string
 };
 // todo: переделать
+
+const unlocked = new Set([1, 2, 3, 4, 5, 6]);
+
 const Result = ({ search, submit, onClose }: Props) => {
   const pos = {
     left: '50%',
@@ -20,6 +23,9 @@ const Result = ({ search, submit, onClose }: Props) => {
     background: 'none',
   };
   if (!submit || !search) return <Box sx={{ visibility: 'hidden' }} />;
+  if (!unlocked.has(Number(search))) {
+    return <Box sx={{ visibility: submit ? 'visible' : 'hidden' }}>Не открыт</Box>;
+  }
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data, error } = useGetPokemonByNameQuery(search);
   if (error) return <Box sx={{ visibility: submit ? 'visible' : 'hidden' }}>Ошибка</Box>;

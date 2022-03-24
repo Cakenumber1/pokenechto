@@ -1,12 +1,15 @@
-import { Button, Grid } from '@mui/material';
+import { Button, Container, Grid } from '@mui/material';
 import axios from 'axios';
+import PokedexLinkComponent from 'components/Home/PokedexLinkComponent';
 import WalletComponent from 'components/WalletComponent';
 import firebase from 'firebase';
 import { parseResponsePokemon } from 'helpers';
 import { Pokemon } from 'interfaces/';
 import { db } from 'myFirebase/firebase';
+import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import pokedexImg from 'public/pokedex.png';
+import shopImg from 'public/shop.png';
 
 function clearCollection(path: string) {
   db.collection(path)
@@ -34,6 +37,7 @@ export async function getListFromPokeApi(links: string[]) {
   }
   return temp;
 }
+
 async function getSize(path: string) {
   return db.collection(path).get().then((snap: any) => snap.size);
 }
@@ -79,7 +83,6 @@ const getInventory = async () => {
         map.set(doc.id, doc.data());
       });
     });
-  console.log(arr);
 };
 
 const getShopSale = async () => {
@@ -91,11 +94,10 @@ const getShopSale = async () => {
         arr.push({ ...doc.data() });
       });
     });
-  console.log(arr);
 };
 
 const HomeComponent = () => (
-  <div style={{ height: '100%' }}>
+  <Container style={{ height: '100%' }}>
     <Grid
       container
       spacing={0}
@@ -128,53 +130,30 @@ const HomeComponent = () => (
         >Get shop
         </Button>
       </Grid>
-      <Grid item xs={1}>
-        <Link href="/pokedex">
-          <Button
-            variant="contained"
-            color="primary"
-          >Pokedex
-          </Button>
-        </Link>
-      </Grid>
-      <Grid item xs={1}>
-        <Link href="/pokedex/bestiary">
-          <Button
-            variant="contained"
-            color="warning"
-          >Bestiary std link
-          </Button>
-        </Link>
-      </Grid>
-      <Grid item xs={1}>
-        <Link href="/pokedex/inventory">
-          <Button
-            variant="contained"
-            color="warning"
-          >Inventory std link
-          </Button>
-        </Link>
-      </Grid>
-      <Grid item xs={1}>
+      <Grid item xs={1} sx={{ cursor: 'pointer' }}>
         <Link href="/shop">
-          <Button
-            variant="contained"
-            color="success"
-          >Shop
-          </Button>
+          <Image
+            src={shopImg}
+            alt="as"
+            width={200}
+            height={200}
+          />
         </Link>
       </Grid>
-      <Grid item xs={1}>
+      <Grid item xs={1} sx={{ cursor: 'pointer' }}>
         <Button
+          onClick={getShopSale}
           variant="contained"
-          color="success"
+          color="primary"
           disabled
         >Arena
         </Button>
       </Grid>
     </Grid>
+
+    <PokedexLinkComponent />
     <WalletComponent />
-  </div>
+  </Container>
 );
 
 export default HomeComponent;

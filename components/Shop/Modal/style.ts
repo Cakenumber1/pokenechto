@@ -31,6 +31,17 @@ export const useStyles = makeStyles(() => ({
     left: 0,
     top: 0,
   }),
+  modalInner: () => ({
+    background: 'grey',
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    top: 0,
+    left: 0,
+    flexDirection: 'column',
+    alignItems: 'center',
+    overflow: 'hidden',
+  }),
   button: () => ({
     display: 'block',
     position: 'absolute',

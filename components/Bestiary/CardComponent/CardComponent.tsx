@@ -9,8 +9,8 @@ import { useGetPokemonByNameQuery } from 'store/api';
 
 import PokeModal from '../ModalComponent';
 import { style } from './style';
-
-const names = new Set(['Ivysaur', 'Charmander', 'Charizard']);
+// todo: firebase
+const unlocked = new Set([1, 2, 3, 4, 5, 6]);
 
 const CardComponent = ({ pokemon }: { pokemon: PokemonsListResults }) => {
   const {
@@ -49,8 +49,7 @@ const CardComponent = ({ pokemon }: { pokemon: PokemonsListResults }) => {
       </Card>
     );
   }
-  // @ts-ignore
-  const matchesName = names.has(data!.name);
+  const matchesName = unlocked.has(data!.id as number);
   return (
     <Card sx={style.card}>
       <CardHeader

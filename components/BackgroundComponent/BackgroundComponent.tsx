@@ -1,0 +1,224 @@
+// eslint-disable-next-line max-classes-per-file
+import { Box } from '@mui/material';
+import cloud1 from 'public/cloud1.png';
+import cloud2 from 'public/cloud2.png';
+import cloud3 from 'public/cloud3.png';
+import cloud4 from 'public/cloud4.png';
+import cloud5 from 'public/cloud5.png';
+import React, { useEffect, useRef } from 'react';
+import { isMobile } from 'react-device-detect';
+
+let background: any;
+let cloudCount = 12;
+let speedC = 0.5;
+let scaleC = 3;
+let pos = 300;
+const links = [cloud1, cloud2, cloud3, cloud4, cloud5];
+const images: HTMLImageElement[] = [];
+
+const bg = [[['#020111', 0.85], ['#191621', 1]],
+  [['#020111', 0.6], ['#20202c', 1]],
+  [['#020111', 0.1], ['#3a3a52', 1]],
+  [['#20202c', 0], ['#515175', 1]],
+  [['#40405c', 0], ['#6f71aa', 0.8], ['#8a76ab', 1]],
+  [['#4a4969', 0], ['#7072ab', 0.5], ['#cd82a0', 1]],
+  [['#757abf', 0], ['#8583be', 0.6], ['#eab0d1', 1]],
+  [['#82addb', 0], ['#ebb2b1', 1]],
+  [['#94c5f8', 0.01], ['#a6e6ff', 0.7], ['#b1b5ea', 1]],
+  [['#b7eaff', 0], ['#94dfff', 1]],
+  [['#9be2fe', 0], ['#67d1fb', 1]],
+  [['#90dffe', 0], ['#38a3d1', 1]],
+  [['#57c1eb', 0], ['#246fa8', 1]],
+  [['#2d91c2', 0], ['#1e528e', 1]],
+  [['#2473ab', 0], ['#1e528e', 0.7], ['#5b7983', 1]],
+  [['#1e528e', 0], ['#265889', 0.5], ['#9da671', 1]],
+  [['#1e528e', 0], ['#728a7c', 0.5], ['#e9ce5d', 1]],
+  [['#154277', 0], ['#576e71', 0.3], ['#e1c45e', 0.7], ['#b26339', 1]],
+  [['#163C52', 0], ['#4F4F47', 0.3], ['#C5752D', 0.6], ['#B7490F', 0.8], ['#2F1107', 1]],
+  [['#071B26', 0], ['#071B26', 0.3], ['#8A3B12', 0.8], ['#240E03', 1]],
+  [['#010A10', 0.3], ['#59230B', 0.8], ['#2F1107', 1]],
+  [['#090401', 0.5], ['#4B1D06', 1]],
+  [['#00000c', 0.8], ['#150800', 1]],
+];
+let date = new Date().getHours();
+let canvas: any;
+let ctx: any;
+class Vector2 { // 2-dimensional vector object for movement/position
+  x: number;
+  y: number;
+
+  constructor(x = 0, y = 0) {
+    this.x = x;
+    this.y = y;
+  }
+
+  add(vec: Vector2) {
+    this.x += vec.x;
+    this.y += vec.y;
+  }
+}
+
+// window dimensions
+const dimensions = {
+  width: 0,
+  height: 0,
+};
+
+// center of window
+const center = new Vector2(0, 0);
+
+class Cloud {
+  self: any;
+  ready: boolean;
+  sprite: HTMLImageElement;
+  scale: number;
+  width: number;
+  height: number;
+  position: Vector2;
+  velocity: Vector2;
+
+  constructor() {
+    this.self = this;
+    this.ready = false;
+    this.sprite = images[Math.floor(Math.random() * images.length)];
+    this.scale = Math.round(scaleC + Math.random() * scaleC); // random scale between 1 and 5
+    this.width = this.sprite.width / this.scale; // divide width/height by scale
+    this.height = this.sprite.height / this.scale;
+    // position offscreen left, center on y axis, add random y offset between -200 and 200
+    this.position = new Vector2(-this.width, center.y - this.height
+      / 2 + (Math.round(pos - Math.random() * pos * 2)));
+    this.velocity = new Vector2(speedC + Math.random(), 0);
+    window.setTimeout(() => {
+      this.ready = true;
+    }, Math.random() * 5000);
+  }
+
+  update() {
+    if (this.position.x > dimensions.width) {
+      // reset when cloud is offscreen right
+      this.sprite = images[Math.floor(Math.random() * images.length)];
+      this.scale = Math.round(1 + Math.random() * 6); // random scale between 1 and 5
+      this.width = this.sprite.width / this.scale; // divide width/height by scale
+      this.height = this.sprite.height / this.scale;
+      // position offscreen left, center on y axis, add random y offset between -200 and 200
+      this.position = new Vector2(-this.width, center.y - this.height
+        / 2 + (Math.round(pos - Math.random() * pos * 2)));
+      this.velocity = new Vector2(speedC + Math.random() * 0.5, 0);
+    } else {
+      this.position.add(this.velocity); // move cloud across the screen
+    }
+  }
+}
+const clouds: Cloud[] = [];
+
+function populate() {
+  for (let i = 0; i < cloudCount; i++) {
+    clouds.push(new Cloud());
+  }
+}
+
+function draw() {
+  // clear previous frame from offscreen canvas
+  ctx.os.clearRect(0, 0, dimensions.width, dimensions.height);
+  for (let i = 0; i < cloudCount; i++) {
+    const cloud = clouds[i];
+    ctx.os.globalAlpha = 0.7;
+    if (cloud.ready) {
+      ctx.os.globalCompositeOperation = 'difference'; // difference composite adds 'shading' to edges of cloud overlap
+      ctx.os.drawImage(cloud.sprite, cloud.position.x, cloud.position.y, cloud.width, cloud.height);
+      ctx.os.globalCompositeOperation = 'lighter'; // lighter composite operation brightens areas where the clouds overlap
+      ctx.os.drawImage(cloud.sprite, cloud.position.x, cloud.position.y, cloud.width, cloud.height);
+      cloud.update();
+    }
+  }
+  ctx.main.fillStyle = background; // fill main canvas with gradient
+  ctx.main.fillRect(0, 0, dimensions.width, dimensions.height);
+  ctx.main.drawImage(canvas.os, 0, 0); // draw the composited offscreen frame to onscreen canvas
+}
+
+function loop() { // do a barrel roll
+  draw();
+  window.requestAnimationFrame(loop);
+}
+
+function getImages() {
+  links.forEach((l) => {
+    const img: HTMLImageElement = document.createElement('img');
+    img.src = l.src;
+    images.push(img);
+  });
+  populate();
+  loop();
+}
+
+function resize() {
+  // eslint-disable-next-line no-param-reassign,no-multi-assign
+  canvas.main.width = canvas.os.width = dimensions.width;
+  // eslint-disable-next-line no-param-reassign,no-multi-assign
+  canvas.main.height = canvas.os.height = dimensions.height;
+  background = ctx.os.createLinearGradient(center.x, 0, center.x, dimensions.height);
+  bg[date].forEach((el) => {
+    background.addColorStop(el[1] as number, el[0] as string);
+  });
+}
+
+const BackgroundComponent = (props: { children: JSX.Element }) => {
+  const { children } = props;
+  const canvasTemp = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    if (window) {
+      window.requestAnimationFrame = (function () {
+        return window.requestAnimationFrame
+          || function (callback) {
+            window.setTimeout(callback, 1000 / 60);
+          };
+      }());
+      if (isMobile) {
+        cloudCount = 4;
+        scaleC = 1;
+        speedC = 0.5;
+        pos = 200;
+      }
+      dimensions.width = window.innerWidth;
+      dimensions.height = window.innerHeight;
+      center.x = dimensions.width / 2;
+      center.y = dimensions.height / 2;
+      canvas = { // get things
+        main: canvasTemp.current,
+        os: document.createElement('canvas'),
+      };
+      ctx = {
+        main: canvas.main.getContext('2d'),
+        os: canvas.os.getContext('2d'),
+      };
+      resize(); // do stuff
+      getImages();
+    }
+    const t = setInterval(() => {
+      const dateTemp = new Date().getHours();
+      if (dateTemp !== date) {
+        console.log('reshade');
+        resize();
+        date = dateTemp;
+      }
+    }, 60000);
+    return () => clearInterval(t);
+  });
+  return (
+    <Box style={{ height: '100%', background: 'green' }}>
+      <canvas
+        ref={canvasTemp}
+        id="canvas"
+        style={{
+          position: 'absolute', top: 0, left: 0, height: '45vh', width: '100vw',
+        }}
+      />
+      <Box style={{ height: '100%' }}>
+        {children}
+      </Box>
+    </Box>
+  );
+};
+
+export default BackgroundComponent;

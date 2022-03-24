@@ -4,8 +4,8 @@ export const useStyles = makeStyles({
   container: {
     zIndex: '10',
     display: 'flex',
-    right: 0,
-    top: 0,
+    right: '1%',
+    top: '1%',
     position: 'absolute',
     width: 'auto',
     height: 'auto',

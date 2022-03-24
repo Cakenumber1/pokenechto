@@ -6,10 +6,10 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'styles/globals.scss';
 
+import { AuthProvider } from 'myFirebase/AuthContext';
 import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 
-import { AuthProvider } from 'myFirebase/AuthContext';
 import { store } from '../store';
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
