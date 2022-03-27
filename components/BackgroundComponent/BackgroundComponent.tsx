@@ -8,15 +8,12 @@ import cloud5 from 'public/cloud5.png';
 import React, { useEffect, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
 
-let background: any;
-let cloudCount = 12;
-let speedC = 0.5;
-let scaleC = 3;
-let pos = 300;
 const links = [cloud1, cloud2, cloud3, cloud4, cloud5];
 const images: HTMLImageElement[] = [];
+const alpArr = [0.21, 0.21, 0.21, 0.4, 0.5, 0.6, 0.7, 0.7, 0.7, 0.7,
+  0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.6, 0.5, 0.4, 0.21];
 
-const bg = [[['#020111', 0.85], ['#191621', 1]],
+const bgArr = [[['#020111', 0.85], ['#191621', 1]],
   [['#020111', 0.6], ['#20202c', 1]],
   [['#020111', 0.1], ['#3a3a52', 1]],
   [['#20202c', 0], ['#515175', 1]],
@@ -40,9 +37,18 @@ const bg = [[['#020111', 0.85], ['#191621', 1]],
   [['#090401', 0.5], ['#4B1D06', 1]],
   [['#00000c', 0.8], ['#150800', 1]],
 ];
+
+let background: any;
+
+let cloudCount = 12;
+let speedC = 0.5;
+let scaleC = 3;
+let pos = 300;
 let date = new Date().getHours();
+let alp = alpArr[date];
 let canvas: any;
 let ctx: any;
+
 class Vector2 { // 2-dimensional vector object for movement/position
   x: number;
   y: number;
@@ -72,8 +78,10 @@ class Cloud {
   ready: boolean;
   sprite: HTMLImageElement;
   scale: number;
+  // scaleH: number;
   width: number;
   height: number;
+  alph: number;
   position: Vector2;
   velocity: Vector2;
 
@@ -81,29 +89,34 @@ class Cloud {
     this.self = this;
     this.ready = false;
     this.sprite = images[Math.floor(Math.random() * images.length)];
-    this.scale = Math.round(scaleC + Math.random() * scaleC); // random scale between 1 and 5
-    this.width = this.sprite.width / this.scale; // divide width/height by scale
+    // random scale between 1 and 5
+    this.scale = Math.round(1 + Math.random() * scaleC);
+    // this.scaleH = Math.round(1 + Math.random() * scaleC);
+    // divide width/height by scale
+    this.width = this.sprite.width / this.scale;
     this.height = this.sprite.height / this.scale;
+    this.alph = alp;
     // position offscreen left, center on y axis, add random y offset between -200 and 200
     this.position = new Vector2(-this.width, center.y - this.height
       / 2 + (Math.round(pos - Math.random() * pos * 2)));
     this.velocity = new Vector2(speedC + Math.random(), 0);
     window.setTimeout(() => {
       this.ready = true;
-    }, Math.random() * 5000);
+    }, Math.random() * 12000);
   }
 
   update() {
     if (this.position.x > dimensions.width) {
       // reset when cloud is offscreen right
       this.sprite = images[Math.floor(Math.random() * images.length)];
-      this.scale = Math.round(1 + Math.random() * 6); // random scale between 1 and 5
+      // const scale = Math.round(1 + Math.random() * 6); // random scale between 1 and 5
       this.width = this.sprite.width / this.scale; // divide width/height by scale
       this.height = this.sprite.height / this.scale;
       // position offscreen left, center on y axis, add random y offset between -200 and 200
       this.position = new Vector2(-this.width, center.y - this.height
         / 2 + (Math.round(pos - Math.random() * pos * 2)));
       this.velocity = new Vector2(speedC + Math.random() * 0.5, 0);
+      this.alph = alp;
     } else {
       this.position.add(this.velocity); // move cloud across the screen
     }
@@ -122,8 +135,8 @@ function draw() {
   ctx.os.clearRect(0, 0, dimensions.width, dimensions.height);
   for (let i = 0; i < cloudCount; i++) {
     const cloud = clouds[i];
-    ctx.os.globalAlpha = 0.7;
-    if (cloud.ready) {
+    ctx.os.globalAlpha = cloud.alph;
+    if (cloud && cloud.ready) {
       ctx.os.globalCompositeOperation = 'difference'; // difference composite adds 'shading' to edges of cloud overlap
       ctx.os.drawImage(cloud.sprite, cloud.position.x, cloud.position.y, cloud.width, cloud.height);
       ctx.os.globalCompositeOperation = 'lighter'; // lighter composite operation brightens areas where the clouds overlap
@@ -138,7 +151,8 @@ function draw() {
 
 function loop() { // do a barrel roll
   draw();
-  window.requestAnimationFrame(loop);
+  setTimeout(() => loop(), 1000 / 60);
+  // window.requestAnimationFrame(loop);
 }
 
 function getImages() {
@@ -157,7 +171,7 @@ function resize() {
   // eslint-disable-next-line no-param-reassign,no-multi-assign
   canvas.main.height = canvas.os.height = dimensions.height;
   background = ctx.os.createLinearGradient(center.x, 0, center.x, dimensions.height);
-  bg[date].forEach((el) => {
+  bgArr[date].forEach((el) => {
     background.addColorStop(el[1] as number, el[0] as string);
   });
 }
@@ -168,15 +182,15 @@ const BackgroundComponent = (props: { children: JSX.Element }) => {
 
   useEffect(() => {
     if (window) {
-      window.requestAnimationFrame = (function () {
-        return window.requestAnimationFrame
-          || function (callback) {
-            window.setTimeout(callback, 1000 / 60);
-          };
-      }());
+      // window.requestAnimationFrame = (function () {
+      //   return window.requestAnimationFrame
+      //     || function (callback) {
+      //       window.setTimeout(callback, 1000 / 90);
+      //     };
+      // }());
       if (isMobile) {
         cloudCount = 4;
-        scaleC = 1;
+        scaleC = 6;
         speedC = 0.5;
         pos = 200;
       }
@@ -192,19 +206,20 @@ const BackgroundComponent = (props: { children: JSX.Element }) => {
         main: canvas.main.getContext('2d'),
         os: canvas.os.getContext('2d'),
       };
-      resize(); // do stuff
       getImages();
+      resize(); // do stuff
     }
     const t = setInterval(() => {
       const dateTemp = new Date().getHours();
       if (dateTemp !== date) {
-        console.log('reshade');
+        console.log(dateTemp);
+        alp = alpArr[dateTemp];
         resize();
         date = dateTemp;
       }
-    }, 60000);
+    }, 120000);
     return () => clearInterval(t);
-  });
+  }, [isMobile]);
   return (
     <Box style={{ height: '100%', background: 'green' }}>
       <canvas

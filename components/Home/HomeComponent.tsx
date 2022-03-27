@@ -1,10 +1,11 @@
-import { Button, Container, Grid } from '@mui/material';
+import { Box, Button, Grid } from '@mui/material';
 import axios from 'axios';
 import PokedexLinkComponent from 'components/Home/PokedexLinkComponent';
 import WalletComponent from 'components/WalletComponent';
 import firebase from 'firebase';
 import { parseResponsePokemon } from 'helpers';
 import { Pokemon } from 'interfaces/';
+import { useAuth } from 'myFirebase/AuthContext';
 import { db } from 'myFirebase/firebase';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -95,64 +96,61 @@ const getShopSale = async () => {
     });
 };
 
-const HomeComponent = () => (
-  <Container style={{ height: '100%' }}>
-    <Grid
-      container
-      spacing={0}
-      direction="column"
-      alignItems="center"
-      justifyContent="center"
-      sx={{ height: '100%' }}
-    >
-      <Grid item xs={1}>
-        <Button
-          onClick={getInventory}
-          variant="contained"
-          color="primary"
-        >Get full invent
-        </Button>
-      </Grid>
-      <Grid item xs={1}>
-        <Button
-          onClick={updateShop}
-          variant="contained"
-          color="primary"
-        >Update shop
-        </Button>
-      </Grid>
-      <Grid item xs={1}>
-        <Button
-          onClick={getShopSale}
-          variant="contained"
-          color="primary"
-        >Get shop
-        </Button>
-      </Grid>
-      <Grid item xs={1} sx={{ cursor: 'pointer' }}>
-        <Link href="/shop">
-          <Image
-            src={shopImg}
-            alt="as"
-            width={200}
-            height={200}
-          />
-        </Link>
-      </Grid>
-      <Grid item xs={1} sx={{ cursor: 'pointer' }}>
-        <Button
-          onClick={getShopSale}
-          variant="contained"
-          color="primary"
-          disabled
-        >Arena
-        </Button>
-      </Grid>
-    </Grid>
+// getInventory();
+// updateShop();
+// getShopSale();
 
-    <PokedexLinkComponent />
-    <WalletComponent />
-  </Container>
-);
+const HomeComponent = () => {
+  const { logout } = useAuth()!;
+  return (
+    <Box style={{ height: '100%', display: 'flex', flexDirection: 'column-reverse' }}>
+      <Grid
+        container
+        spacing={0}
+        direction="column-reverse" // row
+        justifyContent="space-between"
+        sx={{ bottom: 0, height: '60%' }}
+      >
+        <Grid
+          item
+          xs={1}
+          sx={{
+            cursor: 'pointer', display: 'flex', alignItems: 'self-end', pb: '3%',
+          }}
+        >
+          <Button
+            onClick={logout}
+            variant="contained"
+            color="primary"
+          >Exit
+          </Button>
+        </Grid>
+        <Grid item xs={1} sx={{ cursor: 'pointer', minWidth: '150px', alignItems: 'baseline' }}>
+          <Link href="/arena">
+            <Image
+              src={shopImg}
+              alt="as"
+              width={150} // 200
+              height={150}
+            />
+          </Link>
+        </Grid>
+        <Grid item xs={1} sx={{ cursor: 'pointer', minWidth: '150px', alignItems: 'self-end' }}>
+          <Link href="/shop">
+            <Image
+              src={shopImg}
+              alt="as"
+              width={150}
+              height={150}
+            />
+          </Link>
+        </Grid>
+      </Grid>
+
+      <PokedexLinkComponent />
+      <WalletComponent />
+    </Box>
+  );
+};
 
 export default HomeComponent;
