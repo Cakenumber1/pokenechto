@@ -1,8 +1,8 @@
+import RegisterContainer from 'components/Auth/Register/RegisterContainer';
 import withoutAuth from 'components/HOCs/withoutAuthHOC';
 import React, { useState } from 'react';
 
 import LoginComponent from './LoginComponent';
-import RegisterComponent from './RegisterComponent';
 
 const AuthComponent = () => {
   const [page, setPage] = useState(true);
@@ -13,7 +13,7 @@ const AuthComponent = () => {
   if (page) {
     return (<LoginComponent handlePage={handlePage} />);
   }
-  return (<RegisterComponent handlePage={handlePage} />);
+  return (<RegisterContainer handlePage={handlePage} />);
 };
 
 export default withoutAuth(AuthComponent);

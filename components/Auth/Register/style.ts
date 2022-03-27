@@ -1,8 +1,10 @@
 import { makeStyles } from '@mui/styles';
 
 export const useStyles = makeStyles({
-  box: {
+  main: {
     height: '100%',
+  },
+  box: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -25,5 +27,22 @@ export const useStyles = makeStyles({
     width: '100%',
     padding: '2vh',
     textAlign: 'center',
+  },
+  swiper: {
+    width: '180px',
+    height: '240px',
+    padding: '10px',
+    margin: 0,
+  },
+  swiperSlide: {
+    padding: '5px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    borderRadius: '18px',
+    fontSize: '15px',
+    fontWeight: 'bold',
+    color: '#fff',
+    background: 'grey',
   },
 });

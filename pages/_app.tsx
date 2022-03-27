@@ -3,6 +3,8 @@ import 'swiper/css';
 // eslint-disable-next-line import/no-unresolved
 import 'swiper/css/navigation';
 // eslint-disable-next-line import/no-unresolved
+import 'swiper/css/effect-cards';
+// eslint-disable-next-line import/no-unresolved
 import 'swiper/css/pagination';
 import 'styles/globals.scss';
 

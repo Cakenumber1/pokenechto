@@ -42,3 +42,15 @@ export type Pokemon = {
   limit: number,
   amount: number,
 } | undefined;
+
+export type PokemonIni = {
+  id: number,
+  name: string,
+  img: string,
+  abilities: string[],
+  height: number,
+  weight: number,
+  stats: Stat[],
+  types: string[],
+  exp: number,
+};

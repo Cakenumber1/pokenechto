@@ -1,0 +1,130 @@
+[
+    {
+        "id": 141,
+        "name": "kabutops",
+        "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/141.svg",
+        "abilities": [
+            "swift-swim",
+            "battle-armor",
+            "weak-armor"
+        ],
+        "height": 13,
+        "weight": 444,
+        "stats": [
+            {
+                "statName": "hp",
+                "statVal": 64
+            },
+            {
+                "statName": "attack",
+                "statVal": 115
+            },
+            {
+                "statName": "defense",
+                "statVal": 111
+            },
+            {
+                "statName": "special-attack",
+                "statVal": 68
+            },
+            {
+                "statName": "special-defense",
+                "statVal": 70
+            },
+            {
+                "statName": "speed",
+                "statVal": 85
+            }
+        ],
+        "types": [
+            "rock",
+            "water"
+        ],
+        "exp": 0
+    },
+    {
+        "id": 142,
+        "name": "aerodactyl",
+        "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/142.svg",
+        "abilities": [
+            "rock-head",
+            "pressure",
+            "unnerve"
+        ],
+        "height": 19,
+        "weight": 626,
+        "stats": [
+            {
+                "statName": "hp",
+                "statVal": 80
+            },
+            {
+                "statName": "attack",
+                "statVal": 108
+            },
+            {
+                "statName": "defense",
+                "statVal": 71
+            },
+            {
+                "statName": "special-attack",
+                "statVal": 63
+            },
+            {
+                "statName": "special-defense",
+                "statVal": 82
+            },
+            {
+                "statName": "speed",
+                "statVal": 137
+            }
+        ],
+        "types": [
+            "rock",
+            "flying"
+        ],
+        "exp": 0
+    },
+    {
+        "id": 143,
+        "name": "snorlax",
+        "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/143.svg",
+        "abilities": [
+            "immunity",
+            "thick-fat",
+            "gluttony"
+        ],
+        "height": 23,
+        "weight": 4939,
+        "stats": [
+            {
+                "statName": "hp",
+                "statVal": 173
+            },
+            {
+                "statName": "attack",
+                "statVal": 118
+            },
+            {
+                "statName": "defense",
+                "statVal": 65
+            },
+            {
+                "statName": "special-attack",
+                "statVal": 66
+            },
+            {
+                "statName": "special-defense",
+                "statVal": 116
+            },
+            {
+                "statName": "speed",
+                "statVal": 32
+            }
+        ],
+        "types": [
+            "normal"
+        ],
+        "exp": 0
+    }
+]
