@@ -24,9 +24,11 @@ export const useStylesSwiper = makeStyles((theme : Theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     borderRadius: '18px',
-    fontWeight: 'bold',
     color: '#fff',
     background: 'grey',
+  },
+  header: {
+    fontWeight: 'bold',
     [theme.breakpoints.down('md')]: {
       fontSize: '15px',
     },

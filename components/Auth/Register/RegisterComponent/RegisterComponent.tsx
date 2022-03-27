@@ -1,5 +1,4 @@
 import {
-  Alert,
   Box, Button, Grid,
   Typography,
 } from '@mui/material';
@@ -55,14 +54,13 @@ const RegisterComponent: React.FC<Props> = ({
           initialPokes={initialPokes}
         />
       </ThemeProvider>
-      <Alert
-        severity="error"
+      <Box
         sx={{
           display: error,
         }}
         className={classes.error}
       >{error?.message}
-      </Alert>
+      </Box>
       <Button
         type="submit"
         fullWidth

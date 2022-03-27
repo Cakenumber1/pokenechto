@@ -1,13 +1,13 @@
 import {
-  Grid,
   Box,
+  Grid,
   Typography,
 } from '@mui/material';
 import { useStylesSwiper } from 'components/Auth/Register/RegisterComponent/RegisterPokeComponent/style';
 import { PokemonIni } from 'interfaces/pokemonType';
 import React, { useState } from 'react';
 // eslint-disable-next-line import/no-unresolved
-import { EffectCards, Controller } from 'swiper';
+import { Controller, EffectCards } from 'swiper';
 // eslint-disable-next-line import/no-unresolved
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -18,10 +18,15 @@ type Props = {
 const RegisterPokeComponent: React.FC<Props> = ({
   initialPokes,
 }) => {
-  console.log(initialPokes)
+  console.log(initialPokes);
   const classes = useStylesSwiper();
   // @ts-ignore
   const [slide, setSlide] = useState<Swiper | Swiper[] | undefined>(null);
+  function getTopStat(poke: PokemonIni) {
+    const soretedPoke = poke.stats.slice(0);
+    soretedPoke.sort((a, b) => b.statVal - a.statVal);
+    return soretedPoke[0].statName; // poke.stats.sort((a, b) => a.statVal - b.statVal).slice(0, 1);
+  }
   return (
     <Grid
       item
@@ -44,7 +49,7 @@ const RegisterPokeComponent: React.FC<Props> = ({
       >
         {initialPokes.map((poke, key) => (
           <SwiperSlide className={classes.swiperSlide} key={key}>
-            <Typography>{poke!.name.toUpperCase()}</Typography>
+            <Typography className={classes.header}>{poke!.name.toUpperCase()}</Typography>
             <img
               src={poke!.img}
               width="95%"
@@ -53,12 +58,20 @@ const RegisterPokeComponent: React.FC<Props> = ({
               alt=""
             />
             <Box>
-              1
+              <Box>Types</Box>
+              <Grid container spacing={2}>
+                {poke!.types.map((a, key2) => (
+                  <Grid item xs={4}>
+                    <Box key={key2}>{a}</Box>
+                  </Grid>
+                ))}
+              </Grid>
+              <Box>Main attribute</Box>
+              <Box>{getTopStat(poke)}</Box>
             </Box>
           </SwiperSlide>
         ))}
       </Swiper>
-      <button type={'button'} onClick={() => console.log(slide!.realIndex)}/>
     </Grid>
   );
 };

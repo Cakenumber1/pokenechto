@@ -8,7 +8,6 @@ import { Pokemon } from 'interfaces/';
 import { db } from 'myFirebase/firebase';
 import Image from 'next/image';
 import Link from 'next/link';
-import pokedexImg from 'public/pokedex.png';
 import shopImg from 'public/shop.png';
 
 function clearCollection(path: string) {
