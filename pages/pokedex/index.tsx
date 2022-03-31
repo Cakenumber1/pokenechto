@@ -1,13 +1,27 @@
-import { Button, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import FrameComponent from 'components/FrameComponent';
 import withAuth from 'components/HOCs/withAuthHOC';
 import { useAuth } from 'myFirebase/AuthContext';
+import { db } from 'myFirebase/firebase';
 import { NextPage } from 'next';
-import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
+const getData = async (uid: string, setWho: React.Dispatch<any>) => {
+  const res = await db.collection('users').doc(uid)
+    .get();
+  if (res.exists) {
+    setWho(res.data());
+  }
+  return null;
+};
 
 const Home: NextPage = () => {
-  const { logout } = useAuth()!;
+  const { currentUser } = useAuth()!;
+  const [who, setWho] = useState<any>();
+  useEffect(() => {
+    getData(currentUser.uid, setWho);
+    console.log(who);
+  }, []);
   return (
     <FrameComponent>
       <Grid
@@ -19,21 +33,7 @@ const Home: NextPage = () => {
         sx={{ height: '100%' }}
       >
         <Grid item xs={3}>
-          <Button
-            onClick={logout}
-            variant="contained"
-            color="success"
-          >Logout
-          </Button>
-        </Grid>
-        <Grid item xs={3}>
-          <Link href="/" passHref>
-            <Button
-              variant="contained"
-              color="primary"
-            >Выход на начальный экран
-            </Button>
-          </Link>
+          {who && <div>{JSON.stringify(who)}</div>}
         </Grid>
       </Grid>
     </FrameComponent>

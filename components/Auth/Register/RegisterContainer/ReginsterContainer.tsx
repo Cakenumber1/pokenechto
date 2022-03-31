@@ -11,10 +11,11 @@ type Props = {
   handlePage: () => void,
 };
 
-function create(user: any, name: string, slide: number) {
+function create(user: any, name: string, mail: string, slide: number) {
   const db = firebase.firestore();
   db.collection('users').doc(user.uid).set({
     name,
+    mail,
     registered: firebase.firestore.Timestamp.fromDate(new Date()),
     money: 1000,
     berries: 10,
@@ -42,7 +43,7 @@ const RegisterContainer: React.FC<Props> = ({ handlePage }) => {
     logout();
     await signup(mail, pass)
       .then(() => {
-        create(firebase.auth().currentUser, name, slide.activeIndex);
+        create(firebase.auth().currentUser, name, mail, slide.activeIndex);
       })
       .catch((e: any) => {
         setError(e);
