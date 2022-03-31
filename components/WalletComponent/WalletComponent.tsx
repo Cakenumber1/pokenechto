@@ -2,20 +2,22 @@ import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded
 import {
   Box, Button, Collapse, Modal, Stack, Zoom,
 } from '@mui/material';
+import { useAuth } from 'myFirebase/AuthContext';
 import React, { SyntheticEvent, useCallback, useState } from 'react';
 import {
-  useGetMoneyQuery,
-  useGetMushroomsQuery,
   usePatchMoneyMutation,
   usePatchMushroomsMutation,
+  usePostMoneyQuery,
+  usePostMushroomsQuery,
 } from 'store/service';
 
 import { useModalStyles, useStyles } from './style';
 import TableComponent from './TableComponent';
 
 const WalletComponent = () => {
-  const { data: mushrooms } = useGetMushroomsQuery();
-  const { data: money } = useGetMoneyQuery();
+  const { currentUser } = useAuth()!;
+  const { data: mushrooms } = usePostMushroomsQuery(currentUser.uid);
+  const { data: money } = usePostMoneyQuery(currentUser.uid);
   const [patchMoneyMutation] = usePatchMoneyMutation();
   const [patchMushroomsMutation] = usePatchMushroomsMutation();
   const classesM = useModalStyles();
@@ -41,12 +43,12 @@ const WalletComponent = () => {
   const handleAddMoney = (e: SyntheticEvent) => {
     e.preventDefault();
     const temp = e.target as HTMLElement;
-    patchMoneyMutation(Number(temp.innerText)).unwrap();
+    patchMoneyMutation({ uid: currentUser.uid, count: Number(temp.innerText) }).unwrap();
   };
   const handleAddMushrooms = (e: SyntheticEvent) => {
     e.preventDefault();
     const temp = e.target as HTMLElement;
-    patchMushroomsMutation(Number(temp.innerText)).unwrap();
+    patchMushroomsMutation({ uid: currentUser.uid, count: Number(temp.innerText) }).unwrap();
   };
 
   return (

@@ -36,6 +36,7 @@ const bgArr = [[['#020111', 0.85], ['#191621', 1]],
   [['#010A10', 0.3], ['#59230B', 0.8], ['#2F1107', 1]],
   [['#090401', 0.5], ['#4B1D06', 1]],
   [['#00000c', 0.8], ['#150800', 1]],
+  [['#00000c', 0.8], ['#150800', 1]],
 ];
 
 let background: any;
@@ -43,7 +44,7 @@ let background: any;
 let cloudCount = 12;
 let speedC = 0.5;
 let scaleC = 3;
-let pos = 300;
+let pos = 250;
 let date = new Date().getHours();
 let alp = alpArr[date];
 let canvas: any;
@@ -194,6 +195,7 @@ const BackgroundComponent = (props: { children: JSX.Element }) => {
         speedC = 0.5;
         pos = 200;
       }
+      console.log(window.innerHeight);
       dimensions.width = window.innerWidth;
       dimensions.height = window.innerHeight;
       center.x = dimensions.width / 2;
@@ -229,9 +231,7 @@ const BackgroundComponent = (props: { children: JSX.Element }) => {
           position: 'absolute', top: 0, left: 0, height: '45vh', width: '100vw',
         }}
       />
-      <Box style={{ height: '100%' }}>
-        {children}
-      </Box>
+      {children}
     </Box>
   );
 };

@@ -12,6 +12,11 @@ type IDandPrice = {
   price: number,
 };
 
+type PatchWallet = {
+  uid: string,
+  count: number,
+};
+
 type CurrencyResponseType = {
   count: number
 };
@@ -48,27 +53,35 @@ export const appApi = createApi({
       }),
       invalidatesTags: (result, error, id) => [{ type: 'Inventory', id }, 'Mushrooms'],
     }),
-    getMushrooms: builder.query<CurrencyResponseType, void>({
-      query: () => '/wallet/mushrooms',
+    postMushrooms: builder.query<CurrencyResponseType, void>({
+      query: (uid) => ({
+        url: '/wallet/mushrooms',
+        method: 'POST',
+        body: { uid },
+      }),
       providesTags: ['Mushrooms'],
     }),
-    patchMushrooms: builder.mutation<void, number>({
-      query: (count) => ({
+    patchMushrooms: builder.mutation<void, PatchWallet>({
+      query: ({ uid, count }) => ({
         url: '/wallet/mushrooms/',
         method: 'PATCH',
-        body: { count },
+        body: { uid, count },
       }),
       invalidatesTags: ['Mushrooms'],
     }),
-    getMoney: builder.query<CurrencyResponseType, void>({
-      query: () => '/wallet/money',
+    postMoney: builder.query<CurrencyResponseType, void>({
+      query: (uid) => ({
+        url: '/wallet/money',
+        method: 'POST',
+        body: { uid },
+      }),
       providesTags: ['Money'],
     }),
-    patchMoney: builder.mutation<void, number>({
-      query: (count) => ({
+    patchMoney: builder.mutation<void, PatchWallet>({
+      query: ({ uid, count }) => ({
         url: '/wallet/money/',
         method: 'PATCH',
-        body: { count },
+        body: { uid, count },
       }),
       invalidatesTags: ['Money'],
     }),
@@ -96,9 +109,9 @@ export const {
   useDeleteInventoryItemMutation,
   usePatchInventoryItemMutation,
   useGetInventoryItemQuery,
-  useGetMushroomsQuery,
+  usePostMushroomsQuery,
   usePatchMushroomsMutation,
-  useGetMoneyQuery,
+  usePostMoneyQuery,
   usePatchMoneyMutation,
   useGetShopPokemonIDsQuery,
   useGetPokemonByIDQuery,

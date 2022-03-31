@@ -8,9 +8,9 @@ import Slide from '@mui/material/Slide';
 import Zoom from '@mui/material/Zoom';
 import { CollectionItemType } from 'helpers/inventoryHelpers';
 import { colorMap, getBackgdoundColor, namesMap } from 'helpers/maps';
-import * as React from 'react';
-import { useState } from 'react';
-import { useGetInventoryItemQuery, useGetMushroomsQuery } from 'store/service';
+import { useAuth } from 'myFirebase/AuthContext';
+import React, { useState } from 'react';
+import { useGetInventoryItemQuery, usePostMushroomsQuery } from 'store/service';
 
 import { style } from './style';
 
@@ -27,9 +27,10 @@ export const InventoryModal = ({
   onClose: handleClose,
   onMushroom: handleClickMushroom,
 }: InventoryModalProps) => {
+  const { currentUser } = useAuth()!;
   const [zoomEntered, setZoomEntered] = useState(false);
   const { data } = useGetInventoryItemQuery(pokemon.collectionId);
-  const { data: mushrooms } = useGetMushroomsQuery();
+  const { data: mushrooms } = usePostMushroomsQuery(currentUser.uid);
 
   return (
     <Modal

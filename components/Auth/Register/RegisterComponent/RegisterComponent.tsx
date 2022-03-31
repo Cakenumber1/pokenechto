@@ -19,6 +19,8 @@ type Props = {
   setPass: React.Dispatch<React.SetStateAction<string>>,
   name: string,
   setName: React.Dispatch<React.SetStateAction<string>>,
+  slide: any,
+  setSlide: React.Dispatch<React.SetStateAction<any>>,
   error: any,
   handleSubmit: (e :React.FormEvent<HTMLFormElement>) => Promise<void>
 };
@@ -33,6 +35,8 @@ const RegisterComponent: React.FC<Props> = ({
   setPass,
   name,
   setName,
+  slide,
+  setSlide,
   error,
   handleSubmit,
 }) => (
@@ -52,6 +56,8 @@ const RegisterComponent: React.FC<Props> = ({
       <ThemeProvider theme={theme}>
         <RegisterPokeComponent
           initialPokes={initialPokes}
+          slide={slide}
+          setSlide={setSlide}
         />
       </ThemeProvider>
       <Box

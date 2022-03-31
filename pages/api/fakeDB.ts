@@ -1,7 +1,31 @@
 import { CollectionItemType } from 'helpers/inventoryHelpers';
-import { Pokemon } from 'interfaces/pokemonType';
+import { Pokemon, PokemonIni } from 'interfaces/pokemonType';
 import inventoryData from 'mocks/inventory.json';
 import shopInitialData from 'mocks/shop.json';
+import { db } from 'myFirebase/firebase';
+
+import { auth } from '../../myFirebase/firebase';
+
+const getData = async (uid: string) => {
+  const res = await db.collection('users').doc(uid)
+    .get();
+  if (res.exists) {
+    return res.data();
+  }
+  return 0;
+};
+
+const patchData = async (uid: string, count: number, _key: string) => {
+  const key = _key;
+  const obj:any = { [key]: count };
+  console.log(obj);
+  db.collection('users').doc(uid).update(obj);
+};
+
+const loginAdmin = async () => {
+  await auth.signInWithEmailAndPassword('admin@ss.ss', 'admin@ss.ss');
+};
+loginAdmin();
 
 const fakeDB = {
   buyPoke(_id : string, price: number) {
@@ -11,7 +35,7 @@ const fakeDB = {
       this.money -= price;
       this.inventory.data.push(
         {
-          ...slave as Pokemon,
+          ...slave as PokemonIni,
           collectionId: Date.now().toString(16),
         } as CollectionItemType,
       );
@@ -46,6 +70,8 @@ const fakeDB = {
   },
   mushrooms: 133,
   money: 1000,
+  getData,
+  patchData,
   shop: {
     data: shopInitialData as Pokemon[],
     getIDs() {

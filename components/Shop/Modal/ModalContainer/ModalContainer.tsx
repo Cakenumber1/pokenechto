@@ -2,8 +2,9 @@ import clsx from 'clsx';
 import ModalComponent from 'components/Shop/Modal/ModalComponent';
 import { useStyles } from 'components/Shop/Modal/style';
 import { DataType, Pokemon } from 'interfaces';
+import { useAuth } from 'myFirebase/AuthContext';
 import { useEffect, useState } from 'react';
-import { useGetMoneyQuery, usePatchSellPokemonMutation } from 'store/service';
+import { usePatchSellPokemonMutation, usePostMoneyQuery } from 'store/service';
 
 type Props = {
   open: boolean
@@ -15,8 +16,9 @@ type Props = {
 const ModalContainer = ({
   open, onClose, pokemon, data,
 }: Props) => {
+  const { currentUser } = useAuth()!;
   const classes = useStyles(data);
-  const { data: money } = useGetMoneyQuery();
+  const { data: money } = usePostMoneyQuery(currentUser.uid);
   const [patchSellPokemonMutation] = usePatchSellPokemonMutation();
   const [full, setFull] = useState(false);
 

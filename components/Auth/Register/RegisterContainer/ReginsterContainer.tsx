@@ -1,7 +1,7 @@
 import RegisterComponent from 'components/Auth/Register/RegisterComponent';
 import firebase from 'firebase';
+import { generatePersonalShop } from 'helpers/shop/updateShop';
 import initialPokes from 'mocks/initial.json';
-import pokemonsTemp from 'mocks/starter.json';
 import { useAuth } from 'myFirebase/AuthContext';
 import React, { useState } from 'react';
 
@@ -11,15 +11,21 @@ type Props = {
   handlePage: () => void,
 };
 
-function create(user: any, name: string) {
+function create(user: any, name: string, slide: number) {
   const db = firebase.firestore();
   db.collection('users').doc(user.uid).set({
     name,
-    photoUrl: 'https://lh3.googleusercontent.com/a/AATXAJwaJPpAFh4sWy_OSDtSHthSsHWNcV2FbkGL-ALm=s96-c',
+    registered: firebase.firestore.Timestamp.fromDate(new Date()),
+    money: 1000,
+    berries: 10,
+    rating: 0,
+    pvpTotal: 0,
+    pvpWin: 0,
+    mainPoke: initialPokes[slide],
+    bestiary: [initialPokes[slide].id],
   });
-  pokemonsTemp.forEach((poke) => {
-    db.collection('users').doc(user.uid).collection('inventory').add(poke);
-  });
+  db.collection('users').doc(user.uid).collection('inventory').add(initialPokes[slide]);
+  generatePersonalShop(user.uid);
 }
 
 const RegisterContainer: React.FC<Props> = ({ handlePage }) => {
@@ -28,6 +34,7 @@ const RegisterContainer: React.FC<Props> = ({ handlePage }) => {
   const [mail, setMail] = useState('');
   const [pass, setPass] = useState('');
   const [name, setName] = useState('');
+  const [slide, setSlide] = useState<any>(null);
   const { signup, logout } = useAuth()!;
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -35,7 +42,7 @@ const RegisterContainer: React.FC<Props> = ({ handlePage }) => {
     logout();
     await signup(mail, pass)
       .then(() => {
-        create(firebase.auth().currentUser, `${name}`);
+        create(firebase.auth().currentUser, name, slide.activeIndex);
       })
       .catch((e: any) => {
         setError(e);
@@ -55,6 +62,8 @@ const RegisterContainer: React.FC<Props> = ({ handlePage }) => {
       setPass={setPass}
       name={name}
       setName={setName}
+      slide={slide}
+      setSlide={setSlide}
       error={error}
       handleSubmit={handleSubmit}
     />

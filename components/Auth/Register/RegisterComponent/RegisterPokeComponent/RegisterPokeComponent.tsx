@@ -5,23 +5,24 @@ import {
 } from '@mui/material';
 import { useStylesSwiper } from 'components/Auth/Register/RegisterComponent/RegisterPokeComponent/style';
 import { PokemonIni } from 'interfaces/pokemonType';
-import React, { useState } from 'react';
+import React from 'react';
 // eslint-disable-next-line import/no-unresolved
 import { Controller, EffectCards } from 'swiper';
 // eslint-disable-next-line import/no-unresolved
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 type Props = {
-  initialPokes: PokemonIni[]
+  initialPokes: PokemonIni[],
+  slide: any,
+  setSlide: React.Dispatch<React.SetStateAction<any>>,
 };
 
 const RegisterPokeComponent: React.FC<Props> = ({
   initialPokes,
+  slide,
+  setSlide,
 }) => {
-  console.log(initialPokes);
   const classes = useStylesSwiper();
-  // @ts-ignore
-  const [slide, setSlide] = useState<Swiper | Swiper[] | undefined>(null);
   function getTopStat(poke: PokemonIni) {
     const soretedPoke = poke.stats.slice(0);
     soretedPoke.sort((a, b) => b.statVal - a.statVal);
@@ -57,17 +58,24 @@ const RegisterPokeComponent: React.FC<Props> = ({
               style={{ aspectRatio: '1/1' }}
               alt=""
             />
-            <Box>
-              <Box>Types</Box>
-              <Grid container spacing={2}>
+            <Box sx={{
+              display: 'flex',
+              height: '100%',
+              width: '100%',
+              flexDirection: 'column',
+              justifyContent: 'space-evenly',
+            }}
+            >
+              <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                <Box>Types: </Box>
                 {poke!.types.map((a, key2) => (
-                  <Grid item xs={4}>
-                    <Box key={key2}>{a}</Box>
-                  </Grid>
+                  <Box key={key2}>{a}</Box>
                 ))}
-              </Grid>
-              <Box>Main attribute</Box>
-              <Box>{getTopStat(poke)}</Box>
+              </Box>
+              <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                <Box>Spec:</Box>
+                <Box>{getTopStat(poke)}</Box>
+              </Box>
             </Box>
           </SwiperSlide>
         ))}

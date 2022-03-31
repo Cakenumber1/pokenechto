@@ -1,10 +1,10 @@
 import BackgroundComponent from 'components/BackgroundComponent';
 import withAuth from 'components/HOCs/withAuthHOC';
-import HomeComponent from 'components/Home';
+import HomeContainer from 'components/Home/HomeContainer';
 import type { NextPage } from 'next';
 
 const Home: NextPage = () => (
-  <BackgroundComponent><HomeComponent /></BackgroundComponent>
+  <BackgroundComponent><HomeContainer /></BackgroundComponent>
 );
 
 export default withAuth(Home);
