@@ -3,15 +3,16 @@ import { Box, Button } from '@mui/material';
 import PokedexLinkComponent from 'components/Home/PokedexLinkComponent';
 import { useStyles } from 'components/Home/style';
 import WalletComponent from 'components/WalletComponent';
-import firebase from 'firebase';
+// import firebase from 'firebase';
 // import { parseResponsePokemon } from 'helpers';
 // import { Pokemon } from 'interfaces/';
-import { db } from 'myFirebase/firebase';
+// import { db } from 'myFirebase/firebase';
 import Image from 'next/image';
 import Link from 'next/link';
 import arenaImg from 'public/arena.png';
+import mailImg from 'public/mail.png';
 import shopImg from 'public/shop.png';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 // function clearCollection(path: string) {
 //   db.collection(path)
@@ -72,16 +73,16 @@ import React, { useEffect, useState } from 'react';
 //   }
 // }
 
-const getInventory = async (setArr: React.Dispatch<any>, uid: string) => {
-  const res = await db.collection('users').doc(uid).collection('inventory')
-    .orderBy('name')
-    .limit(12)
-    .get();
-  if (res.exists) {
-    const data = res.data();
-    setArr(data);
-  }
-};
+// const getInventory = async (setArr: React.Dispatch<any>, uid: string) => {
+//   const res = await db.collection('users').doc(uid).collection('inventory')
+//     .orderBy('name')
+//     .limit(12)
+//     .get();
+//   if (res.exists) {
+//     const data = res.data();
+//     setArr(data);
+//   }
+// };
 
 // const getShopSale = async () => {
 //   const arr: any[] = [];
@@ -102,43 +103,59 @@ type Props = {
 
 const HomeComponent: React.FC<Props> = ({ logout }) => {
   const classes = useStyles();
-  const [arr, setArr] = useState<any>([]);
-  useEffect(() => {
-    getInventory(setArr, firebase.auth().currentUser!.uid);
-  }, [arr]);
   return (
     <Box style={{ height: '100%' }}>
       <Box
         className={classes.buildings}
       >
-        <Box
-          className={classes.link}
-          style={{ paddingBottom: '3%' }}
-        >
-          <Button
-            onClick={logout}
-            variant="contained"
-            color="primary"
-          >Exit
-          </Button>
+        <Box style={{ display: 'flex', flexDirection: 'column' }}>
+          <Box className={classes.link}>
+            <Box className={classes.mailbox}>
+              <Link href="/mail">
+                <Image
+                  src={mailImg}
+                  alt="mail"
+                />
+              </Link>
+            </Box>
+          </Box>
+          <Box
+            className={classes.link}
+            style={{ paddingBottom: '3%', paddingTop: '15vh' }}
+          >
+            <Button
+              onClick={logout}
+              variant="contained"
+              color="primary"
+            >Exit
+            </Button>
+          </Box>
         </Box>
         <Box className={classes.link} style={{ paddingBottom: '33vh' }}>
-          <Link href="/arena">
-            <Image
-              src={arenaImg}
-              alt="arena"
-              className={classes.image}
-            />
-          </Link>
+          <Box
+            className={classes.imagebox}
+          >
+            <Link href="/arena">
+              <Image
+                src={arenaImg}
+                alt="arena"
+                className={classes.image}
+              />
+            </Link>
+          </Box>
         </Box>
-        <Box className={classes.link} style={{ paddingBottom: '10vh' }}>
-          <Link href="/shop">
-            <Image
-              src={shopImg}
-              alt="shop"
-              className={classes.image}
-            />
-          </Link>
+        <Box className={classes.link} style={{ paddingBottom: '15vh' }}>
+          <Box
+            className={classes.imagebox}
+          >
+            <Link href="/shop">
+              <Image
+                src={shopImg}
+                alt="shop"
+                className={classes.image}
+              />
+            </Link>
+          </Box>
         </Box>
       </Box>
       <PokedexLinkComponent />
