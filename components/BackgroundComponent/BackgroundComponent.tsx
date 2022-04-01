@@ -5,7 +5,7 @@ import cloud2 from 'public/cloud2.png';
 import cloud3 from 'public/cloud3.png';
 import cloud4 from 'public/cloud4.png';
 import cloud5 from 'public/cloud5.png';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 const links = [cloud1, cloud2, cloud3, cloud4, cloud5];
@@ -176,52 +176,48 @@ function resize() {
     background.addColorStop(el[1] as number, el[0] as string);
   });
 }
+setInterval(() => {
+  const dateTemp = new Date().getHours();
+  if (dateTemp !== date) {
+    alp = alpArr[dateTemp];
+    resize();
+    date = dateTemp;
+  }
+}, 120000);
+let doc: any;
 
 const BackgroundComponent = (props: { children: JSX.Element }) => {
   const { children } = props;
   const canvasTemp = useRef<HTMLCanvasElement>(null);
-
   useEffect(() => {
     if (window) {
-      // window.requestAnimationFrame = (function () {
-      //   return window.requestAnimationFrame
-      //     || function (callback) {
-      //       window.setTimeout(callback, 1000 / 90);
-      //     };
-      // }());
       if (isMobile) {
         cloudCount = 4;
         scaleC = 6;
         speedC = 0.5;
         pos = 200;
       }
-      console.log(window.innerHeight);
       dimensions.width = window.innerWidth;
       dimensions.height = window.innerHeight;
       center.x = dimensions.width / 2;
       center.y = dimensions.height / 2;
+      if (!doc) {
+        doc = document.createElement('canvas');
+      }
       canvas = { // get things
         main: canvasTemp.current,
-        os: document.createElement('canvas'),
+        os: doc,
       };
       ctx = {
         main: canvas.main.getContext('2d'),
         os: canvas.os.getContext('2d'),
       };
-      getImages();
-      resize(); // do stuff
-    }
-    const t = setInterval(() => {
-      const dateTemp = new Date().getHours();
-      if (dateTemp !== date) {
-        console.log(dateTemp);
-        alp = alpArr[dateTemp];
-        resize();
-        date = dateTemp;
+      if (!images.length) {
+        getImages();
       }
-    }, 120000);
-    return () => clearInterval(t);
-  }, [isMobile]);
+      resize();
+    }
+  }, []);
   return (
     <Box style={{ height: '100%', background: 'green' }}>
       <canvas
