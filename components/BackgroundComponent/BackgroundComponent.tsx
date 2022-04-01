@@ -5,14 +5,13 @@ import cloud2 from 'public/cloud2.png';
 import cloud3 from 'public/cloud3.png';
 import cloud4 from 'public/cloud4.png';
 import cloud5 from 'public/cloud5.png';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
 
 const links = [cloud1, cloud2, cloud3, cloud4, cloud5];
 const images: HTMLImageElement[] = [];
 const alpArr = [0.21, 0.21, 0.21, 0.4, 0.5, 0.6, 0.7, 0.7, 0.7, 0.7,
-  0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.6, 0.5, 0.4, 0.21];
-
+  0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.6, 0.5, 0.4, 0.21, 0.21];
 const bgArr = [[['#020111', 0.85], ['#191621', 1]],
   [['#020111', 0.6], ['#20202c', 1]],
   [['#020111', 0.1], ['#3a3a52', 1]],
