@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { InventoryPokemonCardComponent } from 'components/Inventory/InventoryPokemonCardComponent';
-import { CollectionItemType } from 'helpers/inventoryHelpers';
+import { CollectionItemType } from 'helpers/inventory/inventoryHelpers';
 import React from 'react';
 
 import { style } from './style';

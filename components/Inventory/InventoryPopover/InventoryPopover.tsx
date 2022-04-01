@@ -3,7 +3,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Popover from '@mui/material/Popover';
-import { HandleClickPopoverControls } from 'helpers/inventoryHelpers';
+import { HandleClickPopoverControls } from 'helpers/inventory/inventoryHelpers';
 import * as React from 'react';
 
 type InventoryPopoverProps = {

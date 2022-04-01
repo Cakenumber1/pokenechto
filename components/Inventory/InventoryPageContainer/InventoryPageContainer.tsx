@@ -1,6 +1,6 @@
 import { InventoryComponent } from 'components/Inventory/InventoryComponent';
 import { InventoryLoader } from 'components/Inventory/InventoryLoader';
-import { HandleClickCard } from 'helpers/inventoryHelpers';
+import { HandleClickCard } from 'helpers/inventory/inventoryHelpers';
 import * as React from 'react';
 import { useGetInventoryByPageQuery } from 'store/service';
 

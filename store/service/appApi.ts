@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { CollectionItemType } from 'helpers/inventoryHelpers';
+import { CollectionItemType } from 'helpers/inventory/inventoryHelpers';
 import { Pokemon } from 'interfaces/pokemonType';
 
 type GetInventoryByPageResult = {

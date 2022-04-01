@@ -10,7 +10,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       break;
     }
     case 'PATCH': {
-      if (fakeDB.money >= 500) {
+      // if (fakeDB.money >= 500) {
+      if (600 >= 500) {
         fakeDB.buyPoke(String(req.query.id), 500);
         return res.status(200).end();
       }

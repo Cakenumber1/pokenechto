@@ -50,6 +50,13 @@ const WalletComponent = () => {
     const temp = e.target as HTMLElement;
     patchMushroomsMutation({ uid: currentUser.uid, count: Number(temp.innerText) }).unwrap();
   };
+  const getShopColour = () => {
+    const t = new Date().getHours();
+    if (t > 20 || t < 4) {
+      return 'yellow';
+    }
+    return 'black';
+  };
 
   return (
     <div className={classes.container}>
@@ -84,7 +91,12 @@ const WalletComponent = () => {
           </Box>
         </Zoom>
       </Modal>
-      <Button startIcon={<ShoppingBasketRoundedIcon sx={{ color: 'black' }} />} onClick={handleOpen} />
+      <Button
+        startIcon={
+          <ShoppingBasketRoundedIcon sx={{ color: getShopColour() }} />
+      }
+        onClick={handleOpen}
+      />
     </div>
   );
 };

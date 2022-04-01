@@ -16,9 +16,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     case 'PATCH': {
       const pokemon = fakeDB.inventory.getCollectionItemById(req.query.id as string);
       if (pokemon) {
-        if (fakeDB.mushrooms) {
+        if (true) {
           // eslint-disable-next-line no-param-reassign
-          fakeDB.mushrooms -= 1;
+          // fakeDB.mushrooms -= 1;
           pokemon.stats.forEach((stat) => {
             const randNumber = Math.ceil(Math.random() * 10);
             if (stat.statVal + randNumber > 300) {

@@ -1,7 +1,7 @@
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardMedia from '@mui/material/CardMedia';
-import { CollectionItemType, HandleClickCard } from 'helpers/inventoryHelpers';
+import { CollectionItemType, HandleClickCard } from 'helpers/inventory/inventoryHelpers';
 import { getBackgdoundColor } from 'helpers/maps';
 import React from 'react';
 

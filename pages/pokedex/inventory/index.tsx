@@ -1,7 +1,7 @@
 import FrameComponent from 'components/FrameComponent';
 import withAuth from 'components/HOCs/withAuthHOC';
 import { InventoryContainer } from 'components/Inventory/InventoryContainer';
-import { naturalNumberPattern } from 'helpers/inventoryHelpers';
+import { naturalNumberPattern } from 'helpers/inventory/inventoryHelpers';
 import Error from 'next/error';
 import { useRouter } from 'next/router';
 

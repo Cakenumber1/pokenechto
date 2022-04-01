@@ -7,7 +7,7 @@ export const style = (isInscription: boolean) => (
       justifyContent: 'center',
       alignItems: 'center',
       margin: '10px',
-      curson: 'pointer',
+      cursor: 'pointer',
     },
     inscription: {
       display: isInscription ? 'visible' : 'none',

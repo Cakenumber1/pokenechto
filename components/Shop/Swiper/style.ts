@@ -3,6 +3,9 @@ import { makeStyles } from '@mui/styles';
 
 export const useStyles = makeStyles((theme : Theme) => ({
   item: {
+    opacity: 0,
+    transitionDelay: '.5s',
+    transitionDuration: '2s',
     position: 'relative',
     [theme.breakpoints.down('md')]: {
       width: '13.662vh',
@@ -16,5 +19,8 @@ export const useStyles = makeStyles((theme : Theme) => ({
       width: '18vh',
       height: '18vh',
     },
+  },
+  visible: {
+    opacity: 1,
   },
 }));

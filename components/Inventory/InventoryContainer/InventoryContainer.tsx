@@ -9,7 +9,7 @@ import { InventoryLoader } from 'components/Inventory/InventoryLoader';
 import { InventoryModal } from 'components/Inventory/InventoryModal';
 import { InventoryPageContainer } from 'components/Inventory/InventoryPageContainer';
 import { InventoryPopover } from 'components/Inventory/InventoryPopover';
-import { CollectionItemType, HandleClickCard, HandleClickPopoverControls } from 'helpers/inventoryHelpers';
+import { CollectionItemType, HandleClickCard, HandleClickPopoverControls } from 'helpers/inventory/inventoryHelpers';
 import * as React from 'react';
 import { useState } from 'react';
 import { isMobile } from 'react-device-detect';
