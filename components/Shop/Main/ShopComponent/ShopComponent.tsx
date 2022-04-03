@@ -35,11 +35,11 @@ const ShopComponent: React.FC<Props> = ({ classes }) => (
         </Box>
         <Box className={classes.shopShelves}>
           <Box className={classes.shopShelvesText}>Заявление1</Box>
-          <ShelfContainer shelfn={1} />
+          <ShelfContainer shelfn="sale" />
         </Box>
         <Box className={classes.shopShelves}>
           <Box className={classes.shopShelvesText}>Заявление2</Box>
-          <ShelfContainer shelfn={2} />
+          <ShelfContainer shelfn="shelf" />
         </Box>
       </Container>
     </Box>

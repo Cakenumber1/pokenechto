@@ -4,9 +4,9 @@ import fakeDB from 'pages/api/fakeDB';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
-    case 'GET': {
-      const list = fakeDB.shop.getIDs();
-      if (list) return res.status(200).json(list);
+    case 'POST': {
+      const ids = await fakeDB.shop.getIDsShop(req.body.target); // fakeDB.shop.getIDs();
+      if (ids) return res.status(200).json({ ids });
       break;
     }
     default:

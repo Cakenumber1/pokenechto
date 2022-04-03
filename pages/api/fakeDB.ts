@@ -4,8 +4,13 @@ import inventoryData from 'mocks/inventory.json';
 import shopInitialData from 'mocks/shop.json';
 import { auth, db } from 'myFirebase/firebase';
 
-const getData = async (uid: string) => {
-  const res = await db.collection('users').doc(uid)
+const loginAdmin = async () => {
+  await auth.signInWithEmailAndPassword('admin@ss.ss', 'admin@ss.ss');
+};
+
+const getUserInfo = async (uid: string) => {
+  const res = await db.collection('users')
+    .doc(uid)
     .get();
   if (res.exists) {
     return res.data();
@@ -13,14 +18,54 @@ const getData = async (uid: string) => {
   return 0;
 };
 
-const patchData = async (uid: string, count: number, _key: string) => {
+const patchUserInfo = async (uid: string, count: number, _key: string) => {
   const key = _key;
   const obj:any = { [key]: count };
   db.collection('users').doc(uid).update(obj);
 };
 
-const loginAdmin = async () => {
-  await auth.signInWithEmailAndPassword('admin@ss.ss', 'admin@ss.ss');
+const getUserIDsShop = async (uid: string) => {
+  const ans: string[] = [];
+  await db.collection('users')
+    .doc(uid)
+    .collection('personalShop')
+    .get()
+    .then((querySnapshot: any) => {
+      querySnapshot.forEach((doc: any) => {
+        ans.push(doc.id);
+      });
+    });
+  if (ans && ans.length) {
+    return ans;
+  }
+  return 0;
+};
+
+const getIDsShop = async (target: string) => {
+  const ans: string[] = [];
+  await db.collection('shop')
+    .doc('shelves')
+    .collection(target)
+    .get()
+    .then((querySnapshot: any) => {
+      querySnapshot.forEach((doc: any) => {
+        ans.push(doc.id);
+      });
+    });
+  if (ans && ans.length) {
+    return ans;
+  }
+  return 0;
+};
+
+const getPokeByID = async (target: string, uid: string) => {
+  const res = await db.collection(target)
+    .doc(uid)
+    .get();
+  if (res.exists) {
+    return res.data();
+  }
+  return 0;
 };
 
 loginAdmin();
@@ -67,16 +112,19 @@ const fakeDB = {
       this.data.splice(itemIndex, 1);
     },
   },
-  getData,
-  patchData,
+  getUserInfo,
+  patchUserInfo,
   shop: {
     data: shopInitialData as Pokemon[],
+    getIDsShop,
+    getUserIDsShop,
     getIDs() {
       return this.data.map((poke) => poke!.id);
     },
-    getPokeByID(_id: string) {
-      return this.data.find((poke) => String(poke!.id) === _id);
-    },
+    getPokeByID,
+    // getPokeByID(_id: string) {
+    //   return this.data.find((poke) => String(poke!.id) === _id);
+    // },
   },
 };
 

@@ -3,12 +3,13 @@ import CellComponent from 'components/Shop/Cell/CellComponent';
 import { getBackgdoundColor } from 'helpers/maps/colorMap';
 import { DataType } from 'interfaces';
 import React, { SyntheticEvent, useCallback } from 'react';
-import { useGetPokemonByIDQuery } from 'store/service';
+import { usePostPokemonByIDQuery } from 'store/service';
 
 import { useStyles } from '../style';
 
 type Props = {
-  pokeid: any,
+  pokeid: string,
+  path: string
 };
 
 const shake = [
@@ -25,8 +26,9 @@ const shake = [
   { transform: 'translate(1px, -2px) rotate(-1deg)' },
 ];
 
-const CellContainer: React.FC<Props> = ({ pokeid }) => {
-  const { data: pokemon } = useGetPokemonByIDQuery(pokeid);
+const CellContainer: React.FC<Props> = ({ pokeid, path }) => {
+  const { data: pokemon } = usePostPokemonByIDQuery({ target: path, uid: pokeid });
+  // const { data: pokemon } = useGetPokemonByIDQuery(pokeid);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [data, setData] = React.useState<DataType>({

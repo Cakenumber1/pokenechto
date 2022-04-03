@@ -69,7 +69,6 @@ export const generatePersonalShop = async (uid: string) => {
     links.push(`https://pokeapi.co/api/v2/pokemon/${Math.round(Math.random() * 300)}`);
   }
   const pokes = await getListFromPokeApi(links);
-  console.log(path);
   pokes.forEach((poke) => db.collection(path).add(poke));
 };
 

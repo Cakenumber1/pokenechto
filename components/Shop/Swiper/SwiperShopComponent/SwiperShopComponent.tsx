@@ -9,10 +9,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { theme } from 'theme/index';
 
 type Props = {
-  pkeys: any,
+  pkeys: string[] | null,
+  path: string,
 };
 
-const MySwiper: React.FC<Props> = ({ pkeys }) => {
+const MySwiper: React.FC<Props> = ({ pkeys, path }) => {
   const classes = useStyles();
   const [str, setStr] = useState(classes.item);
   useEffect(() => {
@@ -32,20 +33,20 @@ const MySwiper: React.FC<Props> = ({ pkeys }) => {
       }}
       className={str}
     >
-      {pkeys.map((_key: any) => (
+      {pkeys?.map((_key: any) => (
         <SwiperSlide key={_key}>
-          <CellContainer pokeid={_key} />
+          <CellContainer pokeid={_key} path={path} />
         </SwiperSlide>
       ))}
     </Swiper>
   );
 };
 
-const SwiperShopComponent: React.FC<Props> = ({ pkeys }) => (
+const SwiperShopComponent: React.FC<Props> = ({ pkeys, path }) => (
   <ThemeProvider theme={theme}>
     {pkeys
       && (
-        <MySwiper pkeys={pkeys} />
+        <MySwiper pkeys={pkeys} path={path} />
       )}
   </ThemeProvider>
 

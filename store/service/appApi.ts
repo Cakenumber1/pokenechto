@@ -21,6 +21,15 @@ type CurrencyResponseType = {
   count: number
 };
 
+type ShopIDs = {
+  ids: string[]
+};
+
+type Tuple = {
+  target: string,
+  uid: string
+};
+
 export const appApi = createApi({
   reducerPath: 'appApi',
   tagTypes: ['Inventory', 'Mushrooms', 'Money', 'Shop'],
@@ -89,9 +98,29 @@ export const appApi = createApi({
       query: () => '/shop/',
       providesTags: ['Shop'],
     }),
-    getPokemonByID: builder.query<Exclude<Pokemon, undefined>, number>({
-      query: (_id) => `/shop/${_id}`,
-      providesTags: (result, error, id) => [{ type: 'Shop', id }],
+    postShopPokemonIDs: builder.query<ShopIDs, string>({
+      query: (target) => ({
+        url: '/shop/',
+        method: 'POST',
+        body: { target },
+      }),
+      providesTags: ['Shop'],
+    }),
+    postUserShopPokemonIDs: builder.query<ShopIDs, string>({
+      query: (uid) => ({
+        url: '/shop/personal/',
+        method: 'POST',
+        body: { uid },
+      }),
+      providesTags: ['Shop'],
+    }),
+    postPokemonByID: builder.query<Exclude<Pokemon, undefined>, Tuple>({
+      query: ({ target, uid }) => ({
+        url: `/shop/${uid}`,
+        method: 'POST',
+        body: { target, uid },
+      }),
+      providesTags: (result, error, uid) => [{ type: 'Shop', uid }],
     }),
     patchSellPokemon: builder.mutation<void, IDandPrice>({
       query: (data) => ({
@@ -113,7 +142,8 @@ export const {
   usePatchMushroomsMutation,
   usePostMoneyQuery,
   usePatchMoneyMutation,
-  useGetShopPokemonIDsQuery,
-  useGetPokemonByIDQuery,
+  usePostShopPokemonIDsQuery,
+  usePostUserShopPokemonIDsQuery,
+  usePostPokemonByIDQuery,
   usePatchSellPokemonMutation,
 } = appApi;

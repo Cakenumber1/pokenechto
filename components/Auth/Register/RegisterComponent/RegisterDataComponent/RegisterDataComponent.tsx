@@ -24,6 +24,7 @@ const RegisterDataComponent: React.FC<Props> = ({
   <Grid container>
     <Grid item xs={12}>
       <TextField
+        autoFocus
         margin="normal"
         required
         fullWidth
@@ -58,7 +59,6 @@ const RegisterDataComponent: React.FC<Props> = ({
         fullWidth
         id="name"
         label="Name"
-        autoFocus
         value={name}
         onChange={(event) => setName(String(event.target.value))}
       />

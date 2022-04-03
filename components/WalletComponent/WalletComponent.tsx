@@ -52,7 +52,7 @@ const WalletComponent = () => {
   };
   const getShopColour = () => {
     const t = new Date().getHours();
-    if (t > 20 || t < 4) {
+    if (t > 18 || t < 4) {
       return 'yellow';
     }
     return 'black';

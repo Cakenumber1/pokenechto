@@ -38,6 +38,15 @@ const bgArr = [[['#020111', 0.85], ['#191621', 1]],
   [['#00000c', 0.8], ['#150800', 1]],
 ];
 
+const getGrad = (date: number, arr: (string | number)[][][]) => {
+  let grad = 'to bottom';
+  arr[date].forEach((el) => {
+    // @ts-ignore
+    grad += `, ${el[0]} ${el[1] * 100}%`;
+  });
+  return grad;
+};
+
 let background: any;
 
 let cloudCount = 12;
@@ -96,7 +105,7 @@ class Cloud {
     this.width = this.sprite.width / this.scale;
     this.height = this.sprite.height / this.scale;
     this.alph = alp;
-    // position offscreen left, center on y axis, add random y offset between -200 and 200
+    // position offscreen left, center on y axis, add random y offset between -pos and pos
     this.position = new Vector2(-this.width, center.y - this.height
       / 2 + (Math.round(pos - Math.random() * pos * 2)));
     this.velocity = new Vector2(speedC + Math.random(), 0);
@@ -112,7 +121,7 @@ class Cloud {
       // const scale = Math.round(1 + Math.random() * 6); // random scale between 1 and 5
       this.width = this.sprite.width / this.scale; // divide width/height by scale
       this.height = this.sprite.height / this.scale;
-      // position offscreen left, center on y axis, add random y offset between -200 and 200
+      // position offscreen left, center on y axis, add random y offset between -pos and pos
       this.position = new Vector2(-this.width, center.y - this.height
         / 2 + (Math.round(pos - Math.random() * pos * 2)));
       this.velocity = new Vector2(speedC + Math.random() * 0.5, 0);
@@ -122,6 +131,7 @@ class Cloud {
     }
   }
 }
+
 const clouds: Cloud[] = [];
 
 function populate() {
@@ -149,10 +159,9 @@ function draw() {
   ctx.main.drawImage(canvas.os, 0, 0); // draw the composited offscreen frame to onscreen canvas
 }
 
-function loop() { // do a barrel roll
+function loop() { // image updates in 60 fps
   draw();
   setTimeout(() => loop(), 1000 / 60);
-  // window.requestAnimationFrame(loop);
 }
 
 function getImages() {
@@ -223,7 +232,12 @@ const BackgroundComponent = (props: { children: JSX.Element }) => {
         ref={canvasTemp}
         id="canvas"
         style={{
-          position: 'absolute', top: 0, left: 0, height: '45vh', width: '100vw',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          height: '45vh',
+          width: '100vw',
+          background: `linear-gradient(${getGrad(date, bgArr)})`,
         }}
       />
       {children}

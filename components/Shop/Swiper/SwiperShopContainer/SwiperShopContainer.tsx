@@ -1,11 +1,14 @@
 import SwiperShopComponent from 'components/Shop/Swiper/SwiperShopComponent';
-import { useGetShopPokemonIDsQuery } from 'store/service';
+import { useAuth } from 'myFirebase/AuthContext';
+import { usePostUserShopPokemonIDsQuery } from 'store/service';
 
 const SwiperShopContainer = () => {
-  const { data: pokeIDs } = useGetShopPokemonIDsQuery();
-  const pkeys = pokeIDs ? pokeIDs!.slice(0, 3) : null;
+  const { currentUser } = useAuth()!;
+  const { data: res } = usePostUserShopPokemonIDsQuery(currentUser.uid);
+  const path = `/users/${currentUser.uid}/personalShop`;
+  const pkeys = res?.ids || null;
   return (
-    <SwiperShopComponent pkeys={pkeys} />
+    <SwiperShopComponent pkeys={pkeys} path={path} />
   );
 };
 

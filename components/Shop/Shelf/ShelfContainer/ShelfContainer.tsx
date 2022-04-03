@@ -1,22 +1,24 @@
 import ShelfComponent from 'components/Shop/Shelf/ShelfComponent';
 import React from 'react';
-import { useGetShopPokemonIDsQuery } from 'store/service';
+import { usePostShopPokemonIDsQuery } from 'store/service';
 
 import { useStylesStack } from '../style';
 
 type Props = {
-  shelfn: number,
+  shelfn: string,
 };
 
 const ShelfContainer: React.FC<Props> = ({ shelfn }) => {
   const classesStack = useStylesStack();
-  const { data: pokeIDs } = useGetShopPokemonIDsQuery();
-  let pkeys;
-  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-  (pokeIDs) ? pkeys = pokeIDs!.slice(3 * shelfn, 2 * 3 * shelfn) : pkeys = null;
-  return (
-    <ShelfComponent classes={classesStack} pkeys={pkeys} />
-  );
+  const { data: res } = usePostShopPokemonIDsQuery(shelfn);
+  const path = `/shop/shelves/${shelfn}`;
+  const pkeys = res?.ids || null;
+  if (pkeys) {
+    return (
+      <ShelfComponent classes={classesStack} pkeys={pkeys} path={path} />
+    );
+  }
+  return <div />;
 };
 
 export default ShelfContainer;
