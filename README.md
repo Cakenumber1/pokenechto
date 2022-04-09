@@ -1,6 +1,6 @@
 # pokenechto
-Актуальная ссылка [сайт](https://pokenechto-7a56n7s3h-cakenumber1.vercel.app/)
-Актуальная бранча - actual
+Актуальная бранча - actual  
+Актуальная ссылка vercel в actual
 ## Для корректной демонстрации проекта
 
 - git clone https://github.com/Cakenumber1/pokenechto.git
