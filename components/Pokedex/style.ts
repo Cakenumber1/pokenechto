@@ -2,11 +2,20 @@ import { makeStyles } from '@mui/styles';
 
 export const useStyles = makeStyles({
   shopBody: {
-    width: '100%',
-    height: '100%',
+    position: 'absolute',
+    bottom: '2.5%',
+    left: '5%',
+    height: '90%',
+    padding: '2.5% 2.5% 0 2.5%',
+    width: '85%',
+    overflowY: 'auto',
+  },
+  shopBodyInner: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',
+    height: '100%',
+    background: '#003a70',
   },
   shopTop: {
     height: '30%',

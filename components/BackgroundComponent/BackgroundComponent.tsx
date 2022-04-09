@@ -1,5 +1,7 @@
 // eslint-disable-next-line max-classes-per-file
 import { Box } from '@mui/material';
+import PokedexLinkComponent from 'components/PokedexLinkComponent';
+import WalletComponent from 'components/WalletComponent';
 import cloud1 from 'public/cloud1.png';
 import cloud2 from 'public/cloud2.png';
 import cloud3 from 'public/cloud3.png';
@@ -175,10 +177,12 @@ function getImages() {
 }
 
 function resize() {
-  // eslint-disable-next-line no-param-reassign,no-multi-assign
-  canvas.main.width = canvas.os.width = dimensions.width;
-  // eslint-disable-next-line no-param-reassign,no-multi-assign
-  canvas.main.height = canvas.os.height = dimensions.height;
+  if (canvas && 'main' in canvas) {
+    // eslint-disable-next-line no-param-reassign,no-multi-assign
+    canvas.main.width = canvas.os.width = dimensions.width;
+    // eslint-disable-next-line no-param-reassign,no-multi-assign
+    canvas.main.height = canvas.os.height = dimensions.height;
+  }
   background = ctx.os.createLinearGradient(center.x, 0, center.x, dimensions.height);
   bgArr[date].forEach((el) => {
     background.addColorStop(el[1] as number, el[0] as string);
@@ -223,9 +227,17 @@ const BackgroundComponent = (props: { children: JSX.Element }) => {
       if (!images.length) {
         getImages();
       }
-      resize();
+      if (doc && canvas) {
+        resize();
+      }
     }
   }, []);
+  useEffect(() => {
+    canvas = { // get things
+      main: canvasTemp.current,
+      os: doc,
+    };
+  }, [canvasTemp]);
   return (
     <Box style={{ height: '100%', background: 'green' }}>
       <canvas
@@ -241,6 +253,8 @@ const BackgroundComponent = (props: { children: JSX.Element }) => {
         }}
       />
       {children}
+      {!isMobile && <PokedexLinkComponent />}
+      <WalletComponent />
     </Box>
   );
 };

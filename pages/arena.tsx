@@ -1,8 +1,15 @@
 import ArenaContainer from 'components/Arena/ArenaContainer';
 import BackgroundComponent from 'components/BackgroundComponent';
+import BuildingContainer from 'components/Buildings/BuildingContainer';
 import withAuth from 'components/HOCs/withAuthHOC';
 import type { NextPage } from 'next';
 
-const Shop: NextPage = () => (<BackgroundComponent><ArenaContainer /></BackgroundComponent>);
+const Arena: NextPage = () => (
+  <BackgroundComponent>
+    <BuildingContainer>
+      <ArenaContainer />
+    </BuildingContainer>
+  </BackgroundComponent>
+);
 
-export default withAuth(Shop);
+export default withAuth(Arena);

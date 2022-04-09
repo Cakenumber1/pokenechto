@@ -49,21 +49,42 @@ export const useTableStyles = makeStyles({
     padding: 0,
   },
   tableContainer: {
-    height: '100%',
+    width: '10vh',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    cursor: 'default',
+  },
+  table: {
+    width: '100%',
+    height: '100%',
   },
   tableRow: {
     '& td': {
       padding: 0,
+      height: '100%',
     },
     '& th': {
       padding: 0,
+      height: '100%',
     },
   },
   tableCell: {
     padding: 0,
     textAlign: 'center',
+  },
+  tableImageCell: {
+    background: '#eee',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  tableValueCell: {
+    background: '#eee',
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

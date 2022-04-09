@@ -1,7 +1,9 @@
 import {
-  Paper, Table, TableBody, TableCell, TableContainer, TableRow,
+  Box, Table, TableBody, TableCell, TableContainer, TableRow,
 } from '@mui/material';
-import { FC } from 'react';
+import berriesImg from 'public/blueberries.svg';
+import moneyImg from 'public/money.svg';
+import React, { FC } from 'react';
 
 import { useTableStyles } from '../style';
 
@@ -12,32 +14,36 @@ type Props = {
 
 const TableComponent: FC<Props> = ({ money, mushrooms }) => {
   const classesT = useTableStyles();
-  function createData(name: string, amount: number, symbol: string) {
-    return { name, amount, symbol };
+  function createData(amount: number, symbol: string) {
+    return { amount, symbol };
   }
 
   const rows = [
-    createData('Money', money, '$'),
-    createData('Mushrooms', mushrooms, '🍄'),
+    createData(money, moneyImg.src),
+    createData(mushrooms, berriesImg.src),
   ];
 
   return (
     <TableContainer
-      component={Paper}
       className={classesT.tableContainer}
     >
-      <Table>
+      <Table className={classesT.table}>
         <TableBody>
           {rows.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.symbol}
               className={classesT.tableRow}
             >
-              <TableCell className={classesT.tableCell} component="th" scope="row">
-                {row.name}
+              <TableCell align="center">
+                <Box className={classesT.tableImageCell}>
+                  <img src={row.symbol} alt={row.symbol} width="25px" height="25px" />
+                </Box>
               </TableCell>
-              <TableCell align="center">{row.amount}</TableCell>
-              <TableCell align="center">{row.symbol}</TableCell>
+              <TableCell align="center">
+                <Box className={classesT.tableValueCell}>
+                  {row.amount}
+                </Box>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

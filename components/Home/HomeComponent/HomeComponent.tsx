@@ -1,8 +1,7 @@
 import { Box, Button } from '@mui/material';
-// import axios from 'axios';
-import PokedexLinkComponent from 'components/Home/PokedexLinkComponent';
 import { useStyles } from 'components/Home/style';
-import WalletComponent from 'components/WalletComponent';
+// import axios from 'axios';
+import PokedexLinkComponent from 'components/PokedexLinkComponent';
 // import firebase from 'firebase';
 // import { parseResponsePokemon } from 'helpers';
 // import { Pokemon } from 'interfaces/';
@@ -13,6 +12,7 @@ import arenaImg from 'public/arena.png';
 import mailImg from 'public/mail.png';
 import shopImg from 'public/shop.png';
 import React from 'react';
+import { isMobile } from 'react-device-detect';
 
 // function clearCollection(path: string) {
 //   db.collection(path)
@@ -158,8 +158,7 @@ const HomeComponent: React.FC<Props> = ({ logout }) => {
           </Box>
         </Box>
       </Box>
-      <PokedexLinkComponent />
-      <WalletComponent />
+      {isMobile && <PokedexLinkComponent />}
     </Box>
   );
 };

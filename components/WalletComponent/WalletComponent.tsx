@@ -59,7 +59,7 @@ const WalletComponent = () => {
   };
 
   return (
-    <div className={classes.container}>
+    <Box className={classes.container}>
       <TableComponent money={money?.count || 0} mushrooms={mushrooms?.count || 0} />
       <Modal
         open={isOpen}
@@ -69,22 +69,22 @@ const WalletComponent = () => {
           <Box className={classesM.box}>
             <Collapse in={isDropped} onExited={handleClose}>
               <Stack className={classesM.boxInner} spacing={2}>
-                <div>
+                <Box>
                   <h2 style={{ textAlign: 'center' }}>Баланс</h2>
                   <TableComponent money={money?.count || 0} mushrooms={mushrooms?.count || 0} />
-                </div>
-                <div>
-                  <div>Купить $$$</div>
-                  <Button variant="contained" disabled>10</Button>
+                </Box>
+                <Box>
+                  <Box>Купить Баксы</Box>
                   <Button variant="contained" disabled>100</Button>
+                  <Button variant="contained" disabled>200</Button>
                   <Button onClick={handleAddMoney} variant="contained">1000</Button>
-                </div>
-                <div>
-                  <div>Купить 🍄</div>
-                  <Button variant="contained" disabled>10</Button>
-                  <Button variant="contained" disabled>50</Button>
-                  <Button onClick={handleAddMushrooms} variant="contained">100</Button>
-                </div>
+                </Box>
+                <Box>
+                  <Box>Купить Berries</Box>
+                  <Button variant="contained" disabled>1</Button>
+                  <Button variant="contained" disabled>5</Button>
+                  <Button onClick={handleAddMushrooms} variant="contained">10</Button>
+                </Box>
                 <Button onClick={handleSqueeze}>Выйти</Button>
               </Stack>
             </Collapse>
@@ -93,11 +93,11 @@ const WalletComponent = () => {
       </Modal>
       <Button
         startIcon={
-          <ShoppingBasketRoundedIcon sx={{ color: getShopColour() }} />
+          <ShoppingBasketRoundedIcon sx={{ color: getShopColour(), width: 40, height: 40 }} />
       }
         onClick={handleOpen}
       />
-    </div>
+    </Box>
   );
 };
 
