@@ -4,12 +4,12 @@ import {
 } from '@mui/material';
 import { ClassNameMap } from '@mui/styles';
 import ModalContainer from 'components/Shop/Modal/ModalContainer';
-import { DataType, Pokemon } from 'interfaces';
+import { DataType, PokemonShop } from 'interfaces';
 import soledOut from 'public/soled_out.png';
 import React, { SyntheticEvent } from 'react';
 
 type Props = {
-  pokemon: Pokemon,
+  pokemon: PokemonShop,
   handleOpen: (e: SyntheticEvent) => void,
   handleClose: () => void,
   classes: ClassNameMap,

@@ -15,13 +15,14 @@ import fakeDB from 'pages/api/fakeDB';
 //   return map;
 // };
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
-    case 'GET': {
-      const results = fakeDB.inventory.getByPage(Number(req.query.page));
+    case 'POST': {
+      const [len, results] = await fakeDB.inventory
+        .getByPage2(Number(req.query.page), req.body.data.uid);
       if (results) {
         return res.status(200).json({
-          count: fakeDB.inventory.getLength(),
+          count: len,
           results,
         });
       }

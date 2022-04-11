@@ -1,5 +1,3 @@
-import React from 'react';
-
 import ShopComponent from '../ShopComponent/ShopComponent';
 import { useStyles } from '../style';
 

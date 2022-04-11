@@ -3,13 +3,14 @@ import {
   Grid,
   Typography,
 } from '@mui/material';
-import { useStylesSwiper } from 'components/Auth/Register/RegisterComponent/RegisterPokeComponent/style';
 import { PokemonIni } from 'interfaces/pokemonType';
 import React from 'react';
 // eslint-disable-next-line import/no-unresolved
 import { Controller, EffectCards } from 'swiper';
 // eslint-disable-next-line import/no-unresolved
 import { Swiper, SwiperSlide } from 'swiper/react';
+
+import { useStylesSwiper } from './style';
 
 type Props = {
   initialPokes: PokemonIni[],

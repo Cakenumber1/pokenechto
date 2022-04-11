@@ -19,9 +19,9 @@ const ProfileContainer = () => {
   const { currentUser } = useAuth()!;
   const [who, setWho] = useState<UserType>();
   const classes = useStyles();
+
   useEffect(() => {
     getData(currentUser.uid, setWho);
-    console.log(who);
   }, [currentUser.uid]);
   return (
     <ProfileComponent classes={classes} who={who} />

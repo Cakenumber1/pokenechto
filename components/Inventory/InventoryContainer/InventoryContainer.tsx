@@ -10,13 +10,14 @@ import { InventoryModal } from 'components/Inventory/InventoryModal';
 import { InventoryPageContainer } from 'components/Inventory/InventoryPageContainer';
 import { InventoryPopover } from 'components/Inventory/InventoryPopover';
 import { CollectionItemType, HandleClickCard, HandleClickPopoverControls } from 'helpers/inventory/inventoryHelpers';
+import { useAuth } from 'myFirebase/AuthContext';
 import * as React from 'react';
 import { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import {
   useDeleteInventoryItemMutation,
-  useGetInventoryByPageQuery,
   usePatchInventoryItemMutation,
+  usePostInventoryByPageQuery,
 } from 'store/service';
 import { Navigation, Pagination, Virtual } from 'swiper';
 // eslint-disable-next-line import/no-unresolved
@@ -28,11 +29,15 @@ type InventoryContainerProps = {
 };
 
 export const InventoryContainer = ({ pageQuery }: InventoryContainerProps) => {
+  const { currentUser } = useAuth()!;
   const [popoverAnchorElement, setPopoverAnchorElement] = useState<HTMLElement | null>(null);
   const [isTopHalfOfScreen, setIsTopHalfOfScreen] = useState(true);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [pokemon, setPokemon] = useState<CollectionItemType | null>(null);
-  const { data, isError, isLoading } = useGetInventoryByPageQuery(pageQuery);
+  const { data, isError, isLoading } = usePostInventoryByPageQuery({
+    page: pageQuery,
+    uid: currentUser.uid,
+  });
   const [deletePokemonCollection] = useDeleteInventoryItemMutation();
   const [patchPokemonCollection] = usePatchInventoryItemMutation();
 
@@ -61,7 +66,7 @@ export const InventoryContainer = ({ pageQuery }: InventoryContainerProps) => {
         break;
       case 'delete':
         if (pokemon !== null) {
-          deletePokemonCollection(pokemon.collectionId).unwrap();
+          deletePokemonCollection({ uid: currentUser.uid, pid: pokemon.collectionId }).unwrap();
           handleClosePopover();
         }
         break;
@@ -120,7 +125,10 @@ export const InventoryContainer = ({ pageQuery }: InventoryContainerProps) => {
           pokemon={pokemon as CollectionItemType}
           onClose={handleCloseModal}
           onMushroom={() => {
-            patchPokemonCollection(pokemon!.collectionId);
+            patchPokemonCollection({
+              pid: pokemon!.collectionId,
+              uid: currentUser.uid,
+            });
           }}
         />
       )}

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import ModalComponent from 'components/Shop/Modal/ModalComponent';
 import { useStyles } from 'components/Shop/Modal/style';
-import { DataType, Pokemon } from 'interfaces';
+import { DataType, PokemonShop } from 'interfaces';
 import { useAuth } from 'myFirebase/AuthContext';
 import { useEffect, useState } from 'react';
 import { usePatchSellPokemonMutation, usePostMoneyQuery } from 'store/service';
@@ -9,7 +9,7 @@ import { usePatchSellPokemonMutation, usePostMoneyQuery } from 'store/service';
 type Props = {
   open: boolean
   onClose: () => void
-  pokemon: Pokemon,
+  pokemon: PokemonShop,
   data: DataType
 };
 
@@ -54,10 +54,10 @@ const ModalContainer = ({
   });
 
   const handleBuy = () => {
-    patchSellPokemonMutation({ id: pokemon!.id, price: 500 });
+    patchSellPokemonMutation({ uid: currentUser.uid, poke: pokemon!, price: pokemon!.price });
   };
 
-  const isDisabledMoneyButton = money!.count < 500 || pokemon!.amount === 0;
+  const isDisabledMoneyButton = money!.count < pokemon!.price || pokemon!.amount === 0;
 
   return (
     <ModalComponent

@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import LoaderComponent from 'components/LoaderComponent';
 import CellComponent from 'components/Shop/Cell/CellComponent';
 import { getBackgdoundColor } from 'helpers/maps/colorMap';
 import { DataType } from 'interfaces';
@@ -27,8 +28,7 @@ const shake = [
 ];
 
 const CellContainer: React.FC<Props> = ({ pokeid, path }) => {
-  const { data: pokemon } = usePostPokemonByIDQuery({ target: path, uid: pokeid });
-  // const { data: pokemon } = useGetPokemonByIDQuery(pokeid);
+  const { data: pokemon } = usePostPokemonByIDQuery({ target: path, pid: pokeid });
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [data, setData] = React.useState<DataType>({
@@ -85,7 +85,7 @@ const CellContainer: React.FC<Props> = ({ pokeid, path }) => {
       />
     );
   }
-  return <div />;
+  return <LoaderComponent />;
 };
 
 export default CellContainer;

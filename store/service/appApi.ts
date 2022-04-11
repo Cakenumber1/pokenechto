@@ -1,14 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { CollectionItemType } from 'helpers/inventory/inventoryHelpers';
-import { Pokemon } from 'interfaces/pokemonType';
+import { PokemonShop } from 'interfaces/pokemonType';
 
 type GetInventoryByPageResult = {
   count: number,
   results: CollectionItemType[]
 };
 
-type IDandPrice = {
-  id: number,
+type IdTargetPrice = {
+  uid: string,
+  poke: PokemonShop,
   price: number,
 };
 
@@ -22,11 +23,20 @@ type CurrencyResponseType = {
 };
 
 type ShopIDs = {
-  ids: string[]
+  pids: string[]
+};
+type PokeIdAndUid = {
+  uid: string,
+  pid: string,
 };
 
 type Tuple = {
   target: string,
+  pid: string
+};
+
+type PageAndUid = {
+  page: number,
   uid: string
 };
 
@@ -35,32 +45,42 @@ export const appApi = createApi({
   tagTypes: ['Inventory', 'Mushrooms', 'Money', 'Shop'],
   baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
   endpoints: (builder) => ({
-    getInventoryByPage: builder.query<GetInventoryByPageResult, number>({
-      query: (page) => `/inventory?page=${page}`,
+    postInventoryByPage: builder.query<GetInventoryByPageResult, PageAndUid>({
+      query: (data) => ({
+        url: `/inventory?page=${data!.page}`,
+        method: 'POST',
+        body: { data },
+      }),
       providesTags: (result) => (result
         ? [
-          ...result.results.map(({ collectionId: id }) => ({ type: 'Inventory', id } as const)),
-          { type: 'Inventory', id: 'LIST' },
+          ...result.results.map(({ collectionId: pid }) => ({ type: 'Inventory', pid } as const)),
+          { type: 'Inventory', pid: 'LIST' },
         ]
-        : [{ type: 'Inventory', id: 'LIST' }]),
+        : [{ type: 'Inventory', pid: 'LIST' }]),
     }),
-    getInventoryItem: builder.query<CollectionItemType, string>({
-      query: (collectionId) => `/inventory/${collectionId}`,
-      providesTags: (result, error, id) => [{ type: 'Inventory', id }],
+    postInventoryItem: builder.query<CollectionItemType, PokeIdAndUid>({
+      query: ({ uid, pid }) => ({
+        url: `/inventory/${pid}`,
+        method: 'POST',
+        body: { uid, pid },
+      }),
+      providesTags: (result, error, pid) => [{ type: 'Inventory', pid }],
     }),
-    deleteInventoryItem: builder.mutation<CollectionItemType, string>({
-      query: (collectionId) => ({
-        url: `/inventory/${collectionId}`,
+    deleteInventoryItem: builder.mutation<CollectionItemType, PokeIdAndUid>({
+      query: ({ uid, pid }) => ({
+        url: `/inventory/${pid}`,
         method: 'DELETE',
+        body: { uid, pid },
       }),
-      invalidatesTags: (result, error, id) => [{ type: 'Inventory', id }],
+      invalidatesTags: (result, error, pid) => [{ type: 'Inventory', pid }],
     }),
-    patchInventoryItem: builder.mutation<CollectionItemType, string>({
-      query: (collectionId) => ({
-        url: `/inventory/${collectionId}`,
+    patchInventoryItem: builder.mutation<CollectionItemType, PokeIdAndUid>({
+      query: ({ uid, pid }) => ({
+        url: `/inventory/${pid}`,
         method: 'PATCH',
+        body: { uid, pid },
       }),
-      invalidatesTags: (result, error, id) => [{ type: 'Inventory', id }, 'Mushrooms'],
+      invalidatesTags: (result, error, pid) => [{ type: 'Inventory', pid }, 'Mushrooms'],
     }),
     postMushrooms: builder.query<CurrencyResponseType, void>({
       query: (uid) => ({
@@ -114,17 +134,17 @@ export const appApi = createApi({
       }),
       providesTags: ['Shop'],
     }),
-    postPokemonByID: builder.query<Exclude<Pokemon, undefined>, Tuple>({
-      query: ({ target, uid }) => ({
-        url: `/shop/${uid}`,
+    postPokemonByID: builder.query<Exclude<PokemonShop, undefined>, Tuple>({
+      query: ({ target, pid }) => ({
+        url: `/shop/${pid}`,
         method: 'POST',
-        body: { target, uid },
+        body: { target, pid },
       }),
-      providesTags: (result, error, uid) => [{ type: 'Shop', uid }],
+      providesTags: (result, error, pid) => [{ type: 'Shop', pid }],
     }),
-    patchSellPokemon: builder.mutation<void, IDandPrice>({
+    patchSellPokemon: builder.mutation<void, IdTargetPrice>({
       query: (data) => ({
-        url: `/shop/${data.id}`,
+        url: `/shop/${data.poke!.pid}`,
         method: 'PATCH',
         body: { data },
       }),
@@ -134,10 +154,10 @@ export const appApi = createApi({
 });
 
 export const {
-  useGetInventoryByPageQuery,
+  usePostInventoryByPageQuery,
   useDeleteInventoryItemMutation,
   usePatchInventoryItemMutation,
-  useGetInventoryItemQuery,
+  usePostInventoryItemQuery,
   usePostMushroomsQuery,
   usePatchMushroomsMutation,
   usePostMoneyQuery,

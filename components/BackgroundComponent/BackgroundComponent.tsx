@@ -1,6 +1,5 @@
 // eslint-disable-next-line max-classes-per-file
 import { Box } from '@mui/material';
-import PokedexLinkComponent from 'components/PokedexLinkComponent';
 import WalletComponent from 'components/WalletComponent';
 import cloud1 from 'public/cloud1.png';
 import cloud2 from 'public/cloud2.png';
@@ -59,6 +58,13 @@ let date = new Date().getHours();
 let alp = alpArr[date];
 let canvas: any;
 let ctx: any;
+let doc: HTMLCanvasElement | undefined;
+
+// window dimensions
+const dimensions = {
+  width: 0,
+  height: 0,
+};
 
 class Vector2 { // 2-dimensional vector object for movement/position
   x: number;
@@ -75,12 +81,6 @@ class Vector2 { // 2-dimensional vector object for movement/position
   }
 }
 
-// window dimensions
-const dimensions = {
-  width: 0,
-  height: 0,
-};
-
 // center of window
 const center = new Vector2(0, 0);
 
@@ -89,7 +89,6 @@ class Cloud {
   ready: boolean;
   sprite: HTMLImageElement;
   scale: number;
-  // scaleH: number;
   width: number;
   height: number;
   alph: number;
@@ -102,7 +101,6 @@ class Cloud {
     this.sprite = images[Math.floor(Math.random() * images.length)];
     // random scale between 1 and 5
     this.scale = Math.round(1 + Math.random() * scaleC);
-    // this.scaleH = Math.round(1 + Math.random() * scaleC);
     // divide width/height by scale
     this.width = this.sprite.width / this.scale;
     this.height = this.sprite.height / this.scale;
@@ -177,30 +175,29 @@ function getImages() {
 }
 
 function resize() {
-  if (canvas && 'main' in canvas) {
-    // eslint-disable-next-line no-param-reassign,no-multi-assign
-    canvas.main.width = canvas.os.width = dimensions.width;
-    // eslint-disable-next-line no-param-reassign,no-multi-assign
-    canvas.main.height = canvas.os.height = dimensions.height;
-  }
+  // eslint-disable-next-line no-param-reassign,no-multi-assign
+  canvas.main.width = canvas.os.width = dimensions.width;
+  // eslint-disable-next-line no-param-reassign,no-multi-assign
+  canvas.main.height = canvas.os.height = dimensions.height;
   background = ctx.os.createLinearGradient(center.x, 0, center.x, dimensions.height);
   bgArr[date].forEach((el) => {
     background.addColorStop(el[1] as number, el[0] as string);
   });
 }
+
 setInterval(() => {
   const dateTemp = new Date().getHours();
   if (dateTemp !== date) {
     alp = alpArr[dateTemp];
-    resize();
     date = dateTemp;
+    resize();
   }
 }, 120000);
-let doc: any;
 
 const BackgroundComponent = (props: { children: JSX.Element }) => {
   const { children } = props;
   const canvasTemp = useRef<HTMLCanvasElement>(null);
+
   useEffect(() => {
     if (window) {
       if (isMobile) {
@@ -227,17 +224,9 @@ const BackgroundComponent = (props: { children: JSX.Element }) => {
       if (!images.length) {
         getImages();
       }
-      if (doc && canvas) {
-        resize();
-      }
+      resize();
     }
   }, []);
-  useEffect(() => {
-    canvas = { // get things
-      main: canvasTemp.current,
-      os: doc,
-    };
-  }, [canvasTemp]);
   return (
     <Box style={{ height: '100%', background: 'green' }}>
       <canvas
@@ -253,7 +242,6 @@ const BackgroundComponent = (props: { children: JSX.Element }) => {
         }}
       />
       {children}
-      {!isMobile && <PokedexLinkComponent />}
       <WalletComponent />
     </Box>
   );

@@ -6,7 +6,7 @@ const SwiperShopContainer = () => {
   const { currentUser } = useAuth()!;
   const { data: res } = usePostUserShopPokemonIDsQuery(currentUser.uid);
   const path = `/users/${currentUser.uid}/personalShop`;
-  const pkeys = res?.ids || null;
+  const pkeys = res?.pids || null;
   return (
     <SwiperShopComponent pkeys={pkeys} path={path} />
   );

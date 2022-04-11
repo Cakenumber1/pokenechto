@@ -1,8 +1,9 @@
 import { InventoryComponent } from 'components/Inventory/InventoryComponent';
 import { InventoryLoader } from 'components/Inventory/InventoryLoader';
 import { HandleClickCard } from 'helpers/inventory/inventoryHelpers';
-import * as React from 'react';
-import { useGetInventoryByPageQuery } from 'store/service';
+import { useAuth } from 'myFirebase/AuthContext';
+import React from 'react';
+import { usePostInventoryByPageQuery } from 'store/service';
 
 type InventoryPageContainerProps = {
   page: number;
@@ -13,7 +14,8 @@ export const InventoryPageContainer = ({
   page,
   onClickCard,
 }: InventoryPageContainerProps) => {
-  const { data, isError, isLoading } = useGetInventoryByPageQuery(page);
+  const { currentUser } = useAuth()!;
+  const { data, isError, isLoading } = usePostInventoryByPageQuery({ page, uid: currentUser.uid });
 
   if (isError) return <div>Error InventoryPageContainer</div>;
   if (isLoading) return <InventoryLoader open />;

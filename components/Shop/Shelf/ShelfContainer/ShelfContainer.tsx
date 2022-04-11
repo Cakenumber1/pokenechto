@@ -12,7 +12,7 @@ const ShelfContainer: React.FC<Props> = ({ shelfn }) => {
   const classesStack = useStylesStack();
   const { data: res } = usePostShopPokemonIDsQuery(shelfn);
   const path = `/shop/shelves/${shelfn}`;
-  const pkeys = res?.ids || null;
+  const pkeys = res?.pids || null;
   if (pkeys) {
     return (
       <ShelfComponent classes={classesStack} pkeys={pkeys} path={path} />

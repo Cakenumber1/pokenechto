@@ -39,8 +39,22 @@ export type Pokemon = {
   stats: Stat[],
   types: string[],
   exp: number,
+} | undefined;
+
+export type PokemonShop = {
+  id: number,
+  name: string,
+  img: string,
+  abilities: string[],
+  height: number,
+  weight: number,
+  stats: Stat[],
+  types: string[],
+  exp: number,
   limit: number,
   amount: number,
+  price: number,
+  pid: string | undefined,
 } | undefined;
 
 export type PokemonIni = {

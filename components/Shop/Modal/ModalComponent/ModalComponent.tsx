@@ -1,10 +1,10 @@
 import { Box, Button, Modal } from '@mui/material';
 import { colorMap, namesMap } from 'helpers/maps';
-import { Pokemon } from 'interfaces';
+import { PokemonShop } from 'interfaces';
 
 type Props = {
   open: boolean
-  pokemon: Pokemon,
+  pokemon: PokemonShop,
   handleBuy: () => void,
   handleClose: () => void,
   isDisabledMoneyButton: boolean,
@@ -134,7 +134,7 @@ const PokeModal = ({
             disabled={isDisabledMoneyButton}
             onClick={handleBuy}
             variant="contained"
-          >Buy 500$
+          >Buy {pokemon!.price}
           </Button>
         </Box>
       </Box>

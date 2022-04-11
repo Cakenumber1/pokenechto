@@ -12,7 +12,6 @@ import arenaImg from 'public/arena.png';
 import mailImg from 'public/mail.png';
 import shopImg from 'public/shop.png';
 import React from 'react';
-import { isMobile } from 'react-device-detect';
 
 // function clearCollection(path: string) {
 //   db.collection(path)
@@ -73,15 +72,17 @@ import { isMobile } from 'react-device-detect';
 //   }
 // }
 
-// const getInventory = async (setArr: React.Dispatch<any>, uid: string) => {
-//   const res = await db.collection('users').doc(uid).collection('inventory')
+// const getInventory = async () => {
+//   const arr: any[] = [];
+//   await db.collection('users').doc(firebase.auth().currentUser!.uid).collection('inventory')
 //     .orderBy('name')
-//     .limit(12)
-//     .get();
-//   if (res.exists) {
-//     const data = res.data();
-//     setArr(data);
-//   }
+//     .get()
+//     .then((querySnapshot: any) => {
+//       querySnapshot.forEach((doc: any) => {
+//         arr.push({ collectionId: doc.id, ...doc.data() });
+//       });
+//     });
+//   return arr;
 // };
 
 // const getShopSale = async () => {
@@ -127,7 +128,7 @@ const HomeComponent: React.FC<Props> = ({ logout }) => {
               onClick={logout}
               variant="contained"
               color="primary"
-            >Exit
+            >Logout
             </Button>
           </Box>
         </Box>
@@ -158,7 +159,7 @@ const HomeComponent: React.FC<Props> = ({ logout }) => {
           </Box>
         </Box>
       </Box>
-      {isMobile && <PokedexLinkComponent />}
+      <PokedexLinkComponent />
     </Box>
   );
 };

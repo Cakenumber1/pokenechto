@@ -5,15 +5,19 @@ import fakeDB from 'pages/api/fakeDB';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'POST': {
-      const pokemon = await fakeDB.shop.getPokeByID(req.body.target, req.body.uid);
-      if (pokemon) return res.status(200).json(pokemon);
+      const pokemon = await fakeDB.shop.getPokeByID(req.body.target, req.body.pid);
+      if (pokemon) return res.status(200).json({ ...pokemon, pid: req.body.pid });
       break;
     }
     case 'PATCH': {
-      // if (fakeDB.money >= 500) {
-      if (600 >= 500) {
-        fakeDB.buyPoke(String(req.query.id), 500);
-        return res.status(200).end();
+      const { uid, poke, price } = req.body.data;
+      const info = await fakeDB.getUserInfo(uid);
+      const count = info.money;
+      const bestiary = new Set(info.bestiary as number[]);
+      const diff = count - price;
+      if (diff >= 0) {
+        const result = await fakeDB.shop.buyPoke(poke, uid, diff, bestiary);
+        return res.status(result).end();
       }
       return res.status(402).end();
     }

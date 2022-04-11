@@ -10,7 +10,7 @@ import { CollectionItemType } from 'helpers/inventory/inventoryHelpers';
 import { colorMap, getBackgdoundColor, namesMap } from 'helpers/maps';
 import { useAuth } from 'myFirebase/AuthContext';
 import React, { useState } from 'react';
-import { useGetInventoryItemQuery, usePostMushroomsQuery } from 'store/service';
+import { usePostInventoryItemQuery, usePostMushroomsQuery } from 'store/service';
 
 import { style } from './style';
 
@@ -29,7 +29,7 @@ export const InventoryModal = ({
 }: InventoryModalProps) => {
   const { currentUser } = useAuth()!;
   const [zoomEntered, setZoomEntered] = useState(false);
-  const { data } = useGetInventoryItemQuery(pokemon.collectionId);
+  const { data } = usePostInventoryItemQuery({ uid: currentUser.uid, pid: pokemon!.collectionId });
   const { data: mushrooms } = usePostMushroomsQuery(currentUser.uid);
 
   return (

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import firebase from 'firebase';
 import { parseResponsePokemon } from 'helpers';
+import { generatePokemonForShop } from 'helpers/adaptors/generatePokemonForShop';
 import { Pokemon } from 'interfaces/pokemonType';
 import { db } from 'myFirebase/firebase';
 
@@ -14,11 +15,9 @@ export const clearCollection = (path: string) => {
     });
 };
 
-export const getFromPokeApi = async (path: string) => {
-  return axios.get(path)
-    .then((res) => res.data)
-    .catch(console.error);
-};
+export const getFromPokeApi = async (path: string) => axios.get(path)
+  .then((res) => res.data)
+  .catch(console.error);
 
 export const getListFromPokeApi = async (links: string[]) => {
   const pokemons = await Promise.all(
@@ -26,14 +25,14 @@ export const getListFromPokeApi = async (links: string[]) => {
   );
   const temp = [];
   for (let i = 0; i < links.length; i++) {
-    temp.push(parseResponsePokemon(pokemons[i]));
+    temp.push(generatePokemonForShop(parseResponsePokemon(pokemons[i])));
   }
   return temp;
 };
 
-export const getSize = async (path: string) => {
-  return db.collection(path).get().then((snap: any) => snap.size);
-};
+export const getSize = async (path: string) => db.collection(path)
+  .get()
+  .then((snap: any) => snap.size);
 
 export const updateShelf = (path: string, pokemons: Pokemon[]) => {
   let check = !!getSize(path);
@@ -50,17 +49,29 @@ export const updateShop = async () => {
   const shopShelvesPath = 'shop/shelves/';
   const salePath = `${shopShelvesPath}sale`;
   const shelfPath = `${shopShelvesPath}shelf`;
-  const shelfPersonalPath = `users/${firebase.auth().currentUser!.uid}/personalShop`;
-  const path: string[] = [salePath, shelfPath, shelfPersonalPath];
+  const users: string[] = [];
+  await db.collection('users')
+    .get()
+    .then((querySnapshot: any) => {
+      querySnapshot.forEach((doc: any) => {
+        users.push(doc.id);
+      });
+    });
+  const shelfPersonalPaths: string[] = [];
+  users.forEach((u) => { shelfPersonalPaths.push(`users/${u}/personalShop`); });
+  const paths: string[] = [salePath, shelfPath, ...shelfPersonalPaths];
   const links: string[] = [];
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < paths.length * 3; i++) {
     links.push(`https://pokeapi.co/api/v2/pokemon/${Math.round(Math.random() * 300)}`);
   }
   const pokes = await getListFromPokeApi(links);
-  for (let i = 0; i < 3; i++) {
-    clearCollection(path[i]);
-    updateShelf(path[i], pokes.slice(i * 3, (i + 1) * 3));
+  for (let i = 0; i < paths.length; i++) {
+    clearCollection(paths[i]);
+    updateShelf(paths[i], pokes.slice(i * 3, (i + 1) * 3));
   }
+  const t = new Date();
+  t.setHours(t.getHours() + 12);
+  db.collection('shop').doc('shelves').set({ update: firebase.firestore.Timestamp.fromDate(t) });
 };
 export const generatePersonalShop = async (uid: string) => {
   const path = `users/${uid}/personalShop`;
@@ -68,7 +79,12 @@ export const generatePersonalShop = async (uid: string) => {
   for (let i = 0; i < 3; i++) {
     links.push(`https://pokeapi.co/api/v2/pokemon/${Math.round(Math.random() * 300)}`);
   }
-  const pokes = await getListFromPokeApi(links);
+  let pokes: Pokemon[] = [];
+  try {
+    pokes = await getListFromPokeApi(links);
+  } catch (e) {
+    pokes = await getListFromPokeApi(links);
+  }
   pokes.forEach((poke) => db.collection(path).add(poke));
 };
 
@@ -81,7 +97,7 @@ export const getInventory = async () => {
     .get()
     .then((querySnapshot: any) => {
       querySnapshot.forEach((doc: any) => {
-        arr.push({ colletctionID: doc.id, ...doc.data() });
+        arr.push({ collectionId: doc.id, ...doc.data() });
         map.set(doc.id, doc.data());
       });
     });
@@ -97,4 +113,3 @@ export const getShopSale = async () => {
       });
     });
 };
-

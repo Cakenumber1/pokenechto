@@ -1,8 +1,11 @@
 import {
-  Avatar, Box, Container, Grid, Typography,
+  Avatar, Box, LinearProgress,
+  Typography,
 } from '@mui/material';
 import { ClassNameMap } from '@mui/styles';
 import FrameComponent from 'components/FrameComponent';
+import LoaderComponent from 'components/LoaderComponent';
+import ProfileMainPokeComponent from 'components/Pokedex/ProfileComponent/ProfileMainPokeComponent';
 import { stringAvatar } from 'helpers';
 import { UserType } from 'interfaces/userType';
 import React from 'react';
@@ -15,33 +18,50 @@ type Props = {
 const ProfileComponent: React.FC<Props> = ({ classes, who }) => (
   <FrameComponent>
     {who ? (
-      <Container className={classes.qwe}>
-        <Box className="User">
-          <Avatar {...stringAvatar(who.name)} />
-          <Typography>{who.name}</Typography>
-          <Typography>{who.mail}</Typography>
+      <Box className={classes.main}>
+        <Box className={classes.mainInner}>
+          <Typography variant="h5">Main info</Typography>
+          <Box className="User">
+            <Avatar {...stringAvatar(who.name)} />
+            <Typography>{who.name}</Typography>
+            <Typography>{who.mail}</Typography>
+          </Box>
+          <Typography variant="h5">PvP Stats</Typography>
+          <Box className="Pvp Stats">
+            <Box style={{ display: 'flex' }}>
+              <Typography>Rating: </Typography>
+              <Typography>&nbsp;</Typography>
+              <Typography>{` ${who.rating}`}</Typography>
+            </Box>
+            <Box style={{ display: 'flex' }}>
+              <Typography>Pvp Fights: </Typography>
+              <Typography>&nbsp;</Typography>
+              <Typography> {who.pvpTotal}</Typography>
+            </Box>
+            <Box style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Typography sx={{ inlineSize: 'min-content', whiteSpace: 'nowrap' }}>Win rate: </Typography>
+              <Box sx={{ width: '70%' }}>
+                <LinearProgress
+                  variant="determinate"
+                  value={(who.pvpWin / who.pvpTotal) || 0}
+                  sx={{ backgroundColor: 'red' }}
+                />
+              </Box>
+            </Box>
+          </Box>
+          <Typography variant="h5">Main Pokemon</Typography>
+          <ProfileMainPokeComponent poke={who.mainPoke} />
+          <Typography variant="h5">Collection</Typography>
+          <Box className="Collection">
+            <Box style={{ display: 'flex' }}>
+              <Typography>Pokemons found:</Typography>
+              <Typography>&nbsp;</Typography>
+              <Typography> {who.bestiary.length}</Typography>
+            </Box>
+          </Box>
         </Box>
-        <Box className="Values">
-          123
-        </Box>
-        <Grid
-          container
-          spacing={2}
-          columns={{ sm: 1, md: 1, lg: 2 }}
-          direction="column"
-          alignItems="center"
-          justifyContent="center"
-          sx={{ height: '100%' }}
-        >
-          <Grid item>
-            <div>{JSON.stringify(who.name)}</div>
-          </Grid>
-          <Grid item>
-            <div>{JSON.stringify(who.mail)}</div>
-          </Grid>
-        </Grid>
-      </Container>
-    ) : <>loading</>}
+      </Box>
+    ) : <LoaderComponent />}
   </FrameComponent>
 );
 

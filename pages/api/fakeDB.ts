@@ -1,11 +1,84 @@
-import { CollectionItemType } from 'helpers/inventory/inventoryHelpers';
-import { Pokemon, PokemonIni } from 'interfaces/pokemonType';
-import inventoryData from 'mocks/inventory.json';
-import shopInitialData from 'mocks/shop.json';
+import { generatePokemonForShop } from 'helpers/adaptors/buyPokeFromShop';
+import { updateShop } from 'helpers/shop/updateShop';
+import { PokemonIni, PokemonShop } from 'interfaces/pokemonType';
 import { auth, db } from 'myFirebase/firebase';
 
 const loginAdmin = async () => {
-  await auth.signInWithEmailAndPassword('admin@ss.ss', 'admin@ss.ss');
+  try {
+    await auth.signInWithEmailAndPassword('admin@ss.ss', 'admin@ss.ss');
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const patchUserInfo = async (uid: string, val: any, _key: string) => {
+  const obj:any = { [_key]: val };
+  db.collection('users').doc(uid).update(obj);
+};
+
+const getByPage2 = async (page: number, uid: string) => {
+  const arr: any[] = [];
+  await db.collection('users').doc(uid).collection('inventory')
+    .orderBy('name')
+    .get()
+    .then((querySnapshot: any) => {
+      querySnapshot.forEach((doc: any) => {
+        arr.push({ collectionId: doc.id, ...doc.data() });
+      });
+    });
+  const start = (page - 1) * 12;
+  const end = start + 12;
+  return [arr.length, arr.slice(start, end)];
+};
+
+const getCollectionItemById2 = async (collectionId: string, uid: string) => {
+  const res = await db.collection('users')
+    .doc(uid)
+    .collection('inventory')
+    .doc(collectionId)
+    .get();
+  if (res.exists) {
+    return res.data();
+  }
+  return 0;
+};
+
+const deleteCollectionItem2 = async (collectionId: string, uid: string) => {
+  await db.collection('users')
+    .doc(uid)
+    .collection('inventory')
+    .doc(collectionId)
+    .delete();
+};
+const feedPoke = (poke: PokemonIni) => {
+  const { stats } = poke;
+  const grow = Math.floor(Math.random() * 10);
+  stats.forEach((stat) => {
+    if (stat.statVal + grow > 300) {
+      // eslint-disable-next-line no-param-reassign
+      stat.statVal = 300;
+    } else {
+      // eslint-disable-next-line no-param-reassign
+      stat.statVal += grow;
+    }
+  });
+  return stats;
+};
+const patchCollectionItem2 = async (collectionId: string, uid: string, diff: number) => {
+  const poke = await db.collection('users')
+    .doc(uid)
+    .collection('inventory')
+    .doc(collectionId)
+    .get();
+  if (poke.exists) {
+    await patchUserInfo(uid, diff, 'berries');
+    const newStats = feedPoke(poke.data());
+    await db.collection('users')
+      .doc(uid)
+      .collection('inventory')
+      .doc(collectionId)
+      .update({ stats: newStats });
+  }
 };
 
 const getUserInfo = async (uid: string) => {
@@ -16,12 +89,6 @@ const getUserInfo = async (uid: string) => {
     return res.data();
   }
   return 0;
-};
-
-const patchUserInfo = async (uid: string, count: number, _key: string) => {
-  const key = _key;
-  const obj:any = { [key]: count };
-  db.collection('users').doc(uid).update(obj);
 };
 
 const getUserIDsShop = async (uid: string) => {
@@ -58,9 +125,17 @@ const getIDsShop = async (target: string) => {
   return 0;
 };
 
-const getPokeByID = async (target: string, uid: string) => {
+const getShopUpdTime = async () => {
+  const res = await db.collection('shop').doc('shelves').get();
+  if (res.exists) {
+    return res.data().update.toDate();
+  }
+  return 0;
+};
+
+const getPokeByID = async (target: string, id: string) => {
   const res = await db.collection(target)
-    .doc(uid)
+    .doc(id)
     .get();
   if (res.exists) {
     return res.data();
@@ -68,63 +143,59 @@ const getPokeByID = async (target: string, uid: string) => {
   return 0;
 };
 
+const buyPoke = async (poke: PokemonShop, uid: string, diff: number, bestiary: Set<number>) => {
+  const results: any[] = [];
+  const shopShelvesPath = 'shop/shelves/';
+  const salePath = `${shopShelvesPath}sale`;
+  const shelfPath = `${shopShelvesPath}shelf`;
+  const shelfPersonalPath = `users/${uid}/personalShop`;
+  const paths = [salePath, shelfPath, shelfPersonalPath];
+  for (let i = 0; i < paths.length; i++) {
+    // eslint-disable-next-line no-await-in-loop
+    results.push(await db.collection(paths[i])
+      .doc(poke!.pid)
+      .get());
+  }
+  // eslint-disable-next-line no-unreachable-loop
+  for (let i = 0; i < paths.length; i++) {
+    if (results[i].exists) {
+      if (results[i].data().amount > 0) {
+        db.collection(paths[i]).doc(poke!.pid).update({ amount: results[i].data().amount - 1 });
+        // eslint-disable-next-line no-await-in-loop
+        await patchUserInfo(uid, diff, 'money');
+        const temp = generatePokemonForShop(poke);
+        db.collection('users').doc(uid).collection('inventory').add(temp);
+        bestiary.add(poke!.id);
+        // eslint-disable-next-line no-await-in-loop
+        await patchUserInfo(uid, Array.from(bestiary), 'bestiary');
+        return 200;
+      }
+      return 204;
+    }
+  }
+  return 204;
+};
+
 loginAdmin();
+setInterval(() => {
+  updateShop();
+}, 43200000);
 
 const fakeDB = {
-  buyPoke(_id : string, price: number) {
-    const slave = this.shop.data.find((poke) => String(poke!.id) === _id);
-    if (slave!.amount > 0) {
-      slave!.amount -= 1;
-      // this.money -= price;
-      console.log(price);
-      this.inventory.data.push(
-        {
-          ...slave as PokemonIni,
-          collectionId: Date.now().toString(16),
-        } as CollectionItemType,
-      );
-    }
-  },
   inventory: {
-    data: inventoryData as CollectionItemType[],
-    itemsPerPage: 12,
-    getLength() {
-      return this.data.length;
-    },
-    getPages() {
-      return Math.ceil(this.data.length / this.itemsPerPage);
-    },
-    getData() {
-      return this.data;
-    },
-    getCollectionItemById(collectionId: string) {
-      return this.data.find((element) => element.collectionId === collectionId);
-    },
-    getByPage(page: number) {
-      const start = (page - 1) * this.itemsPerPage;
-      const end = start + this.itemsPerPage;
-      return this.data.slice(start, end);
-    },
-    deleteCollectionItem(collectionId: string) {
-      const itemIndex = this.data.findIndex(
-        (element) => element.collectionId === collectionId,
-      );
-      this.data.splice(itemIndex, 1);
-    },
+    getCollectionItemById2,
+    getByPage2,
+    deleteCollectionItem2,
+    patchCollectionItem2,
   },
   getUserInfo,
   patchUserInfo,
   shop: {
-    data: shopInitialData as Pokemon[],
     getIDsShop,
+    getShopUpdTime,
     getUserIDsShop,
-    getIDs() {
-      return this.data.map((poke) => poke!.id);
-    },
     getPokeByID,
-    // getPokeByID(_id: string) {
-    //   return this.data.find((poke) => String(poke!.id) === _id);
-    // },
+    buyPoke,
   },
 };
 
