@@ -1,18 +1,29 @@
 # pokenechto
-Актуальная бранча - actual  
-Актуальная ссылка vercel в actual
-## Для корректной демонстрации проекта
-
-- git clone https://github.com/Cakenumber1/pokenechto.git
-- cd pokenechto
-- yarn install
-- yarn build
-- yarn start
-
-## Деплой [https://pokenechto-alpha.vercel.app/](https://pokenechto-alpha.vercel.app/)
-
-### `Технические особенности демонстрационного проекта`
-
-    В качестве бекенда и в рамках ограниченного временного срока было решено воспользоваться внутренним API интерфейсом NextJs и замоканными данными, что позволит в дальнейшем без трудностей перейти на любой внешний бекенд-интерфейс не меняя внутреннюю логику и маршрутизацию.
-
-    НО в связи с техническими ограничениями Vercel (для наших замоканных данных), дабы насладится в полной мере проектом рекомендуем выполнить локальную установку описанную выше.
+Current brunch - actual  
+Current env(deploy on vercel) - Preview
+## Progress
+### Functional Pages
+- [x] Shop
+- [x] Wallet
+- [x] Payment
+- [x] Inventory
+- [x] Pokedex Home
+- [x] HomePage
+- [x] Registration/Authentication
+- [ ] Arena
+- [ ] MailBox
+- [ ] Bestiary
+### RTK Query + back
+- [x] Shop
+- [x] Wallet
+- [x] Payment
+- [x] Inventory
+- [ ] Arena
+- [ ] MailBox
+- [ ] Bestiary(minor)
+### Refactor
+- [x] Shop
+- [x] Inventory
+- [ ] Everything Else
+### Tests
+- [ ] Shop
