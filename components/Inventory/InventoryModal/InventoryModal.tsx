@@ -86,8 +86,8 @@ export const InventoryModal = ({
                 <Button variant="contained" size="large" onClick={handleClose}>
                   Close
                 </Button>
-                <Button disabled={!mushrooms} variant="contained" size="large" onClick={handleClickMushroom}>
-                  🍄 Mushroom {mushrooms?.count || ''}
+                <Button disabled={!mushrooms?.count} variant="contained" size="large" onClick={handleClickMushroom}>
+                  🍇 berries {mushrooms?.count || ''}
                 </Button>
               </Stack>
             </Box>

@@ -30,6 +30,17 @@ export const getListFromPokeApi = async (links: string[]) => {
   return temp;
 };
 
+export const getPureListFromPokeApi = async (links: string[]) => {
+  const pokemons = await Promise.all(
+    links.map((link: any) => getFromPokeApi(link)),
+  );
+  const temp = [];
+  for (let i = 0; i < links.length; i++) {
+    temp.push(parseResponsePokemon(pokemons[i]));
+  }
+  return temp;
+};
+
 export const getSize = async (path: string) => db.collection(path)
   .get()
   .then((snap: any) => snap.size);
@@ -80,10 +91,16 @@ export const generatePersonalShop = async (uid: string) => {
     links.push(`https://pokeapi.co/api/v2/pokemon/${Math.round(Math.random() * 300)}`);
   }
   let pokes: Pokemon[] = [];
+
+  console.log(pokes);
+  const a = setInterval(async () => {
+    pokes.forEach((poke) => db.collection(path).add(poke));
+    clearInterval(a);
+  }, 1000);
   try {
-    pokes = await getListFromPokeApi(links);
+    pokes = await getPureListFromPokeApi(links);
   } catch (e) {
-    pokes = await getListFromPokeApi(links);
+    pokes = await getPureListFromPokeApi(links);
   }
   pokes.forEach((poke) => db.collection(path).add(poke));
 };

@@ -21,5 +21,6 @@ export function parseResponsePokemon(data: any) {
   const { limit, amount } = randomAnL();
   temp.limit = limit;
   temp.amount = amount;
+  temp.price = 300;
   return temp as Pokemon;
 }

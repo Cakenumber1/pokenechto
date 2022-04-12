@@ -2,11 +2,10 @@ import ShoppingBasketRoundedIcon from '@mui/icons-material/ShoppingBasketRounded
 import {
   Box, Button, Collapse, Modal, Stack, Zoom,
 } from '@mui/material';
+import PaymentContainerOuter from 'components/Payment/PaymentContainerOuter';
 import { useAuth } from 'myFirebase/AuthContext';
 import React, { SyntheticEvent, useCallback, useState } from 'react';
 import {
-  usePatchMoneyMutation,
-  usePatchMushroomsMutation,
   usePostMoneyQuery,
   usePostMushroomsQuery,
 } from 'store/service';
@@ -18,12 +17,13 @@ const WalletComponent = () => {
   const { currentUser } = useAuth()!;
   const { data: mushrooms } = usePostMushroomsQuery(currentUser.uid);
   const { data: money } = usePostMoneyQuery(currentUser.uid);
-  const [patchMoneyMutation] = usePatchMoneyMutation();
-  const [patchMushroomsMutation] = usePatchMushroomsMutation();
   const classesM = useModalStyles();
   const classes = useStyles();
   const [isDropped, setIsDropped] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenPay, setIsOpenPay] = useState(false);
+  const [amount, setAmount] = useState(100);
+  const [type, setType] = useState<string>('none');
   const handleOpen = useCallback(() => {
     setIsOpen(true);
   }, []);
@@ -42,13 +42,19 @@ const WalletComponent = () => {
 
   const handleAddMoney = (e: SyntheticEvent) => {
     e.preventDefault();
-    const temp = e.target as HTMLElement;
-    patchMoneyMutation({ uid: currentUser.uid, count: Number(temp.innerText) }).unwrap();
+    setIsOpenPay(true);
+    setAmount(100000);
+    setType('money');
+    // const temp = e.target as HTMLElement;
+    // patchMoneyMutation({ uid: currentUser.uid, count: Number(temp.innerText) }).unwrap();
   };
   const handleAddMushrooms = (e: SyntheticEvent) => {
     e.preventDefault();
-    const temp = e.target as HTMLElement;
-    patchMushroomsMutation({ uid: currentUser.uid, count: Number(temp.innerText) }).unwrap();
+    setIsOpenPay(true);
+    setAmount(100000);
+    setType('berries');
+    // const temp = e.target as HTMLElement;
+    // patchMushroomsMutation({ uid: currentUser.uid, count: Number(temp.innerText) }).unwrap();
   };
   const getShopColour = () => {
     const t = new Date().getHours();
@@ -85,6 +91,12 @@ const WalletComponent = () => {
                   <Button variant="contained" disabled>5</Button>
                   <Button onClick={handleAddMushrooms} variant="contained">10</Button>
                 </Box>
+                <PaymentContainerOuter
+                  amount={amount}
+                  type={type}
+                  isOpenPay={isOpenPay}
+                  setIsOpenPay={setIsOpenPay}
+                />
                 <Button onClick={handleSqueeze}>Выйти</Button>
               </Stack>
             </Collapse>
