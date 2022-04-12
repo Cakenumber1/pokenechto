@@ -4,6 +4,10 @@ import { generatePersonalShop } from 'helpers/shop/updateShop';
 import initialPokes from 'mocks/initial.json';
 import { useAuth } from 'myFirebase/AuthContext';
 import React, { useState } from 'react';
+import {
+  usePatchMoneyMutation,
+  usePatchMushroomsMutation,
+} from 'store/service';
 
 import { useStyles } from '../style';
 
@@ -17,8 +21,8 @@ function create(user: any, name: string, mail: string, slide: number) {
     name,
     mail,
     registered: firebase.firestore.Timestamp.fromDate(new Date()),
-    money: 1000,
-    berries: 10,
+    money: 0,
+    berries: 0,
     rating: 0,
     pvpTotal: 0,
     pvpWin: 0,
@@ -31,6 +35,8 @@ function create(user: any, name: string, mail: string, slide: number) {
 
 const RegisterContainer: React.FC<Props> = ({ handlePage }) => {
   const classes = useStyles();
+  const [patchMoneyMutation] = usePatchMoneyMutation();
+  const [patchMushroomsMutation] = usePatchMushroomsMutation();
   const [error, setError] = useState<any>();
   const [mail, setMail] = useState('');
   const [pass, setPass] = useState('');
@@ -43,7 +49,12 @@ const RegisterContainer: React.FC<Props> = ({ handlePage }) => {
     logout();
     await signup(mail, pass)
       .then(() => {
-        create(firebase.auth().currentUser, name, mail, slide.activeIndex);
+        const user = firebase.auth().currentUser;
+        create(user, name, mail, slide.activeIndex);
+        setTimeout(() => {
+          patchMoneyMutation({ uid: user!.uid, count: 1000 }).unwrap();
+          patchMushroomsMutation({ uid: user!.uid, count: 10 }).unwrap();
+        }, 1000);
       })
       .catch((e: any) => {
         setError(e);

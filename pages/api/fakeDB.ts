@@ -179,7 +179,7 @@ const buyPoke = async (poke: PokemonShop, uid: string, diff: number, bestiary: S
 loginAdmin();
 setInterval(() => {
   updateShop();
-}, 43200000);
+}, 600000);
 
 const fakeDB = {
   inventory: {
