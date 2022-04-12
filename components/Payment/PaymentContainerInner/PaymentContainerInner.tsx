@@ -90,10 +90,8 @@ const PaymentContainerInner: React.FC<Props> = ({
           <Typography sx={{ alignSelf: 'center', mb: '3%' }}>{`К оплате: ${amount / 100} 〒`}</Typography>
           {paymentRequest && (
             <Box sx={{
-              width: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              mt: '3%',
+              mb: '5%',
             }}
             >
               <PaymentRequestButtonElement options={{ paymentRequest }} />
