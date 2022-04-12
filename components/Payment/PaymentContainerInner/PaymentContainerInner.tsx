@@ -88,15 +88,20 @@ const PaymentContainerInner: React.FC<Props> = ({
         }}
         >
           <Typography sx={{ alignSelf: 'center', mb: '3%' }}>{`К оплате: ${amount / 100} 〒`}</Typography>
-          {paymentRequest ? (
-            <Box sx={{ width: '50%' }}>
+          {paymentRequest && (
+            <Box sx={{
+              width: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            >
               <PaymentRequestButtonElement options={{ paymentRequest }} />
             </Box>
-          ) : (
-            <Box>
-              <PaymentComponent amount={amount} type={type} setIsOpenPay={setIsOpenPay} />
-            </Box>
           )}
+          <Box>
+            <PaymentComponent amount={amount} type={type} setIsOpenPay={setIsOpenPay} />
+          </Box>
           <Button onClick={handleClose} sx={{ width: '40%', alignSelf: 'center', mt: '3%' }} variant="contained" color="error">cancel</Button>
         </Box>
       </Box>
