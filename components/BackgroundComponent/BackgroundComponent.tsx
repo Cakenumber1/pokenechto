@@ -212,6 +212,7 @@ const BackgroundComponent = (props: { children: JSX.Element }) => {
       center.y = dimensions.height / 2;
       if (!doc) {
         doc = document.createElement('canvas');
+        doc.style.zIndex = '0';
       }
       canvas = { // get things
         main: canvasTemp.current,
@@ -228,7 +229,7 @@ const BackgroundComponent = (props: { children: JSX.Element }) => {
     }
   }, []);
   return (
-    <Box style={{ height: '100%', background: 'green' }}>
+    <Box style={{ height: '100%', background: 'green', zIndex: '-5' }}>
       <canvas
         ref={canvasTemp}
         id="canvas"
@@ -238,6 +239,7 @@ const BackgroundComponent = (props: { children: JSX.Element }) => {
           left: 0,
           height: '45vh',
           width: '100vw',
+          zIndex: '0',
           background: `linear-gradient(${getGrad(date, bgArr)})`,
         }}
       />

@@ -75,7 +75,7 @@ export const AppBarComponent = () => {
 
   return (
     <AppBar position="static">
-      <Toolbar sx={{ p: 0 }}>
+      <Toolbar sx={{ p: 0, zIndex: 100, background: '#4fc3f7' }}>
         {matchesDashboard ? buttons : mobileButtons}
         <Box sx={currentStyle.exit}>
           <Link href="/">

@@ -12,6 +12,7 @@ export const store = configureStore({
     appApi.middleware,
     pokemonApi.middleware,
   ),
+  devTools: true,
 });
 
 setupListeners(store.dispatch);

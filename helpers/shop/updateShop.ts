@@ -91,8 +91,6 @@ export const generatePersonalShop = async (uid: string) => {
     links.push(`https://pokeapi.co/api/v2/pokemon/${Math.round(Math.random() * 300)}`);
   }
   let pokes: Pokemon[] = [];
-
-  console.log(pokes);
   const a = setInterval(async () => {
     pokes.forEach((poke) => db.collection(path).add(poke));
     clearInterval(a);

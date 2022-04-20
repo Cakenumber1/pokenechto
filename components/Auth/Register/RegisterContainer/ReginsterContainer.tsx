@@ -17,6 +17,8 @@ type Props = {
 
 function create(user: any, name: string, mail: string, slide: number) {
   const db = firebase.firestore();
+  // eslint-disable-next-line no-param-reassign
+  if (!name) name = 'Mr. Undefined';
   db.collection('users').doc(user.uid).set({
     name,
     mail,

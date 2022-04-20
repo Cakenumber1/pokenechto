@@ -8,6 +8,7 @@ import 'swiper/css/effect-cards';
 import 'swiper/css/pagination';
 import 'styles/globals.scss';
 
+import BackgroundComponent from 'components/BackgroundComponent';
 import { AuthProvider } from 'myFirebase/AuthContext';
 import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
@@ -17,7 +18,9 @@ import { store } from '../store';
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <AuthProvider>
     <Provider store={store}>
-      <Component {...pageProps} />
+      <BackgroundComponent>
+        <Component {...pageProps} />
+      </BackgroundComponent>
     </Provider>
   </AuthProvider>
 );

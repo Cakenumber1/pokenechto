@@ -2,7 +2,7 @@ import { makeStyles } from '@mui/styles';
 
 export const useStyles = makeStyles({
   container: {
-    zIndex: '10',
+    zIndex: '1',
     display: 'flex',
     right: '1%',
     top: '1%',

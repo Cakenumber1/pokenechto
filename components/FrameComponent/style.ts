@@ -9,5 +9,7 @@ export const style = {
     py: 2,
     flexGrow: 1,
     overflowY: 'auto',
+    zIndex: 100,
+    background: 'white',
   },
 };

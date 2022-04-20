@@ -13,7 +13,6 @@ type Props = {
   handleOpen: (e: SyntheticEvent) => void,
   handleClose: () => void,
   classes: ClassNameMap,
-  limit: number,
   amount: number,
   open: boolean,
   data: DataType,
@@ -26,7 +25,6 @@ const CellComponent: React.FC<Props> = ({
   handleOpen,
   handleClose,
   classes,
-  limit,
   amount,
   open,
   data,
@@ -50,14 +48,8 @@ const CellComponent: React.FC<Props> = ({
                 src={soledOut.src}
                 alt="soled"
               />
-            ) : amount && limit && (
-              <Box>
-                <Box className={classes.cardAmount}>
-                  {amount}
-                  /
-                  {limit}
-                </Box>
-              </Box>
+            ) : amount && (
+              <Box />
             )}
           </Box>
         </Grow>

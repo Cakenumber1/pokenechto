@@ -34,11 +34,8 @@ const CellContainer: React.FC<Props> = ({ pokeid, path }) => {
   const [data, setData] = React.useState<DataType>({
     left: 0, top: 0, height: 0, width: 0, background: 'none',
   });
-  let limit = 0;
   let amount = 0;
   if (pokemon) {
-    // eslint-disable-next-line no-param-reassign
-    limit = pokemon!.limit;
     // eslint-disable-next-line no-param-reassign
     amount = pokemon!.amount;
   }
@@ -76,7 +73,6 @@ const CellContainer: React.FC<Props> = ({ pokeid, path }) => {
         handleOpen={handleOpen}
         handleClose={handleClose}
         classes={classes}
-        limit={limit}
         amount={amount}
         open={open}
         data={data}

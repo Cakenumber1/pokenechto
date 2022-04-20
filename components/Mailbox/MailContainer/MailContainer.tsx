@@ -3,10 +3,16 @@ import React from 'react';
 import MailComponent from '../MailComponent';
 import { useStyles } from '../style';
 
-const MailContainer = () => {
+type Props = {
+  children: JSX.Element
+};
+
+const MailContainer: React.FC<Props> = ({ children }) => {
   const classes = useStyles();
   return (
-    <MailComponent classes={classes} />
+    <MailComponent classes={classes}>
+      {children}
+    </MailComponent>
   );
 };
 

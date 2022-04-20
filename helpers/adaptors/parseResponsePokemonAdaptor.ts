@@ -1,4 +1,3 @@
-import { randomAnL } from 'helpers/adaptors/randomAnL';
 import { Pokemon, Stat } from 'interfaces';
 
 export function parseResponsePokemon(data: any) {
@@ -18,9 +17,8 @@ export function parseResponsePokemon(data: any) {
   temp.types = [];
   data.types.forEach((a: any) => temp.types.push(a.type.name));
   temp.exp = data.base_experience;
-  const { limit, amount } = randomAnL();
-  temp.limit = limit;
-  temp.amount = amount;
+  temp.limit = 1;
+  temp.amount = 1;
   temp.price = 300;
   return temp as Pokemon;
 }
