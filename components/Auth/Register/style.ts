@@ -5,6 +5,13 @@ export const useStyles = makeStyles({
     height: '100%',
   },
   box: {
+    position: 'absolute',
+    left: '0',
+    top: '0',
+    width: '100%',
+    height: '100%',
+    zIndex: '10',
+    background: 'white',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

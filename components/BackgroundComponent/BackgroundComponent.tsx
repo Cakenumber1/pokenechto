@@ -1,6 +1,7 @@
 // eslint-disable-next-line max-classes-per-file
 import { Box } from '@mui/material';
 import WalletComponent from 'components/Wallet/WalletComponent';
+import { useAuth } from 'myFirebase/AuthContext';
 import cloud1 from 'public/cloud1.png';
 import cloud2 from 'public/cloud2.png';
 import cloud3 from 'public/cloud3.png';
@@ -195,6 +196,7 @@ setInterval(() => {
 }, 120000);
 
 const BackgroundComponent = (props: { children: JSX.Element }) => {
+  const { currentUser } = useAuth()!;
   const { children } = props;
   const canvasTemp = useRef<HTMLCanvasElement>(null);
 
@@ -244,7 +246,7 @@ const BackgroundComponent = (props: { children: JSX.Element }) => {
         }}
       />
       {children}
-      <WalletComponent />
+      { currentUser && <WalletComponent /> }
     </Box>
   );
 };
