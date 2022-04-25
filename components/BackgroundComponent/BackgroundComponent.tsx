@@ -239,8 +239,8 @@ const BackgroundComponent = (props: { children: JSX.Element }) => {
           position: 'absolute',
           top: 0,
           left: 0,
-          height: '45vh',
-          width: '100vw',
+          height: currentUser ? '45vh' : 0,
+          width: currentUser ? '100vw' : 0,
           zIndex: '0',
           background: `linear-gradient(${getGrad(date, bgArr)})`,
         }}
