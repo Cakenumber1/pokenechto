@@ -1,4 +1,4 @@
-import BuildingContainer from 'components/Buildings/BuildingContainer';
+import BuildingContainer from 'components/Building/BuildingContainer';
 import withAuth from 'components/HOCs/withAuthHOC';
 import MailHomeComponent from 'components/Mailbox/MailComponent/MailHome/MailHomeComponent';
 import MailContainer from 'components/Mailbox/MailContainer';

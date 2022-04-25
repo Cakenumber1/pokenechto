@@ -1,7 +1,7 @@
 import { Box, Button } from '@mui/material';
-import { useStyles } from 'components/Home/style';
 // import axios from 'axios';
-import PokedexLinkComponent from 'components/PokedexLinkComponent';
+import HomePokedexLinkComponent from 'components/Home/HomePokedexLinkComponent';
+import { useStyles } from 'components/Home/style';
 // import firebase from 'firebase';
 // import { parseResponsePokemon } from 'helpers';
 // import { Pokemon } from 'interfaces/';
@@ -159,7 +159,7 @@ const HomeComponent: React.FC<Props> = ({ logout }) => {
           </Box>
         </Box>
       </Box>
-      <PokedexLinkComponent />
+      <HomePokedexLinkComponent />
     </Box>
   );
 };

@@ -11,7 +11,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
     case 'PATCH': {
       const { uid, poke, price } = req.body.data;
-      console.log(req.body.data);
       const info = await fakeDB.getUserInfo(uid);
       const count = info.money;
       const bestiary = new Set(info.bestiary as number[]);

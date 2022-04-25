@@ -1,6 +1,6 @@
 // eslint-disable-next-line max-classes-per-file
 import { Box } from '@mui/material';
-import WalletComponent from 'components/WalletComponent';
+import WalletComponent from 'components/Wallet/WalletComponent';
 import cloud1 from 'public/cloud1.png';
 import cloud2 from 'public/cloud2.png';
 import cloud3 from 'public/cloud3.png';

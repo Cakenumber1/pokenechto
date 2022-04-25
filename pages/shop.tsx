@@ -1,4 +1,4 @@
-import BuildingContainer from 'components/Buildings/BuildingContainer';
+import BuildingContainer from 'components/Building/BuildingContainer';
 import withAuth from 'components/HOCs/withAuthHOC';
 import ShopContainer from 'components/Shop/Main/ShopContainer';
 import type { NextPage } from 'next';

@@ -1,5 +1,5 @@
 import ArenaContainer from 'components/Arena/ArenaContainer';
-import BuildingContainer from 'components/Buildings/BuildingContainer';
+import BuildingContainer from 'components/Building/BuildingContainer';
 import withAuth from 'components/HOCs/withAuthHOC';
 import type { NextPage } from 'next';
 

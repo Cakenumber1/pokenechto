@@ -1,6 +1,6 @@
-import FrameComponent from 'components/FrameComponent';
 import withAuth from 'components/HOCs/withAuthHOC';
-import { InventoryContainer } from 'components/Inventory/InventoryContainer';
+import FrameComponent from 'components/Pokedex/FrameComponent';
+import { InventoryContainer } from 'components/Pokedex/Inventory/InventoryContainer';
 import { naturalNumberPattern } from 'helpers/inventory/inventoryHelpers';
 import Error from 'next/error';
 import { useRouter } from 'next/router';
