@@ -12,7 +12,6 @@ const getData = async (uid: string, setWho: React.Dispatch<any>) => {
   if (res.exists) {
     setWho(res.data());
   }
-  return null;
 };
 
 const ProfileContainer = () => {
@@ -23,6 +22,7 @@ const ProfileContainer = () => {
   useEffect(() => {
     getData(currentUser.uid, setWho);
   }, [currentUser.uid]);
+
   return (
     <ProfileComponent classes={classes} who={who} />
   );

@@ -7,7 +7,7 @@ import cloud2 from 'public/cloud2.png';
 import cloud3 from 'public/cloud3.png';
 import cloud4 from 'public/cloud4.png';
 import cloud5 from 'public/cloud5.png';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 const links = [cloud1, cloud2, cloud3, cloud4, cloud5];
@@ -186,16 +186,8 @@ function resize() {
   });
 }
 
-setInterval(() => {
-  const dateTemp = new Date().getHours();
-  if (dateTemp !== date) {
-    alp = alpArr[dateTemp];
-    date = dateTemp;
-    resize();
-  }
-}, 120000);
-
 const BackgroundComponent = (props: { children: JSX.Element }) => {
+  const [time, setTime] = useState(date);
   const { currentUser } = useAuth()!;
   const { children } = props;
   const canvasTemp = useRef<HTMLCanvasElement>(null);
@@ -229,9 +221,21 @@ const BackgroundComponent = (props: { children: JSX.Element }) => {
       }
       resize();
     }
+    const interval = setInterval(() => {
+      const dateTemp = new Date().getHours();
+      if (dateTemp !== time) {
+        alp = alpArr[dateTemp];
+        setTime(dateTemp);
+        date = dateTemp;
+        resize();
+      }
+    }, 120000);
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
   return (
-    <Box style={{ height: '100%', background: 'green', zIndex: '-5' }}>
+    <Box style={{ height: '100%', background: currentUser ? 'green' : 'none', zIndex: '-5' }}>
       <canvas
         ref={canvasTemp}
         id="canvas"
@@ -242,7 +246,7 @@ const BackgroundComponent = (props: { children: JSX.Element }) => {
           height: currentUser ? '45vh' : 0,
           width: currentUser ? '100vw' : 0,
           zIndex: '0',
-          background: `linear-gradient(${getGrad(date, bgArr)})`,
+          background: `linear-gradient(${getGrad(time, bgArr)})`,
         }}
       />
       {children}

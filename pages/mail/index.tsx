@@ -1,6 +1,6 @@
 import BuildingContainer from 'components/Building/BuildingContainer';
 import withAuth from 'components/HOCs/withAuthHOC';
-import MailHomeComponent from 'components/Mailbox/MailComponent/MailHome/MailHomeComponent';
+import MailHomeComponent from 'components/Mailbox/MailComponent/MailHome/';
 import MailContainer from 'components/Mailbox/MailContainer';
 import type { NextPage } from 'next';
 

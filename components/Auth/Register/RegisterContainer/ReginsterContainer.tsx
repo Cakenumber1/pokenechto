@@ -15,11 +15,17 @@ type Props = {
   handlePage: () => void,
 };
 
-function create(user: any, name: string, mail: string, slide: number) {
+async function create(user: any, name: string, mail: string, slide: number) {
   const db = firebase.firestore();
   // eslint-disable-next-line no-param-reassign
   if (!name) name = 'Mr. Undefined';
-  db.collection('users').doc(user.uid).set({
+  let invId = '';
+  await db.collection('users').doc(user.uid).collection('inventory').add(initialPokes[slide]);
+  await db.collection('users').doc(user.uid).collection('inventory').get()
+    .then((querySnapshot: any) => {
+      invId = querySnapshot.docs[0].id;
+    });
+  await db.collection('users').doc(user.uid).set({
     name,
     mail,
     registered: firebase.firestore.Timestamp.fromDate(new Date()),
@@ -28,11 +34,10 @@ function create(user: any, name: string, mail: string, slide: number) {
     rating: 0,
     pvpTotal: 0,
     pvpWin: 0,
-    mainPoke: initialPokes[slide],
+    mainPoke: { ...initialPokes[slide], invId },
     bestiary: [initialPokes[slide].id],
   });
-  db.collection('users').doc(user.uid).collection('inventory').add(initialPokes[slide]);
-  generatePersonalShop(user.uid);
+  await generatePersonalShop(user.uid);
 }
 
 const RegisterContainer: React.FC<Props> = ({ handlePage }) => {

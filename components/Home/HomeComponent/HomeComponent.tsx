@@ -1,7 +1,9 @@
-import { Box, Button } from '@mui/material';
+import { Badge, Box, Button } from '@mui/material';
 // import axios from 'axios';
 import HomePokedexLinkComponent from 'components/Home/HomePokedexLinkComponent';
 import { useStyles } from 'components/Home/style';
+import { useAuth } from 'myFirebase/AuthContext';
+import { db } from 'myFirebase/firebase';
 // import firebase from 'firebase';
 // import { parseResponsePokemon } from 'helpers';
 // import { Pokemon } from 'interfaces/';
@@ -11,7 +13,7 @@ import Link from 'next/link';
 import arenaImg from 'public/arena.png';
 import mailImg from 'public/mail.png';
 import shopImg from 'public/shop.png';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 // function clearCollection(path: string) {
 //   db.collection(path)
@@ -98,12 +100,38 @@ import React from 'react';
 // updateShop();
 // getShopSale();
 
+const getData = async (uid: string, setMails: React.Dispatch<any>) => {
+  const ans: string[] = [];
+  await db
+    .collection('users')
+    .doc(uid)
+    .collection('mails')
+    .where('unread', '==', true)
+    .get()
+    .then((querySnapshot: any) => {
+      querySnapshot.forEach((doc: any) => {
+        ans.push(doc.id);
+      });
+    });
+  if (ans && ans.length) {
+    setMails(ans.length);
+  }
+  return null;
+};
+
 type Props = {
   logout: any,
 };
 
 const HomeComponent: React.FC<Props> = ({ logout }) => {
+  const { currentUser } = useAuth()!;
+  const [newmails, setNewMails] = useState<number>();
   const classes = useStyles();
+
+  useEffect(() => {
+    getData(currentUser.uid, setNewMails);
+  }, [currentUser.uid]);
+
   return (
     <Box style={{ height: '100%' }}>
       <Box
@@ -113,12 +141,15 @@ const HomeComponent: React.FC<Props> = ({ logout }) => {
           <Box className={classes.link}>
             <Box className={classes.mailbox}>
               <Link href="/mail">
-                <Image
-                  src={mailImg}
-                  alt="mail"
-                />
+                <Badge sx={{ right: 13, top: 20 }} badgeContent={newmails} overlap='circular' color="error">
+                  <Image
+                    src={mailImg}
+                    alt="mail"
+                  />
+                </Badge>
               </Link>
             </Box>
+
           </Box>
           <Box
             className={classes.link}

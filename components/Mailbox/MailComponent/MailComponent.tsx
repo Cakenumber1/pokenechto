@@ -38,13 +38,13 @@ const MailComponent: React.FC<Props> = ({ classes, children }) => (
     <Box sx={{
       width: '100%',
       display: 'flex',
-      justifyContent: 'space-between',
+      justifyContent: 'flex-start',
       alignItems: 'center',
     }}
     >
-      <MailButton classes={classes} link="/mail" name="Main" />
+      <MailButton classes={classes} link="/mail" name="New" />
       <MailButton classes={classes} link="/mail/history" name="History" />
-      <MailButton classes={classes} link="/mail/new" name="New message" />
+      <MailButton classes={classes} link="/mail/new" name="Send" />
     </Box>
     <Box style={{
       padding: 0, margin: 0, width: '100%', height: '95%', background: 'darkgray',

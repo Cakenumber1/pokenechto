@@ -4,7 +4,7 @@ export const useStyles = makeStyles({
   buildingBody: {
     position: 'absolute',
     bottom: '2.5%',
-    left: '5%',
+    left: '7.5%',
     height: '90%',
     padding: '2.5% 2.5% 0 2.5%',
     width: '85%',
