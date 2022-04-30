@@ -15,7 +15,7 @@ import { db } from 'myFirebase/firebase';
 import React, { useState } from 'react';
 import { usePostMoneyQuery, usePostMushroomsQuery } from 'store/service';
 
-import { useStyles } from './style';
+// import { useStyles } from './style';
 
 const getData = async (uid: string, setPokes: React.Dispatch<any>) => {
   const ans: string[] = [];
@@ -43,14 +43,13 @@ const getData = async (uid: string, setPokes: React.Dispatch<any>) => {
 };
 
 const MailNewComponent = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
   const [mail, setMail] = useState('');
   const [text, setText] = useState('');
   const [valueBer, setValueBer] = useState(0);
   const [valueMon, setValueMon] = useState(0);
   const [poke, setPoke] = useState(null);
   const [invPokes, setInvPokes] = useState<any>();
-  const [loading, setLoading] = useState(false);
   const { currentUser } = useAuth()!;
   const [open, setOpen] = useState(false);
   const [openTooltip, setOpenTooltip] = useState(false);
@@ -62,13 +61,12 @@ const MailNewComponent = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(mail, text);
+    setPoke(null);
   };
   const handleOpen = async () => {
     setOpen(true);
-    setLoading(true);
     await getData(currentUser.uid, setInvPokes);
     console.log(invPokes);
-    setLoading(false);
   };
   return (
     <Box
@@ -213,7 +211,12 @@ const MailNewComponent = () => {
             Pick poke to transfer
           </Typography>
           {invPokes?.map((p: any) => (
-            <Box sx={{ width: '100%', height: '20%', background: 'red', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }} key={p.invId}>
+            <Box
+              sx={{
+                width: '100%', height: '20%', background: 'red', display: 'flex', justifyContent: 'space-around', alignItems: 'center',
+              }}
+              key={p.invId}
+            >
               <img
                 width="30%"
                 height="100%"

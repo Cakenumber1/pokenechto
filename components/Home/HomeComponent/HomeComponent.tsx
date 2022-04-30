@@ -141,7 +141,7 @@ const HomeComponent: React.FC<Props> = ({ logout }) => {
           <Box className={classes.link}>
             <Box className={classes.mailbox}>
               <Link href="/mail">
-                <Badge sx={{ right: 13, top: 20 }} badgeContent={newmails} overlap='circular' color="error">
+                <Badge sx={{ right: 13, top: 20 }} badgeContent={newmails} overlap="circular" color="error">
                   <Image
                     src={mailImg}
                     alt="mail"
