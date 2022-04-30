@@ -1,6 +1,7 @@
 import {
   AddCircleOutline as AddCircleOutlineIcon,
   Clear as ClearIcon,
+  Close as CloseIcon,
   Help as HelpIcon,
   Send as SendIcon,
 } from '@mui/icons-material';
@@ -10,9 +11,10 @@ import {
   TextField, Tooltip,
   Typography,
 } from '@mui/material';
+import _ from 'lodash';
 import { useAuth } from 'myFirebase/AuthContext';
 import { db } from 'myFirebase/firebase';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { usePostMoneyQuery, usePostMushroomsQuery } from 'store/service';
 
 // import { useStyles } from './style';
@@ -42,32 +44,97 @@ const getData = async (uid: string, setPokes: React.Dispatch<any>) => {
   }
 };
 
+const sendMail = async (
+  uid: string,
+  target: string,
+  mail: string,
+  text: string,
+  money?: number,
+  berries?: number,
+  poke?: any,
+) => {
+  await db
+    .collection('users')
+    .doc(uid)
+    .collection('mails')
+    .add({
+      to: mail,
+      text,
+      money,
+      berries,
+      poke,
+    });
+  await db
+    .collection('users')
+    .doc(target)
+    .collection('mails')
+    .add({
+      to: mail,
+      text,
+      money,
+      berries,
+      poke,
+      unread: true,
+    });
+};
+
 const MailNewComponent = () => {
   // const classes = useStyles();
   const [mail, setMail] = useState('');
+  const [target, setTarget] = useState('');
   const [text, setText] = useState('');
   const [valueBer, setValueBer] = useState(0);
   const [valueMon, setValueMon] = useState(0);
-  const [poke, setPoke] = useState(null);
-  const [invPokes, setInvPokes] = useState<any>();
+  const [poke, setPoke] = useState<any | null>(null);
+  const [invPokes, setInvPokes] = useState<any>(null);
   const { currentUser } = useAuth()!;
   const [open, setOpen] = useState(false);
   const [openTooltip, setOpenTooltip] = useState(false);
   const min = 0;
   const { data: mushrooms } = usePostMushroomsQuery(currentUser.uid);
   const { data: money } = usePostMoneyQuery(currentUser.uid);
-  const maxM = money?.count as number;
+  const [maxM, setMaxM] = useState(money?.count as number - 100);
   const maxB = mushrooms?.count as number;
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log(mail, text);
-    setPoke(null);
+
+  useEffect(
+    () => (poke ? setMaxM(money?.count as number - 1100) : setMaxM(money?.count as number - 100)),
+    [money?.count, poke],
+  );
+
+  const checkMail = _.debounce(async (e: string) => {
+    const res = await db.collection('users')
+      .where('mail', '==', e)
+      .get();
+    if (res.docs.length) {
+      setTarget(res.docs[0].id);
+    } else {
+      setTarget('');
+    }
+  }, 2000);
+
+  const handleMailChange = async (e: string) => {
+    await setMail(String(e));
+    checkMail(e);
   };
+
   const handleOpen = async () => {
     setOpen(true);
     await getData(currentUser.uid, setInvPokes);
-    console.log(invPokes);
   };
+  const handleClear = () => {
+    setPoke(null);
+    setText('');
+    setMail('');
+    setValueMon(0);
+    setValueBer(0);
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    await sendMail(currentUser.uid, target, mail, text, valueMon, valueBer, poke);
+    console.log(currentUser.uid, target, mail, text, valueMon, valueBer, poke);
+  };
+
   return (
     <Box
       component="form"
@@ -82,9 +149,6 @@ const MailNewComponent = () => {
       }}
     >
       <Box sx={{ width: '95%', paddingLeft: '2.5%' }}>
-        <Typography component="h1" variant="h5">
-          New Mail
-        </Typography>
         <Box sx={{ mt: 1, height: '100%' }}>
           <TextField
             margin="normal"
@@ -96,7 +160,8 @@ const MailNewComponent = () => {
             autoComplete="email"
             autoFocus
             value={mail}
-            onChange={(event) => setMail(String(event.target.value))}
+            error={!target}
+            onChange={(event) => handleMailChange(event.target.value)}
           />
           <TextField
             margin="normal"
@@ -111,10 +176,18 @@ const MailNewComponent = () => {
           />
           <Box>{text.length}/100</Box>
           {!poke ? (
-            <IconButton aria-label="add pokemon" component="span" title="add pokemon" onClick={handleOpen}>
+            <IconButton disabled={!money || money!.count < 1100} aria-label="add pokemon" component="span" title="add pokemon" onClick={handleOpen}>
               <AddCircleOutlineIcon sx={{ width: '40px', height: '40px' }} />
             </IconButton>
-          ) : <div style={{ width: '40px', height: '40px', background: 'red' }}>123</div>}
+          )
+            : (
+              <Box sx={{ display: 'flex', p: '5px' }}>
+                <img width="70px" height="70px" src={poke.img} alt="pokemon" />
+                <IconButton onClick={() => setPoke(null)}>
+                  <CloseIcon sx={{ width: '40px', height: '40px' }} />
+                </IconButton>
+              </Box>
+            )}
           <Box>
             <TextField
               type="number"
@@ -142,7 +215,7 @@ const MailNewComponent = () => {
             />
           </Box>
           <Box>
-            Total Tax: {valueMon ? Math.ceil(valueMon / 10) + 100 : 100}💰;
+            Total Tax: {(valueMon ? Math.ceil(valueMon / 10) + 100 : 100) + (poke ? 1000 : 0)}💰;
             {valueBer ? Math.ceil(valueBer / 10) : 0 }🍇
             <ClickAwayListener onClickAway={() => setOpenTooltip(false)}>
               <Tooltip
@@ -168,7 +241,6 @@ const MailNewComponent = () => {
                 </IconButton>
               </Tooltip>
             </ClickAwayListener>
-
           </Box>
         </Box>
       </Box>
@@ -180,10 +252,10 @@ const MailNewComponent = () => {
           alignItems: 'center',
         }}
         >
-          <Button variant="contained" color="error" startIcon={<ClearIcon />}>
+          <Button onClick={handleClear} variant="contained" color="error" startIcon={<ClearIcon />}>
             Clear
           </Button>
-          <Button variant="contained" type="submit" endIcon={<SendIcon />}>
+          <Button disabled={!money || money!.count < 100} variant="contained" type="submit" endIcon={<SendIcon />}>
             Send
           </Button>
         </Box>
@@ -205,15 +277,18 @@ const MailNewComponent = () => {
           bgcolor: 'background.paper',
           border: '2px solid #000',
           boxShadow: 24,
+          overflowY: 'scroll',
+          overflowX: 'hidden',
         }}
         >
           <Typography id="modal-modal-title">
             Pick poke to transfer
           </Typography>
           {invPokes?.map((p: any) => (
-            <Box
+            <Button
+              onClick={() => { setPoke(p); setOpen(false); setValueMon(0); }}
               sx={{
-                width: '100%', height: '20%', background: 'red', display: 'flex', justifyContent: 'space-around', alignItems: 'center',
+                width: '100%', height: '20%', display: 'flex', justifyContent: 'space-around', alignItems: 'center', border: '2px solid black',
               }}
               key={p.invId}
             >
@@ -231,7 +306,7 @@ const MailNewComponent = () => {
                   Power: 100
                 </Typography>
               </Box>
-            </Box>
+            </Button>
           ))}
         </Box>
       </Modal>

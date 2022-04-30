@@ -26,8 +26,8 @@ async function create(user: any, name: string, mail: string, slide: number) {
       invId = querySnapshot.docs[0].id;
     });
   await db.collection('users').doc(user.uid).set({
-    name,
     mail,
+    name,
     registered: firebase.firestore.Timestamp.fromDate(new Date()),
     money: 0,
     berries: 0,

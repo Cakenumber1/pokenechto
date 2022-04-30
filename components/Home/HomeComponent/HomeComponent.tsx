@@ -149,7 +149,6 @@ const HomeComponent: React.FC<Props> = ({ logout }) => {
                 </Badge>
               </Link>
             </Box>
-
           </Box>
           <Box
             className={classes.link}
