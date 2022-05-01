@@ -1,6 +1,9 @@
+import firebase from 'firebase';
 import { generatePokemonForShop } from 'helpers/adaptors/buyPokeFromShop';
 import { updateShop } from 'helpers/shop/updateShop';
-import { PokemonIni, PokemonShop } from 'interfaces/pokemonType';
+import {
+  FromToPoke, PokemonIni, PokemonShop,
+} from 'interfaces/';
 import { auth, db } from 'myFirebase/firebase';
 
 const loginAdmin = async () => {
@@ -176,12 +179,65 @@ const buyPoke = async (poke: PokemonShop, uid: string, diff: number, bestiary: S
   return 204;
 };
 
+const sendMail = async (
+  data: FromToPoke,
+) => {
+  const {
+    from, fromMail, to, toMail,
+    text, money = 0, berries = 0, poke,
+  } = data;
+  const info = await getUserInfo(from);
+  const tax = poke ? Math.ceil(money / 10) + 1100 : Math.ceil(money / 10) + 100;
+  await db
+    .collection('users')
+    .doc(from)
+    .update({
+      money: info.money - tax,
+      berries: info.berries - berries,
+    });
+  if (poke) {
+    await db.collection('users')
+      .doc(from)
+      .collection('inventory')
+      .doc(poke.invId)
+      .delete();
+  }
+  await db
+    .collection('users')
+    .doc(from)
+    .collection('mails')
+    .add({
+      from: fromMail,
+      to: toMail,
+      date: firebase.firestore.Timestamp.fromDate(new Date()),
+      text,
+      money,
+      berries,
+      poke,
+    });
+  await db
+    .collection('users')
+    .doc(to)
+    .collection('mails')
+    .add({
+      from: fromMail,
+      to: toMail,
+      date: firebase.firestore.Timestamp.fromDate(new Date()),
+      text,
+      money,
+      berries,
+      poke,
+      unread: true,
+    });
+  return 1;
+};
+
 loginAdmin();
 setInterval(() => {
   updateShop();
 }, 60000000);
 
-const fakeDB = {
+const server = {
   inventory: {
     getCollectionItemById2,
     getByPage2,
@@ -197,6 +253,9 @@ const fakeDB = {
     getPokeByID,
     buyPoke,
   },
+  mail: {
+    sendMail,
+  },
 };
 
-export default fakeDB;
+export default server;

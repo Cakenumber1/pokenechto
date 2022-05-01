@@ -1,13 +1,13 @@
 import BuildingContainer from 'components/Building/BuildingContainer';
 import withAuth from 'components/HOCs/withAuthHOC';
-import MailHomeComponent from 'components/Mailbox/MailComponent/MailHome/MailHomeComponent';
+import MailHistoryComponent from 'components/Mailbox/MailComponent/MailHistory';
 import MailContainer from 'components/Mailbox/MailContainer';
 import type { NextPage } from 'next';
 
 const Home: NextPage = () => (
   <BuildingContainer>
     <MailContainer>
-      <MailHomeComponent />
+      <MailHistoryComponent />
     </MailContainer>
   </BuildingContainer>
 );

@@ -1,16 +1,27 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { CollectionItemType } from 'helpers/inventory/inventoryHelpers';
-import { PokemonShop } from 'interfaces/pokemonType';
+import { PokemonMail, PokemonShop } from 'interfaces/pokemonType';
 
 type GetInventoryByPageResult = {
   count: number,
   results: CollectionItemType[]
 };
 
-type IdTargetPrice = {
+type IdPokePrice = {
   uid: string,
   poke: PokemonShop,
   price: number,
+};
+
+type FromToPoke = {
+  from: string,
+  fromMail: string,
+  to: string,
+  toMail: string,
+  text: string,
+  money?: number,
+  berries?: number,
+  poke?: PokemonMail,
 };
 
 type PatchWallet = {
@@ -142,13 +153,21 @@ export const appApi = createApi({
       }),
       providesTags: (result, error, pid) => [{ type: 'Shop', pid }],
     }),
-    patchSellPokemon: builder.mutation<void, IdTargetPrice>({
+    patchSellPokemon: builder.mutation<void, IdPokePrice>({
       query: (data) => ({
         url: `/shop/${data.poke!.pid}`,
         method: 'PATCH',
         body: { data },
       }),
       invalidatesTags: ['Money', 'Shop', 'Inventory'],
+    }),
+    patchSendMail: builder.mutation<void, FromToPoke>({
+      query: (data) => ({
+        url: '/mail/',
+        method: 'PATCH',
+        body: { data },
+      }),
+      invalidatesTags: ['Money', 'Mushrooms', 'Inventory'],
     }),
   }),
 });
@@ -166,4 +185,5 @@ export const {
   usePostUserShopPokemonIDsQuery,
   usePostPokemonByIDQuery,
   usePatchSellPokemonMutation,
+  usePatchSendMailMutation,
 } = appApi;

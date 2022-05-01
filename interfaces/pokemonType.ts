@@ -68,3 +68,16 @@ export type PokemonIni = {
   types: string[],
   exp: number,
 };
+
+export type PokemonMail = {
+  id: number,
+  name: string,
+  img: string,
+  abilities: string[],
+  height: number,
+  weight: number,
+  stats: Stat[],
+  types: string[],
+  exp: number,
+  invId: string,
+};

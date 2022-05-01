@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 // import { auth, db } from 'myFirebase/firebase';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import fakeDB from 'pages/api/fakeDB';
+import server from 'pages/api/server';
 
 // const loadPokemons = async () => {
 //   const map = new Map();
@@ -18,7 +18,7 @@ import fakeDB from 'pages/api/fakeDB';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'POST': {
-      const [len, results] = await fakeDB.inventory
+      const [len, results] = await server.inventory
         .getByPage2(Number(req.query.page), req.body.data.uid);
       if (results) {
         return res.status(200).json({

@@ -4,19 +4,11 @@ import server from 'pages/api/server';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
-    case 'POST': {
-      const a = await server.getUserInfo(req.body.uid);
-      const count = a.money;
-      return res.status(200).json({ count });
-    }
     case 'PATCH': {
-      const a = await server.getUserInfo(req.body.uid);
-      const prev = a.money;
-      await server.patchUserInfo(req.body.uid, Number(req.body.count) + Number(prev), 'money');
+      await server.mail.sendMail(req.body.data);
       return res.status(200).end();
     }
     default:
   }
-
   return res.status(400).end();
 }

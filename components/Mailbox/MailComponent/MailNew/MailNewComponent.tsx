@@ -11,11 +11,16 @@ import {
   TextField, Tooltip,
   Typography,
 } from '@mui/material';
+import { useRouter } from 'next/router';
 import _ from 'lodash';
 import { useAuth } from 'myFirebase/AuthContext';
 import { db } from 'myFirebase/firebase';
 import React, { useEffect, useState } from 'react';
-import { usePostMoneyQuery, usePostMushroomsQuery } from 'store/service';
+import {
+  usePatchSendMailMutation,
+  usePostMoneyQuery,
+  usePostMushroomsQuery,
+} from 'store/service';
 
 // import { useStyles } from './style';
 
@@ -44,40 +49,6 @@ const getData = async (uid: string, setPokes: React.Dispatch<any>) => {
   }
 };
 
-const sendMail = async (
-  uid: string,
-  target: string,
-  mail: string,
-  text: string,
-  money?: number,
-  berries?: number,
-  poke?: any,
-) => {
-  await db
-    .collection('users')
-    .doc(uid)
-    .collection('mails')
-    .add({
-      to: mail,
-      text,
-      money,
-      berries,
-      poke,
-    });
-  await db
-    .collection('users')
-    .doc(target)
-    .collection('mails')
-    .add({
-      to: mail,
-      text,
-      money,
-      berries,
-      poke,
-      unread: true,
-    });
-};
-
 const MailNewComponent = () => {
   // const classes = useStyles();
   const [mail, setMail] = useState('');
@@ -93,8 +64,10 @@ const MailNewComponent = () => {
   const min = 0;
   const { data: mushrooms } = usePostMushroomsQuery(currentUser.uid);
   const { data: money } = usePostMoneyQuery(currentUser.uid);
+  const [patchSendMailMutation] = usePatchSendMailMutation();
   const [maxM, setMaxM] = useState(money?.count as number - 100);
   const maxB = mushrooms?.count as number;
+  const router = useRouter();
 
   useEffect(
     () => (poke ? setMaxM(money?.count as number - 1100) : setMaxM(money?.count as number - 100)),
@@ -114,7 +87,7 @@ const MailNewComponent = () => {
 
   const handleMailChange = async (e: string) => {
     await setMail(String(e));
-    checkMail(e);
+    if (e !== currentUser.email) checkMail(e);
   };
 
   const handleOpen = async () => {
@@ -129,10 +102,32 @@ const MailNewComponent = () => {
     setValueBer(0);
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await sendMail(currentUser.uid, target, mail, text, valueMon, valueBer, poke);
-    console.log(currentUser.uid, target, mail, text, valueMon, valueBer, poke);
+    // const m = -(poke ? 1100 + 1.1 * valueMon : 100 + 1.1 * valueMon);
+    patchSendMailMutation({
+      from: currentUser.uid,
+      fromMail: currentUser.email,
+      to: target,
+      toMail: mail,
+      text,
+      money: valueMon,
+      berries: valueBer,
+      poke,
+    }).unwrap();
+    router.push('/');
+    // patchMoneyMutation({ uid: currentUser.uid, count: m }).unwrap();
+    // patchMushroomsMutation({ uid: currentUser.uid, count: 1.1 * valueBer }).unwrap();
+    // await sendMail(
+    //   currentUser.uid,
+    //   currentUser.email,
+    //   target,
+    //   mail,
+    //   text,
+    //   valueMon,
+    //   valueBer,
+    //   poke,
+    // );
   };
 
   return (
@@ -255,7 +250,7 @@ const MailNewComponent = () => {
           <Button onClick={handleClear} variant="contained" color="error" startIcon={<ClearIcon />}>
             Clear
           </Button>
-          <Button disabled={!money || money!.count < 100} variant="contained" type="submit" endIcon={<SendIcon />}>
+          <Button disabled={!money || money!.count < 100 || !target} variant="contained" type="submit" endIcon={<SendIcon />}>
             Send
           </Button>
         </Box>

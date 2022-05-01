@@ -116,7 +116,6 @@ const getData = async (uid: string, setMails: React.Dispatch<any>) => {
   if (ans && ans.length) {
     setMails(ans.length);
   }
-  return null;
 };
 
 type Props = {
