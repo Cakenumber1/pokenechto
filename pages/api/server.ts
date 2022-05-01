@@ -2,7 +2,8 @@ import firebase from 'firebase';
 import { generatePokemonForShop } from 'helpers/adaptors/buyPokeFromShop';
 import { updateShop } from 'helpers/shop/updateShop';
 import {
-  FromToPoke, PokemonIni, PokemonShop,
+  MailExtType,
+  MailType, PokemonIni, PokemonShop,
 } from 'interfaces/';
 import { auth, db } from 'myFirebase/firebase';
 
@@ -180,7 +181,7 @@ const buyPoke = async (poke: PokemonShop, uid: string, diff: number, bestiary: S
 };
 
 const sendMail = async (
-  data: FromToPoke,
+  data: MailType,
 ) => {
   const {
     from, fromMail, to, toMail,
@@ -232,6 +233,33 @@ const sendMail = async (
   return 1;
 };
 
+const receiveMail = async (data: MailExtType) => {
+  const {
+    mailId, uid, money = 0, berries = 0, poke,
+  } = data;
+  const info = await getUserInfo(uid);
+  await db
+    .collection('users')
+    .doc(uid)
+    .update({
+      money: Number(info.money) + Number(money),
+      berries: Number(info.berries) + Number(berries),
+    });
+  await db
+    .collection('users')
+    .doc(uid)
+    .collection('mails')
+    .doc(mailId)
+    .update({
+      received: true,
+    });
+  if (poke) {
+    // @ts-ignore
+    delete poke.invId;
+    db.collection('users').doc(uid).collection('inventory').add(poke);
+  }
+};
+
 loginAdmin();
 setInterval(() => {
   updateShop();
@@ -255,6 +283,7 @@ const server = {
   },
   mail: {
     sendMail,
+    receiveMail,
   },
 };
 

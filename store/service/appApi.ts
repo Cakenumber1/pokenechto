@@ -13,11 +13,22 @@ type IdPokePrice = {
   price: number,
 };
 
-type FromToPoke = {
+type MailType = {
   from: string,
   fromMail: string,
   to: string,
   toMail: string,
+  text: string,
+  money?: number,
+  berries?: number,
+  poke?: PokemonMail,
+};
+
+type MailExtType = {
+  mailId: string,
+  uid: string,
+  from: string,
+  to: string,
   text: string,
   money?: number,
   berries?: number,
@@ -161,9 +172,17 @@ export const appApi = createApi({
       }),
       invalidatesTags: ['Money', 'Shop', 'Inventory'],
     }),
-    patchSendMail: builder.mutation<void, FromToPoke>({
+    patchSendMail: builder.mutation<void, MailType>({
       query: (data) => ({
         url: '/mail/',
+        method: 'PATCH',
+        body: { data },
+      }),
+      invalidatesTags: ['Money', 'Mushrooms', 'Inventory'],
+    }),
+    patchReceiveMail: builder.mutation<void, MailExtType>({
+      query: (data) => ({
+        url: `/mail/${data.mailId}`,
         method: 'PATCH',
         body: { data },
       }),
@@ -186,4 +205,5 @@ export const {
   usePostPokemonByIDQuery,
   usePatchSellPokemonMutation,
   usePatchSendMailMutation,
+  usePatchReceiveMailMutation,
 } = appApi;

@@ -2,11 +2,15 @@ import {
   Inventory as InventoryIcon,
   Textsms as TextsmsIcon,
 } from '@mui/icons-material';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import LoaderComponent from 'components/LoaderComponent';
 import { useAuth } from 'myFirebase/AuthContext';
 import { db } from 'myFirebase/firebase';
 import React, { useEffect, useState } from 'react';
+import {
+  usePatchReceiveMailMutation,
+} from 'store/service';
+import { useRouter } from 'next/router';
 
 const getData = async (uid: string, setMails: React.Dispatch<any>) => {
   const ans: string[] = [];
@@ -29,19 +33,72 @@ const getData = async (uid: string, setMails: React.Dispatch<any>) => {
 
 const MailHistoryComponent = () => {
   const { currentUser } = useAuth()!;
-  const [mail, setMail] = useState(null);
+  const [mail, setMail] = useState<any>(null);
   const [newMails, setNewMails] = useState<any>();
   const [loading, setLoading] = useState(true);
+  const [patchReceiveMailMutation] = usePatchReceiveMailMutation();
+  const router = useRouter();
 
   useEffect(() => {
     setLoading(true);
     getData(currentUser.uid, setNewMails).then(() => setLoading(false));
   }, [currentUser.uid]);
+
+  const handleReceive = () => {
+    patchReceiveMailMutation({
+      ...mail,
+      uid: currentUser.uid,
+    });
+    router.push('/');
+  };
+
   if (loading) return <LoaderComponent />;
   if (mail) {
     return (
-      <Box sx={{ width: '100%', height: '100%' }}>123
-        <Button onClick={() => setMail(null)}>x</Button>
+      <Box sx={{ width: '100%', height: '100%' }}>
+        <Box>
+          <Button onClick={() => setMail(null)}>Back</Button>
+        </Box>
+        <Box>
+          <Box>From: {mail.from === currentUser.email ? 'You' : mail.from}</Box>
+          <Box>To: {mail.to === currentUser.email ? 'You' : mail.to}</Box>
+          <Box>Date: {mail.date.toDate().toLocaleString()}</Box>
+          <Box>Text: {mail.text}</Box>
+          {mail.poke && (
+          <Box>
+            <img
+              width="30%"
+              height="100%"
+              src={mail.poke.img}
+              alt=""
+            />
+            <Typography id="modal-modal-title">
+              Name: {mail.poke.name}
+            </Typography>
+            <Typography id="modal-modal-title">
+              Power: 100
+            </Typography>
+          </Box>
+          )}
+          <Box>
+            {mail.money && (
+              <Box>
+                {mail.money}💰
+              </Box>
+            )}
+            {mail.berries && (
+              <Box>
+                {mail.berries}🍇
+              </Box>
+            )}
+          </Box>
+          <Button
+            onClick={() => handleReceive()}
+            disabled={('received' in mail) && (mail.poke || mail.money || mail.berries)}
+          >
+            Receive
+          </Button>
+        </Box>
       </Box>
     );
   }
