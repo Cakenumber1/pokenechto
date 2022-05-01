@@ -86,7 +86,7 @@ const MailHomeComponent = () => {
               </Button>
             ))}
           </>
-        ) : <Box sx={{textAlign: 'center' }}>No unread messages</Box>}
+        ) : <Box sx={{ textAlign: 'center' }}>No unread messages</Box>}
     </Box>
   );
 };
