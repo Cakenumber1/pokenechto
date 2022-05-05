@@ -1,8 +1,6 @@
-import {
-  Opponent, Pokemon, RawPokemon, Stat,
-} from 'interfaces';
+import { Opponent, RawPokemon, Stat } from 'interfaces/pokemonType';
 
-export function parseResponsePokemon(data: RawPokemon) {
+export function parseResponseOpponent(data: RawPokemon) {
   const temp: any = {};
   temp.id = data.id;
   temp.name = data.name;
@@ -19,8 +17,5 @@ export function parseResponsePokemon(data: RawPokemon) {
   temp.types = [];
   data.types.forEach((a: any) => temp.types.push(a.type.name));
   temp.exp = data.base_experience;
-  temp.limit = 1;
-  temp.amount = 1;
-  temp.price = 300;
-  return temp as Pokemon;
+  return { poke: temp, name: 'Bot', mail: null } as Opponent;
 }

@@ -14,17 +14,17 @@ const ShopComponent: React.FC<Props> = ({ classes }) => (
   <Box className={classes.shopBody}>
     <Box className={classes.shopTop}>
       <Box className={classes.shopTopText}>
-        <Box className={classes.shopText}>Лучшее предложение</Box>
+        <Box className={classes.shopText}>Personal</Box>
         <Rating name="read-only" value={5} style={{ fontSize: '2vmax' }} readOnly />
       </Box>
       <SwiperShopContainer />
     </Box>
     <Box className={classes.shopShelves}>
-      <Box className={classes.shopShelvesText}>Заявление1</Box>
+      <Box className={classes.shopShelvesText}>Shelf1</Box>
       <ShelfContainer shelfn="sale" />
     </Box>
     <Box className={classes.shopShelves}>
-      <Box className={classes.shopShelvesText}>Заявление2</Box>
+      <Box className={classes.shopShelvesText}>Shelf2</Box>
       <ShelfContainer shelfn="shelf" />
     </Box>
   </Box>

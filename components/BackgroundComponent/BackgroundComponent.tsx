@@ -160,9 +160,9 @@ function draw() {
   ctx.main.drawImage(canvas.os, 0, 0); // draw the composited offscreen frame to onscreen canvas
 }
 
-function loop() { // image updates in 60 fps
+function loop() { // image updates in 100 fps
   draw();
-  setTimeout(() => loop(), 1000 / 60);
+  setTimeout(() => loop(), 1000 / 100);
 }
 
 function getImages() {
@@ -207,15 +207,15 @@ const BackgroundComponent = (props: { children: JSX.Element }) => {
       if (!doc) {
         doc = document.createElement('canvas');
         doc.style.zIndex = '0';
+        canvas = { // get things
+          main: canvasTemp.current,
+          os: doc,
+        };
+        ctx = {
+          main: canvas.main.getContext('2d'),
+          os: canvas.os.getContext('2d'),
+        };
       }
-      canvas = { // get things
-        main: canvasTemp.current,
-        os: doc,
-      };
-      ctx = {
-        main: canvas.main.getContext('2d'),
-        os: canvas.os.getContext('2d'),
-      };
       if (!images.length) {
         getImages();
       }
@@ -235,7 +235,13 @@ const BackgroundComponent = (props: { children: JSX.Element }) => {
     };
   }, []);
   return (
-    <Box style={{ height: '100%', background: currentUser ? 'green' : 'none', zIndex: '-5' }}>
+    <Box style={{
+      height: '100%',
+      backgroundImage: currentUser ? 'url(/grass.png)' : 'none',
+      backgroundColor: currentUser ? '#33cc00' : 'none',
+      zIndex: '-5',
+    }}
+    >
       <canvas
         ref={canvasTemp}
         id="canvas"

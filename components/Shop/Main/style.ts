@@ -37,5 +37,8 @@ export const useStyles = makeStyles({
     height: '20%',
     width: '100%',
     background: '#3d7dca',
+    textAlign: 'center',
+    verticalAlign: 'middle',
+    margin: 'auto',
   },
 });

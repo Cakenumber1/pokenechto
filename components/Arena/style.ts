@@ -47,4 +47,13 @@ export const useStyles = makeStyles({
     width: '100%',
     background: '#3d7dca',
   },
+  arena: {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    overflowY: 'hidden',
+  },
 });

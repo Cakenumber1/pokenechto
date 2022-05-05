@@ -7,7 +7,7 @@ import Modal from '@mui/material/Modal';
 import Slide from '@mui/material/Slide';
 import Zoom from '@mui/material/Zoom';
 import { CollectionItemType } from 'helpers/inventory/inventoryHelpers';
-import { colorMap, getBackgdoundColor, namesMap } from 'helpers/maps';
+import { colorMap, getBackgroundColor, namesMap } from 'helpers/maps';
 import { useAuth } from 'myFirebase/AuthContext';
 import React, { useState } from 'react';
 import { usePostInventoryItemQuery, usePostMushroomsQuery } from 'store/service';
@@ -44,7 +44,7 @@ export const InventoryModal = ({
           {data && (
           <>
             <Slide direction="down" in={zoomEntered} timeout={1500}>
-              <Box sx={style.modalImg({ background: getBackgdoundColor(data.types) })}>
+              <Box sx={style.modalImg({ background: getBackgroundColor(data.types) })}>
                 <img style={{ maxHeight: '100%', width: '100%', objectFit: 'contain' }} src={data.img} alt="" />
               </Box>
             </Slide>
@@ -58,7 +58,7 @@ export const InventoryModal = ({
                     <Chip
                       key={type}
                       label={type}
-                      sx={{ backgroundColor: getBackgdoundColor([type]) }}
+                      sx={{ backgroundColor: getBackgroundColor([type]) }}
                     />
                   ),
                 )}

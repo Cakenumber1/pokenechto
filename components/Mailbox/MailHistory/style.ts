@@ -1,0 +1,78 @@
+import { makeStyles } from '@mui/styles';
+
+export const useStyles = makeStyles({
+  mailSingle: {
+    width: '100%',
+    height: '100%',
+  },
+  mails: {
+    width: '100%',
+    height: '100%',
+    padding: '5px',
+    overflowY: 'auto',
+  },
+  mailButton: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-around',
+    border: '2px solid black',
+    marginTop: '5px',
+    color: 'black',
+    textTransform: 'none',
+    boxShadow: '0px 5px 10px 2px rgba(0, 0, 0, 0.2) inset',
+  },
+  mailButtonInner: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-evenly',
+  },
+  mailsNone: {
+    height: '100%',
+    textAlign: 'center',
+    top: '50%',
+  },
+  formInner: {
+    width: '95%',
+    paddingLeft: '2.5%',
+    marginTop: '3%',
+    height: '100%',
+  },
+  buttons: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+  },
+  modal: {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '50%',
+    height: '70%',
+    minWidth: '300px',
+    backgroundColor: 'white',
+    border: '2px solid #000',
+    boxShadow: '4px 4px 8px 0px rgba(34, 60, 80, 0.2);',
+    overflowY: 'scroll',
+    overflowX: 'hidden',
+  },
+  pokemon: {
+    width: '100%',
+    height: '20%',
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    border: '2px solid black',
+  },
+  img: { width: '40px', height: '40px' },
+  verify: {
+    color: 'red',
+    position: 'absolute',
+    top: '15%',
+    left: 0,
+    width: '100%',
+    padding: '2vh',
+    textAlign: 'center',
+  },
+});

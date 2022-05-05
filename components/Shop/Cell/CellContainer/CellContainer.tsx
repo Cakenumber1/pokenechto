@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import LoaderComponent from 'components/LoaderComponent';
 import CellComponent from 'components/Shop/Cell/CellComponent';
-import { getBackgdoundColor } from 'helpers/maps/colorMap';
+import { getBackgroundColor } from 'helpers/maps/colorMap';
 import { DataType } from 'interfaces';
 import React, { SyntheticEvent, useCallback } from 'react';
 import { usePostPokemonByIDQuery } from 'store/service';
@@ -65,7 +65,7 @@ const CellContainer: React.FC<Props> = ({ pokeid, path }) => {
     [classes.unavailable]: amount! <= 0,
   });
   let color = 'white';
-  if (pokemon) color = getBackgdoundColor(pokemon.types);
+  if (pokemon) color = getBackgroundColor(pokemon.types);
   if (pokemon) {
     return (
       <CellComponent

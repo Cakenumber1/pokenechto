@@ -1,7 +1,7 @@
 import React from 'react';
 
 import MailComponent from '../MailComponent';
-import { useStyles } from '../style';
+import { useStyles } from './style';
 
 type Props = {
   children: JSX.Element

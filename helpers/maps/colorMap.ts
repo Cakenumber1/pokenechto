@@ -20,7 +20,7 @@ const colorMap = new Map([
   ['fairy', [245, 201, 208]],
 ]);
 
-export const getBackgdoundColor = (types : string[]) => {
+export const getBackgroundColor = (types : string[]) => {
   if (types.length > 1) {
     let color = '';
     for (let i = 0; i < types.length - 1; i++) {

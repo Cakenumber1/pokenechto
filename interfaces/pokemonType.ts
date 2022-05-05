@@ -81,3 +81,9 @@ export type PokemonMail = {
   exp: number,
   invId: string,
 };
+
+export type Opponent = {
+  poke: PokemonIni,
+  mail: string | null,
+  name: string,
+};

@@ -34,22 +34,13 @@ const MailButton: React.FC<Props2> = ({ classes, link, name }) => {
 };
 
 const MailComponent: React.FC<Props> = ({ classes, children }) => (
-  <Container className={classes.fullMail}>
-    <Box sx={{
-      width: '100%',
-      display: 'flex',
-      justifyContent: 'flex-start',
-      alignItems: 'center',
-    }}
-    >
+  <Container className={classes.mailFull}>
+    <Box className={classes.buttons}>
       <MailButton classes={classes} link="/mail" name="New" />
       <MailButton classes={classes} link="/mail/history" name="History" />
       <MailButton classes={classes} link="/mail/new" name="Send" />
     </Box>
-    <Box style={{
-      padding: 0, margin: 0, width: '100%', height: '95%', background: 'darkgray',
-    }}
-    >
+    <Box className={classes.mailInner}>
       {children}
     </Box>
   </Container>

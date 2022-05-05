@@ -2,7 +2,7 @@ import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardMedia from '@mui/material/CardMedia';
 import { CollectionItemType, HandleClickCard } from 'helpers/inventory/inventoryHelpers';
-import { getBackgdoundColor } from 'helpers/maps';
+import { getBackgroundColor } from 'helpers/maps';
 import React from 'react';
 
 import { style } from './style';
@@ -20,7 +20,7 @@ export const InventoryPokemonCardComponent = ({
 
   return (
     <Card
-      sx={style.inventoryPokemonCard({ background: getBackgdoundColor(collectionItem.types) })}
+      sx={style.inventoryPokemonCard({ background: getBackgroundColor(collectionItem.types) })}
       onClick={(event) => handleClick(event, collectionItem)}
     >
       <CardActionArea sx={{ width: '100%', height: '100%' }}>

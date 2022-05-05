@@ -45,16 +45,12 @@ const WalletComponent = () => {
     setIsOpenPay(true);
     setAmount(100000);
     setType('money');
-    // const temp = e.target as HTMLElement;
-    // patchMoneyMutation({ uid: currentUser.uid, count: Number(temp.innerText) }).unwrap();
   };
   const handleAddMushrooms = (e: SyntheticEvent) => {
     e.preventDefault();
     setIsOpenPay(true);
     setAmount(100000);
     setType('berries');
-    // const temp = e.target as HTMLElement;
-    // patchMushroomsMutation({ uid: currentUser.uid, count: Number(temp.innerText) }).unwrap();
   };
   const getShopColour = () => {
     const t = new Date().getHours();
@@ -76,17 +72,17 @@ const WalletComponent = () => {
             <Collapse in={isDropped} onExited={handleClose}>
               <Stack className={classesM.boxInner} spacing={2}>
                 <Box>
-                  <h2 style={{ textAlign: 'center' }}>Баланс</h2>
+                  <h2 style={{ textAlign: 'center' }}>Balance</h2>
                   <TableComponent money={money?.count || 0} mushrooms={mushrooms?.count || 0} />
                 </Box>
                 <Box>
-                  <Box>Купить Баксы</Box>
+                  <Box>Buy Money</Box>
                   <Button variant="contained" disabled>100</Button>
                   <Button variant="contained" disabled>200</Button>
                   <Button onClick={handleAddMoney} variant="contained">1000</Button>
                 </Box>
                 <Box>
-                  <Box>Купить Berries</Box>
+                  <Box>Buy Berries</Box>
                   <Button variant="contained" disabled>1</Button>
                   <Button variant="contained" disabled>5</Button>
                   <Button onClick={handleAddMushrooms} variant="contained">10</Button>
@@ -97,7 +93,7 @@ const WalletComponent = () => {
                   isOpenPay={isOpenPay}
                   setIsOpenPay={setIsOpenPay}
                 />
-                <Button onClick={handleSqueeze}>Выйти</Button>
+                <Button onClick={handleSqueeze}>Exit</Button>
               </Stack>
             </Collapse>
           </Box>

@@ -1,6 +1,5 @@
-import axios from 'axios';
 import firebase from 'firebase';
-import { parseResponsePokemon } from 'helpers';
+import { getFromPokeApi, parseResponsePokemon } from 'helpers';
 import { generatePokemonForShop } from 'helpers/adaptors/generatePokemonForShop';
 import { Pokemon } from 'interfaces/pokemonType';
 import { db } from 'myFirebase/firebase';
@@ -14,10 +13,6 @@ export const clearCollection = (path: string) => {
       });
     });
 };
-
-export const getFromPokeApi = async (path: string) => axios.get(path)
-  .then((res) => res.data)
-  .catch(console.error);
 
 export const getListFromPokeApi = async (links: string[]) => {
   const pokemons = await Promise.all(
@@ -91,16 +86,20 @@ export const generatePersonalShop = async (uid: string) => {
     links.push(`https://pokeapi.co/api/v2/pokemon/${Math.round(Math.random() * 300)}`);
   }
   let pokes: Pokemon[] = [];
-  const a = setInterval(async () => {
-    pokes.forEach((poke) => db.collection(path).add(poke));
-    clearInterval(a);
-  }, 1000);
   try {
     pokes = await getPureListFromPokeApi(links);
   } catch (e) {
     pokes = await getPureListFromPokeApi(links);
   }
-  pokes.forEach((poke) => db.collection(path).add(poke));
+  const a = setInterval(async () => {
+    pokes.forEach((poke) => db.collection(path).add(poke));
+    clearInterval(a);
+  }, 1000);
+  try {
+    pokes.forEach((poke) => db.collection(path).add(poke));
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const getInventory = async () => {

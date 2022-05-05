@@ -1,10 +1,23 @@
 import { makeStyles } from '@mui/styles';
 
 export const useStyles = makeStyles({
-  fullMail: {
+  mailFull: {
     width: '100%',
     height: '100%',
     padding: '2% 4%',
+  },
+  mailInner: {
+    padding: 0,
+    margin: 0,
+    width: '100%',
+    height: '95%',
+    background: 'darkgray',
+  },
+  buttons: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   button: {
     outlineOffset: '4px',
