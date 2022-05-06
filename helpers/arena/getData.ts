@@ -23,13 +23,13 @@ export const getData = async (
   uid: string,
   setData: React.Dispatch<any>,
   setMe: React.Dispatch<any>,
-  opponents?: Opponent[],
+  // opponents?: Opponent[],
 ) => {
   let ans: Opponent[] = [];
-  let rating = 0;
+  // let rating = 0;
   let poke = {};
   let power = 0;
-  let mail = '';
+  // let mail = '';
   await db.collection('users').doc(uid).collection('inventory').where('main', '==', true)
     .get()
     .then((querySnapshot: any) => {
@@ -40,35 +40,36 @@ export const getData = async (
   const res = await db.collection('users').doc(uid)
     .get();
   if (res.exists) {
-    rating = res.data().rating;
+  //  rating = res.data().rating;
     power = countStats(poke).power;
     setMe({ ...res.data(), mainPoke: poke });
-    mail = res.data().mail;
+  //  mail = res.data().mail;
   }
-  await db
-    .collection('users')
-    .where('rating', '>=', -1.1 * rating)
-    .where('rating', '<=', 1.1 * rating)
-    .get()
-    .then((querySnapshot: any) => {
-      querySnapshot.forEach((doc: any) => {
-        if (doc.data().mail !== mail) {
-          if (!opponents
-            || (opponents[0].mail !== doc.data().mail
-              && opponents[1].mail !== doc.data().mail
-              && opponents[2].mail !== doc.data().mail)
-          ) {
-            db.collection('users').doc(doc.id).collection('inventory').where('main', '==', true)
-              .get()
-              .then((querySnapshot2: any) => {
-                querySnapshot2.forEach((doc2: any) => {
-                  ans.push({ mail: doc.data().mail, poke: doc2, name: doc.data().name });
-                });
-              });
-          }
-        }
-      });
-    });
+  // await db
+  //   .collection('users')
+  //   .where('rating', '>=', -1.1 * rating)
+  //   .where('rating', '<=', 1.1 * rating)
+  //   .get()
+  //   .then((querySnapshot: any) => {
+  //     querySnapshot.forEach((doc: any) => {
+  //       if (doc.data().mail !== mail) {
+  //         if (!opponents
+  //           || (opponents[0].mail !== doc.data().mail
+  //             && opponents[1].mail !== doc.data().mail
+  //             && opponents[2].mail !== doc.data().mail)
+  //         ) {
+  //           db.collection('users').doc(doc.id).collection('inventory').where('main', '==', true)
+  //             .get()
+  //             .then((querySnapshot2: any) => {
+  //               querySnapshot2.forEach((doc2: any) => {
+  //                 console.log(doc.data());
+  //                 ans.push({ mail: doc.data().mail, poke: doc2, name: doc.data().name });
+  //               });
+  //             });
+  //         }
+  //       }
+  //     });
+  //   });
   const links: string[] = [];
   for (let i = 0; i < 3 - ans.length; i++) {
     links.push(`https://pokeapi.co/api/v2/pokemon/${Math.round(Math.random() * 300)}`);

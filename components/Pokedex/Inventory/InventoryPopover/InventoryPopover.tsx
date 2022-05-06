@@ -1,5 +1,6 @@
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Popover from '@mui/material/Popover';
@@ -50,6 +51,15 @@ export const InventoryPopover = ({
           data-button-name="info"
         >
           Info
+        </Button>
+
+        <Button
+          onClick={handleClickControls}
+          color="secondary"
+          startIcon={<MilitaryTechIcon />}
+          data-button-name="setMain"
+        >
+          Set Main
         </Button>
         <Button
           onClick={handleClickControls}

@@ -39,9 +39,13 @@ const ArenaComponent: React.FC<Props> = ({ classes }) => {
     getData(currentUser.uid, setOpponents, setMe);
   }, [currentUser.uid]);
 
-  const handleRefresh = () => {
-    getData(currentUser.uid, setOpponents, setMe, opponents);
+  const handleRefresh = async () => {
+    // getData(currentUser.uid, setOpponents, setMe, opponents);
+    // const mon = await db.collection('users').doc(currentUser.uid).get();
+    // if (mon.exists && mon.data().money >= 1000) {
     patchMoneyMutation({ uid: currentUser.uid, count: -1000 }).unwrap();
+    getData(currentUser.uid, setOpponents, setMe);
+    // }
   };
 
   const handleFight = async () => {
@@ -188,7 +192,7 @@ const ArenaComponent: React.FC<Props> = ({ classes }) => {
       }}
       >
         <Box sx={{ color: 'white' }}>Poke: {me?.mainPoke.name.toUpperCase()}</Box>
-        <IconButton disabled={!(me && me.money > 1000)} onClick={() => handleRefresh()}>
+        <IconButton disabled={!(me && me.money >= 1000)} onClick={() => handleRefresh()}>
           <RefreshIcon />
         </IconButton>
       </Box>

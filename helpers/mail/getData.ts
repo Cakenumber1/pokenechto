@@ -1,5 +1,6 @@
 import { db } from 'myFirebase/firebase';
 import React from 'react';
+import firebase from 'firebase';
 
 export const getNewMails = async (uid: string, setMails: React.Dispatch<any>) => {
   const ans: string[] = [];
@@ -55,4 +56,20 @@ export const getPokes = async (uid: string, setPokes: React.Dispatch<any>) => {
   if (ans && ans.length) {
     setPokes(ans);
   }
+};
+
+export const setMain = async (uid: string, pid: string) => {
+  await db.collection('users').doc(uid).collection('inventory').where('main', '==', true)
+    .get()
+    .then((querySnapshot: any) => {
+      querySnapshot.forEach((doc: any) => {
+        doc.ref.update({ main: firebase.firestore.FieldValue.delete() });
+      });
+    });
+  await db
+    .collection('users')
+    .doc(uid)
+    .collection('inventory')
+    .doc(pid)
+    .update({ main: true });
 };

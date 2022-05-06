@@ -9,7 +9,12 @@ import { InventoryLoader } from 'components/Pokedex/Inventory/InventoryLoader';
 import { InventoryModal } from 'components/Pokedex/Inventory/InventoryModal';
 import { InventoryPageContainer } from 'components/Pokedex/Inventory/InventoryPageContainer';
 import { InventoryPopover } from 'components/Pokedex/Inventory/InventoryPopover';
-import { CollectionItemType, HandleClickCard, HandleClickPopoverControls } from 'helpers/inventory/inventoryHelpers';
+import { setMain } from 'helpers';
+import {
+  CollectionItemType,
+  HandleClickCard,
+  HandleClickPopoverControls,
+} from 'helpers/inventory/inventoryHelpers';
 import { useAuth } from 'myFirebase/AuthContext';
 import * as React from 'react';
 import { useState } from 'react';
@@ -63,6 +68,12 @@ export const InventoryContainer = ({ pageQuery }: InventoryContainerProps) => {
       case 'info':
         setModalOpen(true);
         handleClosePopover();
+        break;
+      case 'setMain':
+        if (pokemon !== null) {
+          setMain(currentUser.uid, pokemon.collectionId);
+          handleClosePopover();
+        }
         break;
       case 'delete':
         if (pokemon !== null) {
