@@ -43,7 +43,7 @@ const ProfileComponent: React.FC<Props> = ({ classes, who }) => (
               <Box sx={{ width: '70%' }}>
                 <LinearProgress
                   variant="determinate"
-                  value={(who.pvpWin / who.pvpTotal) || 0}
+                  value={(who.pvpWin / who.pvpTotal) * 100}
                   sx={{ backgroundColor: 'red' }}
                 />
               </Box>

@@ -27,14 +27,22 @@ export const getData = async (
 ) => {
   let ans: Opponent[] = [];
   let rating = 0;
+  let poke = {};
   let power = 0;
   let mail = '';
+  await db.collection('users').doc(uid).collection('inventory').where('main', '==', true)
+    .get()
+    .then((querySnapshot: any) => {
+      querySnapshot.forEach((doc: any) => {
+        poke = doc.data();
+      });
+    });
   const res = await db.collection('users').doc(uid)
     .get();
   if (res.exists) {
     rating = res.data().rating;
-    power = countStats(res.data().mainPoke).power;
-    setMe(res.data());
+    power = countStats(poke).power;
+    setMe({ ...res.data(), mainPoke: poke });
     mail = res.data().mail;
   }
   await db
@@ -50,7 +58,13 @@ export const getData = async (
               && opponents[1].mail !== doc.data().mail
               && opponents[2].mail !== doc.data().mail)
           ) {
-            ans.push({ mail: doc.data().mail, poke: doc.data().mainPoke, name: doc.data().name });
+            db.collection('users').doc(doc.id).collection('inventory').where('main', '==', true)
+              .get()
+              .then((querySnapshot2: any) => {
+                querySnapshot2.forEach((doc2: any) => {
+                  ans.push({ mail: doc.data().mail, poke: doc2, name: doc.data().name });
+                });
+              });
           }
         }
       });

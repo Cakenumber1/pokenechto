@@ -10,7 +10,13 @@ const getData = async (uid: string, setWho: React.Dispatch<any>) => {
   const res = await db.collection('users').doc(uid)
     .get();
   if (res.exists) {
-    setWho(res.data());
+    await db.collection('users').doc(uid).collection('inventory').where('main', '==', true)
+      .get()
+      .then((querySnapshot: any) => {
+        querySnapshot.forEach((doc: any) => {
+          setWho({ ...res.data(), mainPoke: doc.data() });
+        });
+      });
   }
 };
 

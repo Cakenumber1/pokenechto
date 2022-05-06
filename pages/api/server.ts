@@ -285,6 +285,9 @@ const server = {
     sendMail,
     receiveMail,
   },
+  arena: {
+
+  },
 };
 
 export default server;

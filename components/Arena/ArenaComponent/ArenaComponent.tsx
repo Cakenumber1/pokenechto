@@ -13,21 +13,74 @@ import { getData } from 'helpers/arena/getData';
 import { estimatePower } from 'helpers/arena/powers';
 import { Opponent } from 'interfaces';
 import { useAuth } from 'myFirebase/AuthContext';
+import { db } from 'myFirebase/firebase';
 import React, { useEffect, useState } from 'react';
+import { usePatchMoneyMutation, usePatchMushroomsMutation } from 'store/service';
 
 type Props = {
   classes: ClassNameMap,
+};
+
+type ResultType = {
+  money: number,
+  berries?: number,
+  rating: number,
 };
 
 const ArenaComponent: React.FC<Props> = ({ classes }) => {
   const [opponents, setOpponents] = useState<Opponent[]>();
   const [me, setMe] = useState<any>(null);
   const [opponent, setOpponent] = useState<Opponent | null>(null);
+  const [result, setResult] = useState<ResultType | null>();
   const { currentUser } = useAuth()!;
+  const [patchMoneyMutation] = usePatchMoneyMutation();
+  const [patchMushroomsMutation] = usePatchMushroomsMutation();
   useEffect(() => {
     getData(currentUser.uid, setOpponents, setMe);
   }, [currentUser.uid]);
 
+  const handleRefresh = () => {
+    getData(currentUser.uid, setOpponents, setMe, opponents);
+    patchMoneyMutation({ uid: currentUser.uid, count: -1000 }).unwrap();
+  };
+
+  const handleFight = async () => {
+    opponent!.fight = 'lost';
+    const res = await db.collection('users')
+      .doc(currentUser.uid)
+      .get();
+    if ((0.9 + Math.random() * 0.2) * countStats(opponent!.poke).power
+      < estimatePower(me.mainPoke, opponent!.poke).num * countStats(me.mainPoke).power) {
+      // eslint-disable-next-line @typescript-eslint/no-shadow
+      const result = {
+        money: Math.floor(Math.random() * 200),
+        berries: Math.random() > 0.5 ? Math.floor(Math.random() * 3) : undefined,
+        rating: 10,
+      };
+      if (result.berries) {
+        patchMushroomsMutation({ uid: currentUser.uid, count: result.berries }).unwrap();
+      }
+      patchMoneyMutation({ uid: currentUser.uid, count: result.money }).unwrap();
+      db.collection('users').doc(currentUser.uid).update({ pvpTotal: res.data().pvpTotal + 1, pvpWin: res.data().pvpWin + 1, rating: res.data().rating + 10 });
+      setResult(result);
+      opponent!.fight = 'won';
+    }
+    db.collection('users').doc(currentUser.uid).update({ pvpTotal: res.data().pvpTotal + 1, rating: Math.max(0, res.data().rating - 10) });
+    setOpponent(null);
+  };
+  if (result) {
+    return (
+      <Box sx={{
+        width: '100%', height: '100%', overflow: 'hidden',
+      }}
+      >
+        <Box>Money earned: {result.money}</Box>
+        {result.berries && <Box>Berries earned: {result.berries}</Box>}
+        <Box>Rating earned: {result.rating}</Box>
+        <Button onClick={() => setResult(null)}>x</Button>
+      </Box>
+    );
+  }
   if (opponent) {
     return (
       <Box sx={{ width: '100%', height: '100%', overflow: 'hidden' }}>
@@ -35,14 +88,16 @@ const ArenaComponent: React.FC<Props> = ({ classes }) => {
           width: '100%', height: '10%', display: 'flex', justifyContent: 'center', alignItems: 'center',
         }}
         >
-          <Button sx={{
-            background: 'yellow',
-            borderRadius: '50%',
-            textAlign: 'center',
-            '&:hover': {
-              backgroundColor: 'orange',
-            },
-          }}
+          <Button
+            onClick={() => handleFight()}
+            sx={{
+              background: 'yellow',
+              borderRadius: '50%',
+              textAlign: 'center',
+              '&:hover': {
+                backgroundColor: 'orange',
+              },
+            }}
           >
             Fight
           </Button>
@@ -132,71 +187,92 @@ const ArenaComponent: React.FC<Props> = ({ classes }) => {
         justifyContent: 'space-evenly',
       }}
       >
-        <Box>Rating: {me?.rating}</Box>
-        <IconButton onClick={() => getData(currentUser.uid, setOpponents, setMe, opponents)}>
+        <Box sx={{ color: 'white' }}>Poke: {me?.mainPoke.name.toUpperCase()}</Box>
+        <IconButton disabled={!(me && me.money > 1000)} onClick={() => handleRefresh()}>
           <RefreshIcon />
         </IconButton>
       </Box>
-      {opponents && opponents.map((e) => (
-        <Button
-          onClick={() => setOpponent(e)}
-          key={e.name + e.poke.exp}
-          sx={{
-            width: '95%',
-            height: '30%',
-            border: '2px solid black',
-            boxShadow: '0px 5px 10px 2px rgba(0, 0, 0, 0.2) inset',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            textTransform: 'none',
-            color: 'white',
-          }}
-        >
-          <Box sx={{
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'space-around',
-            alignItems: 'center',
-          }}
-          >
-            <Box>
-              <Box>{e.name}</Box>
-              {e.mail && <Box>Mail: {e.mail}</Box>}
-            </Box>
-            <Box>
-              {e.mail ? <PersonIcon /> : <BotIcon />}
-            </Box>
-          </Box>
-          <Box sx={{
-            display: 'flex', width: '100%', height: '100%', justifyContent: 'space-around',
-          }}
-          >
-            <Box sx={{
-              height: '75%',
+      <Box sx={{
+        height: '90%',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+      }}
+      >
+        {opponents && opponents.map((e) => (
+          <Button
+            onClick={() => setOpponent(e.fight ? null : e)}
+            key={e.name + e.poke.exp}
+            sx={{
+              width: '95%',
+              height: '30%',
+              border: '2px solid black',
+              boxShadow: '0px 5px 10px 2px rgba(0, 0, 0, 0.2) inset',
               display: 'flex',
               flexDirection: 'column',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              textTransform: 'none',
+              color: 'white',
+            }}
+          >
+            <Box sx={{
+              width: '100%',
+              display: 'flex',
               justifyContent: 'center',
+              alignItems: 'center',
             }}
             >
-              <Box>{e.poke.name.toUpperCase()}</Box>
-              <Box sx={{ whiteSpace: 'nowrap' }}>Power: {countStats(e.poke).power}</Box>
               <Box>
-                {e.poke.types.map((type) => (
-                  <Box sx={{ color: getBackgroundColor([type]) }} key={e.name + type}>{type}</Box>
-                ))}
+                <Box>{e.name}</Box>
+                {e.mail && <Box>Mail: {e.mail}</Box>}
               </Box>
-              <Box sx={{ color: estimatePower(me.mainPoke!, e.poke).color, whiteSpace: 'nowrap' }}>
-                {estimatePower(me.mainPoke!, e.poke).result}
+              <Box>
+                {e.mail ? <PersonIcon /> : <BotIcon />}
               </Box>
             </Box>
-            <Box sx={{ objectFit: 'fill', aspectRatio: '1/1' }}>
-              <img style={{ objectFit: 'fill', aspectRatio: '1/1' }} width="80%" height="80%" src={e.poke.img} alt="123" />
+            <Box sx={{
+              display: 'flex', width: '100%', height: '100%', justifyContent: 'space-around',
+            }}
+            >
+              <Box sx={{
+                height: '75%',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
+              >
+                <Box>{e.poke.name.toUpperCase()}</Box>
+                <Box sx={{ whiteSpace: 'nowrap' }}>Power: {countStats(e.poke).power}</Box>
+                <Box>
+                  {e.poke.types.map((type) => (
+                    <Box sx={{ color: getBackgroundColor([type]) }} key={e.name + type}>{type}</Box>
+                  ))}
+                </Box>
+                <Box sx={{ color: estimatePower(me.mainPoke!, e.poke).color, whiteSpace: 'nowrap' }}>
+                  {estimatePower(me.mainPoke!, e.poke).result}
+                </Box>
+              </Box>
+              <Box sx={{ objectFit: 'fill', aspectRatio: '1/1' }}>
+                <img style={{ objectFit: 'fill', aspectRatio: '1/1' }} width="80%" height="80%" src={e.poke.img} alt="123" />
+              </Box>
             </Box>
-          </Box>
-        </Button>
-      ))}
+            {e.fight && (
+            <Box sx={{
+              position: 'absolute',
+              top: '0',
+              height: '100%',
+              width: '100%',
+              background: e.fight === 'won' ? 'green' : 'red',
+              opacity: '0.3',
+            }}
+            />
+            )}
+          </Button>
+        ))}
+      </Box>
     </Box>
   );
 };

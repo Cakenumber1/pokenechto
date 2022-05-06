@@ -31,7 +31,7 @@ export const useStyles = makeStyles({
     backgroundColor: 'white',
     border: '2px solid #000',
     boxShadow: '4px 4px 8px 0px rgba(34, 60, 80, 0.2);',
-    overflowY: 'scroll',
+    overflowY: 'auto',
     overflowX: 'hidden',
   },
   pokemon: {

@@ -46,17 +46,24 @@ export const estimatePower = (poke1: PokemonIni, poke2: PokemonIni) => {
   });
   const p1 = countStats(poke1).power;
   const p2 = countStats(poke2).power;
-  if (((((k1 / k2) * p1) - p2) / p1) > 0.3) {
-    return { result: 'Easy Fight', color: 'lime' };
+  const num = ((((k1 / k2) * p1) - p2) / p1);
+  let result = 'Extreme  Fight';
+  let color = 'red';
+  if (num > 0.3) {
+    result = 'Easy Fight';
+    color = 'lime';
   }
-  if (((((k1 / k2) * p1) - p2) / p1) > 0.1) {
-    return { result: 'Fine Fight', color: 'greenyellow' };
+  if (num > 0.1) {
+    result = 'Fine Fight';
+    color = 'greenyellow';
   }
-  if (((((k1 / k2) * p1) - p2) / p1) < 0.1 && ((((k1 / k2) * p1) - p2) / p1) > -0.1) {
-    return { result: 'Close Fight', color: 'yellow' };
+  if (num < 0.1 && num > -0.1) {
+    result = 'Close Fight';
+    color = 'yellow';
   }
-  if ((((((k1 / k2) * p1) - p2) / p1) > -0.3)) {
-    return { result: 'Hard Fight', color: 'orange' };
+  if (num < -0.3) {
+    result = 'Hard Fight';
+    color = 'orange';
   }
-  return { result: 'Extreme  Fight', color: 'red' };
+  return { num, result, color };
 };

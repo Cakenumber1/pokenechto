@@ -19,12 +19,7 @@ async function create(user: any, name: string, mail: string, slide: number) {
   const db = firebase.firestore();
   // eslint-disable-next-line no-param-reassign
   if (!name) name = 'Mr. Undefined';
-  let invId = '';
-  await db.collection('users').doc(user.uid).collection('inventory').add(initialPokes[slide]);
-  await db.collection('users').doc(user.uid).collection('inventory').get()
-    .then((querySnapshot: any) => {
-      invId = querySnapshot.docs[0].id;
-    });
+  await db.collection('users').doc(user.uid).collection('inventory').add({ ...initialPokes[slide], main: true });
   await db.collection('users').doc(user.uid).set({
     mail,
     name,
@@ -34,7 +29,6 @@ async function create(user: any, name: string, mail: string, slide: number) {
     rating: 0,
     pvpTotal: 0,
     pvpWin: 0,
-    mainPoke: { ...initialPokes[slide], invId },
     bestiary: [initialPokes[slide].id],
   });
   await generatePersonalShop(user.uid);

@@ -56,12 +56,14 @@ const MailSingleComponent: React.FC<Props> = ({
           </Box>
           )}
         </Box>
+        {mail.to === currentUser.email && (
         <Button
           onClick={() => handleReceive()}
           disabled={('received' in mail) && (mail.poke || mail.money || mail.berries)}
         >
           Receive
         </Button>
+        )}
       </Box>
     </Box>
   );

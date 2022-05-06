@@ -86,4 +86,5 @@ export type Opponent = {
   poke: PokemonIni,
   mail: string | null,
   name: string,
+  fight?: string,
 };

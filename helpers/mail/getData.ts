@@ -40,12 +40,6 @@ export const getUnreadMails = async (uid: string, setMails: React.Dispatch<any>)
 
 export const getPokes = async (uid: string, setPokes: React.Dispatch<any>) => {
   const ans: string[] = [];
-  let invId = '';
-  const res = await db.collection('users').doc(uid)
-    .get();
-  if (res.exists) {
-    invId = res.data().mainPoke.invId;
-  }
   await db
     .collection('users')
     .doc(uid)
@@ -53,7 +47,7 @@ export const getPokes = async (uid: string, setPokes: React.Dispatch<any>) => {
     .get()
     .then((querySnapshot: any) => {
       querySnapshot.forEach((doc: any) => {
-        if (doc.id !== invId) {
+        if (!('main' in doc.data())) {
           ans.push({ ...doc.data(), invId: doc.id });
         }
       });
