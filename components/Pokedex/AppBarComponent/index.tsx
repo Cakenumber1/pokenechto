@@ -26,7 +26,7 @@ export const AppBarComponent = () => {
   const buttons = (
     <ButtonGroup variant="contained" color="secondary" sx={{ mr: 'auto' }}>
       <Link href="/pokedex" passHref>
-        <Button color={path === '/pokedex' ? 'success' : 'secondary'}>Home</Button>
+        <Button color={path === '/pokedex' ? 'success' : 'secondary'}>You</Button>
       </Link>
       <Link href="/pokedex/bestiary" passHref>
         <Button color={path === '/pokedex/bestiary' ? 'success' : 'secondary'}>Bestiary</Button>

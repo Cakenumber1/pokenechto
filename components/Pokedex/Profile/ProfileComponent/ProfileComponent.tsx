@@ -26,7 +26,7 @@ const ProfileComponent: React.FC<Props> = ({ classes, who }) => (
             <Typography>{who.name}</Typography>
             <Typography>{who.mail}</Typography>
           </Box>
-          <Typography variant="h5">PvP Stats</Typography>
+          <Typography variant="h5">Arena Stats</Typography>
           <Box className="Pvp Stats">
             <Box style={{ display: 'flex' }}>
               <Typography>Rating: </Typography>
@@ -34,7 +34,7 @@ const ProfileComponent: React.FC<Props> = ({ classes, who }) => (
               <Typography>{` ${who.rating}`}</Typography>
             </Box>
             <Box style={{ display: 'flex' }}>
-              <Typography>Pvp Fights: </Typography>
+              <Typography>Total Fights: </Typography>
               <Typography>&nbsp;</Typography>
               <Typography> {who.pvpTotal}</Typography>
             </Box>

@@ -13,9 +13,13 @@ const getData = async (uid: string, setWho: React.Dispatch<any>) => {
     await db.collection('users').doc(uid).collection('inventory').where('main', '==', true)
       .get()
       .then((querySnapshot: any) => {
-        querySnapshot.forEach((doc: any) => {
-          setWho({ ...res.data(), mainPoke: doc.data() });
-        });
+        if (querySnapshot.docs.length) {
+          querySnapshot.forEach((doc: any) => {
+            setWho({ ...res.data(), mainPoke: doc.data() });
+          });
+        } else {
+          setWho({ ...res.data(), mainPoke: null });
+        }
       });
   }
 };

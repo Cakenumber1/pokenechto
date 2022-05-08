@@ -25,18 +25,24 @@ export const getData = async (
   setMe: React.Dispatch<any>,
   // opponents?: Opponent[],
 ) => {
+  console.log(123);
   let ans: Opponent[] = [];
   // let rating = 0;
-  let poke = {};
+  let poke = null;
   let power = 0;
   // let mail = '';
   await db.collection('users').doc(uid).collection('inventory').where('main', '==', true)
     .get()
     .then((querySnapshot: any) => {
-      querySnapshot.forEach((doc: any) => {
-        poke = doc.data();
-      });
+      if (querySnapshot.docs.length) {
+        querySnapshot.forEach((doc: any) => {
+          poke = doc.data();
+        });
+      }
     });
+  if (!poke) {
+    return;
+  }
   const res = await db.collection('users').doc(uid)
     .get();
   if (res.exists) {

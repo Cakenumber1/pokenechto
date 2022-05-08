@@ -74,6 +74,7 @@ const LoginComponent: React.FC<Props> = ({ handlePage }) => {
         )}
 
         <Button
+          disabled={!mail.length || !pass.length}
           type="submit"
           fullWidth
           variant="contained"

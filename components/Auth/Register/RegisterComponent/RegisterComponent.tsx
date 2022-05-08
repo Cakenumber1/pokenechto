@@ -68,6 +68,7 @@ const RegisterComponent: React.FC<Props> = ({
       >{error?.message}
       </Box>
       <Button
+        disabled={!mail.length || !pass.length || !name.length}
         type="submit"
         fullWidth
         variant="contained"

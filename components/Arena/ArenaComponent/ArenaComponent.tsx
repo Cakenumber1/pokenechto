@@ -72,6 +72,9 @@ const ArenaComponent: React.FC<Props> = ({ classes }) => {
     db.collection('users').doc(currentUser.uid).update({ pvpTotal: res.data().pvpTotal + 1, rating: Math.max(0, res.data().rating - 10) });
     setOpponent(null);
   };
+  if (!me) {
+    return (<div>Pick Main poke in Inventory</div>);
+  }
   if (result) {
     return (
       <Box sx={{
