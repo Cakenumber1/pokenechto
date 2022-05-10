@@ -22,7 +22,8 @@ type Props = {
 };
 
 type ResultType = {
-  money: number,
+  result: string,
+  money?: number,
   berries?: number,
   rating: number,
 };
@@ -50,26 +51,34 @@ const ArenaComponent: React.FC<Props> = ({ classes }) => {
 
   const handleFight = async () => {
     opponent!.fight = 'lost';
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    let result: ResultType = {
+      result: 'Defeat',
+      rating: -10,
+    };
     const res = await db.collection('users')
       .doc(currentUser.uid)
       .get();
     if ((0.9 + Math.random() * 0.2) * countStats(opponent!.poke).power
       < estimatePower(me.mainPoke, opponent!.poke).num * countStats(me.mainPoke).power) {
       // eslint-disable-next-line @typescript-eslint/no-shadow
-      const result = {
-        money: Math.floor(Math.random() * 200),
-        berries: Math.random() > 0.5 ? Math.floor(Math.random() * 3) : undefined,
+      result = {
+        result: 'Victory',
+        money: Math.floor(100 + Math.random() * 200),
+        berries: Math.random() > 0.5 ? Math.floor(1 + Math.random() * 4) : undefined,
         rating: 10,
       };
       if (result.berries) {
         patchMushroomsMutation({ uid: currentUser.uid, count: result.berries }).unwrap();
       }
-      patchMoneyMutation({ uid: currentUser.uid, count: result.money }).unwrap();
-      db.collection('users').doc(currentUser.uid).update({ pvpTotal: res.data().pvpTotal + 1, pvpWin: res.data().pvpWin + 1, rating: res.data().rating + 10 });
-      setResult(result);
+      patchMoneyMutation({ uid: currentUser.uid, count: result.money! }).unwrap();
+      db.collection('users').doc(currentUser.uid).update({ pvpTotal: res.data().pvpTotal + 1, pvpWin: res.data().pvpWin + 1, rating: Number(res.data().rating) + Number(10) });
       opponent!.fight = 'won';
     }
-    db.collection('users').doc(currentUser.uid).update({ pvpTotal: res.data().pvpTotal + 1, rating: Math.max(0, res.data().rating - 10) });
+    if (opponent!.fight === 'lost') {
+      db.collection('users').doc(currentUser.uid).update({ pvpTotal: res.data().pvpTotal + 1, rating: Math.max(0, res.data().rating - 10) });
+    }
+    setResult(result);
     setOpponent(null);
   };
   if (!me) {
@@ -78,10 +87,18 @@ const ArenaComponent: React.FC<Props> = ({ classes }) => {
   if (result) {
     return (
       <Box sx={{
-        width: '100%', height: '100%', overflow: 'hidden',
+        width: '100%',
+        height: '100%',
+        color: 'white',
+        overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
       >
-        <Box>Money earned: {result.money}</Box>
+        {result.result && <Box>{result.result}</Box>}
+        {result.money && <Box>Money earned: {result.money}</Box>}
         {result.berries && <Box>Berries earned: {result.berries}</Box>}
         <Box>Rating earned: {result.rating}</Box>
         <Button onClick={() => setResult(null)}>x</Button>

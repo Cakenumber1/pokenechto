@@ -3,6 +3,7 @@ import {
   Grid,
   Typography,
 } from '@mui/material';
+import { getBackgroundColor } from 'helpers/';
 import { PokemonIni } from 'interfaces/pokemonType';
 import React from 'react';
 // eslint-disable-next-line import/no-unresolved
@@ -40,7 +41,7 @@ const RegisterPokeComponent: React.FC<Props> = ({
         alignItems: 'center',
       }}
     >
-      <Typography>Изначальный покемон</Typography>
+      <Typography>Starter poke</Typography>
       <Swiper
         onSwiper={setSlide}
         controller={{ control: slide }}
@@ -70,7 +71,7 @@ const RegisterPokeComponent: React.FC<Props> = ({
               <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
                 <Box>Types: </Box>
                 {poke!.types.map((a, key2) => (
-                  <Box key={key2}>{a}</Box>
+                  <Box sx={{ color: getBackgroundColor([a]) }} key={key2}>{a}</Box>
                 ))}
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }}>

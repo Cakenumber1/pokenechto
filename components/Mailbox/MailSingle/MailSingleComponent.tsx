@@ -1,4 +1,5 @@
 import { Box, Button, Typography } from '@mui/material';
+import { countStats } from 'helpers/';
 import React from 'react';
 
 import { useStyles } from './style';
@@ -17,7 +18,10 @@ const MailSingleComponent: React.FC<Props> = ({
   handleReceive,
 }) => {
   const classes = useStyles();
-
+  console.log(!mail.poke && !mail.money && !mail.berries)
+  console.log(!mail.poke)
+  console.log(!mail.money)
+  console.log(!mail.berries)
   return (
     <Box className={classes.mailSingle}>
       <Box>
@@ -27,7 +31,7 @@ const MailSingleComponent: React.FC<Props> = ({
         <Box>From: {mail.from === currentUser.email ? 'You' : mail.from}</Box>
         <Box>To: {mail.to === currentUser.email ? 'You' : mail.to}</Box>
         <Box>Date: {mail.date.toDate().toLocaleString()}</Box>
-        <Box>Text: {mail.text}</Box>
+        {mail.text.length && <Box>Text: {mail.text}</Box>}
         {mail.poke && (
         <Box>
           <img
@@ -40,17 +44,17 @@ const MailSingleComponent: React.FC<Props> = ({
             Name: {mail.poke.name}
           </Typography>
           <Typography id="modal-poke-power">
-            Power: 100
+            Power: {countStats(mail.poke).power}
           </Typography>
         </Box>
         )}
         <Box>
-          {mail.money && (
+          {mail.money > 0 && (
           <Box>
             {mail.money}💰
           </Box>
           )}
-          {mail.berries && (
+          {mail.berries > 0 && (
           <Box>
             {mail.berries}🍇
           </Box>
@@ -59,7 +63,7 @@ const MailSingleComponent: React.FC<Props> = ({
         {mail.to === currentUser.email && (
         <Button
           onClick={() => handleReceive()}
-          disabled={('received' in mail) && (mail.poke || mail.money || mail.berries)}
+          disabled={('received' in mail) || (!mail.poke && !mail.money && !mail.berries)}
         >
           Receive
         </Button>

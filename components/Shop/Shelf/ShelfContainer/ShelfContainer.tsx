@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import ShelfComponent from 'components/Shop/Shelf/ShelfComponent';
 import React from 'react';
 import { usePostShopPokemonIDsQuery } from 'store/service';
@@ -18,7 +19,7 @@ const ShelfContainer: React.FC<Props> = ({ shelfn }) => {
       <ShelfComponent classes={classesStack} pkeys={pkeys} path={path} />
     );
   }
-  return <div />;
+  return <Box />;
 };
 
 export default ShelfContainer;

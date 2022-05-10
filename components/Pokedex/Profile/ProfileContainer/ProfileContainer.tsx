@@ -10,7 +10,10 @@ const getData = async (uid: string, setWho: React.Dispatch<any>) => {
   const res = await db.collection('users').doc(uid)
     .get();
   if (res.exists) {
-    await db.collection('users').doc(uid).collection('inventory').where('main', '==', true)
+    await db.collection('users')
+      .doc(uid)
+      .collection('inventory')
+      .where('main', '==', true)
       .get()
       .then((querySnapshot: any) => {
         if (querySnapshot.docs.length) {
@@ -28,7 +31,6 @@ const ProfileContainer = () => {
   const { currentUser } = useAuth()!;
   const [who, setWho] = useState<UserType>();
   const classes = useStyles();
-
   useEffect(() => {
     getData(currentUser.uid, setWho);
   }, [currentUser.uid]);

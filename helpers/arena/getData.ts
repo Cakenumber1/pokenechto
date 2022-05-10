@@ -5,7 +5,7 @@ import React from 'react';
 
 const addBots = async (links: string[], power: number, arr: Opponent[]) => {
   const pokemons = await Promise.all(
-    links.map((link: any) => getFromPokeApi(link)),
+    links.map((link) => getFromPokeApi(link)),
   );
   for (let i = 0; i < links.length; i++) {
     const t = parseResponseOpponent(pokemons[i]);
@@ -25,7 +25,6 @@ export const getData = async (
   setMe: React.Dispatch<any>,
   // opponents?: Opponent[],
 ) => {
-  console.log(123);
   let ans: Opponent[] = [];
   // let rating = 0;
   let poke = null;

@@ -31,7 +31,7 @@ const ProfileComponent: React.FC<Props> = ({ classes, who }) => (
             <Box style={{ display: 'flex' }}>
               <Typography>Rating: </Typography>
               <Typography>&nbsp;</Typography>
-              <Typography>{` ${who.rating}`}</Typography>
+              <Typography>{who.rating}</Typography>
             </Box>
             <Box style={{ display: 'flex' }}>
               <Typography>Total Fights: </Typography>

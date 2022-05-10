@@ -128,8 +128,11 @@ const HomeComponent: React.FC<Props> = ({ logout }) => {
   const classes = useStyles();
 
   useEffect(() => {
-    getData(currentUser.uid, setNewMails);
-  }, [currentUser.uid]);
+    db.collection('users')
+      .doc(currentUser.uid)
+      .collection('mails')
+      .onSnapshot(() => getData(currentUser.uid, setNewMails));
+  }, []);
 
   return (
     <Box style={{ height: '100%' }}>

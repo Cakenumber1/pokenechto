@@ -7,6 +7,7 @@ import LoaderComponent from 'components/LoaderComponent';
 import MailSingleComponent from 'components/Mailbox/MailSingle';
 import { getNewMails } from 'helpers/';
 import { useAuth } from 'myFirebase/AuthContext';
+import { db } from 'myFirebase/firebase';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import {
@@ -37,6 +38,10 @@ const MailHistoryComponent = () => {
 
   const handleClick = async (m: any) => {
     setMail(m);
+    await db.collection('users').doc(currentUser.uid).collection('mails').doc(m.mailId)
+      .update({
+        unread: false,
+      });
   };
 
   if (newMails === null) return <LoaderComponent />;

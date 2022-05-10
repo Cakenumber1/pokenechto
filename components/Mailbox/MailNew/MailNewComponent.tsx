@@ -140,7 +140,7 @@ const MailNewComponent = () => {
               </IconButton>
             </Box>
           )}
-        <Box>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <TextField
             type="number"
             inputProps={{ min, maxM }}
@@ -151,9 +151,9 @@ const MailNewComponent = () => {
               if (value < min) value = min;
               setValueMon(value);
             }}
-          />
+          />💰
         </Box>
-        <Box sx={{ pt: '10px' }}>
+        <Box sx={{ pt: '10px', display: 'flex', alignItems: 'center' }}>
           <TextField
             type="number"
             inputProps={{ min, maxB }}
@@ -164,7 +164,7 @@ const MailNewComponent = () => {
               if (value < min) value = min;
               setValueBer(value);
             }}
-          />
+          />🍇
         </Box>
         <Box>
           Total Tax: {(valueMon ? Math.ceil(valueMon / 10) + 100 : 100) + (poke ? 1000 : 0)}💰;
