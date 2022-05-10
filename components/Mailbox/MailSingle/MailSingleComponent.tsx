@@ -18,10 +18,6 @@ const MailSingleComponent: React.FC<Props> = ({
   handleReceive,
 }) => {
   const classes = useStyles();
-  console.log(!mail.poke && !mail.money && !mail.berries)
-  console.log(!mail.poke)
-  console.log(!mail.money)
-  console.log(!mail.berries)
   return (
     <Box className={classes.mailSingle}>
       <Box>
