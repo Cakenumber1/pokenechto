@@ -8,13 +8,13 @@ import { useGetPokemonByNameQuery } from 'store/api';
 type Props = {
   submit: boolean,
   onClose: () => void,
-  search: string
+  search: string,
+  unlocked: number[],
 };
-// todo: переделать
 
-const unlocked = new Set([1, 2, 3, 4, 5, 6]);
-
-const Result = ({ search, submit, onClose }: Props) => {
+const Result = ({
+  search, submit, onClose, unlocked,
+}: Props) => {
   const pos = {
     left: '50%',
     top: '50%',
@@ -23,7 +23,7 @@ const Result = ({ search, submit, onClose }: Props) => {
     background: 'none',
   };
   if (!submit || !search) return <Box sx={{ visibility: 'hidden' }} />;
-  if (!unlocked.has(Number(search))) {
+  if (!unlocked.includes(Number(search))) {
     return <Box sx={{ visibility: submit ? 'visible' : 'hidden' }}>Не открыт</Box>;
   }
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -33,7 +33,7 @@ const Result = ({ search, submit, onClose }: Props) => {
   return <PokeModal open={submit} onClose={onClose} pokemon={data} data={pos} />;
 };
 
-export const SearchComponent = () => {
+export const SearchComponent = ({ unlocked }: { unlocked: number[] }) => {
   const matchWidth = useMediaQuery('(min-width:350px)');
   const [input, setInput] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -62,7 +62,7 @@ export const SearchComponent = () => {
       <IconButton onClick={handleSubmit}>
         <SearchIcon fontSize="large" />
       </IconButton>
-      <Result search={input} submit={isSubmitted} onClose={handleClose} />
+      <Result search={input} submit={isSubmitted} onClose={handleClose} unlocked={unlocked} />
     </Box>
   );
 };

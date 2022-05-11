@@ -254,9 +254,13 @@ const receiveMail = async (data: MailExtType) => {
       received: true,
     });
   if (poke) {
+    const bestiary = new Set(info.bestiary as number[]);
     // @ts-ignore
     delete poke.invId;
     db.collection('users').doc(uid).collection('inventory').add(poke);
+    bestiary.add(poke!.id);
+    // eslint-disable-next-line no-await-in-loop
+    await patchUserInfo(uid, Array.from(bestiary), 'bestiary');
   }
 };
 

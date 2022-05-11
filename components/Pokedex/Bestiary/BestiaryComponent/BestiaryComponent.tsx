@@ -4,10 +4,10 @@ import { PokemonsListResults } from 'interfaces/pokemonListType';
 import React from 'react';
 
 const BestiaryComponent = (props: any) => {
-  const { pokemons } = props;
+  const { pokemons, unlocked } = props;
   const data = pokemons.results.map((pokemon: PokemonsListResults) => (
     <Grid key={pokemon.name} item xs={3}>
-      <CardComponent pokemon={pokemon} />
+      <CardComponent pokemon={pokemon} unlocked={unlocked} />
     </Grid>
   ));
 

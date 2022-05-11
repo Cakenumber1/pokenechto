@@ -10,9 +10,10 @@ import { useGetPokemonByNameQuery } from 'store/api';
 import PokeModal from '../ModalComponent';
 import { style } from './style';
 // todo: firebase
-const unlocked = new Set([1, 2, 3, 4, 5, 6]);
 
-const CardComponent = ({ pokemon }: { pokemon: PokemonsListResults }) => {
+const CardComponent = (
+  { pokemon, unlocked }: { pokemon: PokemonsListResults, unlocked: number[] },
+) => {
   const {
     data, error, isUninitialized,
   } = useGetPokemonByNameQuery(pokemon.name);
@@ -49,7 +50,7 @@ const CardComponent = ({ pokemon }: { pokemon: PokemonsListResults }) => {
       </Card>
     );
   }
-  const matchesName = unlocked.has(data!.id as number);
+  const matchesName = unlocked.includes(data!.id as number);
   return (
     <Card sx={style.card}>
       <CardHeader
