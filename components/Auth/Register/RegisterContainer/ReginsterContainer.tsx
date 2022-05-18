@@ -3,9 +3,9 @@ import firebase from 'firebase';
 import { generatePersonalShop } from 'helpers/shop/updateShop';
 import initialPokes from 'mocks/initial.json';
 import { useAuth } from 'myFirebase/AuthContext';
+import { sendMail } from 'pages/api/server';
 import React, { useState } from 'react';
 
-import { sendMail } from 'pages/api/server';
 import { useStyles } from '../style';
 
 type Props = {
