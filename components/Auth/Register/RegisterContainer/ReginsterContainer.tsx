@@ -4,11 +4,8 @@ import { generatePersonalShop } from 'helpers/shop/updateShop';
 import initialPokes from 'mocks/initial.json';
 import { useAuth } from 'myFirebase/AuthContext';
 import React, { useState } from 'react';
-import {
-  usePatchMoneyMutation,
-  usePatchMushroomsMutation,
-} from 'store/service';
 
+import { sendMail } from 'pages/api/server';
 import { useStyles } from '../style';
 
 type Props = {
@@ -31,13 +28,20 @@ async function create(user: any, name: string, mail: string, slide: number) {
     pvpWin: 0,
     bestiary: [initialPokes[slide].id],
   });
+  await sendMail({
+    from: 'admin',
+    fromMail: 'admin-no-reply',
+    to: user.uid,
+    toMail: mail,
+    text: 'Welcome bonus',
+    money: 1000,
+    berries: 10,
+  });
   await generatePersonalShop(user.uid);
 }
 
 const RegisterContainer: React.FC<Props> = ({ handlePage }) => {
   const classes = useStyles();
-  const [patchMoneyMutation] = usePatchMoneyMutation();
-  const [patchMushroomsMutation] = usePatchMushroomsMutation();
   const [error, setError] = useState<any>();
   const [mail, setMail] = useState('');
   const [pass, setPass] = useState('');
@@ -52,10 +56,6 @@ const RegisterContainer: React.FC<Props> = ({ handlePage }) => {
       .then(() => {
         const user = firebase.auth().currentUser;
         create(user, name, mail, slide.activeIndex);
-        setTimeout(() => {
-          patchMoneyMutation({ uid: user!.uid, count: 1000 }).unwrap();
-          patchMushroomsMutation({ uid: user!.uid, count: 10 }).unwrap();
-        }, 5000);
       })
       .catch((e: any) => {
         setError(e);

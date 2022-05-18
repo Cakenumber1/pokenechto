@@ -180,42 +180,44 @@ const buyPoke = async (poke: PokemonShop, uid: string, diff: number, bestiary: S
   return 204;
 };
 
-const sendMail = async (
+export const sendMail = async (
   data: MailType,
 ) => {
   const {
     from, fromMail, to, toMail,
-    text, money = 0, berries = 0, poke,
+    text, money = 0, berries = 0, poke = null,
   } = data;
   const info = await getUserInfo(from);
   const tax = poke ? Math.ceil(money / 10) + 1100 : Math.ceil(money / 10) + 100;
-  await db
-    .collection('users')
-    .doc(from)
-    .update({
-      money: info.money - tax,
-      berries: info.berries - berries,
-    });
-  if (poke) {
-    await db.collection('users')
+  if (from !== 'admin') {
+    await db
+      .collection('users')
       .doc(from)
-      .collection('inventory')
-      .doc(poke.invId)
-      .delete();
+      .update({
+        money: info.money - tax,
+        berries: info.berries - berries,
+      });
+    if (poke) {
+      await db.collection('users')
+        .doc(from)
+        .collection('inventory')
+        .doc(poke.invId)
+        .delete();
+    }
+    await db
+      .collection('users')
+      .doc(from)
+      .collection('mails')
+      .add({
+        from: fromMail,
+        to: toMail,
+        date: firebase.firestore.Timestamp.fromDate(new Date()),
+        text,
+        money,
+        berries,
+        poke,
+      });
   }
-  await db
-    .collection('users')
-    .doc(from)
-    .collection('mails')
-    .add({
-      from: fromMail,
-      to: toMail,
-      date: firebase.firestore.Timestamp.fromDate(new Date()),
-      text,
-      money,
-      berries,
-      poke,
-    });
   await db
     .collection('users')
     .doc(to)
