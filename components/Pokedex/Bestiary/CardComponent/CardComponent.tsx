@@ -9,7 +9,6 @@ import { useGetPokemonByNameQuery } from 'store/api';
 
 import PokeModal from '../ModalComponent';
 import { style } from './style';
-// todo: firebase
 
 const CardComponent = (
   { pokemon, unlocked }: { pokemon: PokemonsListResults, unlocked: number[] },

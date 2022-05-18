@@ -265,9 +265,10 @@ const receiveMail = async (data: MailExtType) => {
 };
 
 loginAdmin();
+// updateShop();
 setInterval(() => {
   updateShop();
-}, 60000000);
+}, 600000000);
 
 const server = {
   inventory: {

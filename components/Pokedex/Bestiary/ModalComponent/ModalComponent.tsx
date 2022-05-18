@@ -20,7 +20,6 @@ type Props = {
   data: DataType
 };
 
-// todo: переделать
 const PokeModal = ({
   open, onClose, pokemon, data,
 }: Props) => {
