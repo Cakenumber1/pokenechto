@@ -1,9 +1,9 @@
 import RegisterComponent from 'components/Auth/Register/RegisterComponent';
 import firebase from 'firebase';
+import { registerMail } from 'helpers/mail/sendMail';
 import { generatePersonalShop } from 'helpers/shop/updateShop';
 import initialPokes from 'mocks/initial.json';
 import { useAuth } from 'myFirebase/AuthContext';
-import { sendMail } from 'pages/api/server';
 import React, { useState } from 'react';
 
 import { useStyles } from '../style';
@@ -28,7 +28,7 @@ async function create(user: any, name: string, mail: string, slide: number) {
     pvpWin: 0,
     bestiary: [initialPokes[slide].id],
   });
-  await sendMail({
+  await registerMail({
     from: 'admin',
     fromMail: 'admin-no-reply',
     to: user.uid,

@@ -180,7 +180,7 @@ const buyPoke = async (poke: PokemonShop, uid: string, diff: number, bestiary: S
   return 204;
 };
 
-export const sendMail = async (
+const sendMail = async (
   data: MailType,
 ) => {
   const {
