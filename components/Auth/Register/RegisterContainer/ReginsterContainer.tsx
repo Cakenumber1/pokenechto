@@ -55,7 +55,7 @@ const RegisterContainer: React.FC<Props> = ({ handlePage }) => {
         setTimeout(() => {
           patchMoneyMutation({ uid: user!.uid, count: 1000 }).unwrap();
           patchMushroomsMutation({ uid: user!.uid, count: 10 }).unwrap();
-        }, 3000);
+        }, 5000);
       })
       .catch((e: any) => {
         setError(e);

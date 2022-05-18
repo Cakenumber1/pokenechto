@@ -39,7 +39,7 @@ const TableComponent: FC<Props> = ({ money, mushrooms }) => {
                   <img src={row.symbol} alt={row.symbol} width="25px" height="25px" />
                 </Box>
               </TableCell>
-              <TableCell align="center">
+              <TableCell sx={{ minWidth: '20px' }} align="center">
                 <Box className={classesT.tableValueCell}>
                   {row.amount}
                 </Box>
